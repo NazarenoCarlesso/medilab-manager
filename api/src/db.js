@@ -1,8 +1,7 @@
 require('dotenv').config()
-const { Sequelize, DataTypes } = require('sequelize')
+const { Sequelize } = require('sequelize')
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE } = process.env
 const patient = require('./models/patient')
-const exam = require('./models/exam')
 const order = require('./models/order')
 const payment = require('./models/payment')
 const test = require('./models/test')
@@ -15,20 +14,18 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
 })
 
 patient(sequelize)
-exam(sequelize)
 order(sequelize)
 payment(sequelize)
 test(sequelize)
 item(sequelize)
 result(sequelize)
 
-const { Patient, Exam, Test, Payment, Item, Result, Order } = sequelize.models
+const { Patient, Test, Payment, Item, Result, Order } = sequelize.models
 
-Patient.belongsToMany(Exam, { through: Order })
-Exam.belongsToMany(Patient, { through: Order })
+Patient.belongsToMany(Test, { through: Order })
+Test.belongsToMany(Patient, { through: Order })
 
-Test.belongsToMany(Exam, { through: 'test_exam', timestamps: false })
-Exam.belongsToMany(Test, { through: 'test_exam', timestamps: false })
+Test.belongsToMany(Test, { as: 'Bundle', through: 'test_bundle' })
 
 Item.belongsToMany(Test, { through: 'test_item', timestamps: false })
 Test.belongsToMany(Item, { through: 'test_item', timestamps: false })

@@ -3,7 +3,7 @@ const sequelize = require('./src/db.js')
 const server = require('./src/server.js')
 const { PORT } = process.env
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
     console.log(`database connection successful`)
     server.listen(PORT, () => {
         console.log(`server listening on port ${PORT}`)
