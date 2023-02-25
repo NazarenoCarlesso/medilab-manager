@@ -8,6 +8,9 @@ const payment = require('./models/payment')
 const test = require('./models/test')
 const item = require('./models/item')
 const result = require('./models/result')
+const sample = require('./models/sample')
+const test_category = require('./models/test_category')
+
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`, {
   logging: false, // set to console.log to see the raw SQL queries
@@ -21,8 +24,10 @@ payment(sequelize)
 test(sequelize)
 item(sequelize)
 result(sequelize)
+sample(sequelize)
+test_category(sequelize)
 
-const { Patient, Exam, Test, Payment, Item, Result, Order } = sequelize.models
+const { Patient, Exam, Test, Payment, Item, Result, Order, Sample, Test_category } = sequelize.models
 
 Patient.belongsToMany(Exam, { through: Order })
 Exam.belongsToMany(Patient, { through: Order })
@@ -37,5 +42,9 @@ Result.belongsTo(Item)
 Result.belongsTo(Order)
 
 Payment.hasMany(Order)
+
+Sample.hasMany(Test)
+
+Test_category.hasMany(Test)
 
 module.exports = sequelize
