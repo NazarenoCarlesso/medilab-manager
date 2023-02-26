@@ -2,13 +2,10 @@ const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
     sequelize.define('Sample', {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-        },
         name: {
-            type: DataTypes.STRING(25),
-            allowNull: false
+            type: DataTypes.STRING(50),
+            allowNull: false,
+            unique: true
         }
     }, {
         timestamps: false

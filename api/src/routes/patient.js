@@ -1,10 +1,9 @@
 const { Router } = require('express')
-const { patientHandler } = require('../handlers/patient')
+// handlers
+const { patientAllHandler } = require('../handlers/patient')
 
 const router = Router()
-
-router.get('/', patientHandler)
-
-router.get('/*', (req, res) => res.send('PATIENTS ROUTE IS WORKING FINE!'))
+// routes
+router.get('/', patientAllHandler)
 
 module.exports = router
