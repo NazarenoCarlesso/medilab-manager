@@ -8,12 +8,12 @@ export default function Home() {
     const dispatch = useDispatch()
     const value = useSelector(state => state.value)
 
-    const [patients, setPatients] = useState([])
+    const [tests, setTests] = useState([])
 
     useEffect(() => {
-        fetch(`${BACK}/patients`)
+        fetch(`${BACK}/tests`)
             .then(response => response.json())
-            .then(data => setPatients(data))
+            .then(data => setTests(data))
     }, [])
 
     return (
@@ -24,7 +24,7 @@ export default function Home() {
                 <button onClick={() => dispatch(increment())}>+</button>
                 <button onClick={() => dispatch(decrement())}>-</button>
             </div>
-            {JSON.stringify(patients)}
+            {tests.map(t => <><span><b>{t.name}</b> | Precio: $ {t.price} | Tiempo Estimado: {t.time} | Muestra: {t.sample} | Categoria: {t.category}</span><br/></>)}
         </div>
     )
 }

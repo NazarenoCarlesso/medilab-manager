@@ -1,14 +1,11 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
-    sequelize.define('Test_category', {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-        },
+    sequelize.define('test_category', {
         name: {
             type: DataTypes.STRING(25),
-            allowNull: false
+            allowNull: false,
+            unique: true
         }
     }, {
         timestamps: false
