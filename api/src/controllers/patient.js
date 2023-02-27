@@ -1,5 +1,6 @@
 const { models } = require('../db.js')
 const { Patient } = models
+const bcrypt = require('bcrypt');
 
 const patientAll = async () => {
     const patients = await Patient.findAll({
@@ -26,12 +27,16 @@ const patientLogIn = async (username, password) => {
     return { id, firstName, lastName }
 }
 
-const patientSignUp = async (username, password, email, firstName, lastName, dni, number, sex, height, civilState) =>{
-    
-    const newPatient = {
+const patientSignUp = async (username, password, email, firstName, lastName, dni, number, sex, height, civilState) => {
+    try {
+      // Generar una contraseña encriptada con bcrypt
+      const hashedPassword = await bcrypt.hash(password, 10);
+  
+      // Crear un nuevo objeto de paciente con la contraseña encriptada
+      const newPatient = {
         username,
         email,
-        password,
+        password: hashedPassword,
         firstName,
         lastName,
         dni,
@@ -40,20 +45,46 @@ const patientSignUp = async (username, password, email, firstName, lastName, dni
         height,
         civilState
       };
+  
+      // Crear el registro de paciente en la base de datos
+      const newPatientCreated = await Patient.create(newPatient);
+      console.log('Paciente creado:', newPatientCreated.toJSON());
+  
+      return newPatientCreated;
+    } catch (error) {
+      console.error('Error al crear paciente:', error);
+      throw error;
+    }
+  };
+
+// const patientSignUp = async (username, password, email, firstName, lastName, dni, number, sex, height, civilState) =>{
+    
+//     const newPatient = {
+//         username,
+//         email,
+//         password,
+//         firstName,
+//         lastName,
+//         dni,
+//         number,
+//         sex,
+//         height,
+//         civilState
+//       };
       
-    const newPatientCreated = await Patient.create(newPatient)
-        .then(patient => {
-          console.log('Paciente creado:', patient.toJSON());
-        })
-        .catch(error => {
-          console.error('Error al crear paciente:', error);
-        });
+//     const newPatientCreated = await Patient.create(newPatient)
+//         .then(patient => {
+//           console.log('Paciente creado:', patient.toJSON());
+//         })
+//         .catch(error => {
+//           console.error('Error al crear paciente:', error);
+//         });
     
     
     
 
-    return newPatientCreated;
+//     return newPatientCreated;
 
-}
+// }
 
 module.exports = { patientAll, patientLogIn, patientSignUp }
