@@ -3,20 +3,30 @@ import { createSlice } from '@reduxjs/toolkit'
 const slice = createSlice({
   name: 'counter',
   initialState: {
-    value: 0
+    sessionId: undefined,
+    tests: [],
+    samples: [],
+    categories: [],
+    cart: []
   },
   reducers: {
-    increment(state) {
-      state.value++
+    loadTests(state, action) {
+      state.tests = action.payload
     },
-    decrement(state) {
-      state.value--
+    loadSamples(state, action) {
+      state.samples = action.payload
     },
-    incrementByAmount(state, action) {
-      state.value += action.payload
+    loadCategories(state, action) {
+      state.categories = action.payload
     },
+    addToCart(state, action) {
+      state.cart.push(action.payload)
+    },
+    setSessionId(state, action) {
+      state.sessionId = action.payload
+    }
   },
 })
 
-export const { increment, decrement, incrementByAmount } = slice.actions
+export const { loadTests, loadSamples, loadCategories, addToCart, setSessionId } = slice.actions
 export default slice.reducer
