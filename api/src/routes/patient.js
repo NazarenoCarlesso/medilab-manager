@@ -8,4 +8,6 @@ router.get('/', patientAllHandler)
 
 router.post('/login', patientLogInHandler)
 
+router.post('/signup', patientSignUpHandler)
+
 module.exports = router
