@@ -26,4 +26,34 @@ const patientLogIn = async (username, password) => {
     return { id, firstName, lastName }
 }
 
-module.exports = { patientAll, patientLogIn }
+const patientSignUp = async (username, password, email, firstName, lastName, dni, number, sex, height, civilState) =>{
+    
+    const newPatient = {
+        username,
+        email,
+        password,
+        firstName,
+        lastName,
+        dni,
+        number,
+        sex,
+        height,
+        civilState
+      };
+      
+    const newPatientCreated = await Patient.create(newPatient)
+        .then(patient => {
+          console.log('Paciente creado:', patient.toJSON());
+        })
+        .catch(error => {
+          console.error('Error al crear paciente:', error);
+        });
+    
+    
+    const { id, firstName, lastName } = newPatientCreated;
+
+    return { id, firstName, lastName };
+
+}
+
+module.exports = { patientAll, patientLogIn, patientSignUp }
