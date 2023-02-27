@@ -16,4 +16,14 @@ const patientAll = async () => {
     return filter
 }
 
-module.exports = { patientAll }
+const patientLogIn = async (username, password) => {
+    const patient = await Patient.findOne({
+        where: { username: username, password: password }
+    })
+
+    const { id, firstName, lastName } = patient
+
+    return { id, firstName, lastName }
+}
+
+module.exports = { patientAll, patientLogIn }

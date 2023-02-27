@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { decrement, increment } from '../reducer'
-
-const BACK = process.env.REACT_APP_BACK
+import React from 'react'
+import { useSelector } from 'react-redux'
+import Row from 'react-bootstrap/Row'
+import Test from './Test'
 
 export default function Home() {
-    const dispatch = useDispatch()
-    const value = useSelector(state => state.value)
-
-    const [tests, setTests] = useState([])
-
-    useEffect(() => {
-        fetch(`${BACK}/tests`)
-            .then(response => response.json())
-            .then(data => setTests(data))
-    }, [])
+    const tests = useSelector(state => state.tests)
+    const samples = useSelector(state => state.samples)
+    const categories = useSelector(state => state.categories)
 
     return (
         <div>
-            Home
-            <div>
-                {value}
-                <button onClick={() => dispatch(increment())}>+</button>
-                <button onClick={() => dispatch(decrement())}>-</button>
-            </div>
-            {tests.map(t => <><span><b>{t.name}</b> | Precio: $ {t.price} | Tiempo Estimado: {t.time} | Muestra: {t.sample} | Categoria: {t.category}</span><br/></>)}
+            <b>Samples:</b> {samples.join(' | ')}
+            <hr/>
+            <b>Categories:</b> {categories.join(' | ')}
+            <hr/>
+            <Row md={3} className="g-4">
+                {tests.map(test =>
+                    <Test
+                        key={test.id}
+                        id={test.id}
+                        name={test.name}
+                        description={test.description}
+                        price={test.price}
+                    />
+                )}
+            </Row>
         </div>
     )
 }
