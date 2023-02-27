@@ -50,9 +50,9 @@ const patientSignUp = async (username, password, email, firstName, lastName, dni
         });
     
     
-    const { id, firstName, lastName } = newPatientCreated;
+    
 
-    return { id, firstName, lastName };
+    return newPatientCreated;
 
 }
 
