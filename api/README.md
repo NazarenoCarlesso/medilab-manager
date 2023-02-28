@@ -17,3 +17,5 @@ Desactualizada
 ``` GET /samples ``` devuelve todos los tipos de muestras
 
 ``` GET /categories ``` devuelve todas las categorias
+
+``` POST /patients/signup ``` ruta de signup para pacientes
