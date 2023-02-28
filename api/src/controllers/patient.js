@@ -1,6 +1,7 @@
 const { models } = require('../db.js')
 const { Patient } = models
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt')
+const generateJWT = require('../helpers/generateJWT.js')
 
 const patientAll = async () => {
     const patients = await Patient.findAll({
@@ -20,73 +21,101 @@ const patientAll = async () => {
 // login con bcrypt...
 
 const patientLogIn = async (username, password) => {
-    try {
-      // Buscar al paciente por nombre de usuario
-      const patient = await Patient.findOne({ where: { username } });
-  
-      // Si el paciente no existe, mostrar un mensaje de error
-      if (!patient) {
-        throw new Error('Usuario no encontrado');
-      }
-  
-      // Comparar la contraseña proporcionada con la contraseña almacenada en la base de datos
-      const isMatch = await bcrypt.compare(password, patient.password);
-  
-      // Si las contraseñas coinciden, el inicio de sesión es exitoso
-      if (isMatch) {
-        console.log('Inicio de sesión exitoso');
-        const { id, firstName, lastName } = patient;
-        return { id, firstName, lastName };
-      } else {
-        throw new Error('Contraseña incorrecta');
-      }
-    } catch (error) {
-      console.error('Error al iniciar sesión:', error);
-      throw error;
-    }
-  };
+    // Buscar al paciente por nombre de usuario
+    const patient = await Patient.findOne({ where: { username } });
 
+    // Si el paciente no existe, mostrar un mensaje de error
+    if (!patient) {
+        throw new Error('Usuario no encontrado');
+    }
+
+    // Si el paciente fue borrado, mostrar un mensaje de error
+    if (patient.deleted) {
+        throw new Error('Paciente eliminado')
+    }
+
+    // Comparar la contraseña proporcionada con la contraseña
+    // almacenada en la base de datos
+    const isMatch = await bcrypt.compare(password, patient.password);
+
+    // Si las contraseñas no coinciden, mostrar un mensaje de error
+    if (!isMatch) {
+        throw new Error('Contraseña incorrecta');
+    }
+
+    // Todo es valido
+    // Generar JWT
+    const token = generateJWT(patient.id)
+
+    return token
+}
 
 // con chequeo de duplicidad de mail...
 
 const patientSignUp = async (username, password, email, firstName, lastName, dni, number, sex, height, civilState) => {
-try {
-    // Buscar si ya existe un paciente con el correo electrónico proporcionado
-    const existingPatient = await Patient.findOne({ where: { email } });
+    try {
+        // Buscar si ya existe un paciente con el correo electrónico proporcionado
+        const existingPatient = await Patient.findOne({ where: { email } });
 
 
-    if (existingPatient) {
-        return { error: 'El correo electrónico ya está en uso' };
+        if (existingPatient) {
+            return { error: 'El correo electrónico ya está en uso' };
+        }
+
+        // Generar una contraseña encriptada con bcrypt
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Crear un nuevo objeto de paciente con la contraseña encriptada
+        const newPatient = {
+            username,
+            email,
+            password: hashedPassword,
+            firstName,
+            lastName,
+            dni,
+            number,
+            sex,
+            height,
+            civilState
+        };
+
+        // Crear el registro de paciente en la base de datos
+        const newPatientCreated = await Patient.create(newPatient);
+
+        return newPatientCreated;
+    } catch (error) {
+        console.error('Error al crear paciente:', error);
+        throw error;
+    }
+}
+
+const patientDelete = async (id) => {
+    // Buscar al paciente por id
+    const patient = await Patient.findByPk(id)
+
+    // Si el paciente no existe, mostrar un mensaje de error
+    if (!patient) {
+        throw new Error('Usuario no encontrado')
     }
 
-    // Generar una contraseña encriptada con bcrypt
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Si el paciente fue borrado, mostrar un mensaje de error
+    if (patient.deleted) {
+        throw new Error('El paciente ya fue eliminado')
+    }
 
-    // Crear un nuevo objeto de paciente con la contraseña encriptada
-    const newPatient = {
-    username,
-    email,
-    password: hashedPassword,
-    firstName,
-    lastName,
-    dni,
-    number,
-    sex,
-    height,
-    civilState
-    };
+    // Borrado logico en base de datos
+    patient.deleted = true
 
-    // Crear el registro de paciente en la base de datos
-    const newPatientCreated = await Patient.create(newPatient);
-    console.log('Paciente creado:', newPatientCreated.toJSON());
+    // Guardo en base de datos al paciente
+    patient.save()
 
-    return newPatientCreated;
-} catch (error) {
-    console.error('Error al crear paciente:', error);
-    throw error;
+    // Devuelvo el estado del paciente
+    return patient.deleted
 }
-};
 
-
-
-module.exports = { patientAll, patientLogIn, patientSignUp }
+module.exports = {
+    patientAll,
+    patientLogIn,
+    patientSignUp,
+    patientDelete
+}

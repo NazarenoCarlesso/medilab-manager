@@ -19,3 +19,5 @@ Desactualizada
 ``` GET /categories ``` devuelve todas las categorias
 
 ``` POST /patients/signup ``` ruta de signup para pacientes
+
+``` DELETE /patients/:id ``` elimina el paciente con el id
