@@ -133,22 +133,43 @@ export default function Signup() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    /*const login = await fetch(`${BACK}/patients/login`, {
+    if (hasValues) {
+      alert("Debe completar todos los espacios");
+    } else if (hasErrors) {
+      alert("Debe completar los datos correctamente");
+    } else {
+      /*const login = await fetch(`${BACK}/patients/login`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
     }).then((response) => response.json());
 */
-    const response = await axios.post(`${BACK}/patients/login`, user);
-    console.log(response.data);
-    dispatch(setSessionId(response.data));
+      const response = await axios.post(`${BACK}/patients/login`, user);
+      console.log(response.data);
+      dispatch(setSessionId(response.data));
+    }
   };
 
   const handleSubmitSignUp = async (event) => {
     event.preventDefault();
-    dispatch(addUser(userSignUp));
-    window.alert("Registro exitoso.");
+    /*if (hasValuesSignUp) {
+      alert("Debe completar todos los espacios");
+    } else */ if (hasErrorsSignUp) {
+      alert("Debe completar los datos correctamente");
+    } else {
+      dispatch(addUser(userSignUp));
+      window.alert("Registro exitoso.");
+    }
   };
+
+  const hasErrors = Object.values(errorsUser).some((value) => value !== "");
+  const hasErrorsSignUp = Object.values(errorsUserSignUp).some(
+    (value) => value !== ""
+  );
+  const hasValues = Object.values(user).some((value) => value === "");
+  const hasValuesSignUp = Object.values(userSignUp).some(
+    (value) => value === ""
+  );
 
   return (
     <div className="container text-center">
@@ -177,14 +198,14 @@ export default function Signup() {
               </p>
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Apellido</Form.Label>
+              <Form.Label>Apellidos</Form.Label>
               <Form.Control
                 name="lastName"
                 onChange={(e) => {
                   handleChangeSignUp(e);
                 }}
                 type="text"
-                placeholder="Ingrese su apellido"
+                placeholder="Ingrese sus apellidos"
               />
               <p style={{ color: "red", fontSize: "12px" }}>
                 {userSignUp.touched.lastName ? errorsUserSignUp.lastName : null}
@@ -263,7 +284,7 @@ export default function Signup() {
               </p>
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Altura</Form.Label>
+              <Form.Label>Altura (cm)</Form.Label>
               <Form.Control
                 name="height"
                 onChange={(e) => {
