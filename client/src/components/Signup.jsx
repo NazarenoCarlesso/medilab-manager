@@ -152,9 +152,9 @@ export default function Signup() {
 
   const handleSubmitSignUp = async (event) => {
     event.preventDefault();
-    /*if (hasValuesSignUp) {
+    if (hasValuesSignUp) {
       alert("Debe completar todos los espacios");
-    } else */ if (hasErrorsSignUp) {
+    } else if (hasErrorsSignUp) {
       alert("Debe completar los datos correctamente");
     } else {
       dispatch(addUser(userSignUp));
@@ -310,7 +310,10 @@ export default function Signup() {
                 }
                 name="civilState"
                 onClick={(e) => {
-                  handleChangeSignUp(e);
+                  //console.log("event", e.target.name);
+                  if (e.target.name !== "") {
+                    handleChangeSignUp(e);
+                  }
                 }}
               >
                 <Dropdown.Item name="civilState" value="soltero">
@@ -353,7 +356,7 @@ export default function Signup() {
                 onChange={(e) => {
                   handleChangeSignUp(e);
                 }}
-                type="text"
+                type="password"
                 placeholder="Ingrese una contraseña"
               />
               <p style={{ color: "red", fontSize: "12px" }}>
@@ -367,7 +370,7 @@ export default function Signup() {
                 onChange={(e) => {
                   handleChangeSignUp(e);
                 }}
-                type="text"
+                type="password"
                 placeholder="Confirme su contraseña"
               />
               <p style={{ color: "red", fontSize: "12px" }}>
@@ -409,7 +412,7 @@ export default function Signup() {
                 onChange={(e) => {
                   handleChange(e);
                 }}
-                type="text"
+                type="password"
                 placeholder="Ingrese su contraseña"
               />
               <p style={{ color: "red", fontSize: "12px" }}>
