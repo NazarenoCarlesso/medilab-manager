@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import Home from './components/Home'
-import NavBar from './components/NavBar'
+import NavBar from './components/Navbar'
 import Signup from './components/Signup'
 import About from './components/About'
 import Contact from './components/Contact'
@@ -12,6 +12,8 @@ import Ops from './components/Ops'
 import './App.css'
 import { loadCategories, loadSamples, loadTests } from './reducer'
 import { getCategories, getSamples, getTests } from './utils/request'
+
+
 
 export default function App() {
   const dispatch = useDispatch()
