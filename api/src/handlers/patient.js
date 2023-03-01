@@ -52,13 +52,15 @@ const patientSignUpHandler = async (req, res) => {
 const patientDeleteHandler = async (req, res) => {
     const { id } = req.params
 
+    const uid = req.uid
+
     try {
         const deleted = await patientDelete(id)
 
-        return res.status(200).json({ id, deleted })
+        return res.status(200).json({ patient: id, deleted, deletedBy: uid })
     } catch (error) {
         console.log(error)
-        return res.status(400).json({ msg: 'Validation error' })
+        return res.status(400).json({ msg: error.message })
     }
 }
 

@@ -3,19 +3,16 @@ const jwt = require('jsonwebtoken')
 const validateJWT = (req, res, next) => {
     const token = req.header('token')
 
-    // Si no hay token
-    if (!token) {
-        return res.status(400).json({ msg: 'No hay token en la peticion' })
-    }
-
     // Verificar la firma del token
     try {
-        jwt.verify(token, process.env.SECRET_JWT_KEY)
+        const { uid } = jwt.verify(token, process.env.SECRET_JWT_KEY)
+
+        req.uid = uid
 
         next()
     } catch (error) {
         console.log(error)
-        res.status(400).json({ msg: 'Token no válido'})
+        res.status(401).json({ msg: 'Token no válido' })
     }
 }
 
