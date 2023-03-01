@@ -1,7 +1,13 @@
-const { testAll, testDetail } = require("../controllers/test")
+const { testAll, testDetail, testSearch } = require("../controllers/test")
 
 const testAllHandler = async (req, res) => {
-    const tests = await testAll()
+    const { search } = req.query
+
+    let tests = await testAll()
+
+    if (search) {
+        tests = await testSearch(search)
+    }
 
     res.status(200).json(tests)
 }
