@@ -15,6 +15,7 @@ const slice = createSlice({
     loadTests(state, action) {
       state.tests = action.payload
       state.allTests = action.payload
+      state.filteredTests = action.payload
     },
     loadSamples(state, action) {
       state.samples = action.payload
@@ -29,16 +30,21 @@ const slice = createSlice({
       state.sessionId = action.payload
     },
     categoriesFilter(state, action) {
-      const categoriesFiltered = state.allTests.filter(test => test.category === action.payload)
-      state.tests = categoriesFiltered
-      state.filteredTests = categoriesFiltered
+      if(action.payload !== "") {
+        const categoriesFiltered = state.allTests.filter(test => test.category === action.payload)
+        state.tests = categoriesFiltered
+        state.filteredTests = categoriesFiltered
+      } 
       
     },
     samplesFilter(state, action) {
-      state.tests = state.filteredTests.filter(test => test.sample === action.payload)
+      if(action.payload !== "") {
+        state.tests = state.filteredTests.filter(test => test.sample === action.payload)
+      }
     },
     clearFilter(state)  {
       state.tests = state.allTests
+      state.filteredTests = state.allTests
     }
   },
 })
