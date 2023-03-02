@@ -12,8 +12,10 @@ import Ops from './components/Ops'
 import './App.css'
 import { loadCategories, loadSamples, loadTests } from './reducer'
 import { getCategories, getSamples, getTests } from './utils/request'
+import TestList from './containers/TestList'
 import Quoter from './components/Quoter'
 import Results from './components/Results'
+
 
 export default function App() {
   const dispatch = useDispatch()
@@ -28,6 +30,7 @@ export default function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
+        <Route path='/tests' element={<TestList />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
