@@ -1,9 +1,8 @@
 require('dotenv').config()
 const { Sequelize } = require('sequelize')
-const mongoose = require('mongoose');
+
 // environment variables
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE } = process.env
-const { MONGO_USER, MONGO_PASSWORD, MONGO_HOST, MONGO_DATABASE } = process.env
 // import models
 const patient = require('./models/patient')
 const order = require('./models/order')
@@ -14,7 +13,6 @@ const result = require('./models/result')
 const sample = require('./models/sample')
 const category = require('./models/test_category')
 // database connection
-mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_DATABASE}`)
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed

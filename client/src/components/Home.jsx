@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import Row from 'react-bootstrap/Row'
 import Test from './Test'
+import Carousel from './Carousel'
 
 export default function Home() {
     const tests = useSelector(state => state.tests)
@@ -10,6 +11,9 @@ export default function Home() {
 
     return (
         <div>
+            <div>
+                <Carousel/>
+            </div>
             <b>Samples:</b> {samples.join(' | ')}
             <hr/>
             <b>Categories:</b> {categories.join(' | ')}
