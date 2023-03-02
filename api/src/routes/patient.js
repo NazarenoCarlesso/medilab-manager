@@ -33,7 +33,7 @@ router.post('/signup', [
     check('email', 'Email debe ser válido').isEmail(),
     check('username', 'Username debe ser de 8 a 25 caracteres de largo').isLength({ min: 8, max: 25 }),
     check('password', 'Contraseña debe ser de 8 a 25 caracteres de largo').isLength({ min: 8, max: 25 }),
-    check('firstName', 'Nombre debe ser de 8 a 25 caracteres de largo').isLength({ min: 8, max: 25 }),
+    check('firstName', 'Nombre debe ser de 2 a 25 caracteres de largo').isLength({ min: 2, max: 25 }), // minimo 2  chars para firstname
     check('lastName', 'Apellido debe ser de 8 a 25 caracteres de largo').isLength({ min: 8, max: 25 }),
     check('sex', 'Sexo solo puede contener un caracter').isLength({ min: 0, max: 1 }),
     validateReq
