@@ -1,11 +1,11 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import Row from 'react-bootstrap/Row'
-import Test from './Test'
 import Carousel from './Carousel'
+import CarouselCards from './CarouselCards'
+
 
 export default function Home() {
-    const tests = useSelector(state => state.tests)
     const samples = useSelector(state => state.samples)
     const categories = useSelector(state => state.categories)
 
@@ -18,16 +18,14 @@ export default function Home() {
             <hr/>
             <b>Categories:</b> {categories.join(' | ')}
             <hr/>
+            <div style={{background: "aliceblue"}}>
+            <Row>
+            <h3 className='d-flex justify-content-center'style={{padding: 20, color: "navy"}}>Nuestros Paquetes</h3>
+            <p className='d-flex justify-content-center'style={{color: "navy"}}>Ponemos a tu disposición los siguientes paquetes de diagnóstico.</p>
+            </Row>
+                <CarouselCards/>
+            </div>
             <Row md={3} className="g-4">
-                {tests.map(test =>
-                    <Test
-                        key={test.id}
-                        id={test.id}
-                        name={test.name}
-                        description={test.description}
-                        price={test.price}
-                    />
-                )}
             </Row>
         </div>
     )
