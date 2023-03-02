@@ -12,6 +12,8 @@ Desactualizada
 
 ``` GET /tests ``` devuelve todos los tests
 
+``` GET /tests/?search=sangre ``` devuelve los test que coinciden por nombre o descripcion
+
 ``` GET /tests/:id ``` devuelve los detalles de el test
 
 ``` GET /samples ``` devuelve todos los tipos de muestras
@@ -21,3 +23,6 @@ Desactualizada
 ``` POST /patients/signup ``` ruta de signup para pacientes
 
 ``` DELETE /patients/:id ``` elimina el paciente con el id
+
+``` GET /orders/:id ``` trae las ordenes de ese paciente
+

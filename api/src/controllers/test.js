@@ -1,3 +1,4 @@
+const { Op } = require("sequelize")
 const { models } = require('../db.js')
 const { Test, Sample, test_category } = models
 
@@ -12,6 +13,7 @@ const testAll = async () => {
     const filter = tests.map(test => ({
         id: test.id,
         name: test.name,
+        description: test.description,
         price: test.price,
         sample: test.Sample.name,
         category: test.test_category.name
@@ -35,4 +37,38 @@ const testDetail = async (pk) => {
     }
 }
 
-module.exports = { testAll, testDetail }
+const testSearch = async (search) => {
+    const tests = await Test.findAll({
+        include: [
+            { model: Sample, required: true },
+            { model: test_category, required: true }
+        ],
+        where: {
+            [Op.or]: [
+                {
+                    name: {
+                        [Op.iLike]: `%${search}%`
+                    }
+                },
+                {
+                    description: {
+                        [Op.iLike]: `%${search}%`
+                    }
+                }
+            ]
+        }
+    })
+
+    const filter = tests.map(test => ({
+        id: test.id,
+        name: test.name,
+        description: test.description,
+        price: test.price,
+        sample: test.Sample.name,
+        category: test.test_category.name
+    }))
+
+    return filter
+}
+
+module.exports = { testAll, testDetail, testSearch }
