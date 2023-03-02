@@ -1,7 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-const BACK = process.env.REACT_APP_BACK;
+import { createSlice } from "@reduxjs/toolkit";
 
 const slice = createSlice({
   name: "counter",
@@ -28,9 +25,6 @@ const slice = createSlice({
     setSessionId(state, action) {
       state.sessionId = action.payload;
     },
-    addUser(state, action) {
-      axios.post(`${BACK}/patients/signup`, action.payload);
-    },
   },
 });
 
@@ -40,6 +34,5 @@ export const {
   loadCategories,
   addToCart,
   setSessionId,
-  addUser,
 } = slice.actions;
 export default slice.reducer;

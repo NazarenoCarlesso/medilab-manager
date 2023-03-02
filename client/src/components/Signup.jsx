@@ -3,14 +3,11 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import Badge from "react-bootstrap/Badge";
-import InputGroup from "react-bootstrap/InputGroup";
-import { setSessionId, addUser } from "../reducer";
+import { setSessionId } from "../reducer";
 import { validateLogin, validateSignUp } from "../utils/validate";
 
 const BACK = process.env.REACT_APP_BACK;
@@ -73,6 +70,9 @@ export default function Signup() {
 
     confirmPassword: "",
   });
+
+  const [selectedSex, setSelectedSex] = useState("");
+
   // Ingresar los datos al objeto user y verificar errores
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -91,20 +91,8 @@ export default function Signup() {
 
   // Ingresar los datos al objeto userSignUp y verificar errores
   const handleChangeSignUp = (event) => {
-    const { name, value, checked, innerText } = event.target;
-    if (!checked && name === "sex") {
-      setUserSignUp((prevState) => ({
-        ...prevState,
-        [name]: "",
-        touched: { ...prevState.touched, [name]: true },
-      }));
-      setErrorsUserSignUp(
-        validateSignUp({
-          ...userSignUp,
-          [name]: "",
-        })
-      );
-    } else if (innerText && name === "civilState") {
+    const { name, value, innerText } = event.target;
+    if (innerText && name === "civilState") {
       setUserSignUp((prevState) => ({
         ...prevState,
         [name]: innerText.toLowerCase(),
@@ -117,6 +105,9 @@ export default function Signup() {
         })
       );
     } else {
+      if (name === "sex" && value !== selectedSex) {
+        setSelectedSex(value);
+      }
       setUserSignUp((prevState) => ({
         ...prevState,
         [name]: value,
@@ -150,6 +141,42 @@ export default function Signup() {
     }
   };
 
+  const showErrors = function (e) {
+    console.log(e);
+    const { innerText } = e.target;
+    if (innerText === "Ingresar") {
+      for (const key in user) {
+        setUser((prevState) => ({
+          ...prevState,
+          touched: {
+            ...prevState.touched,
+            [key]: true,
+          },
+        }));
+      }
+      setErrorsUser(
+        validateLogin({
+          ...user,
+        })
+      );
+    } else {
+      for (const key in userSignUp) {
+        setUserSignUp((prevState) => ({
+          ...prevState,
+          touched: {
+            ...prevState.touched,
+            [key]: true,
+          },
+        }));
+      }
+      setErrorsUserSignUp(
+        validateSignUp({
+          ...userSignUp,
+        })
+      );
+    }
+  };
+
   const handleSubmitSignUp = async (event) => {
     event.preventDefault();
     if (hasValuesSignUp) {
@@ -157,7 +184,7 @@ export default function Signup() {
     } else if (hasErrorsSignUp) {
       alert("Debe completar los datos correctamente");
     } else {
-      dispatch(addUser(userSignUp));
+      axios.post(`${BACK}/patients/signup`, userSignUp);
       window.alert("Registro exitoso.");
     }
   };
@@ -260,6 +287,7 @@ export default function Signup() {
                   <Form.Check
                     name="sex"
                     value={"M"}
+                    checked={selectedSex === "M"}
                     onChange={(e) => {
                       handleChangeSignUp(e);
                     }}
@@ -271,6 +299,7 @@ export default function Signup() {
                   <Form.Check
                     name="sex"
                     value={"F"}
+                    checked={selectedSex === "F"}
                     onChange={(e) => {
                       handleChangeSignUp(e);
                     }}
@@ -379,7 +408,13 @@ export default function Signup() {
                   : null}
               </p>
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={(e) => {
+                showErrors(e);
+              }}
+            >
               Registrarse
             </Button>
           </Form>
@@ -422,7 +457,13 @@ export default function Signup() {
             <Form.Group className="mb-3">
               <Form.Check type="checkbox" label="Mantener la sesión iniciada" />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={(e) => {
+                showErrors(e);
+              }}
+            >
               Ingresar
             </Button>
           </Form>
