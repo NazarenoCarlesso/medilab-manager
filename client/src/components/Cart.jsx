@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 export default function Cart() {
   const tests = useSelector(state => state.tests)
   const cart = useSelector(state => state.cart)
-
   const products = tests.filter(t => cart.includes(t.id))
 
   return (
