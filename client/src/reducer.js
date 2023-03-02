@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const slice = createSlice({
-  name: 'counter',
+  name: "counter",
   initialState: {
     sessionId: undefined,
     tests: [],
@@ -9,7 +9,7 @@ const slice = createSlice({
     filteredTests: [],
     samples: [],
     categories: [],
-    cart: []
+    cart: [],
   },
   reducers: {
     loadTests(state, action) {
@@ -18,16 +18,16 @@ const slice = createSlice({
       state.filteredTests = action.payload
     },
     loadSamples(state, action) {
-      state.samples = action.payload
+      state.samples = action.payload;
     },
     loadCategories(state, action) {
-      state.categories = action.payload
+      state.categories = action.payload;
     },
     addToCart(state, action) {
-      state.cart.push(action.payload)
+      state.cart.push(action.payload);
     },
     setSessionId(state, action) {
-      state.sessionId = action.payload
+      state.sessionId = action.payload;
     },
     categoriesFilter(state, action) {
       if(action.payload !== "") {
@@ -47,7 +47,7 @@ const slice = createSlice({
       state.filteredTests = state.allTests
     }
   },
-})
+});
 
 export const { loadTests, loadSamples, loadCategories, addToCart, setSessionId, categoriesFilter, samplesFilter, clearFilter } = slice.actions
 export default slice.reducer
