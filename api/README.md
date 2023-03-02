@@ -26,3 +26,4 @@ Desactualizada
 
 ``` GET /orders/:id ``` trae las ordenes de ese paciente
 
+``` GET /results/:id ``` devuelve los resultados de la orden con id
