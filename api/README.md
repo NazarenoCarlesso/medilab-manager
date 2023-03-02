@@ -21,3 +21,6 @@ Desactualizada
 ``` POST /patients/signup ``` ruta de signup para pacientes
 
 ``` DELETE /patients/:id ``` elimina el paciente con el id
+
+``` GET /orders/:id ``` trae las ordenes de ese paciente
+
