@@ -13,6 +13,9 @@ import './App.css'
 import { loadCategories, loadSamples, loadTests } from './reducer'
 import { getCategories, getSamples, getTests } from './utils/request'
 import TestList from './containers/TestList'
+import Quoter from './components/Quoter'
+import Results from './components/Results'
+
 
 export default function App() {
   const dispatch = useDispatch()
@@ -35,6 +38,8 @@ export default function App() {
         <Route path='/cart' element={<Cart />} />
         <Route path='/detail/:id' element={<Detail />} />
         <Route path='/*' element={<Ops />} />
+        <Route path='/quoter' element={<Quoter/>} />
+        <Route path='/results' element={<Results/>} />
       </Routes>
     </div>
   )

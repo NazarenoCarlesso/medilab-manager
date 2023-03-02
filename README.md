@@ -58,6 +58,7 @@ DB_HOST=localhost
 DB_PORT=5432
 DB_DATABASE=medilab
 PORT=3001
+SECRET_JWT_KEY=MiContraseñaSecreta
 ```
 
 10. De ser necesario modificarlas con tus propias credenciales

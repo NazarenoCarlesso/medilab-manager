@@ -1,22 +1,22 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import Row from 'react-bootstrap/Row'
+import { useSelector } from "react-redux";
+import Row from "react-bootstrap/Row";
+import QuoterContainer from './QuoterContainer'
+import Slides from './Slides'
+import Test from "./Test";
 import Carousel from './Carousel'
 import CarouselCards from './CarouselCards'
 
-
 export default function Home() {
-    const samples = useSelector(state => state.samples)
-    const categories = useSelector(state => state.categories)
-
+    
     return (
-        <div>
-            <div>
-                <Carousel/>
-            </div>
-            <b>Samples:</b> {samples.join(' | ')}
+        <div>  
+          <div>
+            <Carousel/>
+          </div>
+            <Slides/>
             <hr/>
-            <b>Categories:</b> {categories.join(' | ')}
+            <QuoterContainer/>
             <hr/>
             <div style={{background: "aliceblue"}}>
             <Row>
