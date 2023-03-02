@@ -5,7 +5,6 @@ const slice = createSlice({
   initialState: {
     sessionId: undefined,
     tests: [],
-    allTests: [],
     filteredTests: [],
     samples: [],
     categories: [],
@@ -29,25 +28,30 @@ const slice = createSlice({
     setSessionId(state, action) {
       state.sessionId = action.payload;
     },
-    categoriesFilter(state, action) {
-      if(action.payload !== "") {
-        const categoriesFiltered = state.allTests.filter(test => test.category === action.payload)
-        state.tests = categoriesFiltered
-        state.filteredTests = categoriesFiltered
-      } 
-      
+    testsFilter(state, action) {
+      const { category, sample } = action.payload;
+      let categoriesFiltered = [];
+      let sampleFiltered = [];
+      !category
+        ? (categoriesFiltered = state.tests)
+        : (categoriesFiltered = state.tests.filter(
+            (test) => test.category === category
+          ));
+      !sample
+        ? (sampleFiltered = categoriesFiltered)
+        : (sampleFiltered = categoriesFiltered.filter(
+            (test) => test.sample === sample
+          ));
+      state.filteredTests = sampleFiltered;
     },
-    samplesFilter(state, action) {
-      if(action.payload !== "") {
-        state.tests = state.filteredTests.filter(test => test.sample === action.payload)
-      }
+    searchFilter(state, action) {
+      state.filteredTests = state.tests.filter(test => test.name.toLowerCase().includes(action.payload.toLowerCase()))
     },
-    clearFilter(state)  {
-      state.tests = state.allTests
-      state.filteredTests = state.allTests
-    }
+    clearFilter(state) {
+      state.filteredTests = state.tests
+    },
   },
 });
 
-export const { loadTests, loadSamples, loadCategories, addToCart, setSessionId, categoriesFilter, samplesFilter, clearFilter } = slice.actions
+export const { loadTests, loadSamples, loadCategories, addToCart, setSessionId, testsFilter, clearFilter, searchFilter } = slice.actions
 export default slice.reducer
