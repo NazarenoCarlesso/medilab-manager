@@ -13,7 +13,7 @@ export default function NavBar() {
     const sessionId = useSelector(state => state.sessionId)
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="light"  expand="lg">
             <Container>
                 <Navbar.Brand as={Link} to="/">MediLab Manager</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
