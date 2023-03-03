@@ -1,4 +1,5 @@
-const { Op } = require("sequelize")
+const { Op } = require('sequelize')
+// models
 const { models } = require('../db.js')
 const { Test, Sample, test_category } = models
 
@@ -10,7 +11,7 @@ const testAll = async () => {
         ]
     })
 
-    const filter = tests.map(test => ({
+    return tests.map(test => ({
         id: test.id,
         name: test.name,
         description: test.description,
@@ -18,16 +19,12 @@ const testAll = async () => {
         sample: test.Sample.name,
         category: test.test_category.name
     }))
-
-    return filter
 }
 
 const testDetail = async (pk) => {
     const test = await Test.findByPk(pk)
-
     const sample = await test.getSample()
     const category = await test.getTest_category()
-
     const { id, name, description, price, time } = test
 
     return {
@@ -44,22 +41,15 @@ const testSearch = async (search) => {
             { model: test_category, required: true }
         ],
         where: {
-            [Op.or]: [
-                {
-                    name: {
-                        [Op.iLike]: `%${search}%`
-                    }
-                },
-                {
-                    description: {
-                        [Op.iLike]: `%${search}%`
-                    }
-                }
-            ]
+            [Op.or]: [{
+                name: { [Op.iLike]: `%${search}%` }
+            }, {
+                description: { [Op.iLike]: `%${search}%` }
+            }]
         }
     })
 
-    const filter = tests.map(test => ({
+    return tests.map(test => ({
         id: test.id,
         name: test.name,
         description: test.description,
@@ -67,8 +57,6 @@ const testSearch = async (search) => {
         sample: test.Sample.name,
         category: test.test_category.name
     }))
-
-    return filter
 }
 
 module.exports = { testAll, testDetail, testSearch }

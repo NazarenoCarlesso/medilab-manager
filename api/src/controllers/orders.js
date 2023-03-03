@@ -1,37 +1,22 @@
+// models
 const { models } = require('../db.js')
-const { Order, Patient, Payment } = models
+const { Order, Test } = models
 
-const orders = async (patientId) => {
-    try {
-        let orders;
-        if (patientId) {
-            console.log("patientId en el controler >>> ",patientId);
-            const patient = await Patient.findByPk(patientId)
-            if (!patient) {
-                console.log('Paciente no encontrado');
-                return;
-            }
-
-            const tests = await patient.getTests()
-            const testIds = tests.map((test) => test.id);
-
-            orders = await Order.findAll({
-                where: {
-                    TestId: testIds
-                },
-                // include: {
-                //     model: Payment,
-                //     required: true
-                // }
-            })
-        } else {
-            orders = await Order.findAll();
-        }
-        return orders
-    } catch (error) {
-        console.log(error);
-        return []
-    }
+const orderAll = async () => {
+    return await Order.findAll()
 }
 
-module.exports = { orders }
+const orderById = async (uid) => {
+    const orders = await Order.findAll({
+        include: { model: Test, required: true },
+        where: { PatientId: uid }
+    })
+
+    return orders.map(order => ({
+        id: order.id,
+        test: order.Test.name,
+        payment: order.PaymentId
+    }))
+}
+
+module.exports = { orderAll, orderById }

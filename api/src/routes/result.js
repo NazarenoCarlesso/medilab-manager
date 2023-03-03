@@ -1,7 +1,7 @@
 const { Router } = require('express')
 
 // middlewares
-const { check, header } = require('express-validator')
+const { header, param } = require('express-validator')
 const validateJWT = require('../middlewares/validateJWT')
 const validateReq = require('../middlewares/validateReq')
 const { validateOrder } = require('../middlewares/validateDB')
@@ -13,8 +13,8 @@ const { resultHandler } = require('../handlers/result')
 const router = Router()
 
 router.get('/:id', [
-    check('id', 'Id debe ser un numero').isInt(),
-    check('id').custom(validateOrder),
+    param('id', 'Id debe ser un numero').isInt(),
+    param('id').custom(validateOrder),
     header('token', 'Token es obligatorio').not().isEmpty(),
     validateReq,
     validateJWT

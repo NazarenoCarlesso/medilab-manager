@@ -83,11 +83,7 @@ REACT_APP_BACK=http://localhost:3001
 
 10. De ser necesario modificarlas con el puerto correspondiente
 
-De funcionar todo correctamente deberia verse la pagina siguiente
-
 # Screenshots
-
-![Setup](screenshots/setup.png)
 
 ### Thanks for visiting
 
