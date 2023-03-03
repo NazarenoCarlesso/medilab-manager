@@ -9,10 +9,12 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { setSessionId } from "../reducer";
 import { validateLogin, validateSignUp } from "../utils/validate";
+import {useNavigate} from "react-router-dom"
 
 const BACK = process.env.REACT_APP_BACK;
 
 export default function Signup() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   // Variable user para el Login
   const [user, setUser] = useState({
@@ -139,6 +141,7 @@ export default function Signup() {
       console.log(response.data);
       dispatch(setSessionId(response.data));
     }
+    navigate("/user");
   };
 
   const showErrors = function (e) {
