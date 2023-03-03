@@ -59,14 +59,26 @@ const slice = createSlice({
       state.filteredTests = sampleFiltered;
     },
     searchFilter(state, action) {
-      state.filteredTests = state.tests.filter(test => test.name.toLowerCase().includes(action.payload.toLowerCase()))
+      state.filteredTests = state.tests.filter((test) =>
+        test.name.toLowerCase().includes(action.payload.toLowerCase())
+      );
     },
     clearFilter(state) {
-      state.filteredTests = state.tests
+      state.filteredTests = state.tests;
     },
   },
 });
 
-
-export const { loadTests, loadSamples, loadCategories, addToCart, setSessionId, testsFilter, clearFilter, searchFilter  deleteOfCartId, deleteOfCart} = slice.actions
-export default slice.reducer
+export const {
+  loadTests,
+  loadSamples,
+  loadCategories,
+  addToCart,
+  setSessionId,
+  testsFilter,
+  clearFilter,
+  searchFilter,
+  deleteOfCartId,
+  deleteOfCart,
+} = slice.actions;
+export default slice.reducer;
