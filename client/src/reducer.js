@@ -12,9 +12,9 @@ const slice = createSlice({
   },
   reducers: {
     loadTests(state, action) {
-      state.tests = action.payload
-      state.allTests = action.payload
-      state.filteredTests = action.payload
+      state.tests = action.payload;
+      state.allTests = action.payload;
+      state.filteredTests = action.payload;
     },
     loadSamples(state, action) {
       state.samples = action.payload;
@@ -24,6 +24,20 @@ const slice = createSlice({
     },
     addToCart(state, action) {
       state.cart.push(action.payload);
+    },
+    deleteOfCartId(state, action) {
+      const stateCart = state.cart;
+      const index = stateCart.indexOf(action.payload);
+      if (index !== -1) {
+        stateCart.splice(index, 1);
+      }
+      state.cart = stateCart;
+    },
+    deleteOfCart(state, action) {
+      if (action.payload === "deleteAll") {
+        state.cart = [];
+      }
+      state.cart = state.cart.filter((e) => e !== action.payload);
     },
     setSessionId(state, action) {
       state.sessionId = action.payload;
@@ -53,5 +67,6 @@ const slice = createSlice({
   },
 });
 
-export const { loadTests, loadSamples, loadCategories, addToCart, setSessionId, testsFilter, clearFilter, searchFilter } = slice.actions
+
+export const { loadTests, loadSamples, loadCategories, addToCart, setSessionId, testsFilter, clearFilter, searchFilter  deleteOfCartId, deleteOfCart} = slice.actions
 export default slice.reducer

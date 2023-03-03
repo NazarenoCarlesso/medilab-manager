@@ -15,17 +15,18 @@ import { getCategories, getSamples, getTests } from './utils/request'
 import TestList from './containers/TestList'
 import Quoter from './components/Quoter'
 import Results from './components/Results'
+import Payments from "./components/Payments";
 
 
 export default function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  getTests(tests => dispatch(loadTests(tests)))
-  getSamples(samples => dispatch(loadSamples(samples)))
-  getCategories(categories => dispatch(loadCategories(categories)))
+  getTests((tests) => dispatch(loadTests(tests)));
+  getSamples((samples) => dispatch(loadSamples(samples)));
+  getCategories((categories) => dispatch(loadCategories(categories)));
 
   return (
-    <div className='App'>
+    <div className="App">
       <NavBar />
       <Routes>
         <Route path='/' element={<Home />} />
@@ -40,7 +41,8 @@ export default function App() {
         <Route path='/*' element={<Ops />} />
         <Route path='/quoter' element={<Quoter/>} />
         <Route path='/results' element={<Results/>} />
+        <Route path="/payments" element={<Payments />} />
       </Routes>
     </div>
-  )
+  );
 }
