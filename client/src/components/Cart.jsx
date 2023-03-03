@@ -3,44 +3,25 @@ import Table from "react-bootstrap/Table";
 
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, deleteOfCartId, deleteOfCart } from "../reducer";
+import { useNavigate } from "react-router-dom";
+import { deleteOfCart } from "../reducer";
+import { setItem } from "../utils/localStorage";
 
 export default function Cart() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const tests = useSelector((state) => state.tests);
   const cart = useSelector((state) => state.cart);
-  const [products, setProducts] = useState([]);
-  const [counts, setCounts] = useState({});
+  const sessionId = useSelector((state) => state.sessionId);
+  const [products, setProducts] = useState(
+    tests.filter((e) => cart.includes(e.id))
+  );
 
   useEffect(() => {
-    const newCounts = {};
-    for (const element of cart) {
-      newCounts[element] = (newCounts[element] || 0) + 1;
-    }
     setProducts(tests.filter((e) => cart.includes(e.id)));
-    setCounts(newCounts);
+    setItem("cart", cart);
   }, [cart, tests]);
-
-  function handleClick(e) {
-    const { value, id } = e.target;
-    const idInt = parseInt(id);
-    if (value === "+") {
-      setCounts({
-        ...counts,
-        [idInt]: (counts[idInt] || 0) + 1,
-      });
-      dispatch(addToCart(idInt));
-    } else {
-      if (counts[idInt] === 1) {
-        return;
-      }
-      setCounts({
-        ...counts,
-        [idInt]: (counts[idInt] || 0) - 1,
-      });
-      dispatch(deleteOfCartId(idInt));
-    }
-  }
 
   function handleClickDelete(e) {
     const { id } = e.target;
@@ -49,12 +30,6 @@ export default function Cart() {
   }
 
   function handleSubmit() {
-    setProducts((prevProducts) => {
-      return prevProducts.map((product) => {
-        const count = counts[product.id] || 0;
-        return { ...product, amount: count };
-      });
-    });
     console.log(products);
   }
 
@@ -93,7 +68,6 @@ export default function Cart() {
             <tr>
               <th style={{ width: "50%" }}>PRODUCTO</th>
               <th style={{ width: "20%" }}>PRECIO</th>
-              <th style={{ width: "20%" }}>CANTIDAD</th>
               <th style={{ width: "10%" }}>QUITAR</th>
             </tr>
           </thead>
@@ -103,27 +77,6 @@ export default function Cart() {
                 <tr key={key}>
                   <td>{test.name}</td>
                   <td>${test.price}.00</td>
-                  <th>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      value={"-"}
-                      id={test.id}
-                      onClick={(e) => handleClick(e)}
-                    >
-                      -
-                    </Button>{" "}
-                    {counts[test.id]}{" "}
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      value={"+"}
-                      id={test.id}
-                      onClick={(e) => handleClick(e)}
-                    >
-                      +
-                    </Button>
-                  </th>
                   <td>
                     <Button
                       variant="danger"
@@ -139,24 +92,33 @@ export default function Cart() {
             <tr>
               <th>TOTAL: </th>
               <th>
-                $
-                {products
-                  .map((e) => e.price * (counts[e.id] || 0))
-                  .reduce((a, b) => a + b, 0)}
+                ${products.map((e) => e.price || 0).reduce((a, b) => a + b, 0)}
                 .00
               </th>
             </tr>
           </tbody>
         </Table>
       </div>
-
-      <Button
-        variant="success"
-        style={{ padding: "1%", paddingRight: "3%", paddingLeft: "3%" }}
-        onClick={handleSubmit}
-      >
-        Comprar
-      </Button>
+      {sessionId ? (
+        <Button
+          variant="success"
+          style={{ padding: "1%", paddingRight: "3%", paddingLeft: "3%" }}
+          onClick={handleSubmit}
+        >
+          Comprar
+        </Button>
+      ) : (
+        <div>
+          <h4>Debe iniciar sesión</h4>
+          <Button
+            variant="success"
+            style={{ padding: "1%", paddingRight: "3%", paddingLeft: "3%" }}
+            onClick={() => navigate("/signup")}
+          >
+            Iniciar sesión
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

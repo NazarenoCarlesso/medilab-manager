@@ -1,14 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getItem } from "./utils/localStorage";
 
 const slice = createSlice({
   name: "counter",
   initialState: {
-    sessionId: undefined,
+    sessionId: getItem("sessionId") || undefined,
     tests: [],
     filteredTests: [],
     samples: [],
     categories: [],
-    cart: [],
+    cart: getItem("cart") || [],
   },
   reducers: {
     loadTests(state, action) {
@@ -23,7 +24,10 @@ const slice = createSlice({
       state.categories = action.payload;
     },
     addToCart(state, action) {
-      state.cart.push(action.payload);
+      const findIdTest = state.cart.findIndex((e) => e === action.payload);
+      if (findIdTest === -1) {
+        state.cart.push(action.payload);
+      }
     },
     deleteOfCartId(state, action) {
       const stateCart = state.cart;
@@ -66,6 +70,10 @@ const slice = createSlice({
     clearFilter(state) {
       state.filteredTests = state.tests;
     },
+    setState(state, action) {
+      state.sessionId = undefined;
+      state.cart = [];
+    },
   },
 });
 
@@ -80,5 +88,6 @@ export const {
   searchFilter,
   deleteOfCartId,
   deleteOfCart,
+  setState,
 } = slice.actions;
 export default slice.reducer;
