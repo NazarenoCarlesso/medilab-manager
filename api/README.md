@@ -24,5 +24,10 @@ Desactualizada
 
 ``` DELETE /patients/:id ``` elimina el paciente con el id
 
-``` GET /orders/:id ``` trae las ordenes de ese paciente
+``` GET /orders/:id ``` trae las ordenes de ese paciente // quizá deberiamos deshabilitar xq no tiene JWT
 
+``` GET /orders ``` trae todas las ordenes
+
+``` GET /orders/patient ``` trae las ordenes de ese paciente (identificado por token)
+
+``` GET /results/:id ``` devuelve los resultados de la orden con id

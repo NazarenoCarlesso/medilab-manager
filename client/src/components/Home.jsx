@@ -4,29 +4,29 @@ import Row from "react-bootstrap/Row";
 import QuoterContainer from './QuoterContainer'
 import Slides from './Slides'
 import Test from "./Test";
+import Carousel from './Carousel'
+import CarouselCards from './CarouselCards'
 
 export default function Home() {
-
-    const tests = useSelector((state) => state.tests);
-
-
+    
     return (
-        <div>
+        <div>  
+          <div>
+            <Carousel/>
+          </div>
             <Slides/>
             <hr/>
             <QuoterContainer/>
             <hr/>
+            <div style={{background: "aliceblue"}}>
+            <Row>
+            <h3 className='d-flex justify-content-center'style={{padding: 20, color: "navy"}}>Nuestros Paquetes</h3>
+            <p className='d-flex justify-content-center'style={{color: "navy"}}>Ponemos a tu disposición los siguientes paquetes de diagnóstico.</p>
+            </Row>
+                <CarouselCards/>
+            </div>
             <Row md={3} className="g-4">
-        {tests.map((test) => (
-          <Test
-            key={test.id}
-            id={test.id}
-            name={test.name}
-            description={test.description}
-            price={test.price}
-          />
-        ))}
-      </Row>
+            </Row>
         </div>
     )
 }

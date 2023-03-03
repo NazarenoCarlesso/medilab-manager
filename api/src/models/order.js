@@ -7,5 +7,7 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true
         }
+    }, {
+        timestamps: false
     })
 }
