@@ -1,8 +1,8 @@
 const { models } = require('../db.js')
 const { Order, Patient, Payment, Test } = models
 
-const patientId = 2; // id del paciente existente en la tabla patients
-const testIds = [5, 6, 7, 8]; // ids de prueba de la tabla tests
+const patientId = 803; // id del paciente existente en la tabla patients
+const testIds = [9,10,11,12]; // ids de prueba de la tabla tests
 const amount = 100;
 const paymentMethod = 'tarjeta de crédito';
 

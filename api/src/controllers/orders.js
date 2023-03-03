@@ -5,6 +5,7 @@ const orders = async (patientId) => {
     try {
         let orders;
         if (patientId) {
+            console.log("patientId en el controler >>> ",patientId);
             const patient = await Patient.findByPk(patientId)
             if (!patient) {
                 console.log('Paciente no encontrado');
