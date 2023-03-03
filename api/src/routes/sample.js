@@ -1,9 +1,11 @@
 const { Router } = require('express')
+
 // handlers
 const { sampleAllHandler } = require('../handlers/sample')
 
-const router = Router()
 // routes
+const router = Router()
+
 router.get('/', sampleAllHandler)
 
 module.exports = router

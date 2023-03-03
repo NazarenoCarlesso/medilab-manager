@@ -10,6 +10,10 @@ Desactualizada
 
 ``` POST /patients/login ``` ruta de login para pacientes
 
+``` POST /patients/signup ``` ruta de signup para pacientes
+
+``` DELETE /patients ``` elimina al paciente
+
 ``` GET /tests ``` devuelve todos los tests
 
 ``` GET /tests/?search=sangre ``` devuelve los test que coinciden por nombre o descripcion
@@ -20,14 +24,8 @@ Desactualizada
 
 ``` GET /categories ``` devuelve todas las categorias
 
-``` POST /patients/signup ``` ruta de signup para pacientes
+``` GET /orders ``` devuelve las ordenes del paciente
 
-``` DELETE /patients/:id ``` elimina el paciente con el id
+``` GET /orders/all ``` devuelve todas las ordenes
 
-``` GET /orders/:id ``` trae las ordenes de ese paciente // quizá deberiamos deshabilitar xq no tiene JWT
-
-``` GET /orders ``` trae todas las ordenes
-
-``` GET /orders/patient ``` trae las ordenes de ese paciente (identificado por token)
-
-``` GET /results/:id ``` devuelve los resultados de la orden con id
+``` GET /results/:id ``` devuelve los resultados de la orden

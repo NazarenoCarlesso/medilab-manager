@@ -3,7 +3,7 @@ const {
     patientLogIn,
     patientSignUp,
     patientDelete
-} = require("../controllers/patient")
+} = require('../controllers/patient')
 
 const patientAllHandler = async (req, res) => {
     const patients = await patientAll()
@@ -12,55 +12,36 @@ const patientAllHandler = async (req, res) => {
 }
 
 const patientLogInHandler = async (req, res) => {
+    const { username, password } = req.body
+
     try {
-        const { username, password } = req.body;
-
-        const token = await patientLogIn(username, password);
-
-        res.status(200).json(token);
+        const { token, name } = await patientLogIn(username, password)
+        res.status(200).header('token', token).json({ name })
     } catch (error) {
-        console.error('Error al iniciar sesión:', error);
-        res.status(401).json({ message: 'Inicio de sesión fallido' });
+        res.status(400).json({ msg: error.message })
     }
 }
 
 const patientSignUpHandler = async (req, res) => {
+    const { username, password, email, firstName, lastName,
+        dni, number, sex, height, civilState } = req.body
+
     try {
-        const {
-            username, password, email,
-            firstName, lastName, dni, number,
-            sex, height, civilState
-        } = req.body
-
-        const newPatient = await patientSignUp(
-            username, password, email,
-            firstName, lastName, dni, number,
-            sex, height, civilState
-        )
-
-        if (newPatient.error) {
-            return res.status(409).json({ error: newPatient.error });
-        }
-
-        return res.status(201).json(newPatient);
+        await patientSignUp(username,
+            password, email, firstName, lastName, dni, number,
+            sex, height, civilState)
+        res.status(201).json({ msg: 'Created successfully' })
     } catch (error) {
-        console.error('Error al crear paciente:', error);
-        return res.status(500).json({ error: 'Error al crear paciente' });
+        res.status(400).json({ msg: error.message })
     }
 }
 
 const patientDeleteHandler = async (req, res) => {
-    const { id } = req.params
-
-    const uid = req.uid
-
     try {
-        const deleted = await patientDelete(id)
-
-        return res.status(200).json({ patient: id, deleted, deletedBy: uid })
+        await patientDelete(req.uid)
+        res.status(200).json({ msg: 'Deleted successfully' })
     } catch (error) {
-        console.log(error)
-        return res.status(400).json({ msg: error.message })
+        res.status(400).json({ msg: error.message })
     }
 }
 

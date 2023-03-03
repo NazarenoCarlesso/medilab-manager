@@ -1,27 +1,22 @@
-const { Router } = require('express');
+const { Router } = require('express')
 
 // middlewares
-const { check, header } = require('express-validator')
+const { header } = require('express-validator')
 const validateJWT = require('../middlewares/validateJWT')
 const validateReq = require('../middlewares/validateReq')
 
-
 // handlers
-const { ordersHandler, allOrdersHandler, ordersPatientHandler } = require('../handlers/orders');
+const { orderHandler, orderAllHandler } = require('../handlers/orders')
 
-const router = Router();
+// routes
+const router = Router()
 
-router.get('/', allOrdersHandler); // todas las orders
-
-router.get('/patient', [
+router.get('/', [
     header('token', 'Token es obligatorio').not().isEmpty(),
     validateReq,
     validateJWT
-], ordersPatientHandler); // orders de un paciente q viene x jwt
+], orderHandler)
 
-router.get('/:id', ordersHandler); // orders de un paciente q viene x id
+router.get('/all', orderAllHandler)
 
-
-
-module.exports = router;
-
+module.exports = router

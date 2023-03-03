@@ -10,9 +10,7 @@ const resultById = async (id, uid) => {
         { type: QueryTypes.SELECT }
     )
 
-    const filter = results.map(result => ({ item: result.name, value: result.value }))
-
-    return filter
+    return results.map(result => ({ item: result.name, value: result.value }))
 }
 
 module.exports = { resultById }
