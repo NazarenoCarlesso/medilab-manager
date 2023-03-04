@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -9,11 +10,13 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { setSessionId } from "../reducer";
 import { validateLogin, validateSignUp } from "../utils/validate";
+import { setItem } from "../utils/localStorage";
 
 const BACK = process.env.REACT_APP_BACK;
 
 export default function Signup() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // Variable user para el Login
   const [user, setUser] = useState({
     username: "",
@@ -129,20 +132,14 @@ export default function Signup() {
     } else if (hasErrors) {
       alert("Debe completar los datos correctamente");
     } else {
-      /*const login = await fetch(`${BACK}/patients/login`, {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    }).then((response) => response.json());
-*/
       const response = await axios.post(`${BACK}/patients/login`, user);
-      console.log(response.data);
       dispatch(setSessionId(response.data));
+      setItem("sessionId", response.data);
+      navigate("/home");
     }
   };
 
   const showErrors = function (e) {
-    console.log(e);
     const { innerText } = e.target;
     if (innerText === "Ingresar") {
       for (const key in user) {
@@ -184,8 +181,11 @@ export default function Signup() {
     } else if (hasErrorsSignUp) {
       alert("Debe completar los datos correctamente");
     } else {
-      axios.post(`${BACK}/patients/signup`, userSignUp);
+      const response = await axios.post(`${BACK}/patients/signup`, userSignUp);
+      console.log(response.data.firstName);
+      setItem("sessionId", response.data.firstName);
       window.alert("Registro exitoso.");
+      navigate("/home");
     }
   };
 
