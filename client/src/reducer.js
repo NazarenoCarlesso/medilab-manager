@@ -14,7 +14,6 @@ const slice = createSlice({
   reducers: {
     loadTests(state, action) {
       state.tests = action.payload;
-      state.allTests = action.payload;
       state.filteredTests = action.payload;
     },
     loadSamples(state, action) {
@@ -63,6 +62,7 @@ const slice = createSlice({
       state.filteredTests = sampleFiltered;
     },
     searchFilter(state, action) {
+      console.log(action.payload)
       state.filteredTests = state.tests.filter((test) =>
         test.name.toLowerCase().includes(action.payload.toLowerCase())
       );
