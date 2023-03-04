@@ -39,7 +39,7 @@ const createOrder = async (uid, tests) => {
     amount:
     paymentMethod:
   } */);
-
+  
   const bulkOfOrders = tests.map((test) => {
     return {
       PatientId: uid,
@@ -47,8 +47,6 @@ const createOrder = async (uid, tests) => {
       PaymentId: newPayment.dataValues.id,
     };
   });
-
-  console.log(bulkOfOrders)
   return await Order.bulkCreate(bulkOfOrders); //datos correspondientes con la orden recién generada
 };
 

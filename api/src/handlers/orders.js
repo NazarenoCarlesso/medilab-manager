@@ -20,9 +20,14 @@ const orderCreateHandler = async(req,res)=>{
     const {tests} = req.body
     const uid = req.uid
 
-    const newOrder = await createOrder(uid, tests)
+    try {
+        const newOrder = await createOrder(uid, tests)
+        res.status(201).json({msg:"Orden creada"})
+    } catch (error) {
+        return res.status(400).json({ msg: error.message })
+    } 
 
-    res.status(201).json(newOrder)
+    
 }
 
 module.exports = { ordersHandler, allOrdersHandler, orderCreateHandler }
