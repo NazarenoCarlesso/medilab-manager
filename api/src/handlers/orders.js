@@ -1,4 +1,4 @@
-const { orders } = require("../controllers/orders")
+const { orders, createOrder } = require("../controllers/orders")
 
 const ordersHandler = async (req, res) => {
     const { id } = req.params
@@ -16,4 +16,15 @@ const allOrdersHandler = async (req, res) => {
     res.status(200).json(allOrdenes)
 }
 
-module.exports = { ordersHandler, allOrdersHandler }
+const orderCreateHandler = async(req,res)=>{
+
+    /*data esperada => [testId1,testId2, testId3] */
+    const {data} = req.body
+    const uid = req.uid
+
+    const newOrder = await createOrder(uid, data)
+
+    res.status(201).json(newOrder)
+}
+
+module.exports = { ordersHandler, allOrdersHandler, orderCreateHandler }
