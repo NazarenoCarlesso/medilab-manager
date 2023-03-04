@@ -10,7 +10,7 @@ function UncontrolledCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          style={{ height: '600px'}}
+          style={{ height: 500 }}
           src={slide1}
           alt="First slide"
         />
@@ -21,10 +21,9 @@ function UncontrolledCarousel() {
         <img
           className="d-block w-100"
           src={slide2}
-          style={{ height: '600px'}}
+          style={{ height: 500 }}
           alt="Second slide"
         />
-
         <Carousel.Caption>
         </Carousel.Caption>
       </Carousel.Item>
@@ -32,10 +31,9 @@ function UncontrolledCarousel() {
         <img
           className="d-block w-100"
           src={slide3}
-          style={{ height: '600px'}}
+          style={{ height: 500 }}
           alt="Third slide"
         />
-
         <Carousel.Caption>
         </Carousel.Caption>
       </Carousel.Item>

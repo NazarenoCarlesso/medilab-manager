@@ -37,7 +37,7 @@ export default function NavBar() {
             </Nav.Link>
 
             <Nav.Link as={Link} to="/cart" href="/cart">
-              Cart {cartLength}
+              Cart <b style={{ color: 'red' }}>{cartLength ? cartLength : null}</b>
             </Nav.Link>
             <NavDropdown title="More Info" id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/contact">
@@ -58,7 +58,7 @@ export default function NavBar() {
             )}
 
             {sessionId ? (
-              <NavDropdown title={sessionId} id="basic-nav-dropdown">
+              <NavDropdown title={<span style={{ color: 'blue' }}>{sessionId}</span>} id="basic-nav-dropdown">
                 <NavDropdown.Item onClick={handleLogout}>
                   Cerrar sesión
                 </NavDropdown.Item>
