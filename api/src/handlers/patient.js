@@ -16,6 +16,7 @@ const patientLogInHandler = async (req, res) => {
 
     try {
         const { token, name } = await patientLogIn(username, password)
+        res.header('Access-Control-Expose-Headers', 'token'); //This set a header visible to clients requests
         res.status(200).header('token', token).json({ name })
     } catch (error) {
         res.status(400).json({ msg: error.message })
