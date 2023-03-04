@@ -7,9 +7,15 @@ import { useNavigate } from "react-router-dom";
 import { deleteOfCart } from "../reducer";
 import { setItem } from "../utils/localStorage";
 
+import OffCanvasCart from "./OffCanvasCart";
+
 export default function Cart() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  // Panel de pagos (agregar)
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
 
   const tests = useSelector((state) => state.tests);
   const cart = useSelector((state) => state.cart);
@@ -103,7 +109,10 @@ export default function Cart() {
         <Button
           variant="success"
           style={{ padding: "1%", paddingRight: "3%", paddingLeft: "3%" }}
-          onClick={handleSubmit}
+          onClick={() => {
+            handleShow();
+            handleSubmit();
+          }}
         >
           Comprar
         </Button>
@@ -119,6 +128,10 @@ export default function Cart() {
           </Button>
         </div>
       )}
+      <div>
+        {" "}
+        <OffCanvasCart show={show} setShow={setShow} />
+      </div>
     </div>
   );
 }
