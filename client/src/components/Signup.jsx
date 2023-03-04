@@ -133,11 +133,35 @@ export default function Signup() {
       alert("Debe completar los datos correctamente");
     } else {
       const response = await axios.post(`${BACK}/patients/login`, user);
-      dispatch(setSessionId(response.data));
-      setItem("sessionId", response.data);
+      dispatch(setSessionId(response.data.name));
+      setItem("sessionId", response.data.name);
       navigate("/home");
     }
   };
+
+  const handleSubmitSignUp = async (event) => {
+    event.preventDefault();
+    if (hasValuesSignUp) {
+      alert("Debe completar todos los espacios");
+    } else if (hasErrorsSignUp) {
+      alert("Debe completar los datos correctamente");
+    } else {
+      const response = await axios.post(`${BACK}/patients/signup`, userSignUp);
+      console.log(response.data.firstName);
+      setItem("sessionId", response.data.firstName);
+      window.alert("Registro exitoso.");
+      navigate("/home");
+    }
+  };
+
+  const hasErrors = Object.values(errorsUser).some((value) => value !== "");
+  const hasErrorsSignUp = Object.values(errorsUserSignUp).some(
+    (value) => value !== ""
+  );
+  const hasValues = Object.values(user).some((value) => value === "");
+  const hasValuesSignUp = Object.values(userSignUp).some(
+    (value) => value === ""
+  );
 
   const showErrors = function (e) {
     const { innerText } = e.target;
@@ -173,30 +197,6 @@ export default function Signup() {
       );
     }
   };
-
-  const handleSubmitSignUp = async (event) => {
-    event.preventDefault();
-    if (hasValuesSignUp) {
-      alert("Debe completar todos los espacios");
-    } else if (hasErrorsSignUp) {
-      alert("Debe completar los datos correctamente");
-    } else {
-      const response = await axios.post(`${BACK}/patients/signup`, userSignUp);
-      console.log(response.data.firstName);
-      setItem("sessionId", response.data.firstName);
-      window.alert("Registro exitoso.");
-      navigate("/home");
-    }
-  };
-
-  const hasErrors = Object.values(errorsUser).some((value) => value !== "");
-  const hasErrorsSignUp = Object.values(errorsUserSignUp).some(
-    (value) => value !== ""
-  );
-  const hasValues = Object.values(user).some((value) => value === "");
-  const hasValuesSignUp = Object.values(userSignUp).some(
-    (value) => value === ""
-  );
 
   return (
     <div className="container text-center">
