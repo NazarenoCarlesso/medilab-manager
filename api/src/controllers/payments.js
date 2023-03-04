@@ -3,7 +3,8 @@
 
 const { QueryTypes } = require('sequelize')
 // conexion con Sequelize
-const { sequelize, models } = require('../db.js')
+const { models } = require('../db.js')
+const { sequelize } = require('../db.js')
 const { Payment } = models
 
 
