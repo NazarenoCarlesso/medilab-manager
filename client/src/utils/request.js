@@ -18,4 +18,4 @@ const getCategories = async (callback) => {
         .then(data => callback(data))
 }
 
-module.exports = { getTests, getSamples, getCategories }
+module.exports = { getTests, getSamples, getCategories}
