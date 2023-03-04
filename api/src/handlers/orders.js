@@ -17,12 +17,10 @@ const allOrdersHandler = async (req, res) => {
 }
 
 const orderCreateHandler = async(req,res)=>{
-
-    /*data esperada => [testId1,testId2, testId3] */
-    const {data} = req.body
+    const {tests} = req.body
     const uid = req.uid
 
-    const newOrder = await createOrder(uid, data)
+    const newOrder = await createOrder(uid, tests)
 
     res.status(201).json(newOrder)
 }

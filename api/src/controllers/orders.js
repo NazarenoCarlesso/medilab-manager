@@ -33,38 +33,23 @@ const orders = async (patientId) => {
   }
 };
 
-const createOrder = async (uid, data) => {
-  //Genera un Payment, quizás debería venir el costo y tipo desde "data"
-  const newPayment = await Payment
-    .create
-    /*{
-    amount: amount,
-    paymentMethod: paymentMethod,
-  }*/
-    ();
+const createOrder = async (uid, tests) => {
+  //Genera un Payment, quizás debería venir el costo y tipo desde la variable "tests" (body)
+  const newPayment = await Payment.create(/*{
+    amount:
+    paymentMethod:
+  } */);
 
-  // console.log(data)
-  // console.log(newPayment.dataValues.id)
-  // console.log(uid)
-
-  // return newPayment
-
-  const bulkOfOrders = data.map((test) => {
+  const bulkOfOrders = tests.map((test) => {
     return {
       PatientId: uid,
       TestId: test,
       PaymentId: newPayment.dataValues.id,
     };
   });
-  /*console.log(bulkOfOrders)
- return bulkOfOrders;*/
 
-  await Order.bulkCreate(bulkOfOrders);
-
-  console.log();
-
-  // return await Order.findAll({ where: { id: uid } });
-  return ("Created")
+  console.log(bulkOfOrders)
+  return await Order.bulkCreate(bulkOfOrders); //datos correspondientes con la orden recién generada
 };
 
 module.exports = { orders, createOrder };
