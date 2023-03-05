@@ -16,6 +16,7 @@ export default function Quoter() {
   return (
     <div>
       <SearchBar setCurrentPage={setCurrentPage} />
+      <hr style={{ border: '3px solid navy', opacity: 1 }} />
       <PaginationTests
         postPerPage={postsPerPage}
         totalPosts={filteredTests.length}

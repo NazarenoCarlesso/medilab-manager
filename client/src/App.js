@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
@@ -24,10 +24,13 @@ import Payments from "./components/Payments";
 import User from "./components/User";
 import Footer from "./components/Footer";
 
+
 export default function App() {
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.sessionId?.token);
+  const usuario = useSelector((state) => state.sessionId?.name)
+
 
   getTests((tests) => dispatch(loadTests(tests)));
   getSamples((samples) => dispatch(loadSamples(samples)));
@@ -36,6 +39,15 @@ export default function App() {
   if (token) {
     getOrders((orders) => dispatch(loadOrders(orders)), token);
   }
+  // function requireAuth(nextState, replace) {
+  //   if (token !== "undefined") {
+  //     replace({
+  //       pathname: '/home',
+  //       state: { nextPathname: nextState.location.pathname }
+  //     })
+  //   }
+  // }
+// console.log(usuario.toString())
 
   return (
     <div className="App">
@@ -54,9 +66,14 @@ export default function App() {
         <Route path="/quoter" element={<Quoter />} />
         <Route path="/results" element={<Results />} />
         <Route path="/payments" element={<Payments />} />
-        <Route path="/user" element={<User />} />
+        {/* <Route path="/user" element={<User />}  onEnter={requireAuth}  /> */}
+        {/* pregunta si hay algo en el token al momento de buscar la url user si no tiene nada manda al componente de error */ }
+        {/* modifica la url con el nombre del usuario (`/user/${usuario}`) */ }
+        <Route path={`/user/${usuario}`} element={!token ? <Navigate to="/*" /> : <User />} />
       </Routes>
-      <Footer />
+        <Footer />
+ 
+      
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Accordion from "react-bootstrap/Accordion";
@@ -5,7 +6,6 @@ import Form from "react-bootstrap/Form";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/esm/DropdownButton";
 
-import axios from "axios";
 import React, { useState } from "react";
 import { validatePayCard } from "../utils/validate";
 import { useSelector } from "react-redux";

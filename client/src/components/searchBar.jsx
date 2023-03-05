@@ -40,31 +40,34 @@ export default function SearchBar({ setCurrentPage }) {
         onChange={(event) => setSearch(event.target.value)}
         />
       <label htmlFor="category">filtrar por Categoria: </label>
-      <select
-        id="category"
-        name="category"
-        value={category}
-        onChange={(event) => setCategory(event.target.value)}
+    
+        <select
+          id="category"
+          name="category"
+          value={category}
+          onChange={(event) => setCategory(event.target.value)}
+          style={{ marginRight: 10 }}
         >
-        <option></option>
-        {categories.map((category, index) => (
-          <option key={index}>{category}</option>
+          <option></option>
+          {categories.map((category, index) => (
+            <option key={index}>{category}</option>
           ))}
-      </select>
-      <label htmlFor="sample">filtrar por muestra: </label>
-      <select
-        id="sample"
-        name="sample"
-        value={sample}
-        onChange={(event) => setSample(event.target.value)}
+        </select>
+        <label htmlFor="sample" style={{ marginRight: 10 }}>filtrar por muestra: </label>
+        <select
+          id="sample"
+          name="sample"
+          value={sample}
+          onChange={(event) => setSample(event.target.value)}
+          style={{ marginRight: 10 }}
         >
-        <option></option>
-        {samples.map((sample, index) => (
-          <option key={index}>{sample}</option>
+          <option></option>
+          {samples.map((sample, index) => (
+            <option key={index}>{sample}</option>
           ))}
-      </select>
-      <button onClick={onClear}>Borrar filtros</button>
-          </Navbar>
+        </select>
+        <button onClick={onClear}>Borrar filtros</button>
+      </Navbar>
     </>
   );
 }
