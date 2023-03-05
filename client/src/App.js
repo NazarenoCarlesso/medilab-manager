@@ -10,8 +10,13 @@ import Cart from "./components/Cart";
 import Detail from "./components/Detail";
 import Ops from "./components/Ops";
 import "./App.css";
-import { loadCategories, loadSamples, loadTests,loadOrders } from "./reducer";
-import { getCategories, getOrders, getSamples, getTests } from "./utils/request";
+import { loadCategories, loadSamples, loadTests, loadOrders } from "./reducer";
+import {
+  getCategories,
+  getOrders,
+  getSamples,
+  getTests,
+} from "./utils/request";
 import TestList from "./containers/TestList";
 import Quoter from "./components/Quoter";
 import Results from "./components/Results";
@@ -22,14 +27,15 @@ import Footer from "./components/Footer";
 export default function App() {
   const dispatch = useDispatch();
 
-
   const token = useSelector((state) => state.sessionId?.token);
 
   getTests((tests) => dispatch(loadTests(tests)));
   getSamples((samples) => dispatch(loadSamples(samples)));
   getCategories((categories) => dispatch(loadCategories(categories)));
-  getOrders((orders) =>dispatch(loadOrders(orders)), token); 
 
+  if (token) {
+    getOrders((orders) => dispatch(loadOrders(orders)), token);
+  }
 
   return (
     <div className="App">
