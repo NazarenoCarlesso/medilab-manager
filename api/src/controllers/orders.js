@@ -33,8 +33,7 @@ const createOrder = async (uid, tests) => {
         PaymentId: newPayment.dataValues.id,
       };
     });
-
-    console.log(bulkOfOrders)
+    
     newOrdersIds = await Order.bulkCreate(bulkOfOrders); //datos correspondientes con la orden recién generada
     return newOrdersIds.map((order)=>order.id)
   };
