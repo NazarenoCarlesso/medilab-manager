@@ -14,8 +14,7 @@ export default function NavBar() {
   const dispatch = useDispatch();
 
   const cartLength = useSelector((state) => state.cart.length);
-  const sessionId = useSelector((state) => state.sessionId);
-
+  const sessionId = useSelector((state) => state.sessionId?.name);
   function handleLogout() {
     setItem("cart", []);
     setItem("sessionId", undefined);

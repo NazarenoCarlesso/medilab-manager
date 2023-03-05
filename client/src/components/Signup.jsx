@@ -133,8 +133,12 @@ export default function Signup() {
       alert("Debe completar los datos correctamente");
     } else {
       const response = await axios.post(`${BACK}/patients/login`, user);
-      dispatch(setSessionId(response.data.name));
-      setItem("sessionId", response.data.name);
+      const userData = {
+        name: response.data.name,
+        token: response.headers.token,
+      };
+      dispatch(setSessionId(userData));
+      setItem("sessionId", userData);
       navigate("/home");
     }
   };
@@ -146,11 +150,8 @@ export default function Signup() {
     } else if (hasErrorsSignUp) {
       alert("Debe completar los datos correctamente");
     } else {
-      const response = await axios.post(`${BACK}/patients/signup`, userSignUp);
-      console.log(response.data.firstName);
-      setItem("sessionId", response.data.firstName);
+      await axios.post(`${BACK}/patients/signup`, userSignUp);
       window.alert("Registro exitoso.");
-      navigate("/home");
     }
   };
 

@@ -8,6 +8,7 @@ import { deleteOfCart } from "../reducer";
 import { setItem } from "../utils/localStorage";
 
 import OffCanvasCart from "./OffCanvasCart";
+import BillCart from "./BillCart";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ export default function Cart() {
 
   // Panel de pagos (agregar)
   const [show, setShow] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const handleShow = () => setShow(true);
 
   const tests = useSelector((state) => state.tests);
@@ -36,7 +38,11 @@ export default function Cart() {
   }
 
   function handleSubmit() {
-    console.log(products);
+    if (cart.length === 0) {
+      alert("No tiene productos en el carrito de compras.");
+    } else {
+      handleShow();
+    }
   }
 
   return (
@@ -107,20 +113,17 @@ export default function Cart() {
       </div>
       {sessionId ? (
         <Button
-          variant="success"
+          variant="primary"
           style={{ padding: "1%", paddingRight: "3%", paddingLeft: "3%" }}
-          onClick={() => {
-            handleShow();
-            handleSubmit();
-          }}
+          onClick={handleSubmit}
         >
-          Comprar
+          PROCESAR COMPRA
         </Button>
       ) : (
         <div>
           <h4>Debe iniciar sesión</h4>
           <Button
-            variant="success"
+            variant="primary"
             style={{ padding: "1%", paddingRight: "3%", paddingLeft: "3%" }}
             onClick={() => navigate("/signup")}
           >
@@ -130,7 +133,20 @@ export default function Cart() {
       )}
       <div>
         {" "}
-        <OffCanvasCart show={show} setShow={setShow} />
+        <OffCanvasCart
+          show={show}
+          setShow={setShow}
+          setShowAlert={setShowAlert}
+          products={products}
+        />
+      </div>
+      <div style={{ position: "absolute", width: "100%" }}>
+        {" "}
+        <BillCart
+          showAlert={showAlert}
+          setShowAlert={setShowAlert}
+          products={products}
+        />
       </div>
     </div>
   );

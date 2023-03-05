@@ -62,7 +62,6 @@ const slice = createSlice({
       state.filteredTests = sampleFiltered;
     },
     searchFilter(state, action) {
-      console.log(action.payload)
       state.filteredTests = state.tests.filter((test) =>
         test.name.toLowerCase().includes(action.payload.toLowerCase())
       );
