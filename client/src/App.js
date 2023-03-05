@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Home from "./components/Home";
-import NavBar from "./components/Navbar";
+import NavBar from "./components/NavBar";
 import Signup from "./components/Signup";
 import About from "./components/About";
 import Contact from "./components/Contact";
@@ -16,6 +16,7 @@ import TestList from "./containers/TestList";
 import Quoter from "./components/Quoter";
 import Results from "./components/Results";
 import Payments from "./components/Payments";
+import Footer from "./components/Footer";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ export default function App() {
         <Route path="/results" element={<Results />} />
         <Route path="/payments" element={<Payments />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
