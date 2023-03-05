@@ -10,8 +10,12 @@ const slice = createSlice({
     samples: [],
     categories: [],
     cart: getItem("cart") || [],
+    orders:[],  
   },
   reducers: {
+    loadOrders( state, action){
+      state.orders=action.payload},      
+
     loadTests(state, action) {
       state.tests = action.payload;
       state.filteredTests = action.payload;
@@ -89,5 +93,6 @@ export const {
   deleteOfCartId,
   deleteOfCart,
   setState,
+  loadOrders,
 } = slice.actions;
 export default slice.reducer;

@@ -12,9 +12,16 @@ import { setSessionId } from "../reducer";
 import { validateLogin, validateSignUp } from "../utils/validate";
 import { setItem } from "../utils/localStorage";
 
+
+
+
+
 const BACK = process.env.REACT_APP_BACK;
 
 export default function Signup() {
+
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // Variable user para el Login
@@ -125,6 +132,8 @@ export default function Signup() {
     }
   };
 
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (hasValues) {
@@ -133,9 +142,13 @@ export default function Signup() {
       alert("Debe completar los datos correctamente");
     } else {
       const response = await axios.post(`${BACK}/patients/login`, user);
-      dispatch(setSessionId(response.data.name));
-      setItem("sessionId", response.data.name);
-      navigate("/home");
+      const userData = {
+        name: response.data.name,
+        token: response.headers.token,
+      };
+      dispatch(setSessionId(userData));
+      setItem("sessionId", userData);
+      navigate("/user");
     }
   };
 
@@ -147,10 +160,7 @@ export default function Signup() {
       alert("Debe completar los datos correctamente");
     } else {
       const response = await axios.post(`${BACK}/patients/signup`, userSignUp);
-      console.log(response.data.firstName);
-      setItem("sessionId", response.data.firstName);
       window.alert("Registro exitoso.");
-      navigate("/home");
     }
   };
 
@@ -199,6 +209,8 @@ export default function Signup() {
   };
 
   return (
+
+ 
     <div className="container text-center">
       <div className="row">
         <div className="col">
@@ -470,5 +482,6 @@ export default function Signup() {
         </div>
       </div>
     </div>
+    
   );
 }

@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Home from "./components/Home";
 import NavBar from "./components/Navbar";
 import Signup from "./components/Signup";
@@ -10,19 +10,27 @@ import Cart from "./components/Cart";
 import Detail from "./components/Detail";
 import Ops from "./components/Ops";
 import "./App.css";
-import { loadCategories, loadSamples, loadTests } from "./reducer";
-import { getCategories, getSamples, getTests } from "./utils/request";
+import { loadCategories, loadSamples, loadTests,loadOrders } from "./reducer";
+import { getCategories, getOrders, getSamples, getTests } from "./utils/request";
 import TestList from "./containers/TestList";
 import Quoter from "./components/Quoter";
 import Results from "./components/Results";
 import Payments from "./components/Payments";
+import User from "./components/User";
+
+
 
 export default function App() {
   const dispatch = useDispatch();
 
+
+  const token = useSelector((state) => state.sessionId?.token);
+
   getTests((tests) => dispatch(loadTests(tests)));
   getSamples((samples) => dispatch(loadSamples(samples)));
   getCategories((categories) => dispatch(loadCategories(categories)));
+  getOrders((orders) =>dispatch(loadOrders(orders)), token); 
+
 
   return (
     <div className="App">
@@ -41,6 +49,7 @@ export default function App() {
         <Route path="/quoter" element={<Quoter />} />
         <Route path="/results" element={<Results />} />
         <Route path="/payments" element={<Payments />} />
+        <Route path="/user" element={<User />} />
       </Routes>
     </div>
   );
