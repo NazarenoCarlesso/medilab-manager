@@ -114,3 +114,51 @@ export function validateLogin(inputs) {
 
   return errors;
 }
+
+export function validatePayCard(inputs) {
+  const errors = {};
+
+  if (!inputs.name) {
+    errors.name = "El nombre no puede estar vacío.";
+  } else if (!regexName.test(inputs.name)) {
+    errors.name = "El nombre solo puede contener letras.";
+  } else if (inputs.name.length > 25) {
+    errors.name = "El nombre debe tener entre 8 y 25 caractéres.";
+  }
+
+  if (!inputs.number) {
+    errors.number = "El número de la tarjeta no puede estar vacío.";
+  } else if (!regexNumber.test(inputs.number)) {
+    errors.number = "El número de la tarjeta solo puede contener números";
+  } else if (inputs.number.length !== 16) {
+    errors.number = "El número de la tarjeta debe ser de 16 caractéres.";
+  }
+
+  if (!inputs.month) {
+    errors.month =
+      "El mes/año de expiración de la tarjeta no puede estar vacío.";
+  }
+
+  if (!inputs.year) {
+    errors.year =
+      "El mes/año de expiración de la tarjeta no puede estar vacío.";
+  }
+
+  if (!inputs.cvv) {
+    errors.cvv = "El número de la tarjeta no puede estar vacío.";
+  } else if (!regexNumber.test(inputs.number)) {
+    errors.cvv = "El número de la tarjeta solo puede contener números";
+  } else if (inputs.cvv.length !== 3) {
+    errors.cvv = "El número de la tarjeta debe tener 3 números.";
+  }
+
+  if (!inputs.dni) {
+    errors.dni = "El DNI no puede estar vacío.";
+  } else if (!regexNumber.test(inputs.dni)) {
+    errors.dni = "El DNI solo puede contener números.";
+  } else if (inputs.dni.length < 8 || inputs.dni.length > 25) {
+    errors.dni = "El DNI debe tener entre 8 y 25 caractéres.";
+  }
+
+  return errors;
+}

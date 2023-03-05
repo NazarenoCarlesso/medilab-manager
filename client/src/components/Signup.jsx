@@ -12,16 +12,9 @@ import { setSessionId } from "../reducer";
 import { validateLogin, validateSignUp } from "../utils/validate";
 import { setItem } from "../utils/localStorage";
 
-
-
-
-
 const BACK = process.env.REACT_APP_BACK;
 
 export default function Signup() {
-
-
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // Variable user para el Login
@@ -132,8 +125,6 @@ export default function Signup() {
     }
   };
 
-
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (hasValues) {
@@ -159,7 +150,7 @@ export default function Signup() {
     } else if (hasErrorsSignUp) {
       alert("Debe completar los datos correctamente");
     } else {
-      const response = await axios.post(`${BACK}/patients/signup`, userSignUp);
+      await axios.post(`${BACK}/patients/signup`, userSignUp);
       window.alert("Registro exitoso.");
     }
   };
@@ -209,8 +200,6 @@ export default function Signup() {
   };
 
   return (
-
- 
     <div className="container text-center">
       <div className="row">
         <div className="col">
@@ -482,6 +471,5 @@ export default function Signup() {
         </div>
       </div>
     </div>
-    
   );
 }
