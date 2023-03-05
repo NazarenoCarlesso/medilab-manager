@@ -4,7 +4,7 @@ import QuoterContainer from './QuoterContainer'
 import Slides from './Slides'
 import Carousel from './Carousel'
 import CarouselCards from './CarouselCards'
-import Footer from './Footer';
+
 
 export default function Home() {
     

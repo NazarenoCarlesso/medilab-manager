@@ -5,6 +5,7 @@ import logo from "../images/logo3.png"
 
 export default function Footer() {
     return (
+        <div>
       <div style={{background: "aliceblue"}}>
         <footer className="text-info py-4">
             <div className="container">
@@ -67,6 +68,7 @@ export default function Footer() {
                 </nav>
             </div>
         </footer>
+      </div>
       </div>
     )
   }

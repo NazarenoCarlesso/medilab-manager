@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -15,6 +15,8 @@ import { setItem } from "../utils/localStorage";
 const BACK = process.env.REACT_APP_BACK;
 
 export default function Signup() {
+const usuario = useSelector((state) => state.sessionId?.name)
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // Variable user para el Login
@@ -139,7 +141,8 @@ export default function Signup() {
       };
       dispatch(setSessionId(userData));
       setItem("sessionId", userData);
-      navigate("/user");
+      // devuelve al iniciar sesión al perfil del usuario con url modificada con parte de su usuario
+      navigate("/user/"+usuario.toString().toLowerCase());
     }
   };
 
