@@ -1,4 +1,4 @@
-const { orderAll, orderById } = require('../controllers/orders')
+const { orderAll, orderById, createOrder } = require('../controllers/orders')
 
 const orderHandler = async (req, res) => {
     try {
@@ -14,4 +14,14 @@ const orderAllHandler = async (req, res) => {
     res.status(200).json(orders)
 }
 
-module.exports = { orderHandler, orderAllHandler }
+const orderCreateHandler = async(req,res)=>{
+    const {tests} = req.body, uid = req.uid
+    try {
+        const orderId = await createOrder(uid, tests)
+        res.status(201).json( {msg:"Order created successfully", orderId});
+    } catch (error) {
+        res.status(400).json({ msg: error.message })
+    }    
+}
+
+module.exports = { orderHandler, orderAllHandler, orderCreateHandler }
