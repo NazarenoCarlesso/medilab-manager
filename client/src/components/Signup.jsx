@@ -139,7 +139,7 @@ export default function Signup() {
       };
       dispatch(setSessionId(userData));
       setItem("sessionId", userData);
-      navigate("/home");
+      navigate("/user");
     }
   };
 

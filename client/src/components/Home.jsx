@@ -1,11 +1,10 @@
 import React from 'react'
-import { useSelector } from "react-redux";
 import Row from "react-bootstrap/Row";
 import QuoterContainer from './QuoterContainer'
 import Slides from './Slides'
-import Test from "./Test";
 import Carousel from './Carousel'
 import CarouselCards from './CarouselCards'
+import Footer from './Footer';
 
 export default function Home() {
     
@@ -18,7 +17,7 @@ export default function Home() {
             <hr/>
             <QuoterContainer/>
             <hr/>
-            <div style={{background: "aliceblue"}}>
+            <div style={{background: "white"}}>
             <Row>
             <h3 className='d-flex justify-content-center'style={{padding: 20, color: "navy"}}>Nuestros Paquetes</h3>
             <p className='d-flex justify-content-center'style={{color: "navy"}}>Ponemos a tu disposición los siguientes paquetes de diagnóstico.</p>
