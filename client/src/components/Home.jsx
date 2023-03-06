@@ -15,10 +15,10 @@ export default function Home() {
             <hr/>
             <QuoterContainer/>
             <hr/>
-            <div style={{background: "white"}}>
+            <div style={{background: "aliceblue"}}>
             <Row>
             <h3 className='d-flex justify-content-center'style={{padding: 10, color: "navy"}}>Mas Vendidos</h3>
-            <p className='d-flex justify-content-center'style={{color: "navy"}}>Los favoritos dde nuestros clientes.</p>
+            <p className='d-flex justify-content-center'style={{color: "navy"}}>Los favoritos de nuestros clientes.</p>
             </Row>
                 <CarouselCards/>
             </div>
