@@ -52,28 +52,28 @@ export default function App() {
   return (
     <div className="App">
       <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/tests" element={<TestList />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/faq" element={<Faq />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/*" element={<Ops />} />
-        <Route path="/quoter" element={<Quoter />} />
-        <Route path="/results" element={<Results />} />
-        <Route path="/payments" element={<Payments />} />
-        {/* <Route path="/user" element={<User />}  onEnter={requireAuth}  /> */}
-        {/* pregunta si hay algo en el token al momento de buscar la url user si no tiene nada manda al componente de error */ }
-        {/* modifica la url con el nombre del usuario (`/user/${usuario}`) */ }
-        <Route path={`/user`} element={!token ? <Navigate to="/*" /> : <User />} />
-      </Routes>
-        <Footer />
- 
-      
+      <div className="route">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/tests" element={<TestList />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/*" element={<Ops />} />
+          <Route path="/quoter" element={<Quoter />} />
+          <Route path="/results" element={<Results />} />
+          <Route path="/payments" element={<Payments />} />
+          {/* <Route path="/user" element={<User />}  onEnter={requireAuth}  /> */}
+          {/* pregunta si hay algo en el token al momento de buscar la url user si no tiene nada manda al componente de error */ }
+          {/* modifica la url con el nombre del usuario (`/user/${usuario}`) */ }
+          <Route path={`/user`} element={!token ? <Navigate to="/*" /> : <User />} />
+        </Routes>
+      </div>
+      <Footer />
     </div>
   );
 }
