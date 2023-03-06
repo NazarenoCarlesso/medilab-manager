@@ -2,7 +2,6 @@ import React from 'react'
 import Row from "react-bootstrap/Row";
 import QuoterContainer from './QuoterContainer'
 import Slides from './Slides'
-import Carousel from './Carousel'
 import CarouselCards from './CarouselCards'
 
 
@@ -11,9 +10,8 @@ export default function Home() {
     return (
         <div>  
           <div>
-            <Carousel/>
-          </div>
             <Slides/>
+          </div>
             <hr/>
             <QuoterContainer/>
             <hr/>
