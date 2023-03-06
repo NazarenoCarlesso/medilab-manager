@@ -23,7 +23,7 @@ export default function Quoter() {
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
       />
-      <Row md={3} className="g-4">
+      <Row md={3} className="g-4 justify-content-center align-items-center">
         {currentPost &&
           currentPost.map((test) => (
             <Test

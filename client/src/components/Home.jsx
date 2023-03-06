@@ -17,13 +17,12 @@ export default function Home() {
             <hr/>
             <div style={{background: "white"}}>
             <Row>
-            <h3 className='d-flex justify-content-center'style={{padding: 20, color: "navy"}}>Nuestros Paquetes</h3>
-            <p className='d-flex justify-content-center'style={{color: "navy"}}>Ponemos a tu disposición los siguientes paquetes de diagnóstico.</p>
+            <h3 className='d-flex justify-content-center'style={{padding: 10, color: "navy"}}>Mas Vendidos</h3>
+            <p className='d-flex justify-content-center'style={{color: "navy"}}>Los favoritos dde nuestros clientes.</p>
             </Row>
                 <CarouselCards/>
             </div>
-            <Row md={3} className="g-4">
-            </Row>
+            <Row className="pt-4"/>
         </div>
     )
 }
