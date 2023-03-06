@@ -24,27 +24,27 @@ export default  function CarouselCards (){
           className="h-100 justify-content-center align-items-center"
           gap={3}>  
           <Test
-              key={fav1}
+              key={fav1.id}
               id={fav1?.id}
               name={fav1?.name}
               price={fav1?.price}
           />
           <Test
-              key={fav2}
+              key={fav2.id}
               id={fav2?.id}
               name={fav2?.name}
               price={fav2?.price}
           /> 
 
           <Test
-              key={fav3}
+              key={fav3.id}
               id={fav3?.id}
               name={fav3?.name}
               price={fav3?.price}
           />
             
             <Test
-              key={fav4}
+              key={fav4.id}
               id={fav4?.id}
               name={fav4?.name}
               price={fav4?.price}
@@ -58,27 +58,27 @@ export default  function CarouselCards (){
           className="h-100 justify-content-center align-items-center"
           gap={3}>
             <Test
-              key={fav5}
+              key={fav5.id}
               id={fav5?.id}
               name={fav5?.name}
               price={fav5?.price}
           />
           <Test
-              key={fav6}
+              key={fav6.id}
               id={fav6?.id}
               name={fav6?.name}
               price={fav6?.price}
           /> 
 
           <Test
-              key={fav7}
+              key={fav7.id}
               id={fav7?.id}
               name={fav7?.name}
               price={fav7?.price}
           />
             
             <Test
-              key={fav8}
+              key={fav8.id}
               id={fav8?.id}
               name={fav8?.name}
               price={fav8?.price}/>
