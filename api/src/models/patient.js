@@ -44,6 +44,10 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING(25),
             allowNull: true
         },
+        role: {
+            type: DataTypes.STRING(25),
+            allowNull: true
+        },
         deleted: {
             type: DataTypes.BOOLEAN,
             allowNull: true,

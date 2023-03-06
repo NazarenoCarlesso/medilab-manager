@@ -1,7 +1,14 @@
-const { testAll, testDetail, testSearch } = require("../controllers/test")
+const {
+    testAll,
+    testDetail,
+    testSearch,
+    testByOrders
+} = require('../controllers/test')
 
 const testAllHandler = async (req, res) => {
-    const tests = req.query.search ? await testSearch(search) : await testAll()
+    const tests = req.query.search
+        ? await testSearch(req.query.search, req.query.limit)
+        : await testAll(req.query.limit)
     res.status(200).json(tests)
 }
 
@@ -10,4 +17,13 @@ const testDetailHandler = async (req, res) => {
     res.status(200).json(test)
 }
 
-module.exports = { testAllHandler, testDetailHandler }
+const testByOrdersHandler = async (req, res) => {
+    const tests = await testByOrders(req.query.limit)
+    res.status(200).json(tests)
+}
+
+module.exports = {
+    testAllHandler,
+    testDetailHandler,
+    testByOrdersHandler
+}

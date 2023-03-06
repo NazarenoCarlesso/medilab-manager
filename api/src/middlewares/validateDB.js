@@ -39,11 +39,18 @@ const validateUsernameStatus = async (username) => {
     }
 }
 
+const validateAdmin = async (req, res, next) => {
+    const patient = await Patient.findByPk(req.uid)
+
+    patient.role !== 'ADMIN' ? res.status(401).json({ msg: 'Acceso denegado' }) : next()
+}
+
 module.exports = {
     validateOrder,
     validateTest,
     validateUsername,
     validateFreeUsername,
     validateFreeEmail,
-    validateUsernameStatus
+    validateUsernameStatus,
+    validateAdmin
 }

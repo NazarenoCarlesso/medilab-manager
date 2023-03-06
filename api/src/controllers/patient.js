@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const { Op } = require('sequelize')
 // models
 const { models } = require('../db.js')
 const { Patient } = models
@@ -7,6 +8,21 @@ const generateJWT = require('../helpers/generateJWT.js')
 
 const patientAll = async () => {
     let patients = await Patient.findAll({ where: { deleted: false } })
+
+    return patients.map(patient => ({
+        id: patient.id,
+        firstName: patient.firstName,
+        lastName: patient.lastName,
+        sex: patient.sex,
+    }))
+}
+
+const patientWithRoles = async () => {
+    let patients = await Patient.findAll({
+        where: {
+            role: { [Op.ne]: null }
+        }
+    })
 
     return patients.map(patient => ({
         id: patient.id,
@@ -50,5 +66,6 @@ module.exports = {
     patientAll,
     patientLogIn,
     patientSignUp,
-    patientDelete
+    patientDelete,
+    patientWithRoles
 }

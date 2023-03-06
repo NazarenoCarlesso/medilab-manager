@@ -8,7 +8,8 @@ const {
     validateUsername,
     validateFreeUsername,
     validateFreeEmail,
-    validateUsernameStatus
+    validateUsernameStatus,
+    validateAdmin
 } = require('../middlewares/validateDB')
 
 // handlers
@@ -16,7 +17,8 @@ const {
     patientAllHandler,
     patientLogInHandler,
     patientSignUpHandler,
-    patientDeleteHandler
+    patientDeleteHandler,
+    patientWithRolesHandler
 } = require('../handlers/patient')
 
 // routes
@@ -25,8 +27,16 @@ const router = Router()
 router.get('/', [
     header('token', 'Token es obligatorio').not().isEmpty(),
     validateReq,
-    validateJWT
+    validateJWT,
+    validateAdmin
 ], patientAllHandler)
+
+router.get('/roles', [
+    header('token', 'Token es obligatorio').not().isEmpty(),
+    validateReq,
+    validateJWT,
+    validateAdmin
+], patientWithRolesHandler)
 
 router.post('/login', [
     body('username', 'Username es obligatorio').not().isEmpty(),
