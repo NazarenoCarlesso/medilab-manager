@@ -15,8 +15,6 @@ import { setItem } from "../utils/localStorage";
 const BACK = process.env.REACT_APP_BACK;
 
 export default function Signup() {
-const usuario = useSelector((state) => state.sessionId?.name)
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // Variable user para el Login
@@ -142,7 +140,7 @@ const usuario = useSelector((state) => state.sessionId?.name)
       dispatch(setSessionId(userData));
       setItem("sessionId", userData);
       // devuelve al iniciar sesión al perfil del usuario con url modificada con parte de su usuario
-      navigate("/user/"+usuario.toString().toLowerCase());
+      navigate("/user");
     }
   };
 

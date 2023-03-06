@@ -37,9 +37,13 @@ export default function User() {
         <Modal.Body>
           
         <Row md={"8"} className="g-4">
-        {orders.map((order) => (
+        {orders.map((order, key) => (
+          
     <>
-        <Card style={{ width: 250, height: 250 }}>
+      
+    
+    
+        <Card key={key} style={{ width: 250, height: 250, marginRight:"10px" }}>
         <Card.Body>
             <Card.Title style={{ height: 50 }}>{order.test}</Card.Title>
                 <Card.Text style={{ height: 70 }}>
@@ -49,7 +53,7 @@ export default function User() {
                 </Card.Text>
         </Card.Body> 
        </Card>
-      </> 
+      </>
         ))}
 
       </Row>

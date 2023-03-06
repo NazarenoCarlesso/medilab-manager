@@ -69,7 +69,7 @@ export default function App() {
         {/* <Route path="/user" element={<User />}  onEnter={requireAuth}  /> */}
         {/* pregunta si hay algo en el token al momento de buscar la url user si no tiene nada manda al componente de error */ }
         {/* modifica la url con el nombre del usuario (`/user/${usuario}`) */ }
-        <Route path={`/user/${usuario}`} element={!token ? <Navigate to="/*" /> : <User />} />
+        <Route path={`/user`} element={!token ? <Navigate to="/*" /> : <User />} />
       </Routes>
         <Footer />
  
