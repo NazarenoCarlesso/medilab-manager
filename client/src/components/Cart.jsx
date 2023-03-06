@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { deleteOfCart } from "../reducer";
 import { setItem } from "../utils/localStorage";
 
@@ -112,13 +112,30 @@ export default function Cart() {
         </Table>
       </div>
       {sessionId ? (
-        <Button
-          variant="primary"
-          style={{ padding: "1%", paddingRight: "3%", paddingLeft: "3%" }}
-          onClick={handleSubmit}
+        <div
+          style={{
+            display: "flex",
+            width: "400px",
+            justifyContent: "space-around",
+            marginBottom: "2%",
+          }}
         >
-          PROCESAR COMPRA
-        </Button>
+          <Button
+            variant="success"
+            style={{ padding: "1%", paddingRight: "3%", paddingLeft: "3%" }}
+            as={Link}
+            to="/quoter"
+          >
+            SEGUIR COMPRANDO
+          </Button>
+          <Button
+            variant="primary"
+            style={{ padding: "1%", paddingRight: "3%", paddingLeft: "3%" }}
+            onClick={handleSubmit}
+          >
+            PROCESAR COMPRA
+          </Button>
+        </div>
       ) : (
         <div>
           <h4>Debe iniciar sesión</h4>
