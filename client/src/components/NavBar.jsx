@@ -80,7 +80,7 @@ export default function NavBar() {
             )}
 
              {sessionId ? (
-              <NavDropdown title={<span style={{ color: 'blue' }}>{"salir"}</span>} id="basic-nav-dropdown">
+              <NavDropdown title={<span style={{ color: 'blue' }}>{sessionId}</span>} id="basic-nav-dropdown">
                 <NavDropdown.Item onClick={handleLogout}>
                   Cerrar sesión
                 </NavDropdown.Item>
