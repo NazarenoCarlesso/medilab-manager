@@ -1,9 +1,7 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import Card from 'react-bootstrap/Card'
 import Stack from 'react-bootstrap/Stack'
 import { useSelector } from 'react-redux'
-import Row from 'react-bootstrap/Row'
 import Test from '../components/Test'
 
 
@@ -27,29 +25,29 @@ export default  function CarouselCards (){
           gap={3}>  
           <Test
               key={fav1}
-              id={fav1.id}
-              name={fav1.name}
-              price={fav1.price}
+              id={fav1?.id}
+              name={fav1?.name}
+              price={fav1?.price}
           />
           <Test
               key={fav2}
-              id={fav2.id}
-              name={fav2.name}
-              price={fav2.price}
+              id={fav2?.id}
+              name={fav2?.name}
+              price={fav2?.price}
           /> 
 
           <Test
               key={fav3}
-              id={fav3.id}
-              name={fav3.name}
-              price={fav3.price}
+              id={fav3?.id}
+              name={fav3?.name}
+              price={fav3?.price}
           />
             
             <Test
               key={fav4}
-              id={fav4.id}
-              name={fav4.name}
-              price={fav4.price}
+              id={fav4?.id}
+              name={fav4?.name}
+              price={fav4?.price}
           />
           </Stack>
     
@@ -61,29 +59,29 @@ export default  function CarouselCards (){
           gap={3}>
             <Test
               key={fav5}
-              id={fav5.id}
-              name={fav5.name}
-              price={fav5.price}
+              id={fav5?.id}
+              name={fav5?.name}
+              price={fav5?.price}
           />
           <Test
               key={fav6}
-              id={fav6.id}
-              name={fav6.name}
-              price={fav6.price}
+              id={fav6?.id}
+              name={fav6?.name}
+              price={fav6?.price}
           /> 
 
           <Test
               key={fav7}
-              id={fav7.id}
-              name={fav7.name}
-              price={fav7.price}
+              id={fav7?.id}
+              name={fav7?.name}
+              price={fav7?.price}
           />
             
             <Test
               key={fav8}
-              id={fav8.id}
-              name={fav8.name}
-              price={fav8.price}/>
+              id={fav8?.id}
+              name={fav8?.name}
+              price={fav8?.price}/>
               
           </Stack>
         </Carousel.Item>

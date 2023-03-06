@@ -8,11 +8,11 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import { setItem } from "../utils/localStorage";
 import { setState } from "../reducer";
+import img from "../images/logonav.png"
 
 export default function NavBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const usuario = useSelector((state) => state.sessionId?.name)
   
   const cartLength = useSelector((state) => state.cart.length);
   const sessionId = useSelector((state) => state.sessionId?.name);
@@ -31,6 +31,7 @@ export default function NavBar() {
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">
+         <img src={img} style={{width: "50px", marginRight:"10px"}} alt={img}/> 
           MediLab Manager
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -44,33 +45,34 @@ export default function NavBar() {
             )}
              {sessionId ? (
             
-               <Nav.Link as={Link} to={`/user/${usuario}`}>Mi perfil</Nav.Link>
+               <Nav.Link as={Link} to={`/user`}>Mi perfil</Nav.Link>
            
              
             ) : null}
+            
 
 
 
             <Nav.Link as={Link} to="/cart" href="/cart">
               Cart <b style={{ color: 'red' }}>{cartLength ? cartLength : null} </b></Nav.Link>
 
+
+              <Nav >
+
+<NavDropdown  title="More Info" id="basic-nav-dropdown">
+  <NavDropdown.Item as={Link} to="/contact">
+    Contact us
+  </NavDropdown.Item>
+  <NavDropdown.Item as={Link} to="/about">
+    About us
+  </NavDropdown.Item>
+  <NavDropdown.Item as={Link} to="/faq">
+    FAQ
+  </NavDropdown.Item>
+</NavDropdown>
+</Nav>
             </Nav>
  
-        <Nav >
-
-            <NavDropdown  title="More Info" id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/contact">
-                Contact us
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/about">
-                About us
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/faq">
-                FAQ
-              </NavDropdown.Item>
-            </NavDropdown>
-       </Nav>
-
            <Nav>
 
             {sessionId ? null : (
