@@ -1,30 +1,28 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import Row from 'react-bootstrap/Row'
-import Test from './Test'
+import Row from "react-bootstrap/Row";
+import QuoterContainer from './QuoterContainer'
+import Slides from './Slides'
+import CarouselCards from './CarouselCards'
+
 
 export default function Home() {
-    const tests = useSelector(state => state.tests)
-    const samples = useSelector(state => state.samples)
-    const categories = useSelector(state => state.categories)
-
+    
     return (
-        <div>
-            <b>Samples:</b> {samples.join(' | ')}
+        <div>  
+          <div>
+            <Slides/>
+          </div>
             <hr/>
-            <b>Categories:</b> {categories.join(' | ')}
+            <QuoterContainer/>
             <hr/>
-            <Row md={3} className="g-4">
-                {tests.map(test =>
-                    <Test
-                        key={test.id}
-                        id={test.id}
-                        name={test.name}
-                        description={test.description}
-                        price={test.price}
-                    />
-                )}
+            <div style={{background: "aliceblue"}}>
+            <Row>
+            <h3 className='d-flex justify-content-center'style={{padding: 10, color: "navy"}}>Mas Vendidos</h3>
+            <p className='d-flex justify-content-center'style={{color: "navy"}}>Los favoritos de nuestros clientes.</p>
             </Row>
+                <CarouselCards/>
+            </div>
+            <Row className="pt-4"/>
         </div>
     )
 }

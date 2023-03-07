@@ -1,7 +1,9 @@
 require('dotenv').config()
 const { Sequelize } = require('sequelize')
+
 // environment variables
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE } = process.env
+
 // import models
 const patient = require('./models/patient')
 const order = require('./models/order')
@@ -11,11 +13,13 @@ const item = require('./models/item')
 const result = require('./models/result')
 const sample = require('./models/sample')
 const category = require('./models/test_category')
+
 // database connection
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 })
+
 // models definitions
 patient(sequelize)
 order(sequelize)
@@ -25,11 +29,18 @@ item(sequelize)
 result(sequelize)
 sample(sequelize)
 category(sequelize)
+
 // models destructuring
-const { Patient, Test, Payment, Item, Result, Order, Sample, test_category } = sequelize.models
+const {
+  Patient, Test, Payment, Item, Result, Order, Sample, test_category
+} = sequelize.models
+
 // associations
-Patient.belongsToMany(Test, { through: Order })
-Test.belongsToMany(Patient, { through: Order })
+Patient.hasMany(Order)
+Order.belongsTo(Patient)
+
+Test.hasMany(Order)
+Order.belongsTo(Test)
 
 Test.belongsToMany(Test, { as: 'Bundle', through: 'test_bundle' })
 
@@ -47,5 +58,6 @@ Test.belongsTo(Sample)
 
 test_category.hasMany(Test)
 Test.belongsTo(test_category)
+
 // connection export
 module.exports = sequelize

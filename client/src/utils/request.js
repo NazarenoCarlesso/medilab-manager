@@ -1,4 +1,8 @@
+
+
+
 const BACK = process.env.REACT_APP_BACK
+
 
 const getTests = async (callback) => {
     fetch(`${BACK}/tests`)
@@ -18,4 +22,18 @@ const getCategories = async (callback) => {
         .then(data => callback(data))
 }
 
-module.exports = { getTests, getSamples, getCategories }
+
+const getOrders = async (callback, token) => {
+
+    const options = {
+        headers: {
+          'token': ` ${token}`
+        }
+      }
+    fetch(`${BACK}/orders`, options)
+     .then(response => response.json())
+    .then(data => callback(data)) 
+      
+}
+
+module.exports = { getTests, getSamples, getCategories, getOrders}
