@@ -2,11 +2,18 @@ const {
     patientAll,
     patientLogIn,
     patientSignUp,
-    patientDelete
+    patientDelete,
+    patientWithRoles
 } = require('../controllers/patient')
 
 const patientAllHandler = async (req, res) => {
     const patients = await patientAll()
+
+    res.status(200).json(patients)
+}
+
+const patientWithRolesHandler = async (req, res) => {
+    const patients = await patientWithRoles()
 
     res.status(200).json(patients)
 }
@@ -50,5 +57,6 @@ module.exports = {
     patientAllHandler,
     patientLogInHandler,
     patientSignUpHandler,
-    patientDeleteHandler
+    patientDeleteHandler,
+    patientWithRolesHandler
 }

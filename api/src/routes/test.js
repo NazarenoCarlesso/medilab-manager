@@ -6,12 +6,18 @@ const validateReq = require('../middlewares/validateReq')
 const { validateTest } = require('../middlewares/validateDB')
 
 // handlers
-const { testAllHandler, testDetailHandler } = require('../handlers/test')
+const {
+    testAllHandler,
+    testDetailHandler,
+    testByOrdersHandler
+} = require('../handlers/test')
 
 // routes
 const router = Router()
 
 router.get('/', testAllHandler)
+
+router.get('/orders', testByOrdersHandler)
 
 router.get('/:id', [
     param('id', 'Id debe ser un numero').isInt(),

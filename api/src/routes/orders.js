@@ -1,12 +1,13 @@
 const { Router } = require('express')
 
 // middlewares
-const { header } = require('express-validator')
+const { header, body } = require('express-validator')
 const validateJWT = require('../middlewares/validateJWT')
 const validateReq = require('../middlewares/validateReq')
 
 // handlers
-const { orderHandler, orderAllHandler, orderCreateHandler} = require('../handlers/orders')
+const { orderHandler, orderAllHandler, orderCreateHandler } = require('../handlers/orders')
+const { validateAdmin } = require('../middlewares/validateDB')
 
 // routes
 const router = Router()
@@ -17,8 +18,17 @@ router.get('/', [
     validateJWT
 ], orderHandler)
 
-router.get('/all', orderAllHandler)
+router.get('/admin', [
+    header('token', 'Token es obligatorio').not().isEmpty(),
+    validateReq,
+    validateJWT,
+    validateAdmin
+], orderAllHandler)
 
-router.post('/', validateReq, validateJWT, orderCreateHandler);
+router.post('/', [
+    body('tests', 'Tests son obligatorios').not().isEmpty(),
+    validateReq,
+    validateJWT
+], orderCreateHandler)
 
 module.exports = router
