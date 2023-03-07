@@ -154,7 +154,7 @@ export default function Cart() {
           show={show}
           setShow={setShow}
           setShowAlert={setShowAlert}
-          products={products}
+          cart={cart}
         />
       </div>
       <div style={{ position: "absolute", width: "100%" }}>
