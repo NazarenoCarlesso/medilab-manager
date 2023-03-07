@@ -9,6 +9,11 @@ const getTests = async (callback) => {
         .then(response => response.json())
         .then(data => callback(data))
 }
+const getCovidTests = async (callback) => {
+    fetch(`${BACK}/covid`)
+        .then(response => response.json())
+        .then(data => callback(data))
+}
 
 const getSamples = async (callback) => {
     fetch(`${BACK}/samples`)
@@ -36,4 +41,4 @@ const getOrders = async (callback, token) => {
       
 }
 
-module.exports = { getTests, getSamples, getCategories, getOrders}
+module.exports = { getTests, getSamples, getCategories, getOrders, getCovidTests}
