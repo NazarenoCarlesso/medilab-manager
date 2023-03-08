@@ -5,6 +5,7 @@ const { models } = require('../db.js')
 const { Patient } = models
 // helpers
 const generateJWT = require('../helpers/generateJWT.js')
+const { googleVerify } = require('../helpers/verifyGoogle.js')
 
 const patientAll = async () => {
     let patients = await Patient.findAll({ where: { deleted: false } })
@@ -56,6 +57,26 @@ const patientSignUp = async (username, password, email, firstName, lastName, dni
     })
 }
 
+const patientGoogle = async (token) => {
+    const { firstName, lastName, email, picture } = await googleVerify(token)
+
+    let patient = findOne({ where: { email } })
+
+    if (!patient) {
+        patient = Patient.create({
+            username: email, email, password: email,
+            firstName, lastName
+        })
+    }
+
+    if (patient.deleted) throw new Error('Paciente eliminado')
+
+    return ({
+        token: await generateJWT(patient.id),
+        name: `${patient.lastName.toUpperCase()}, ${patient.firstName}`
+    })
+}
+
 const patientDelete = async (uid) => {
     const patient = await Patient.findByPk(uid)
     patient.deleted = true
@@ -66,6 +87,7 @@ module.exports = {
     patientAll,
     patientLogIn,
     patientSignUp,
+    patientGoogle,
     patientDelete,
     patientWithRoles
 }

@@ -17,6 +17,7 @@ const {
     patientAllHandler,
     patientLogInHandler,
     patientSignUpHandler,
+    patientGoogleHandler,
     patientDeleteHandler,
     patientWithRolesHandler
 } = require('../handlers/patient')
@@ -62,6 +63,11 @@ router.post('/signup', [
     body('email').custom(validateFreeEmail),
     validateReq
 ], patientSignUpHandler)
+
+router.post('/google', [
+    header('token', 'Token es obligatorio').not().isEmpty(),
+    validateReq,
+], patientGoogleHandler)
 
 router.delete('/', [
     header('token', 'Token es obligatorio').not().isEmpty(),
