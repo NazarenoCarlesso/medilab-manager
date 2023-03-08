@@ -14,6 +14,8 @@ const result = require('./models/result')
 const sample = require('./models/sample')
 const category = require('./models/test_category')
 
+
+
 // database connection
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`, {
   logging: false, // set to console.log to see the raw SQL queries
@@ -30,12 +32,16 @@ result(sequelize)
 sample(sequelize)
 category(sequelize)
 
+
 // models destructuring
 const {
-  Patient, Test, Payment, Item, Result, Order, Sample, test_category
+  Patient, Test, Payment, Item, Result, Order, Sample, test_category, 
 } = sequelize.models
 
 // associations
+
+
+
 Patient.hasMany(Order)
 Order.belongsTo(Patient)
 
