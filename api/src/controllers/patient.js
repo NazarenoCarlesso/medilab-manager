@@ -60,11 +60,11 @@ const patientSignUp = async (username, password, email, firstName, lastName, dni
 const patientGoogle = async (token) => {
     const { firstName, lastName, email, picture } = await googleVerify(token)
 
-    let patient = findOne({ where: { email } })
+    let patient = await Patient.findOne({ where: { email } })
 
     if (!patient) {
-        patient = Patient.create({
-            username: email, email, password: email,
+        patient = await Patient.create({
+            username: email.slice(0,24), email, password: email,
             firstName, lastName
         })
     }
