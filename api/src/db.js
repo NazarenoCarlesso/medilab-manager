@@ -13,6 +13,7 @@ const item = require('./models/item')
 const result = require('./models/result')
 const sample = require('./models/sample')
 const category = require('./models/test_category')
+const doctor = require('./models/doctor')
 
 // database connection
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`, {
@@ -29,13 +30,17 @@ item(sequelize)
 result(sequelize)
 sample(sequelize)
 category(sequelize)
+doctor(sequelize)
 
 // models destructuring
 const {
-  Patient, Test, Payment, Item, Result, Order, Sample, test_category
+  Patient, Test, Payment, Item, Result, Order, Sample, test_category, Doctor
 } = sequelize.models
 
 // associations
+Doctor.hasMany(Order)
+Order.belongsTo(Doctor)
+
 Patient.hasMany(Order)
 Order.belongsTo(Patient)
 

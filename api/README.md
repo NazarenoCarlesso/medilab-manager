@@ -29,3 +29,5 @@ Desactualizada
 ``` GET /orders/all ``` devuelve todas las ordenes
 
 ``` GET /results/:id ``` devuelve los resultados de la orden
+
+``` GET /doctors ``` devuelve los doctores

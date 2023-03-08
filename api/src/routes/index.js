@@ -6,6 +6,7 @@ const sampleRouter = require('./sample.js')
 const categoryRouter = require('./category.js')
 const ordersRouter = require('./orders.js')
 const resultRouter = require('./result.js')
+const doctorRouter = require('./doctor.js')
 
 const router = Router()
 // routers config
@@ -20,6 +21,8 @@ router.use('/categories', categoryRouter)
 router.use('/orders', ordersRouter)
 
 router.use('/results', resultRouter)
+
+router.use('/doctors', doctorRouter)
 
 // main router export
 module.exports = router

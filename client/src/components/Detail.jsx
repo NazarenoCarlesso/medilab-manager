@@ -5,12 +5,13 @@ import Button from 'react-bootstrap/esm/Button'
 import { Link } from 'react-router-dom'
 import { ArrowReturnLeft} from 'react-bootstrap-icons'
 import Badge from 'react-bootstrap/esm/Badge'
+import { useNavigate } from "react-router-dom";
 
 const BACK = process.env.REACT_APP_BACK
 
 export default function Detail() {
     const { id } = useParams()
-
+    const navigate = useNavigate();
     const [test, setTest] = useState(id)
 
     useEffect(() => {
@@ -50,7 +51,8 @@ export default function Detail() {
                             style={{ height: '50px', width: "150px"}} 
                             variant="outline-info" 
                             as={Link} 
-                            to={`/quoter`}>
+                            
+                            to={-1}>
                             <ArrowReturnLeft></ArrowReturnLeft> Atrás
                         </Button> 
                     </div>
