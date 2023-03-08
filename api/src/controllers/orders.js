@@ -20,22 +20,16 @@ const orderById = async (uid) => {
 }
 
 const createOrder = async (uid, tests) => {
-    //Genera un Payment, quizás debería venir el costo y tipo desde la variable "tests" (body)
-    const newPayment = await Payment.create(/*{
-      amount:
-      paymentMethod:
-    } */);
-    
-    const bulkOfOrders = tests.map((test) => {
-      return {
+    const newPayment = await Payment.create()
+
+    const bulkOfOrders = tests.map(test => ({
         PatientId: uid,
         TestId: test,
         PaymentId: newPayment.dataValues.id,
-      };
-    });
-    
-    newOrdersIds = await Order.bulkCreate(bulkOfOrders); //datos correspondientes con la orden recién generada
-    return newOrdersIds.map((order)=>order.id)
-  };
+    }))
+    newOrdersIds = await Order.bulkCreate(bulkOfOrders)
+
+    return newOrdersIds.map((order) => order.id)
+}
 
 module.exports = { orderAll, orderById, createOrder }
