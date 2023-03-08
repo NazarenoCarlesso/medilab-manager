@@ -10,7 +10,7 @@ export default function QuoterContainer() {
 
   return (
     <div className="container pt-4 mb-4" style={{ width: '100vw', maxWidth: '100%', textAlign: 'center' }}>
-        <Badge bg='white' className="row rounded" style={{width: "1100px", height: "250px"}}>
+        <Badge bg='white' className="row shadow-lg" style={{width: "1100px", height: "250px"}}>
             <div className=" text-info row justify-content-center">
                 <div className="col-4 p-4">
                     <h3 className="pt-4">Bienvenido</h3>

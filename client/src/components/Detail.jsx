@@ -25,7 +25,7 @@ export default function Detail() {
         <div className='container pt-4 mb-4 ' style={{ height: '400px', width: "900px"}}>
             <div className='pt-4'></div>
                 
-                <Badge bg='white' className="row rounded-pill" style={{width: "900px"}}>
+                <Badge bg='white' className="row shadow-sm" style={{width: "900px"}}>
                     <h1 className='text-primary'>{test.name}</h1>
                     <div class="row justify-content-center">
                     <div class="col-4">
