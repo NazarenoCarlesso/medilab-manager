@@ -23,6 +23,17 @@ const testAll = async (limit) => {
     })).slice(0, limit)
 }
 
+const testEdit = async (id, name, description, price, time) => {
+    const test = Text.findByPk(id)
+
+    test.name = name
+    test.description = description
+    test.price = price
+    test.time = time
+
+    return test.save()
+}
+
 const testDetail = async (pk) => {
     const test = await Test.findByPk(pk)
     const sample = await test.getSample()
@@ -79,8 +90,17 @@ const testByOrders = async (limit) => {
     })).slice(0, limit)
 }
 
+const testCreate = (name, description, price, time, category, sample) => {
+    return Test.create({
+        name, description, price, time,
+        CategoryId: category, SampleId: sample
+    })
+}
+
 module.exports = {
     testAll,
+    testEdit,
+    testCreate,
     testDetail,
     testSearch,
     testByOrders
