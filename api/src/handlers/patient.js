@@ -4,7 +4,8 @@ const {
     patientSignUp,
     patientGoogle,
     patientDelete,
-    patientWithRoles
+    patientWithRoles,
+    patientGenerator
 } = require('../controllers/patient')
 
 const patientAllHandler = async (req, res) => {
@@ -66,11 +67,21 @@ const patientDeleteHandler = async (req, res) => {
     }
 }
 
+const patientGeneratorHandler = async (req, res) => {
+    try {
+        await patientGenerator()
+        res.status(201).json({ msg: 'Created successfully' })
+    } catch (error) {
+        res.status(400).json({ msg: error.message })
+    }
+}
+
 module.exports = {
     patientAllHandler,
     patientLogInHandler,
     patientSignUpHandler,
     patientGoogleHandler,
     patientDeleteHandler,
-    patientWithRolesHandler
+    patientWithRolesHandler,
+    patientGeneratorHandler
 }

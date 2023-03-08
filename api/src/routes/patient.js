@@ -19,7 +19,8 @@ const {
     patientSignUpHandler,
     patientGoogleHandler,
     patientDeleteHandler,
-    patientWithRolesHandler
+    patientWithRolesHandler,
+    patientGeneratorHandler
 } = require('../handlers/patient')
 
 // routes
@@ -74,5 +75,9 @@ router.delete('/', [
     validateReq,
     validateJWT
 ], patientDeleteHandler)
+
+router.post('/generate', [
+    validateJWT
+], patientGeneratorHandler)
 
 module.exports = router

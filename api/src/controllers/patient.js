@@ -83,11 +83,39 @@ const patientDelete = async (uid) => {
     return await patient.save()
 }
 
+const patientGenerator = async () => {
+    const patients = await fetch(`${process.env.VITAL_API}/apirest/pacientes`)
+        .then(response => response.json())
+
+    const password = await bcrypt.hash('password', 10)
+
+    await Promise.all(patients.map(patient => Patient.create({
+        id: patient.id,
+        firstName: patient.nombres.toLowerCase(),
+        lastName: `${patient.apePaterno} ${patient.apeMaterno}`,
+        dni: patient.dni,
+        height: Number(patient.height),
+        sex: patient.sexo,
+        civilState: patient.estadoCivil,
+        number: patient.telefono,
+        email: `${patient.apePaterno.toLowerCase()}${patient.apeMaterno.toLowerCase()}${patient.id}@gmail.com`,
+        username: `${patient.apePaterno}${patient.apeMaterno}${patient.id}`,
+        password: password
+    })))
+
+    await Patient.create({
+        id: 999, firstName: 'admin', lastName: 'admin',
+        username: 'admin', password: await bcrypt.hash('admin', 10),
+        email: 'admin@admin.com', role: 'ADMIN'
+    })
+}
+
 module.exports = {
     patientAll,
     patientLogIn,
     patientSignUp,
     patientGoogle,
     patientDelete,
-    patientWithRoles
+    patientWithRoles,
+    patientGenerator
 }

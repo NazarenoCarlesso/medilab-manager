@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize')
 module.exports = (sequelize) => {
     sequelize.define('Patient', {
         username: {
-            type: DataTypes.STRING(25),
+            type: DataTypes.STRING(50),
             allowNull: false,
             unique: true
         },
@@ -17,11 +17,11 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         firstName: {
-            type: DataTypes.STRING(25),
+            type: DataTypes.STRING(50),
             allowNull: false
         },
         lastName: {
-            type: DataTypes.STRING(25),
+            type: DataTypes.STRING(50),
             allowNull: false
         },
         dni: {

@@ -42,6 +42,8 @@ const validateUsernameStatus = async (username) => {
 const validateAdmin = async (req, res, next) => {
     const patient = await Patient.findByPk(req.uid)
 
+    if (!patient) return res.status(401).json({ msg: 'Acceso denegado' })
+
     patient.role !== 'ADMIN' ? res.status(401).json({ msg: 'Acceso denegado' }) : next()
 }
 
