@@ -8,11 +8,8 @@ const { User } = models
 // helpers
 const generateJWT = require('../helpers/generateJWT.js')
 const { googleVerify } = require('../helpers/verifyGoogle.js')
-const uploadFile = require('../helpers/uploadFile')
-const { userPhotoPath } = require('../helpers/generatePath.js')
 
 // utils
-const { toFirstName, toLastName, toUnique, toPhoto } = require('../utils/index.js')
 const { uploadPhotoCloudinary } = require('./upload.js')
 
 const userAll = async () => {
@@ -107,34 +104,6 @@ const userDelete = async (uid) => {
     return await user.save()
 }
 
-const userGenerator = async () => {
-    const users = await fetch(`${process.env.VITAL_API}/apirest/pacientes`)
-        .then(response => response.json())
-
-    const password = await bcrypt.hash('password', 10)
-
-    await Promise.all(users.map(user => User.create({
-        id: user.id,
-        firstName: toFirstName(user.nombres),
-        lastName: toLastName(user.apePaterno),
-        dni: user.dni,
-        height: null,
-        sex: user.sexo,
-        civil: null,
-        phone: user.telefono,
-        photo: toPhoto(user.sexo),
-        email: toUnique(user.apePaterno, user.apeMaterno, user.id) + '@gmail.com',
-        username: toUnique(user.apePaterno, user.apeMaterno, user.id),
-        password: password
-    })))
-
-    await User.create({
-        id: 999, firstName: 'admin', lastName: 'admin',
-        username: 'admin', password: await bcrypt.hash('admin', 10),
-        email: 'admin@admin.com', role: 'ADMIN'
-    })
-}
-
 const userPhotoUpload = async (uid, file) => {
     const user = await User.findByPk(uid)
 
@@ -168,6 +137,5 @@ module.exports = {
     userDelete,
     userWithRoles,
     userChangePassword,
-    userPhotoUpload,
-    userGenerator
+    userPhotoUpload
 }
