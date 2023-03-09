@@ -21,7 +21,7 @@ export default function QuoterContainer() {
                     <Button 
                             style={{ height: '160px'}}
                             className="p-4 fs-4"
-                            variant="outline-info" 
+                            variant="outline-secondary" 
                             as={Link} 
                             to={`/quoter`}>
                         <img src={test} className="mx-2 p-2" style={{ height: '90px'}} alt=""/>Cotizar analisis
@@ -33,7 +33,7 @@ export default function QuoterContainer() {
                     <Button 
                             style={{ height: '160px'}}
                             className="p-4 fs-4"
-                            variant="outline-info" 
+                            variant="outline-secondary" 
                             as={Link} 
                             to={`/results`}>
                         <img src={result} className="mx-2 p-2" style={{ height: '90px'}} alt=""/>

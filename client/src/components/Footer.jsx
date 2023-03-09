@@ -7,7 +7,7 @@ export default function Footer() {
     return (
         <div>
       <div style={{background: "aliceblue"}}>
-        <footer className="text-info py-4">
+        <footer className="text-primary py-4">
             <div className="container">
                 <nav className="row">
                     <ul className="col-12 col-md-3 list-unstyled">
