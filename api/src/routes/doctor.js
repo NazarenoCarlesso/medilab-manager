@@ -1,7 +1,20 @@
-const { Router } = require("express");
-const { getDoctorsHandler } = require("../handlers/doctor");
-const router = Router();
+const { Router } = require('express')
 
-router.get("/", getDoctorsHandler);
+// middlewares
+const { header } = require('express-validator')
+const validateJWT = require('../middlewares/validateJWT')
+const validateReq = require('../middlewares/validateReq')
 
-module.exports = router;
+// handlers
+const { doctorAllHandler } = require('../handlers/doctor')
+
+// routes
+const router = Router()
+
+router.get('/', [
+    header('token', 'Token es obligatorio').not().isEmpty(),
+    validateReq,
+    validateJWT,
+], doctorAllHandler)
+
+module.exports = router

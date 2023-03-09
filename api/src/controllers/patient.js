@@ -18,6 +18,14 @@ const patientAll = async () => {
     }))
 }
 
+const patientDetail = async (uid) => {
+    let patient = await Patient.findByPk(uid, {
+        attributes: { exclude: ['password', 'deleted'] }
+    })
+
+    return (patient)
+}
+
 const patientWithRoles = async () => {
     let patients = await Patient.findAll({
         where: {
@@ -47,6 +55,14 @@ const patientLogIn = async (username, password) => {
     })
 }
 
+const patientChangePassword = async (uid, password) => {
+    const patient = await Patient.findByPk(uid)
+
+    patient.password = await bcrypt.hash(password, 10)
+
+    return patient.save()
+}
+
 const patientSignUp = async (username, password, email, firstName, lastName, dni, number, sex, height, civilState) => {
     // Generar una contraseña encriptada con bcrypt
     const hash = await bcrypt.hash(password, 10)
@@ -64,7 +80,7 @@ const patientGoogle = async (token) => {
 
     if (!patient) {
         patient = await Patient.create({
-            username: email.slice(0,24), email, password: email,
+            username: email.slice(0, 24), email, password: email,
             firstName, lastName
         })
     }
@@ -115,7 +131,9 @@ module.exports = {
     patientLogIn,
     patientSignUp,
     patientGoogle,
+    patientDetail,
     patientDelete,
     patientWithRoles,
+    patientChangePassword,
     patientGenerator
 }

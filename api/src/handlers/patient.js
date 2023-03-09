@@ -3,8 +3,10 @@ const {
     patientLogIn,
     patientSignUp,
     patientGoogle,
+    patientDetail,
     patientDelete,
     patientWithRoles,
+    patientChangePassword,
     patientGenerator
 } = require('../controllers/patient')
 
@@ -12,6 +14,12 @@ const patientAllHandler = async (req, res) => {
     const patients = await patientAll()
 
     res.status(200).json(patients)
+}
+
+const patientDetailHandler = async (req, res) => {
+    const patient = await patientDetail(req.uid)
+
+    res.status(200).json(patient)
 }
 
 const patientWithRolesHandler = async (req, res) => {
@@ -27,6 +35,16 @@ const patientLogInHandler = async (req, res) => {
         const { token, name } = await patientLogIn(username, password)
         res.header('Access-Control-Expose-Headers', 'token')
         res.status(200).header('token', token).json({ name })
+    } catch (error) {
+        res.status(400).json({ msg: error.message })
+    }
+}
+
+const patientChangePasswordHandler = async (req, res) => {
+    try {
+        await patientChangePassword(req.uid, req.body.password)
+
+        res.status(201).json({ msg: 'Password modified successfully' })
     } catch (error) {
         res.status(400).json({ msg: error.message })
     }
@@ -81,7 +99,9 @@ module.exports = {
     patientLogInHandler,
     patientSignUpHandler,
     patientGoogleHandler,
+    patientDetailHandler,
     patientDeleteHandler,
     patientWithRolesHandler,
+    patientChangePasswordHandler,
     patientGeneratorHandler
 }

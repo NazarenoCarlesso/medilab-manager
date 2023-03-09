@@ -1,11 +1,11 @@
-const { getAllDoctors } = require("../controllers/doctor.js");
+const { doctorAll } = require('../controllers/doctor.js')
 
-const getDoctorsHandler = async (req, res) => {
-    // const { name } = req.query;
-    const results = await getAllDoctors();
-    res.status(200).json(results);
- };
+const doctorAllHandler = async (req, res) => {
+    const doctors = await doctorAll()
 
-  module.exports = {
-    getDoctorsHandler,
- };
+    res.status(200).json(doctors)
+}
+
+module.exports = {
+    doctorAllHandler,
+}

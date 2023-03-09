@@ -1,37 +1,28 @@
-const { payments, paymentsById } = require("../controllers/payments")
-
+const {
+    paymentsAll,
+    paymentsById
+} = require('../controllers/payments')
 
 const paymentsPatientHandler = async (req, res) => {
-
-    const uid = req.uid
-
     try {
-        const pagos = await paymentsById(uid); 
-        
-        return res.status(200).json(pagos);
-    } catch (error) {
-        console.log(error)
-        return res.status(400).json({ msg: error.message })
-        
-    }
+        const pagos = await paymentsById(req.uid)
 
+        res.status(200).json(pagos)
+    } catch (error) {
+        res.status(400).json({ msg: error.message })
+    }
 }
 
 const allPaymentsHandler = async (req, res) => {
-
     try {
-        const allPagos = await paymentsAll()
-
-        res.status(200).json(allPagos)
-        
+        const payments = await paymentsAll()
+        res.status(200).json(payments)
     } catch (error) {
-
-        console.log(error)
-        return res.status(400).json({ msg: error.message })
-        
+        res.status(400).json({ msg: error.message })
     }
-
-    
 }
 
-module.exports = { allPaymentsHandler, paymentsPatientHandler }
+module.exports = {
+    allPaymentsHandler,
+    paymentsPatientHandler
+}

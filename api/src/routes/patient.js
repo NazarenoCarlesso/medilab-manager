@@ -18,8 +18,10 @@ const {
     patientLogInHandler,
     patientSignUpHandler,
     patientGoogleHandler,
+    patientDetailHandler,
     patientDeleteHandler,
     patientWithRolesHandler,
+    patientChangePasswordHandler,
     patientGeneratorHandler
 } = require('../handlers/patient')
 
@@ -32,6 +34,12 @@ router.get('/', [
     validateJWT,
     validateAdmin
 ], patientAllHandler)
+
+router.get('/me', [
+    header('token', 'Token es obligatorio').not().isEmpty(),
+    validateReq,
+    validateJWT,
+], patientDetailHandler)
 
 router.get('/roles', [
     header('token', 'Token es obligatorio').not().isEmpty(),
@@ -47,6 +55,13 @@ router.post('/login', [
     body('username').custom(validateUsernameStatus),
     validateReq
 ], patientLogInHandler)
+
+router.post('/changepass', [
+    header('token', 'Token es obligatorio').not().isEmpty(),
+    body('password', 'Contraseña es obligatoria').not().isEmpty(),
+    validateReq,
+    validateJWT,
+], patientChangePasswordHandler)
 
 router.post('/signup', [
     body('username', 'Username es obligatorio').not().isEmpty(),
