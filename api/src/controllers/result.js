@@ -6,7 +6,7 @@ const sequelize = require('../db.js')
 
 const resultById = async (id, uid) => {
     const results = await sequelize.query(
-        `SELECT * FROM "Results" JOIN "Items" ON "ItemId"="Items".id JOIN "Orders" ON "OrderId"="Orders".id JOIN "Patients" ON "PatientId"="Patients".id WHERE "OrderId"=${id} AND "PatientId"=${uid};`,
+        `SELECT * FROM "Results" JOIN "Items" ON "ItemId"="Items".id JOIN "Orders" ON "OrderId"="Orders".id JOIN "Users" ON "UserId"="Users".id WHERE "OrderId"=${id} AND "UserId"=${uid};`,
         { type: QueryTypes.SELECT }
     )
 

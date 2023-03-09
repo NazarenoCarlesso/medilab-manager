@@ -1,6 +1,6 @@
 const { Router } = require('express')
 // routers import
-const patientRouter = require('./patient.js')
+const userRouter = require('./user.js')
 const testRouter = require('./test.js')
 const sampleRouter = require('./sample.js')
 const categoryRouter = require('./category.js')
@@ -12,7 +12,7 @@ const doctorRouter = require('./doctor.js')
 
 const router = Router()
 // routers config
-router.use('/patients', patientRouter)
+router.use('/users', userRouter)
 
 router.use('/tests', testRouter)
 

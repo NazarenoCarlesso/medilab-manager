@@ -78,8 +78,6 @@ const testByOrders = async (limit) => {
         { type: QueryTypes.SELECT }
     )
 
-    console.log(tests)
-
     return tests.map(test => ({
         id: test.testId,
         name: test.name,

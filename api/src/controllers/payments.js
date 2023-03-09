@@ -6,7 +6,7 @@ const paymentsById = async (uid) => {
     return await Payment.findAll({
         include: {
             model: Order,
-            where: { PatientId: uid }
+            where: { UserId: uid }
         }
     })
 }

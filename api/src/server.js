@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const cors = require('cors')
+const fileUpload = require('express-fileupload')
 const routes = require('./routes/index.js')
 
 // create server
@@ -17,6 +18,11 @@ server.use(bodyParser.json({ limit: '50mb' }))
 server.use(cookieParser())
 server.use(morgan('dev'))
 server.use(cors())
+server.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: '/tmp/',
+  createParentPath: true
+}))
 
 // server routing
 server.use('/', routes)
