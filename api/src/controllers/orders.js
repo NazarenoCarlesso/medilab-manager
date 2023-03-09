@@ -9,7 +9,7 @@ const orderAll = async () => {
 const orderById = async (uid) => {
     const orders = await Order.findAll({
         include: { model: Test, required: true },
-        where: { PatientId: uid }
+        where: { UserId: uid }
     })
 
     return orders.map(order => ({
@@ -23,7 +23,7 @@ const createOrder = async (uid, tests) => {
     const newPayment = await Payment.create()
 
     const bulkOfOrders = tests.map(test => ({
-        PatientId: uid,
+        UserId: uid,
         TestId: test,
         PaymentId: newPayment.dataValues.id,
     }))

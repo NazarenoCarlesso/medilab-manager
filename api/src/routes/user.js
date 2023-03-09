@@ -11,19 +11,24 @@ const {
     validateUsernameStatus,
     validateAdmin
 } = require('../middlewares/validateDB')
+const {
+    validateFile,
+    validateImg
+} = require('../middlewares/validateFiles')
 
 // handlers
 const {
-    patientAllHandler,
-    patientLogInHandler,
-    patientSignUpHandler,
-    patientGoogleHandler,
-    patientDetailHandler,
-    patientDeleteHandler,
-    patientWithRolesHandler,
-    patientChangePasswordHandler,
-    patientGeneratorHandler
-} = require('../handlers/patient')
+    userAllHandler,
+    userLogInHandler,
+    userSignUpHandler,
+    userGoogleHandler,
+    userDetailHandler,
+    userDeleteHandler,
+    userWithRolesHandler,
+    userChangePasswordHandler,
+    userPhotoUploadHandler,
+    userGeneratorHandler,
+} = require('../handlers/user')
 
 // routes
 const router = Router()
@@ -33,20 +38,20 @@ router.get('/', [
     validateReq,
     validateJWT,
     validateAdmin
-], patientAllHandler)
+], userAllHandler)
 
 router.get('/me', [
     header('token', 'Token es obligatorio').not().isEmpty(),
     validateReq,
     validateJWT,
-], patientDetailHandler)
+], userDetailHandler)
 
 router.get('/roles', [
     header('token', 'Token es obligatorio').not().isEmpty(),
     validateReq,
     validateJWT,
     validateAdmin
-], patientWithRolesHandler)
+], userWithRolesHandler)
 
 router.post('/login', [
     body('username', 'Username es obligatorio').not().isEmpty(),
@@ -54,14 +59,14 @@ router.post('/login', [
     body('username').custom(validateUsername),
     body('username').custom(validateUsernameStatus),
     validateReq
-], patientLogInHandler)
+], userLogInHandler)
 
 router.post('/changepass', [
     header('token', 'Token es obligatorio').not().isEmpty(),
     body('password', 'Contraseña es obligatoria').not().isEmpty(),
     validateReq,
     validateJWT,
-], patientChangePasswordHandler)
+], userChangePasswordHandler)
 
 router.post('/signup', [
     body('username', 'Username es obligatorio').not().isEmpty(),
@@ -70,29 +75,43 @@ router.post('/signup', [
     body('firstName', 'Nombre es obligatorio').not().isEmpty(),
     body('lastName', 'Apellido es obligatorio').not().isEmpty(),
     body('email', 'Email debe ser válido').isEmail(),
-    body('username', 'Username debe ser de 8 a 25 caracteres de largo').isLength({ min: 8, max: 25 }),
-    body('password', 'Contraseña debe ser de 8 a 25 caracteres de largo').isLength({ min: 8, max: 25 }),
-    body('firstName', 'Nombre debe ser de 8 a 25 caracteres de largo').isLength({ min: 8, max: 25 }),
-    body('lastName', 'Apellido debe ser de 8 a 25 caracteres de largo').isLength({ min: 8, max: 25 }),
+    body('username', 'Username debe ser de 6 a 25 caracteres de largo').isLength({ min: 4, max: 25 }),
+    body('password', 'Contraseña debe ser de 6 a 25 caracteres de largo').isLength({ min: 6, max: 25 }),
+    body('firstName', 'Nombre debe ser de 2 a 25 caracteres de largo').isLength({ min: 2, max: 25 }),
+    body('lastName', 'Apellido debe ser de 2 a 25 caracteres de largo').isLength({ min: 2, max: 25 }),
     body('sex', 'Sexo solo puede contener un caracter').isLength({ min: 0, max: 1 }),
     body('username').custom(validateFreeUsername),
     body('email').custom(validateFreeEmail),
     validateReq
-], patientSignUpHandler)
+], userSignUpHandler)
 
 router.post('/google', [
     header('token', 'Token es obligatorio').not().isEmpty(),
     validateReq,
-], patientGoogleHandler)
+], userGoogleHandler)
 
 router.delete('/', [
     header('token', 'Token es obligatorio').not().isEmpty(),
     validateReq,
     validateJWT
-], patientDeleteHandler)
+], userDeleteHandler)
 
-router.post('/generate', [
+router.post('/photo', [
+    header('token', 'Token es obligatorio').not().isEmpty(),
+    validateReq,
+    validateFile,
+    validateImg,
     validateJWT
-], patientGeneratorHandler)
+], userPhotoUploadHandler)
+
+/*
+router.get('/photo', [
+    header('token', 'Token es obligatorio').not().isEmpty(),
+    validateReq,
+    validateJWT
+], userPhotoHandler)
+*/
+
+router.post('/generate', userGeneratorHandler)
 
 module.exports = router

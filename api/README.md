@@ -6,15 +6,17 @@ Desactualizada
 
 # Routes
 
-``` GET /patients ``` devuelve todos los pacientes activos
+``` GET /users ``` devuelve todos los pacientes activos
 
-``` GET /patients/roles ``` devuelve todos los pacientes con rol
+``` GET /users/me ``` devuelve todos los datos del paciente
 
-``` POST /patients/login ``` ruta de login para pacientes
+``` GET /users/roles ``` devuelve todos los pacientes con rol
 
-``` POST /patients/signup ``` ruta de signup para pacientes
+``` POST /users/login ``` ruta de login para pacientes
 
-``` DELETE /patients ``` elimina al paciente
+``` POST /users/signup ``` ruta de signup para pacientes
+
+``` DELETE /users ``` elimina al paciente
 
 ``` GET /tests ``` devuelve todos los tests
 

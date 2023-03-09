@@ -1,11 +1,11 @@
 // models
 const { models } = require('../db.js')
-const { Review, Patient } = models
+const { Review, User } = models
 
 const reviewAll = async () => {
     const reviews = await Review.findAll({
         include: {
-            model: Patient, required: true
+            model: User, required: true
         }
     })
 
@@ -14,12 +14,12 @@ const reviewAll = async () => {
         content: review.content,
         createdAt: review.createdAt,
         updatedAt: review.updatedAt,
-        author: `${review.Patient.lastName.toUpperCase()}, ${review.Patient.firstName}`
+        author: `${review.User.lastName.toUpperCase()}, ${review.User.firstName}`
     }))
 }
 
 const reviewCreate = async (uid, content) => {
-    return await Review.create({ content, PatientId: uid })
+    return await Review.create({ content, UserId: uid })
 }
 
 module.exports = {

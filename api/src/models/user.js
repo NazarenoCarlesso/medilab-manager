@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
-    sequelize.define('Patient', {
+    sequelize.define('User', {
         username: {
             type: DataTypes.STRING(50),
             allowNull: false,
@@ -28,7 +28,11 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING(25),
             allowNull: true
         },
-        number: {
+        photo: {
+            type: DataTypes.STRING(255),
+            allowNull: true
+        },
+        phone: {
             type: DataTypes.STRING(25),
             allowNull: true
         },
@@ -37,10 +41,10 @@ module.exports = (sequelize) => {
             allowNull: true
         },
         height: {
-            type: DataTypes.FLOAT,
+            type: DataTypes.INTEGER,
             allowNull: true
         },
-        civilState: {
+        civil: {
             type: DataTypes.STRING(25),
             allowNull: true
         },
@@ -54,6 +58,6 @@ module.exports = (sequelize) => {
             defaultValue: false
         }
     }, {
-        timestamps: false
+        timestamps: true
     })
 }

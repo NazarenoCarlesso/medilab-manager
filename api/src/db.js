@@ -5,7 +5,7 @@ const { Sequelize } = require('sequelize')
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE } = process.env
 
 // import models
-const patient = require('./models/patient')
+const user = require('./models/user')
 const order = require('./models/order')
 const payment = require('./models/payment')
 const test = require('./models/test')
@@ -22,7 +22,7 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
 })
 
 // models definitions
-patient(sequelize)
+user(sequelize)
 order(sequelize)
 payment(sequelize)
 test(sequelize)
@@ -34,13 +34,13 @@ review(sequelize)
 
 // models destructuring
 const {
-  Patient, Test, Payment, Item, Result,
+  User, Test, Payment, Item, Result,
   Order, Sample, test_category, Review
 } = sequelize.models
 
 // associations
-Patient.hasMany(Order)
-Order.belongsTo(Patient)
+User.hasMany(Order)
+Order.belongsTo(User)
 
 Test.hasMany(Order)
 Order.belongsTo(Test)
@@ -62,8 +62,8 @@ Test.belongsTo(Sample)
 test_category.hasMany(Test)
 Test.belongsTo(test_category)
 
-Patient.hasMany(Review)
-Review.belongsTo(Patient)
+User.hasMany(Review)
+Review.belongsTo(User)
 
 // connection export
 module.exports = sequelize

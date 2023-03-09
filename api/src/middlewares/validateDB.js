@@ -1,5 +1,5 @@
 const { models } = require('../db.js')
-const { Order, Patient, Test } = models
+const { Order, User, Test } = models
 
 const validateOrder = async (id) => {
     const order = await Order.findByPk(id)
@@ -14,37 +14,37 @@ const validateTest = async (id) => {
 }
 
 const validateUsername = async (username) => {
-    const patient = await Patient.findOne({ where: { username } })
+    const user = await User.findOne({ where: { username } })
 
-    if (!patient) throw new Error('Username no es válido')
+    if (!user) throw new Error('Username no es válido')
 }
 
 const validateFreeUsername = async (username) => {
-    const patient = await Patient.findOne({ where: { username } })
+    const user = await User.findOne({ where: { username } })
 
-    if (patient) throw new Error('Username ya existe')
+    if (user) throw new Error('Username ya existe')
 }
 
 const validateFreeEmail = async (email) => {
-    const patient = await Patient.findOne({ where: { email } })
+    const user = await User.findOne({ where: { email } })
 
-    if (patient) throw new Error('Email ya existe')
+    if (user) throw new Error('Email ya existe')
 }
 
 const validateUsernameStatus = async (username) => {
-    const patient = await Patient.findOne({ where: { username } })
+    const user = await User.findOne({ where: { username } })
 
-    if (patient) {
-        if (patient.deleted) throw new Error('Paciente eliminado')
+    if (user) {
+        if (user.deleted) throw new Error('Usuario eliminado')
     }
 }
 
 const validateAdmin = async (req, res, next) => {
-    const patient = await Patient.findByPk(req.uid)
+    const user = await User.findByPk(req.uid)
 
-    if (!patient) return res.status(401).json({ msg: 'Acceso denegado' })
+    if (!user) return res.status(401).json({ msg: 'Acceso denegado' })
 
-    patient.role !== 'ADMIN' ? res.status(401).json({ msg: 'Acceso denegado' }) : next()
+    user.role !== 'ADMIN' ? res.status(401).json({ msg: 'Acceso denegado' }) : next()
 }
 
 module.exports = {
