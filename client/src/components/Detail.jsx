@@ -25,13 +25,13 @@ export default function Detail() {
         <div className='container pt-4 mb-4 ' style={{ height: '400px', width: "900px"}}>
             <div className='pt-4'></div>
                 
-                <Badge bg='white' className="row rounded-pill" style={{width: "900px"}}>
+                <Badge bg='white' className="row shadow-sm" style={{width: "900px"}}>
                     <h1 className='text-primary'>{test.name}</h1>
-                    <div class="row justify-content-center">
+                    <div class="row">
                     <div class="col-4">
                     <ul className="list-unstyled text-info-emphasis">
                     <li className='text-info'><strong>Test #{id}</strong></li>
-                    <li className="col-md-3 d-flex aling-items-center justyfy-content-center">
+                    <li className="col-md-3">
                             <img src={logo} className="mx-2 p-4" style={{ height: '230px'}} alt=""/>
                         </li>   
                     </ul>  
@@ -49,7 +49,7 @@ export default function Detail() {
                     
                         <Button 
                             style={{ height: '50px', width: "150px"}} 
-                            variant="outline-info" 
+                            variant="outline-secondary" 
                             as={Link} 
                             to={-1}>
                             <ArrowReturnLeft></ArrowReturnLeft> Atrás
