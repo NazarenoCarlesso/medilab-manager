@@ -1,30 +1,21 @@
-/// a revisar controllers sin try catch
-
-
-const { QueryTypes } = require('sequelize')
-// conexion con Sequelize
+// models
 const { models } = require('../db.js')
-const { sequelize } = require('../db.js')
 const { Payment, Order } = models
 
-
-const paymentsById = async (PatientId) => {
-
-    const payments = await Payment.findAll({
-        include: [{
-          model: Order,
-          where: { PatientId }
-        }]
-      });
-      
-    
-    return payments;
+const paymentsById = async (uid) => {
+    return await Payment.findAll({
+        include: {
+            model: Order,
+            where: { PatientId: uid }
+        }
+    })
 }
 
 const paymentsAll = async () => {
-
-    const paymentsTodas = await Payment.findAll();
-    return paymentsTodas;
+    return await Payment.findAll()
 }
 
-module.exports = { paymentsById, paymentsAll }
+module.exports = {
+    paymentsById,
+    paymentsAll
+}
