@@ -5,7 +5,7 @@ const { models } = require('../db.js')
 const { User, test_category, Sample, Test } = models
 
 // utils
-const { toFirstName, toLastName, toUnique, toPhoto } = require('../utils/index.js')
+const { toFirstName, toLastName, toUnique, toPhoto, CapitalizeFirst } = require('../utils/index.js')
 
 const userGenerator = async () => {
     const users = await fetch(`${process.env.VITAL_API}/apirest/pacientes`)
@@ -30,7 +30,7 @@ const userGenerator = async () => {
 
     await User.create({
         id: 999, firstName: 'admin', lastName: 'admin',
-        username: 'admin', password: await bcrypt.hash('admin', 10),
+        username: 'admin1', password: await bcrypt.hash('admin1', 10),
         email: 'admin@admin.com', role: 'ADMIN'
     })
 }
@@ -41,7 +41,7 @@ const categoryGenerator = async () => {
 
     Promise.all(categories.map(category => test_category.create({
         id: category.id,
-        name: category.nombre
+        name: CapitalizeFirst(category.nombre)
     })))
 }
 
@@ -51,7 +51,7 @@ const sampleGenerator = async () => {
 
     Promise.all(samples.map(sample => Sample.create({
         id: sample.id,
-        name: sample.nombre
+        name: CapitalizeFirst(sample.nombre)
     })))
 }
 
@@ -63,9 +63,9 @@ const testGenerator = async () => {
 
     Promise.all(tests.map(test => Test.create({
         id: test.id,
-        name: test.nombre,
+        name: CapitalizeFirst(test.nombre),
         description: 'Descripción',
-        price: test.precio ? test.precio : null,
+        price: test.precio && test.precio !== '-' ? Number(test.precio) : null,
         time: test.tiempo_resultado ? test.tiempo_resultado : '5 horas',
         testCategoryId: test.categoria && test.categoria !== '-' ? test.categoria : null,
         SampleId: test.muestra && test.muestra !== '-' ? test.muestra : null

@@ -112,22 +112,6 @@ const userPhotoUpload = async (uid, file) => {
     return await user.save()
 }
 
-/*
-const userPhotoUpload = async (uid, archivo, ext) => {
-    const user = await User.findByPk(uid)
-
-    user.img = await uploadFile(archivo, '/users', uid, ext)
-
-    return user.save()
-}
-
-const userPhoto = async (uid) => {
-    const user = await User.findByPk(uid)
-
-    return await userPhotoPath(user.photo)
-}
-*/
-
 module.exports = {
     userAll,
     userLogIn,

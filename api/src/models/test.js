@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
             allowNull: true
         },
         price: {
-            type: DataTypes.STRING(50),
+            type: DataTypes.INTEGER,
             allowNull: true
         },
         time: {
