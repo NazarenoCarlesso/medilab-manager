@@ -105,18 +105,6 @@ const userPhotoUploadHandler = async (req, res) => {
     }
 }
 
-/*
-const userPhotoHandler = async (req, res) => {
-    try {
-        const photo = await userPhoto(req.uid)
-
-        res.status(200).sendFile(photo)
-    } catch (error) {
-        res.status(400).json({ msg: error.message })
-    }
-}
-*/
-
 module.exports = {
     userAllHandler,
     userLogInHandler,
