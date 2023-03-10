@@ -13,7 +13,9 @@ const {
     testDetailHandler,
     testByOrdersHandler,
     testEditHandler,
-    testCreateHandler
+    testCreateHandler,
+    testUpdateHandler,
+    testDeleteHandler
 } = require('../handlers/test')
 
 // routes
@@ -30,7 +32,31 @@ router.get('/:id', [
     validateReq,
 ], testDetailHandler)
 
-router.get('/edit/:id', [
+router.post('/create', [
+    header('token', 'Token es obligatorio').not().isEmpty(),
+    body('name', 'Nombre es obligatorio').not().isEmpty(),
+    body('description', 'Descripcion es obligatoria').not().isEmpty(),
+    body('price', 'Precio es obligatorio').not().isEmpty(),
+    body('time', 'Tiempo es obligatorio').not().isEmpty(),
+    body('category', 'Categoria es obligatorio').not().isEmpty(),
+    body('sample', 'Muestra es obligatorio').not().isEmpty(),
+    validateReq,
+    validateJWT,
+    validateAdmin
+], testCreateHandler)
+
+router.delete('/:id', [
+    header('token', 'Token es obligatorio').not().isEmpty(),
+    param('id', 'Id debe ser un numero').isInt(),
+    validateReq,
+    param('id').custom(validateTest),
+    validateReq,
+    validateReq,
+    validateJWT,
+    validateAdmin
+], testDeleteHandler)
+
+router.put('/:id', [
     param('id', 'Id debe ser un numero').isInt(),
     validateReq,
     param('id').custom(validateTest),
@@ -40,20 +66,11 @@ router.get('/edit/:id', [
     body('description', 'Descripcion es obligatoria').not().isEmpty(),
     body('price', 'Precio es obligatorio').not().isEmpty(),
     body('time', 'Tiempo es obligatorio').not().isEmpty(),
+    body('category', 'Categoria es obligatorio').not().isEmpty(),
+    body('sample', 'Muestra es obligatorio').not().isEmpty(),
     validateReq,
     validateJWT,
     validateAdmin
-], testEditHandler)
-
-router.post('/create', [
-    header('token', 'Token es obligatorio').not().isEmpty(),
-    body('name', 'Nombre es obligatorio').not().isEmpty(),
-    body('description', 'Descripcion es obligatoria').not().isEmpty(),
-    body('price', 'Precio es obligatorio').not().isEmpty(),
-    body('time', 'Tiempo es obligatorio').not().isEmpty(),
-    validateReq,
-    validateJWT,
-    validateAdmin
-], testCreateHandler)
+], testUpdateHandler)
 
 module.exports = router

@@ -1,18 +1,21 @@
 const { Router } = require('express')
 
 // middlewares
-const { header, body } = require('express-validator')
+const { header, body, param } = require('express-validator')
 const validateJWT = require('../middlewares/validateJWT')
 const validateReq = require('../middlewares/validateReq')
 const {
-    validateAdmin
+    validateAdmin,
+    validateSample
 } = require('../middlewares/validateDB')
 
 // handlers
 const {
     sampleAllHandler,
     sampleCreateHandler,
-    sampleWithTestsHandler
+    sampleWithTestsHandler,
+    sampleDeleteHandler,
+    sampleUpdateHandler
 } = require('../handlers/sample')
 
 // routes
@@ -34,5 +37,27 @@ router.post('/', [
     validateJWT,
     validateAdmin
 ], sampleCreateHandler)
+
+router.delete('/:id/:newId', [
+    param('id', 'Id debe ser un numero').isInt(),
+    param('newId', 'Id debe ser un numero').isInt(),
+    validateReq,
+    param('id').custom(validateSample),
+    param('newId').custom(validateSample),
+    validateReq,
+    validateJWT,
+    validateAdmin
+], sampleDeleteHandler)
+
+router.put('/:id', [
+    param('id', 'Id debe ser un numero').isInt(),
+    body('name', 'Nombre es obligatorio').not().isEmpty(),
+    body('name', 'Nombre debe ser menor a 25 caracteres de largo').isLength({ min: 1, max: 25 }),
+    validateReq,
+    param('id').custom(validateSample),
+    validateReq,
+    validateJWT,
+    validateAdmin
+], sampleUpdateHandler)
 
 module.exports = router

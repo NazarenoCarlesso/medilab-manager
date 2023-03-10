@@ -23,17 +23,6 @@ const testAll = async (limit) => {
     })).slice(0, limit)
 }
 
-const testEdit = async (id, name, description, price, time) => {
-    const test = Text.findByPk(id)
-
-    test.name = name
-    test.description = description
-    test.price = price
-    test.time = time
-
-    return test.save()
-}
-
 const testDetail = async (pk) => {
     const test = await Test.findByPk(pk)
     const sample = await test.getSample()
@@ -88,18 +77,42 @@ const testByOrders = async (limit) => {
     })).slice(0, limit)
 }
 
-const testCreate = (name, description, price, time, category, sample) => {
-    return Test.create({
-        name, description, price, time,
-        CategoryId: category, SampleId: sample
+const testCreate = async (name, description, price, time, category, sample) => {
+    return await Test.create({
+        name: name,
+        description: description,
+        price: price,
+        time: time,
+        testCategoryId: category,
+        SampleId: sample
     })
+}
+
+const testDelete = async (id) => {
+    const test = await Test.findByPk(id)
+
+    return await test.destroy()
+}
+
+const testUpdate = async (id, name, description, price, time, category, sample) => {
+    const test = await Test.findByPk(id)
+
+    test.name = name
+    test.description = description
+    test.price = price
+    test.time = time
+    test.testCategoryId = category
+    test.SampleId = sample
+
+    return await test.save()
 }
 
 module.exports = {
     testAll,
-    testEdit,
     testCreate,
     testDetail,
     testSearch,
+    testDelete,
+    testUpdate,
     testByOrders
 }

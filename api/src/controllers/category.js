@@ -22,10 +22,10 @@ const categoryAll = async () => {
     return await test_category.findAll()
 }
 
-const categoryDelete = async (id) => {
-    const tests = await Test.findAll({ where: { testCategoryId: null } })
+const categoryDelete = async (id, newId) => {
+    const tests = await Test.findAll({ where: { testCategoryId: id } })
 
-    tests.map(test => test.testCategoryId = null)
+    tests.map(test => test.testCategoryId = newId)
 
     await Promise.all(tests.map(test => test.save()))
 
@@ -34,9 +34,17 @@ const categoryDelete = async (id) => {
     return await category.destroy()
 }
 
+const categoryUpdate = async (id, name) => {
+    const category = await test_category.findByPk(id)
+
+    category.name = name
+    return await category.save()
+}
+
 module.exports = {
     categoryAll,
     categoryCreate,
     categoryDelete,
+    categoryUpdate,
     categoryWithTests
 }

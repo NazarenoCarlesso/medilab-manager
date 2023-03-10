@@ -16,7 +16,11 @@ Desactualizada
 
 ``` POST /users/signup ``` ruta de signup para pacientes
 
-``` DELETE /users ``` elimina al paciente
+``` POST /users/photo ``` ruta para subir foto de usuario
+
+``` POST /users/changepass ``` ruta para cambiar de contraseña
+
+``` DEL /users ``` elimina al paciente
 
 ``` GET /tests ``` devuelve todos los tests
 
@@ -26,17 +30,29 @@ Desactualizada
 
 ``` GET /tests/:id ``` devuelve los detalles de el test
 
+``` DEL /tests/:id ``` elimina un test
+
+``` PUT /tests/:id ``` modificar un test
+
 ``` GET /samples ``` devuelve todos los tipos de muestras con tests
 
 ``` GET /samples/admin ``` devuelve todos los tipos de muestras
 
 ``` POST /samples ``` crear una sample
 
+``` DEL /samples/:id:/:newId ``` elimina una muestra pasando los tests a otra
+
+``` PUT /samples/:id ``` modificar una muestra
+
 ``` GET /categories ``` devuelve todas las categorias con tests
 
 ``` GET /categories/admin ``` devuelve todas las categorias
 
 ``` POST /categories ``` crear una categoria
+
+``` DEL /categories/:id:/:newId ``` elimina una categoria pasando los tests a otra
+
+``` PUT /categories/:id ``` modificar una categoria
 
 ``` GET /orders ``` devuelve las ordenes del paciente
 
