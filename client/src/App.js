@@ -25,8 +25,6 @@ import Payments from "./components/Payments";
 import User from "./components/User";
 import Footer from "./components/Footer";
 import CovidTests from "./containers/CovidTests";
-import UserSettings from "./components/UserSettings"
-
 import Appointment from "./components/UserRoutes/Appointment"
 import Orders from "./components/UserRoutes/Orders"
 import Profile from "./components/UserRoutes/Profile"
@@ -88,7 +86,6 @@ export default function App() {
             <Route path="appointment" element={<Appointment/>} />
             <Route path="reviews" element={<Reviews/>} />
           </Route>
-          <Route path={"/settings"} element={<UserSettings/>} />
         </Routes>
       </div>
       <Footer />
