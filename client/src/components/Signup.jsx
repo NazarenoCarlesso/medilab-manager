@@ -140,7 +140,7 @@ export default function Signup(props) {
       alert("Debe completar los datos correctamente");
     } else {
       try {
-        const response = await axios.post(`${BACK}/patients/login`, user);
+        const response = await axios.post(`${BACK}/users/login`, user);
         const userData = {
           name: response.data.name,
           token: response.headers.token,
@@ -169,7 +169,7 @@ export default function Signup(props) {
       alert("Debe completar los datos correctamente");
     } else {
       try {
-        await axios.post(`${BACK}/patients/signup`, userSignUp);
+        await axios.post(`${BACK}/users/signup`, userSignUp);
         window.alert("Registro exitoso.");
         setSelectedForm("login");
       } catch (error) {
