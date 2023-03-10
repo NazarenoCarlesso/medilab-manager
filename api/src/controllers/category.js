@@ -3,7 +3,7 @@ const { QueryTypes } = require('sequelize')
 const sequelize = require('../db.js')
 // models
 const { models } = require('../db.js')
-const { test_category } = models
+const { test_category, Test } = models
 
 const categoryWithTests = async () => {
     const categories = await sequelize.query(
@@ -22,8 +22,21 @@ const categoryAll = async () => {
     return await test_category.findAll()
 }
 
+const categoryDelete = async (id) => {
+    const tests = await Test.findAll({ where: { testCategoryId: null } })
+
+    tests.map(test => test.testCategoryId = null)
+
+    await Promise.all(tests.map(test => test.save()))
+
+    const category = await test_category.findByPk(id)
+
+    return await category.destroy()
+}
+
 module.exports = {
     categoryAll,
     categoryCreate,
+    categoryDelete,
     categoryWithTests
 }

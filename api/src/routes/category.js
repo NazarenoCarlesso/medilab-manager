@@ -1,7 +1,7 @@
 const { Router } = require('express')
 
 // middlewares
-const { header, body } = require('express-validator')
+const { header, body, param } = require('express-validator')
 const validateJWT = require('../middlewares/validateJWT')
 const validateReq = require('../middlewares/validateReq')
 const {
@@ -12,7 +12,8 @@ const {
 const {
     categoryAllHandler,
     categoryCreateHandler,
-    categoryWithTestsHandler
+    categoryWithTestsHandler,
+    categoryDeleteHandler
 } = require('../handlers/category')
 
 // routes
@@ -34,5 +35,12 @@ router.post('/', [
     validateJWT,
     validateAdmin
 ], categoryCreateHandler)
+
+router.delete('/:id', [
+    param('id', 'Id debe ser un numero').isInt(),
+    validateReq,
+    validateJWT,
+    validateAdmin
+], categoryDeleteHandler)
 
 module.exports = router

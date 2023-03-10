@@ -3,9 +3,8 @@ const { DataTypes } = require('sequelize')
 module.exports = (sequelize) => {
     sequelize.define('test_category', {
         name: {
-            type: DataTypes.STRING(25),
+            type: DataTypes.STRING(50),
             allowNull: false,
-            unique: true
         }
     }, {
         timestamps: false

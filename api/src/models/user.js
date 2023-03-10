@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         dni: {
-            type: DataTypes.STRING(25),
+            type: DataTypes.STRING(50),
             allowNull: true
         },
         photo: {
@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
             allowNull: true
         },
         phone: {
-            type: DataTypes.STRING(25),
+            type: DataTypes.STRING(50),
             allowNull: true
         },
         sex: {
@@ -45,11 +45,11 @@ module.exports = (sequelize) => {
             allowNull: true
         },
         civil: {
-            type: DataTypes.STRING(25),
+            type: DataTypes.STRING(50),
             allowNull: true
         },
         role: {
-            type: DataTypes.STRING(25),
+            type: DataTypes.STRING(50),
             allowNull: true
         },
         deleted: {

@@ -104,14 +104,4 @@ router.post('/photo', [
     validateJWT
 ], userPhotoUploadHandler)
 
-/*
-router.get('/photo', [
-    header('token', 'Token es obligatorio').not().isEmpty(),
-    validateReq,
-    validateJWT
-], userPhotoHandler)
-*/
-
-router.post('/generate', userGeneratorHandler)
-
 module.exports = router

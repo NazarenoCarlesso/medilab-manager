@@ -17,4 +17,12 @@ const toPhoto = (sex) => {
     return `https://randomuser.me/api/portraits/${sex}/${Math.floor(Math.random() * 90)}.jpg`
 }
 
-module.exports = { toFirstName, toLastName, toUnique, toPhoto }
+const CapitalizeFirst = (str) => {
+    return str.toLowerCase()
+        .split(' ').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ')
+        .split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join('-')
+        .split('/').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join('/')
+        .split('(').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join('(')
+}
+
+module.exports = { toFirstName, toLastName, toUnique, toPhoto, CapitalizeFirst }

@@ -12,11 +12,11 @@ module.exports = (sequelize) => {
         },
         price: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         time: {
-            type: DataTypes.STRING(25),
-            allowNull: false
+            type: DataTypes.STRING(50),
+            allowNull: true
         }
     }, {
         timestamps: false
