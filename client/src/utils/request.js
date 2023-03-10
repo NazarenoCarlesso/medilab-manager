@@ -41,4 +41,10 @@ const getOrders = async (callback, token) => {
       
 }
 
-module.exports = { getTests, getSamples, getCategories, getOrders, getCovidTests}
+const getResults = async (callback) => {
+    fetch(`${BACK}/results`)
+        .then(response => response.json())
+        .then(data => callback(data))
+}
+
+module.exports = { getTests, getSamples, getCategories, getOrders, getCovidTests, getResults}

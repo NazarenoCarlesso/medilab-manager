@@ -10,17 +10,18 @@ import Cart from "./components/Cart";
 import Detail from "./components/Detail";
 import Ops from "./components/Ops";
 import "./App.css";
-import { loadCategories, loadSamples, loadTests, loadOrders } from "./reducer";
+import { loadCategories, loadSamples, loadTests, loadOrders, loadResults } from "./reducer";
 import {
   getCategories,
   getOrders,
   getSamples,
   getTests,
-  getCovidTests
+  getCovidTests,
+  getResults
 } from "./utils/request";
 import TestList from "./containers/TestList";
 import Quoter from "./components/Quoter";
-import Results from "./components/Results";
+import Results from "./containers/Results";
 import Payments from "./components/Payments";
 import User from "./components/User";
 import Footer from "./components/Footer";
@@ -38,6 +39,7 @@ export default function App() {
   getCovidTests((tests) => dispatch(loadTests(tests)));
   getSamples((samples) => dispatch(loadSamples(samples)));
   getCategories((categories) => dispatch(loadCategories(categories)));
+  getResults((tests) => dispatch(loadResults(tests)));
 
   if (token) {
     getOrders((orders) => dispatch(loadOrders(orders)), token);
