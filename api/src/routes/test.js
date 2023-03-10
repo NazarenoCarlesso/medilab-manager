@@ -26,7 +26,7 @@ router.get('/', testAllHandler)
 router.get('/orders', testByOrdersHandler)
 
 router.get('/:id', [
-    param('id', 'Id debe ser un numero').isInt(),
+    param('id', 'Id debe ser un uuid').isUUID(),
     validateReq,
     param('id').custom(validateTest),
     validateReq,
@@ -47,7 +47,7 @@ router.post('/create', [
 
 router.delete('/:id', [
     header('token', 'Token es obligatorio').not().isEmpty(),
-    param('id', 'Id debe ser un numero').isInt(),
+    param('id', 'Id debe ser un uuid').isUUID(),
     validateReq,
     param('id').custom(validateTest),
     validateReq,
@@ -57,7 +57,7 @@ router.delete('/:id', [
 ], testDeleteHandler)
 
 router.put('/:id', [
-    param('id', 'Id debe ser un numero').isInt(),
+    param('id', 'Id debe ser un uuid').isUUID(),
     validateReq,
     param('id').custom(validateTest),
     validateReq,
