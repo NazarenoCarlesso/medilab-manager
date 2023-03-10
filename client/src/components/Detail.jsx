@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import logo from "../images/logo4.png";
 import Button from "react-bootstrap/esm/Button";
-import { ArrowReturnLeft } from "react-bootstrap-icons";
 import Modal from "react-bootstrap/Modal";
-import { Link } from "react-router-dom";
 import Badge from "react-bootstrap/esm/Badge";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -80,7 +77,7 @@ export default function Detail(props) {
                   >
                     <ul className="pt-4 text-info list-unstyled">
                       <li className="fs-4 pt-4">
-                        {test.description}description
+                        {test.description}
                       </li>
                       <li className="fs-4 pt-2">Precio ${test.price}.00 </li>
                       <li className="fs-4 pt-2">
