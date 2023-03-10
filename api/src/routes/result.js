@@ -13,7 +13,7 @@ const { resultHandler } = require('../handlers/result')
 const router = Router()
 
 router.get('/:id', [
-    param('id', 'Id debe ser un numero').isInt(),
+    param('id', 'Id debe ser un uuid').isUUID(),
     param('id').custom(validateOrder),
     header('token', 'Token es obligatorio').not().isEmpty(),
     validateReq,

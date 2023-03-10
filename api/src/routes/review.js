@@ -31,7 +31,7 @@ router.post('/', [
 
 router.delete('/:id', [
     header('token', 'Token es obligatorio').not().isEmpty(),
-    param('id', 'Id debe ser un numero').isInt(),
+    param('id', 'Id debe ser un uuid').isUUID(),
     validateReq,
     param('id').custom(validateReview),
     validateReq,
@@ -41,7 +41,7 @@ router.delete('/:id', [
 
 router.put('/:id', [
     header('token', 'Token es obligatorio').not().isEmpty(),
-    param('id', 'Id debe ser un numero').isInt(),
+    param('id', 'Id debe ser un uuid').isUUID(),
     body('content', 'Contenido es obligatorio').not().isEmpty(),
     body('content', 'Contenido debe ser de al menos 16 caracteres').isLength({ min: 16 }),
     validateReq,

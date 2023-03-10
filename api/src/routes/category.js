@@ -39,8 +39,8 @@ router.post('/', [
 ], categoryCreateHandler)
 
 router.delete('/:id/:newId', [
-    param('id', 'Id debe ser un numero').isInt(),
-    param('newId', 'Id debe ser un numero').isInt(),
+    param('id', 'Id debe ser un uuid').isUUID(),
+    param('newId', 'Id debe ser un uuid').isUUID(),
     validateReq,
     param('id').custom(validateCategory),
     param('newId').custom(validateCategory),
@@ -50,7 +50,7 @@ router.delete('/:id/:newId', [
 ], categoryDeleteHandler)
 
 router.put('/:id', [
-    param('id', 'Id debe ser un numero').isInt(),
+    param('id', 'Id debe ser un uuid').isUUID(),
     body('name', 'Nombre es obligatorio').not().isEmpty(),
     body('name', 'Nombre debe ser menor a 25 caracteres de largo').isLength({ min: 1, max: 25 }),
     validateReq,

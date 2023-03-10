@@ -1,5 +1,6 @@
 const fetch = require('node-fetch')
 const bcrypt = require('bcrypt')
+const { fromString } = require('uuidv4')
 
 // models
 const { models } = require('../db.js')
@@ -15,7 +16,7 @@ const userGenerator = async () => {
     const password = await bcrypt.hash('password', 10)
 
     await Promise.all(users.map(user => User.create({
-        id: user.id,
+        id: fromString(user.id.toString()),
         firstName: toFirstName(user.nombres),
         lastName: toLastName(user.apePaterno),
         dni: user.dni,
@@ -30,7 +31,7 @@ const userGenerator = async () => {
     })))
 
     await User.create({
-        id: 999, firstName: 'admin', lastName: 'admin',
+        id: fromString('999'), firstName: 'admin', lastName: 'admin',
         username: 'admin1', password: await bcrypt.hash('admin1', 10),
         email: 'admin@admin.com', role: 'ADMIN'
     })
@@ -41,7 +42,7 @@ const categoryGenerator = async () => {
         .then(response => response.json())
 
     Promise.all(categories.map(category => test_category.create({
-        id: category.id,
+        id: fromString(category.id.toString()),
         name: CapitalizeFirst(category.nombre)
     })))
 }
@@ -51,7 +52,7 @@ const sampleGenerator = async () => {
         .then(response => response.json())
 
     Promise.all(samples.map(sample => Sample.create({
-        id: sample.id,
+        id: fromString(sample.id.toString()),
         name: CapitalizeFirst(sample.nombre)
     })))
 }
@@ -63,13 +64,13 @@ const testGenerator = async () => {
     tests = tests.filter(test => test.categoria !== '24')
 
     Promise.all(tests.map(test => Test.create({
-        id: test.id,
+        id: fromString(test.id.toString()),
         name: CapitalizeFirst(test.nombre),
         description: 'Descripción',
         price: test.precio && test.precio !== '-' ? Number(test.precio) : null,
         time: test.tiempo_resultado ? test.tiempo_resultado : '5 horas',
-        testCategoryId: test.categoria && test.categoria !== '-' ? test.categoria : null,
-        SampleId: test.muestra && test.muestra !== '-' ? test.muestra : null
+        testCategoryId: test.categoria !== '-' ? fromString(test.categoria.toString()) : null,
+        SampleId: test.muestra !== '-' ? fromString(test.muestra.toString()) : null
     })))
 }
 
