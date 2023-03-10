@@ -5,7 +5,8 @@ const { header, body, param } = require('express-validator')
 const validateJWT = require('../middlewares/validateJWT')
 const validateReq = require('../middlewares/validateReq')
 const {
-    validateAdmin
+    validateAdmin,
+    validateCategory
 } = require('../middlewares/validateDB')
 
 // handlers
@@ -13,7 +14,8 @@ const {
     categoryAllHandler,
     categoryCreateHandler,
     categoryWithTestsHandler,
-    categoryDeleteHandler
+    categoryDeleteHandler,
+    categoryUpdateHandler
 } = require('../handlers/category')
 
 // routes
@@ -36,11 +38,26 @@ router.post('/', [
     validateAdmin
 ], categoryCreateHandler)
 
-router.delete('/:id', [
+router.delete('/:id/:newId', [
     param('id', 'Id debe ser un numero').isInt(),
+    param('newId', 'Id debe ser un numero').isInt(),
+    validateReq,
+    param('id').custom(validateCategory),
+    param('newId').custom(validateCategory),
     validateReq,
     validateJWT,
     validateAdmin
 ], categoryDeleteHandler)
+
+router.put('/:id', [
+    param('id', 'Id debe ser un numero').isInt(),
+    body('name', 'Nombre es obligatorio').not().isEmpty(),
+    body('name', 'Nombre debe ser menor a 25 caracteres de largo').isLength({ min: 1, max: 25 }),
+    validateReq,
+    param('id').custom(validateCategory),
+    validateReq,
+    validateJWT,
+    validateAdmin
+], categoryUpdateHandler)
 
 module.exports = router

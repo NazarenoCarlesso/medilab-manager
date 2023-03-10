@@ -3,7 +3,7 @@ const { QueryTypes } = require('sequelize')
 const sequelize = require('../db.js')
 // models
 const { models } = require('../db.js')
-const { Sample } = models
+const { Sample, Test } = models
 
 const sampleWithTests = async () => {
     const samples = await sequelize.query(
@@ -22,8 +22,29 @@ const sampleAll = async () => {
     return await Sample.findAll()
 }
 
+const sampleDelete = async (id, newId) => {
+    const tests = await Test.findAll({ where: { SampleId: id } })
+
+    tests.map(test => test.SampleId = newId)
+
+    await Promise.all(tests.map(test => test.save()))
+
+    const sample = await Sample.findByPk(id)
+
+    return await sample.destroy()
+}
+
+const sampleUpdate = async (id, name) => {
+    const sample = await Sample.findByPk(id)
+
+    sample.name = name
+    return await sample.save()
+}
+
 module.exports = {
     sampleAll,
-    sampleWithTests,
-    sampleCreate
+    sampleCreate,
+    sampleDelete,
+    sampleUpdate,
+    sampleWithTests
 }

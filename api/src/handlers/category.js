@@ -2,7 +2,8 @@ const {
     categoryAll,
     categoryCreate,
     categoryWithTests,
-    categoryDelete
+    categoryDelete,
+    categoryUpdate
 } = require('../controllers/category')
 
 const categoryAllHandler = async (req, res) => {
@@ -28,8 +29,17 @@ const categoryWithTestsHandler = async (req, res) => {
 
 const categoryDeleteHandler = async (req, res) => {
     try {
-        await categoryDelete(req.params.id)
+        await categoryDelete(req.params.id, req.params.newId)
         res.status(200).json({ msg: 'Deleted successfully' })
+    } catch (error) {
+        res.status(400).json({ msg: error.message })
+    }
+}
+
+const categoryUpdateHandler = async (req, res) => {
+    try {
+        await categoryUpdate(req.params.id, req.body.name)
+        res.status(200).json({ msg: 'Updated successfully' })
     } catch (error) {
         res.status(400).json({ msg: error.message })
     }
@@ -39,5 +49,6 @@ module.exports = {
     categoryAllHandler,
     categoryCreateHandler,
     categoryDeleteHandler,
+    categoryUpdateHandler,
     categoryWithTestsHandler
 }

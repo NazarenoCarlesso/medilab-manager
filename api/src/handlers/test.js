@@ -4,7 +4,8 @@ const {
     testCreate,
     testSearch,
     testByOrders,
-    testEdit
+    testUpdate,
+    testDelete
 } = require('../controllers/test')
 
 const testAllHandler = async (req, res) => {
@@ -12,18 +13,6 @@ const testAllHandler = async (req, res) => {
         ? await testSearch(req.query.search, req.query.limit)
         : await testAll(req.query.limit)
     res.status(200).json(tests)
-}
-
-const testEditHandler = async (req, res) => {
-    const { id } = req.params
-    const { name, description, price, time } = req.body
-
-    try {
-        await testEdit(id, name, description, price, time)
-        res.status(201).json({ msg: 'Modified successfully' })
-    } catch (error) {
-        res.status(400).json({ msg: error.message })
-    }
 }
 
 const testDetailHandler = async (req, res) => {
@@ -43,7 +32,28 @@ const testCreateHandler = async (req, res) => {
         await testCreate(name, description, price, time, category, sample)
         res.status(201).json({ msg: 'Created successfully' })
     } catch (error) {
-        res.status(400).json({ msg: error.message })
+        res.status(500).json({ msg: error.message })
+    }
+}
+
+const testDeleteHandler = async (req, res) => {
+    try {
+        testDelete(req.params.id)
+        res.status(200).json({ msg: 'Deleted successfully' })
+    } catch (error) {
+        res.status(500).json({ msg: error.message })
+    }
+}
+
+const testUpdateHandler = async (req, res) => {
+    const { name, description, price, time, category, sample } = req.body
+
+    try {
+        await testUpdate(req.params.id, name, description,
+            price, time, category, sample)
+        res.status(201).json({ msg: 'Updated successfully' })
+    } catch (error) {
+        res.status(500).json({ msg: error.message })
     }
 }
 
@@ -52,5 +62,6 @@ module.exports = {
     testDetailHandler,
     testByOrdersHandler,
     testCreateHandler,
-    testEditHandler
+    testDeleteHandler,
+    testUpdateHandler
 }

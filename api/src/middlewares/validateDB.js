@@ -1,5 +1,5 @@
 const { models } = require('../db.js')
-const { Order, User, Test } = models
+const { Order, User, Test, test_category, Sample, Review } = models
 
 const validateOrder = async (id) => {
     const order = await Order.findByPk(id)
@@ -47,9 +47,30 @@ const validateAdmin = async (req, res, next) => {
     user.role !== 'ADMIN' ? res.status(401).json({ msg: 'Acceso denegado' }) : next()
 }
 
+const validateCategory = async (id) => {
+    const category = await test_category.findByPk(id)
+
+    if (!category) throw new Error('Categoria no es válida')
+}
+
+const validateSample = async (id) => {
+    const sample = await Sample.findByPk(id)
+
+    if (!sample) throw new Error('Muestra no es válida')
+}
+
+const validateReview = async (id) => {
+    const review = await Review.findByPk(id)
+
+    if (!review) throw new Error('Reseña no es válida')
+}
+
 module.exports = {
     validateOrder,
     validateTest,
+    validateCategory,
+    validateSample,
+    validateReview,
     validateUsername,
     validateFreeUsername,
     validateFreeEmail,
