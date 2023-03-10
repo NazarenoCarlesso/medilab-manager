@@ -139,19 +139,24 @@ export default function Signup(props) {
     } else if (hasErrors) {
       alert("Debe completar los datos correctamente");
     } else {
-      const response = await axios.post(`${BACK}/patients/login`, user);
-      const userData = {
-        name: response.data.name,
-        token: response.headers.token,
-      };
-      dispatch(setSessionId(userData));
-      setItem("sessionId", userData);
-      // devuelve al iniciar sesión al perfil del usuario con url modificada con parte de su usuario
-      if (fromCart === true) {
-        setShowAlertLogin(false);
-        navigate("/cart");
-      } else {
-        navigate("/user");
+      try {
+        const response = await axios.post(`${BACK}/patients/login`, user);
+        const userData = {
+          name: response.data.name,
+          token: response.headers.token,
+        };
+        dispatch(setSessionId(userData));
+        setItem("sessionId", userData);
+        // devuelve al iniciar sesión al perfil del usuario con url modificada con parte de su usuario
+        if (fromCart === true) {
+          setShowAlertLogin(false);
+          navigate("/cart");
+        } else {
+          navigate("/user");
+        }
+      } catch (error) {
+        const alertError = error.response.data?.msg;
+        alert(alertError);
       }
     }
   };
@@ -163,9 +168,14 @@ export default function Signup(props) {
     } else if (hasErrorsSignUp) {
       alert("Debe completar los datos correctamente");
     } else {
-      await axios.post(`${BACK}/patients/signup`, userSignUp);
-      window.alert("Registro exitoso.");
-      navigate("/signup");
+      try {
+        await axios.post(`${BACK}/patients/signup`, userSignUp);
+        window.alert("Registro exitoso.");
+        setSelectedForm("login");
+      } catch (error) {
+        const alertError = error.response.data.errors[0]?.msg;
+        alert(alertError);
+      }
     }
   };
 
