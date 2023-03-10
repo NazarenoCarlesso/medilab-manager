@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -19,9 +18,9 @@ export default function Test({
   return (
     <div
       style={{
-        width: "100%",
-        height: "300px",
-        marginTop: "5%",
+        width: "300px",
+        height: "320px",
+        marginTop: "1%",
         marginBottom: "5%",
       }}
     >
@@ -31,7 +30,6 @@ export default function Test({
           width: "95%",
           height: "100%",
           margin: "auto",
-          borderRadius: "15%",
         }}
       >
         <Card.Img
@@ -59,10 +57,10 @@ export default function Test({
               height: "40px",
             }}
           >
-            description
+            {description}
           </Card.Title>
-          <hr style={{ marginBottom: "2%" }} />
-          <Card.Title className="text-info d-flex flex-row-reverse">
+          <hr style={{ marginBottom: "4%" }} />
+          <Card.Title className="text-primary d-flex flex-row-reverse">
             ${price}.00
           </Card.Title>
 

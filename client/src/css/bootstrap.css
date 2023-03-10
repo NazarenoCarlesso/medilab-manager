@@ -4112,9 +4112,9 @@ textarea.form-control-lg {
   --bs-card-title-spacer-y: 0.5rem;
   --bs-card-border-width: 1px;
   --bs-card-border-color: var(--bs-border-color-translucent);
-  --bs-card-border-radius: 15px;
+  --bs-card-border-radius: 35px;
   --bs-card-box-shadow: ;
-  --bs-card-inner-border-radius: 14px;
+  --bs-card-inner-border-radius: 34px;
   --bs-card-cap-padding-y: 0.5rem;
   --bs-card-cap-padding-x: 1rem;
   --bs-card-cap-bg: rgba(0, 0, 0, 0.03);
