@@ -1,3 +1,4 @@
+const fetch = require('node-fetch')
 const bcrypt = require('bcrypt')
 
 // models
