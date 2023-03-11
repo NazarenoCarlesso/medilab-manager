@@ -173,7 +173,7 @@ export default function Signup(props) {
         window.alert("Registro exitoso.");
         setSelectedForm("login");
       } catch (error) {
-        const alertError = error.response.data.errors[0]?.msg;
+        const alertError = error?.response.data.errors[0].msg;
         alert(alertError);
       }
     }
