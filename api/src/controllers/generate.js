@@ -63,11 +63,25 @@ const itemGenerator = async () => {
     const items = await fetch(`${process.env.VITAL_API}/apirest/caracteristicas`)
         .then(response => response.json())
 
-    Promise.all(items.map(item => Item.create({
+    await Promise.all(items.map(async item => {
+      const newItem = await Item.create({
         id: fromString(item.id.toString()),
-        name: item.nombre ? CapitalizeFirst(item.nombre.slice(0,49)) : item.id // sdelp: por ahora lo dejo  ingresando id donde no tiene nombre 
-    })))/*.then(results => console.log(results))
-    .catch(err => console.error(err));*/
+        name: item.nombre ? CapitalizeFirst(item.nombre.slice(0,49)) : item.id+" > id antiguo sin nombre",
+      });
+      if (await Test.findByPk(fromString(item.id_examen))){
+        await newItem.addTest(fromString(item.id_examen.toString()));
+        }
+    }));
+    
+    
+    
+        // Promise.all(items.map(item => Item.create({
+    //     id: fromString(item.id.toString()),
+    //     name: item.nombre ? CapitalizeFirst(item.nombre.slice(0,49)) : item.id, // sdelp: por ahora lo dejo  ingresando id donde no tiene nombre 
+    // })))/*.then(results => console.log(results))
+    // .catch(err => console.error(err));*/
+    // //await Item.addTest(fromString(item.id_examen.toString()));
+
 }
 
 const testGenerator = async () => {
