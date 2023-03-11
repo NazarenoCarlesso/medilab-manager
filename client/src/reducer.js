@@ -2,20 +2,37 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getItem } from "./utils/localStorage";
 
 const slice = createSlice({
-  name: "counter",
+  name: "store",
   initialState: {
     sessionId: getItem("sessionId") || undefined,
+    token: getItem('token') || undefined,
+    name: getItem('name') || undefined,
+    avatar: getItem('avatar') || undefined,
+    role: getItem('role') || undefined,
     tests: [],
     filteredTests: [],
     samples: [],
     categories: [],
     cart: getItem("cart") || [],
-    orders:[],  
+    orders:[],
   },
   reducers: {
+    setToken(state, action) {
+      state.token = action.payload
+    },
+    setName(state, action) {
+      console.log(action.payload)
+      state.name = action.payload
+    },
+    setAvatar(state, action) {
+      state.avatar = action.payload
+    },
+    setRole(state, action) {
+      state.role = action.payload
+    },
     loadOrders( state, action){
-      state.orders=action.payload},      
-
+      state.orders=action.payload
+    },
     loadTests(state, action) {
       state.tests = action.payload;
       state.filteredTests = action.payload;
@@ -27,6 +44,7 @@ const slice = createSlice({
       state.categories = action.payload;
     },
     addToCart(state, action) {
+      console.log(action.payload)
       const findIdTest = state.cart.findIndex((e) => e === action.payload);
       if (findIdTest === -1) {
         state.cart.push(action.payload);
@@ -93,5 +111,9 @@ export const {
   deleteOfCart,
   setState,
   loadOrders,
+  setToken,
+  setName,
+  setAvatar,
+  setRole
 } = slice.actions;
 export default slice.reducer;

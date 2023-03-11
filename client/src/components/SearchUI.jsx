@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import TestUI from './TestUI';
-import NavUI from './NavUI';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Paper, Select, TextField } from '@mui/material';
+import { FormControl, FormHelperText, Paper, TextField } from '@mui/material';
 
 const BACK = process.env.REACT_APP_BACK
-
-const darkTheme = createTheme({
-    palette: {
-        mode: 'dark',
-    },
-})
 
 export default function TestsUI() {
     const [tests, setTests] = useState([])
@@ -37,9 +28,7 @@ export default function TestsUI() {
     useEffect(() => setPage(1), [search])
 
     return (
-        <ThemeProvider theme={darkTheme}>
-            <NavUI />
-            <Grid container direction="column" justifyContent="space-evenly" alignItems="center" sx={{ background: 'whitesmoke' }}>
+            <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
                 <Paper style={{ width: 360 }}>
                     <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
                         <FormControl sx={{ m: 1, width: 340 }}>
@@ -94,6 +83,5 @@ export default function TestsUI() {
                     />)}
                 </Grid>
             </Grid>
-        </ThemeProvider>
     )
 }

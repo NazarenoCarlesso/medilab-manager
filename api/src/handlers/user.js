@@ -33,9 +33,9 @@ const userLogInHandler = async (req, res) => {
     const { username, password } = req.body
 
     try {
-        const { token, name } = await userLogIn(username, password)
+        const { token, name, avatar, role } = await userLogIn(username, password)
         res.header('Access-Control-Expose-Headers', 'token')
-        res.status(200).header('token', token).json({ name })
+        res.status(200).header('token', token).json({ name, avatar, role })
     } catch (error) {
         res.status(400).json({ msg: error.message })
     }
@@ -69,9 +69,9 @@ const userGoogleHandler = async (req, res) => {
     const googleToken = req.header('token')
 
     try {
-        const { token, name } = await userGoogle(googleToken)
+        const { token, name, avatar, role } = await userGoogle(googleToken)
         res.header('Access-Control-Expose-Headers', 'token')
-        res.status(200).header('token', token).json({ name })
+        res.status(200).header('token', token).json({ name, avatar, role })
     } catch (error) {
         res.status(400).json({ msg: error.message })
     }
