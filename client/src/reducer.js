@@ -10,7 +10,23 @@ const slice = createSlice({
     samples: [],
     categories: [],
     cart: getItem("cart") || [],
-    orders:[],  
+    orders:[], 
+    results:[ {
+      "item": "Sodio",
+      "value": 54
+  },
+  {
+      "item": "Cloro",
+      "value": 51
+  },
+  {
+      "item": "Potasio",
+      "value": 39
+  },
+  {
+      "item": "Ph",
+      "value": 6
+  }] 
   },
   reducers: {
     loadOrders( state, action){
@@ -25,6 +41,9 @@ const slice = createSlice({
     },
     loadCategories(state, action) {
       state.categories = action.payload;
+    },
+    loadResults(state, action) {
+      state.results = action.payload
     },
     addToCart(state, action) {
       const findIdTest = state.cart.findIndex((e) => e === action.payload);
@@ -93,5 +112,6 @@ export const {
   deleteOfCart,
   setState,
   loadOrders,
+  loadResults
 } = slice.actions;
 export default slice.reducer;
