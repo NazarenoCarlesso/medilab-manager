@@ -22,7 +22,7 @@ export default function GoogleSignIn() {
     const navigate = useNavigate()
 
     const handleCredentialResponse = ({ credential }) => {
-        fetch(`${BACK}/patients/google`, {
+        fetch(`${BACK}/users/google`, {
             method: 'post',
             headers: {
                 'token': credential
