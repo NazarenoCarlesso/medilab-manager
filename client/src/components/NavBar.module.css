@@ -1,0 +1,5 @@
+.div.container{
+    background: linear-gradient(293deg, rgba(83, 214, 232, 0.8) 0%, aliceblue 100%);
+    box-shadow:0 2px 20px grey;
+    margin-bottom: 3px;
+}

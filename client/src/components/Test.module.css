@@ -1,0 +1,46 @@
+.card.container {
+    position: relative;
+    overflow: hidden;
+    border-color: aliceblue;
+    width: 240px;
+    height: 320px;
+    background: linear-gradient(293deg, #ccd9fb 0%, #d6fcfd 100%);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.card.title {
+    position: absolute;
+    left: -11px;
+    width: 104%;
+    height: 12%;
+    padding: 5%;
+    font-size: 17px;
+    font-weight: 900;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.card.category {
+    margin-top: 18%;
+    width: 95%;
+    height: 30%;
+    padding: 10%;
+    font-size: 15px;
+}
+.card.card.container:hover{
+    transform: scale(1.03);
+    box-shadow: 0px 0px 30px 1px rgba(109, 237, 239, 0.3);
+}
+
+.btn.boton:hover{
+    background: linear-gradient(293deg, rgb(185, 185, 255) 0%, rgb(72, 225, 255) 100%);;
+    color: white;
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke: .5px;
+}
+
+.btn2.boton:hover{
+    background: linear-gradient(293deg, #5080FD 0%, #5CE1E6 100%);;
+    color: white;
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke: .5px;
+}

@@ -2,11 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Youtube, Twitter, Telephone, EnvelopeAt} from 'react-bootstrap-icons';
 import logo from "../images/logo3.png"
+import styles from './Footer.module.css';
 
 export default function Footer() {
     return (
         <div>
-      <div style={{background: "aliceblue"}}>
+      <div className={`${styles.div} ${styles.container}`}>
         <footer className="text-primary py-4">
             <div className="container">
                 <nav className="row">

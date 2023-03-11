@@ -4,11 +4,13 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { addToCart } from "../reducer";
 import logo from "../images/logo5.png";
+import Hematologia from '../icons/hematologia'
+import styles from './Test.module.css';
 
 export default function Test({
   id,
   name,
-  description,
+  category,
   price,
   setDetailId,
   setShowDetails,
@@ -18,49 +20,25 @@ export default function Test({
   return (
     <div
       style={{
-        width: "300px",
-        height: "320px",
-        marginTop: "1%",
+        width: "250px",
+        height: "340px",
+        marginTop: "3%",
         marginBottom: "5%",
       }}
     >
-      <Card
-        className="shadow-sm p-3 mb-5 bg-white"
-        style={{
-          width: "95%",
-          height: "100%",
-          margin: "auto",
-        }}
-      >
-        <Card.Img
-          variant="top"
-          src={logo}
-          style={{ width: "100%", height: "80px" }}
-        />
+      <Card className={`p-2 ${styles.card} ${styles.container}`}>
+        <Card.Header variant="top" style={{ width: "80px", height: "80px" }}>
+          <Hematologia></Hematologia>
+        </Card.Header>
         <Card.Body>
-          <Card.Title
-            className="text-info"
-            style={{
-              marginTop: "-10px",
-              fontSize: "18px",
-              textAlign: "center",
-              height: "50px",
-            }}
-          >
-            {name}
+          <Card.Title className={`badge bg-secondary ${styles.card} ${styles.title}`}>
+            <strong>{name}</strong>
           </Card.Title>
-          <Card.Title
-            className="text-info"
-            style={{
-              fontSize: "16px",
-              textAlign: "center",
-              height: "40px",
-            }}
-          >
-            {description}
+          <Card.Title className={`text-primary ${styles.card} ${styles.category}`}>
+            {category}
           </Card.Title>
-          <hr style={{ marginBottom: "4%" }} />
-          <Card.Title className="text-primary d-flex flex-row-reverse">
+          <hr className="text-primary" style={{ marginBottom: "4%" }} />
+          <Card.Title className="text-primary d-flex pb-4 flex-row-reverse">
             ${price}.00
           </Card.Title>
 
@@ -74,6 +52,7 @@ export default function Test({
             <Button
               id={id}
               variant="outline-primary"
+              className={`${styles.btn2} ${styles.boton}`}
               onClick={() => {
                 setDetailId(id);
                 setShowDetails(true);
@@ -84,7 +63,7 @@ export default function Test({
             >
               Detalles
             </Button>
-            <Button variant="success" onClick={() => dispatch(addToCart(id))}>
+            <Button variant="outline-success" className={`${styles.btn} ${styles.boton}`} onClick={() => dispatch(addToCart(id))}>
               Agregar
             </Button>
           </div>

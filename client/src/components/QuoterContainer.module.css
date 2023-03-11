@@ -1,0 +1,22 @@
+.quoter.container{
+    background: linear-gradient(293deg, #ccd9fbe9 0%, #d6fcfddd 100%);
+    box-shadow:0 2px 20px grey;
+    border-radius: 20px;
+    padding: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.btn.boton:hover{
+    background: linear-gradient(293deg, rgb(185, 185, 255) 0%, rgb(72, 225, 255) 100%);;
+    color: white;
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke: .5px;
+}
+
+.btn2.boton:hover{
+    background: linear-gradient(293deg, #5080FD 0%, #5CE1E6 100%);;
+    color: white;
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke: .5px;
+}
