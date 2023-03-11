@@ -36,8 +36,8 @@ const testDetail = async (pk) => {
     }
 }
 
-const testSearch = async (search, limit) => {
-    const tests = await Test.findAll({
+const testSearch = async (search, page = 0, limit = 5) => {
+    const tests = await Test.findAndCountAll({
         include: [
             { model: Sample, required: true },
             { model: test_category, required: true }
@@ -48,17 +48,34 @@ const testSearch = async (search, limit) => {
             }, {
                 description: { [Op.iLike]: `%${search}%` }
             }]
-        }
+        },
+        limit: limit,
+        offset: ((page - 1) * limit)
     })
 
-    return tests.map(test => ({
-        id: test.id,
-        name: test.name,
-        description: test.description,
-        price: test.price,
-        sample: test.Sample.name,
-        category: test.test_category.name
-    })).slice(0, limit)
+    const categories = []
+    const samples = []
+
+    tests.rows = tests.rows.map(test => {
+        categories.includes(test.test_category.name)
+            ? null
+            : categories.push(test.test_category.name)
+
+        samples.includes(test.Sample.name)
+            ? null
+            : categories.push(test.Sample.name)
+
+        return ({
+            id: test.id,
+            name: test.name,
+            description: test.description,
+            price: test.price,
+            sample: test.Sample.name,
+            category: test.test_category.name
+        })
+    })
+
+    return { ...tests, categories, samples }
 }
 
 const testByOrders = async (limit) => {

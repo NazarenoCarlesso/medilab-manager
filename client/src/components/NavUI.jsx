@@ -26,7 +26,8 @@ export default function NavUI() {
     const navigate = useNavigate()
 
     const onCart = useSelector((state) => state.cart.length);
-    const sessionId = useSelector((state) => state.sessionId);
+    const name = useSelector((state) => state.name);
+    const avatar = useSelector((state) => state.avatar);
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -40,14 +41,18 @@ export default function NavUI() {
     const handleCloseUserMenu = () => setAnchorElUser(null);
 
     const handleLogout = () => {
-        setItem("cart", []);
-        setItem("sessionId", undefined);
+        setItem('cart', []);
+        setItem('sessionId', undefined);
+        setItem('token', undefined);
+        setItem('name', undefined);
+        setItem('avatar', undefined);
+        setItem('role', undefined)
         dispatch(setState());
-        navigate("/home");
+        navigate('/home');
     }
 
     return (
-        <AppBar className="NavUI" position="fixed">
+        <AppBar position="fixed">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography variant="h6" noWrap component={Link} to="/" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontWeight: 600, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none' }}>
@@ -72,7 +77,7 @@ export default function NavUI() {
                         <Button component={Link} to="/home" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
                             Home
                         </Button>
-                        <IconButton component={Link} to="/quoter" size="large" color="inherit">
+                        <IconButton component={Link} to="/search" size="large" color="inherit">
                             <Badge color="error">
                                 <SearchIcon />
                             </Badge>
@@ -84,12 +89,12 @@ export default function NavUI() {
                         </IconButton>
                     </Box>
                     <Typography onClick={handleCloseNavMenu} sx={{ marginRight: 1 }}>
-                        {sessionId?.name}
+                        {name ? name : null}
                     </Typography>
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt={sessionId ? sessionId.name : null} src="/static/images/avatar/1.jpg" />
+                                <Avatar alt={name ? name : null} referrerpolicy="no-referrer" src={avatar} />
                             </IconButton>
                         </Tooltip>
                         <Menu sx={{ mt: '45px' }} id="menu-appbar" anchorEl={anchorElUser} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right' }} open={Boolean(anchorElUser)} onClose={handleCloseUserMenu}>

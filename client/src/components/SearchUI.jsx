@@ -1,42 +1,41 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import React, { useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid';
 import TestUI from './TestUI';
-import NavUI from './NavUI';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Paper, Select, TextField } from '@mui/material';
+import { FormControl, FormHelperText, Paper, TextField } from '@mui/material';
 
-const darkTheme = createTheme({
-    palette: {
-        mode: 'dark',
-    },
-})
+const BACK = process.env.REACT_APP_BACK
 
 export default function TestsUI() {
-    const samples = useSelector((state) => state.samples)
-    const categories = useSelector((state) => state.categories)
+    const [tests, setTests] = useState([])
+    const [search, setSearch] = useState('')
+    const [page, setPage] = useState(1)
+    const [count, setCount] = useState()
 
-    const [sample, setSample] = useState('')
-    const [category, setCategory] = useState('')
+    useEffect(() => {
+        fetch(`${BACK}/tests/search/?search=${search}&page=${page}&limit=5`)
+            .then(response => response.json())
+            .then(data => {
+                setTests(data.rows)
+                setCount(data.count)
+            })
+    }, [search, page])
 
-    const tests = useSelector((state) => state.filteredTests.slice(0, 4))
+    useEffect(() => setPage(1), [search])
 
     return (
-        <ThemeProvider theme={darkTheme}>
-            <NavUI />
-            <Grid container direction="column" justifyContent="space-evenly" alignItems="center" sx={{ background: 'whitesmoke' }}>
-                <div style={{ minHeight: 20 }} />
-                <Paper>
-                    <FormControl sx={{ m: 1, minWidth: 120 }}>
-                        <TextField id="outlined-search" label="Search field" type="search" />
-                        <FormHelperText>With label + helper text</FormHelperText>
-                    </FormControl>
-                    <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
+                <Paper style={{ width: 360 }}>
+                    <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
+                        <FormControl sx={{ m: 1, width: 340 }}>
+                            <TextField value={search} onChange={e => setSearch(e.target.value)} id="outlined-search" label="Search field" type="search" />
+                            <FormHelperText>With label + helper text</FormHelperText>
+                        </FormControl>
+                        {/*<FormControl sx={{ m: 1, minWidth: 120 }}>
                         <InputLabel id="demo-simple-select-helper-label">Categoria</InputLabel>
                         <Select labelId="demo-simple-select-helper-label" id="demo-simple-select-helper" label="Age"
                             value={category} onChange={e => setCategory(e.target.value)}>
@@ -45,6 +44,7 @@ export default function TestsUI() {
                         </Select>
                         <FormHelperText>With label + helper text</FormHelperText>
                     </FormControl>
+                    
                     <FormControl sx={{ m: 1, minWidth: 120 }}>
                         <InputLabel id="demo-simple-select-helper-label">Muestra</InputLabel>
                         <Select labelId="demo-simple-select-helper-label" id="demo-simple-select-helper" label="Age"
@@ -57,20 +57,21 @@ export default function TestsUI() {
                     <FormControl sx={{ m: 1, minWidth: 120 }}>
                         <Button variant="contained">Contained</Button>
                         <FormHelperText>With label + helper text</FormHelperText>
-                    </FormControl>
-                </Paper>
-                <Paper>
-                    <Stack spacing={2}>
-                        <Pagination
-                            count={10}
-                            renderItem={(item) => (
-                                <PaginationItem
-                                    slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-                                    {...item}
-                                />
-                            )}
-                        />
-                    </Stack>
+                    </FormControl>*/}
+                        <Stack spacing={2}>
+                            <Pagination
+                                count={Math.round(count / 5)}
+                                page={page}
+                                onChange={(e, v) => setPage(v)}
+                                renderItem={(item) => <PaginationItem
+                                    slots={{
+                                        previous: ArrowBackIcon,
+                                        next: ArrowForwardIcon
+                                    }}
+                                    {...item} />}
+                            />
+                        </Stack>
+                    </Grid>
                 </Paper>
                 <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
                     {tests.map(test => <TestUI
@@ -82,6 +83,5 @@ export default function TestsUI() {
                     />)}
                 </Grid>
             </Grid>
-        </ThemeProvider>
     )
 }

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { setSessionId } from '../reducer'
+import { setSessionId, setToken, setName, setAvatar } from '../reducer'
 import { setItem } from '../utils/localStorage'
 
 const BACK = process.env.REACT_APP_BACK
@@ -30,13 +30,16 @@ export default function GoogleSignIn() {
         })
             .then(async response => ({
                 token: response.headers.get('token'),
-                name: await response.json().then(o => o.name)
+                body: await response.json()
             }))
             .then(data => {
                 dispatch(setSessionId(data))
                 setItem('sessionId', data)
+                dispatch(setToken(data.token))
+                dispatch(setName(data.body.name))
+                dispatch(setAvatar(data.body.avatar))
             })
-            .then(() => navigate('/user'))
+            .then(() => navigate('/home'))
     }
 
     useEffect(() => {

@@ -11,7 +11,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 
-import { setSessionId } from "../reducer";
+import { setAvatar, setName, setRole, setSessionId, setToken } from "../reducer";
 import { validateLogin, validateSignUp } from "../utils/validate";
 import { setItem } from "../utils/localStorage";
 import GoogleSignIn from "./GoogleSignIn";
@@ -144,9 +144,18 @@ export default function Signup(props) {
         const userData = {
           name: response.data.name,
           token: response.headers.token,
+          avatar: response.data.avatar
         };
         dispatch(setSessionId(userData));
+        dispatch(setToken(userData.token));
+        dispatch(setName(userData.name));
+        dispatch(setRole(userData.role));
+        dispatch(setAvatar(userData.avatar));
         setItem("sessionId", userData);
+        setItem('token', userData.token)
+        setItem('name', userData.name)
+        setItem('role', userData.role)
+        setItem('avatar', userData.avatar)
         // devuelve al iniciar sesión al perfil del usuario con url modificada con parte de su usuario
         if (fromCart === true) {
           setShowAlertLogin(false);
