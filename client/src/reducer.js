@@ -93,6 +93,10 @@ const slice = createSlice({
     },
     setState(state, action) {
       state.sessionId = undefined;
+      state.token = undefined;
+      state.name = undefined;
+      state.role = undefined;
+      state.avatar = undefined;
       state.cart = [];
     },
   },

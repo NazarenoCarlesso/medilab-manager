@@ -43,6 +43,10 @@ export default function NavUI() {
     const handleLogout = () => {
         setItem('cart', []);
         setItem('sessionId', undefined);
+        setItem('token', undefined);
+        setItem('name', undefined);
+        setItem('avatar', undefined);
+        setItem('role', undefined)
         dispatch(setState());
         navigate('/home');
     }

@@ -39,7 +39,7 @@ export default function GoogleSignIn() {
                 dispatch(setName(data.body.name))
                 dispatch(setAvatar(data.body.avatar))
             })
-            .then(() => navigate('/mui'))
+            .then(() => navigate('/home'))
     }
 
     useEffect(() => {
