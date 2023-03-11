@@ -7,9 +7,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    width: 260px;
     padding: 20px 1px;
     margin: 10px 0;
+    height: 400px;
+    width: 240px;
     text-align: center;
     position: relative;
     cursor: pointer;
@@ -20,7 +21,7 @@
 }
 
 .TestUI .content {
-    padding: 20px;
+    padding: 0px 6px;
 }
 
 .TestUI .content .price {
@@ -34,15 +35,23 @@
     color: rgba(255, 255, 255, 0.6);
     margin-top: 10px;
     font-size: 14px;
+    height: 120px;
+    margin-bottom: 10px;
 }
 
 .TestUI .content .title {
     font-weight: 800;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.64);
-    margin-top: 10px;
+    margin-top: 0px;
     font-size: 25px;
     letter-spacing: 1px;
+    height: 110px;
+    width: 220px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .TestUI button {
