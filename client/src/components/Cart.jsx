@@ -5,16 +5,16 @@ import CloseButton from "react-bootstrap/CloseButton";
 
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { deleteOfCart } from "../reducer";
 import { setItem } from "../utils/localStorage";
 
 import OffCanvasCart from "./OffCanvasCart";
 import BillCart from "./BillCart";
 import Signup from "./Signup";
+import SelectAppointment from "./SelectAppointment";
 
 export default function Cart() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // Panel de pagos (agregar)
@@ -22,6 +22,9 @@ export default function Cart() {
   const [showAlert, setShowAlert] = useState(false);
   const [showAlertLogin, setShowAlertLogin] = useState(false);
   const [fromCart, setFromCart] = useState(false);
+  const [openSA, setOpenSA] = useState(false);
+  const handleOpenSA = () => setOpenSA(true);
+  const handleCloseSA = () => setOpenSA(false);
 
   const handleShow = () => setShow(true);
 
@@ -47,7 +50,7 @@ export default function Cart() {
     if (cart.length === 0) {
       alert("No tiene productos en el carrito de compras.");
     } else {
-      handleShow();
+      handleOpenSA();
     }
   }
 
@@ -138,7 +141,7 @@ export default function Cart() {
             </Button>
             {sessionId ? (
               <Button variant="primary" onClick={handleSubmit}>
-                PROCESAR COMPRA
+                CONTINUAR COMPRA
               </Button>
             ) : null}
           </div>
@@ -227,6 +230,11 @@ export default function Cart() {
           </Modal.Body>
         </Modal>
       </div>
+      <SelectAppointment
+        openSA={openSA}
+        handleCloseSA={handleCloseSA}
+        handleShow={handleShow}
+      />
     </div>
   );
 }
