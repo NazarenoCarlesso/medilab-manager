@@ -4,7 +4,7 @@ const { fromString } = require('uuidv4')
 
 // models
 const { models } = require('../db.js')
-const { User, test_category, Sample, Test } = models
+const { User, test_category, Sample, Test, Item } = models
 
 // utils
 const { toFirstName, toLastName, toUnique, toPhoto, CapitalizeFirst } = require('../utils/index.js')
@@ -57,6 +57,18 @@ const sampleGenerator = async () => {
     })))
 }
 
+
+const itemGenerator = async () => {
+    const items = await fetch(`${process.env.VITAL_API}/apirest/caracteristicas`)
+        .then(response => response.json())
+
+    Promise.all(items.map(item => Item.create({
+        id: fromString(item.id.toString()),
+        name: item.nombre ? CapitalizeFirst(item.nombre.slice(0,49)) : item.id
+    }))).then(results => console.log(results))
+    .catch(err => console.error(err));
+}
+
 const testGenerator = async () => {
     let tests = await fetch(`${process.env.VITAL_API}/apirest/examenes`)
         .then(response => response.json())
@@ -78,5 +90,6 @@ module.exports = {
     userGenerator,
     sampleGenerator,
     categoryGenerator,
+    itemGenerator,
     testGenerator
 }

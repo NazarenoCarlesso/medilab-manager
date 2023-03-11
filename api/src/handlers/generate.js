@@ -2,7 +2,8 @@ const {
     userGenerator,
     categoryGenerator,
     sampleGenerator,
-    testGenerator
+    testGenerator,
+    itemGenerator
 } = require('../controllers/generate.js')
 
 const generateAllHandler = async (req, res) => {
@@ -10,6 +11,7 @@ const generateAllHandler = async (req, res) => {
     await categoryGenerator()
     await sampleGenerator()
     await testGenerator()
+    await itemGenerator()
     res.status(200).json({ msg: 'Data Generated Successfully' })
 }
 
