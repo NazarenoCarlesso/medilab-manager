@@ -30,6 +30,7 @@ import Orders from "./components/UserRoutes/Orders"
 import Profile from "./components/UserRoutes/Profile"
 import Reviews from "./components/UserRoutes/Reviews"
 import UserResults from "./components/UserRoutes/UserResults"
+import SearchUI from "./components/SearchUI";
 
 
 export default function App() {
@@ -76,6 +77,7 @@ export default function App() {
           <Route path="/quoter" element={<Quoter />} />
           <Route path="/results" element={<Results />} />
           <Route path="/payments" element={<Payments />} />
+          <Route path="/mui" element={<SearchUI />} />
           {/* <Route path="/user" element={<User />}  onEnter={requireAuth}  /> */}
           {/* pregunta si hay algo en el token al momento de buscar la url user si no tiene nada manda al componente de error */ }
           {/* modifica la url con el nombre del usuario (`/user/${usuario}`) */ }
