@@ -4,8 +4,8 @@
     border-color: aliceblue;
     width: 240px;
     height: 320px;
-    background: linear-gradient(293deg, #ccd9fb 0%, #d6fcfd 100%);
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    background: linear-gradient(293deg, #dee7ff 0%, #ecfeff 100%);
+    box-shadow: rgba(20, 20, 52, 0.599) 0px 50px 100px -20px, rgba(0, 0, 0, 0.632) 0px 30px 60px -30px;
 }
 
 .card.title {
