@@ -51,8 +51,9 @@ export default function NavBar() {
                 Mi perfil
               </Nav.Link>
             ) : null}
-
+ <Nav.Link as={Link} to="/comment">comment</Nav.Link>
             <Nav.Link as={Link} to="/cart" href="/cart">
+           
               Cart
               <b style={{ color: "red" }}>{cartLength ? cartLength : null} </b>
             </Nav.Link>
