@@ -3,6 +3,7 @@ import Row from "react-bootstrap/Row";
 import QuoterContainer from './QuoterContainer'
 import Slides from './Slides'
 import CarouselCards from './CarouselCards'
+import styles from './Home.module.css';
 
 
 export default function Home() {
@@ -15,11 +16,11 @@ export default function Home() {
           <Row className="p-4"/>
           <QuoterContainer/>
           <Row className="p-4"/>
-          <div className='bg-light transition-fade'>
+          <div className={`p-2 ${styles.div} ${styles.container}`}>
             <Row>
-            <h3 className='d-flex justify-content-center pt-2 text-info'>Mas Vendidos</h3>
+            <h3 className='d-flex justify-content-center pt-2 text-primary'>Mas Vendidos</h3>
             </Row>
-            <CarouselCards/>
+            <CarouselCards />
           </div>
           <Row className="p-4"/>
         </div>

@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { setItem } from "../utils/localStorage";
 import { setState } from "../reducer";
 import img from "../images/logonav.png";
+import styles from './NavBar.module.css';
 
 export default function NavBar() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export default function NavBar() {
   }
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className={`${styles.div} ${styles.container}`} expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">
           <img

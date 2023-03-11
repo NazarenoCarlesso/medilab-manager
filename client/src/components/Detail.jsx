@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import logo from "../images/logo4.png";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
-import Badge from "react-bootstrap/esm/Badge";
+import Row from "react-bootstrap/esm/Row";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../reducer";
+import styles from './Detail.module.css';
 
 const BACK = process.env.REACT_APP_BACK;
 
@@ -26,18 +27,19 @@ export default function Detail(props) {
     <div>
       {showDetails === true ? (
         <Modal
+          
           show={showDetails}
           onHide={() => setShowDetails(false)}
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
-          <Modal.Header closeButton>
+          <Modal.Header className={`${styles.detail} ${styles.container}`} closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
               Detalles de Test
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className={`${styles.detail} ${styles.container}`}>
             <div
               style={{
                 display: "flex",
@@ -47,7 +49,7 @@ export default function Detail(props) {
                 width: "100%",
               }}
             >
-              <Badge bg="white" style={{ width: "100%" }}>
+              <Row style={{ width: "100%", height:"100%" }}>
                 <h1 className="text-primary">{test.name}</h1>
                 <div
                   style={{
@@ -90,8 +92,9 @@ export default function Detail(props) {
                     </ul>
                     <div class="col-4 pt-4" style={{ margin: "auto" }}>
                       <Button
+                        className="p-2"
                         style={{ height: "50px", width: "150px" }}
-                        variant="secondary"
+                        variant="outline-primary"
                         onClick={() => dispatch(addToCart(id))}
                       >
                         Agregar al carrito
@@ -99,7 +102,7 @@ export default function Detail(props) {
                     </div>
                   </div>
                 </div>
-              </Badge>
+              </Row>
               <div className="pt-4"></div>
             </div>
           </Modal.Body>

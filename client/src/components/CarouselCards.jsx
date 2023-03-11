@@ -31,6 +31,7 @@ export default  function CarouselCards (){
               key={fav1.id}
               id={fav1.id}
               name={fav1.name}
+              category={fav1.category}
               price={fav1.price}
               setDetailId={setDetailId}
               setShowDetails={setShowDetails}
@@ -39,6 +40,7 @@ export default  function CarouselCards (){
               key={fav2.id}
               id={fav2.id}
               name={fav2.name}
+              category={fav2.category}
               price={fav2.price}
               setDetailId={setDetailId}
               setShowDetails={setShowDetails}
@@ -47,6 +49,7 @@ export default  function CarouselCards (){
               key={fav3.id}
               id={fav3.id}
               name={fav3.name}
+              category={fav3.category}
               price={fav3.price}
               setDetailId={setDetailId}
               setShowDetails={setShowDetails}
@@ -55,6 +58,7 @@ export default  function CarouselCards (){
               key={fav4.id}
               id={fav4.id}
               name={fav4.name}
+              category={fav4.category}
               price={fav4.price}
               setDetailId={setDetailId}
               setShowDetails={setShowDetails}
@@ -71,6 +75,7 @@ export default  function CarouselCards (){
               key={fav5.id}
               id={fav5.id}
               name={fav5.name}
+              category={fav5.category}
               price={fav5.price}
               setDetailId={setDetailId}
               setShowDetails={setShowDetails}
@@ -79,6 +84,7 @@ export default  function CarouselCards (){
               key={fav6.id}
               id={fav6.id}
               name={fav6.name}
+              category={fav5.category}
               price={fav6.price}
               setDetailId={setDetailId}
               setShowDetails={setShowDetails}
@@ -87,6 +93,7 @@ export default  function CarouselCards (){
               key={fav7.id}
               id={fav7.id}
               name={fav7.name}
+              category={fav7.category}
               price={fav7.price}
               setDetailId={setDetailId}
               setShowDetails={setShowDetails}
@@ -95,6 +102,7 @@ export default  function CarouselCards (){
               key={fav8.id}
               id={fav8.id}
               name={fav8.name}
+              category={fav8.category}
               price={fav8.price}
               setDetailId={setDetailId}
               setShowDetails={setShowDetails}

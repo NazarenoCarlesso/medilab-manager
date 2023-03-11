@@ -8,3 +8,7 @@
 .route{
     flex-grow: 1;
 }
+
+.icon{
+    stroke: #5080FD;
+}
