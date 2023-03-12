@@ -22,15 +22,20 @@ import TestList from "./containers/TestList";
 import Quoter from "./components/Quoter";
 import Results from "./components/Results";
 import Payments from "./components/Payments";
-import User from "./components/User";
+import Dashboard from "./components/Dashboard/Dashboard";
 import Footer from "./components/Footer";
 import CovidTests from "./containers/CovidTests";
-import Appointment from "./components/UserRoutes/Appointment"
-import Orders from "./components/UserRoutes/Orders"
-import Profile from "./components/UserRoutes/Profile"
-import Reviews from "./components/UserRoutes/Reviews"
-import UserResults from "./components/UserRoutes/UserResults"
+import Appointment from "./components/Dashboard/UserRoutes/Appointment"
+import Orders from "./components/Dashboard/UserRoutes/Orders"
+import Profile from "./components/Dashboard/UserRoutes/Profile"
+import Reviews from "./components/Dashboard/UserRoutes/Reviews"
+import UserResults from "./components/Dashboard/UserRoutes/UserResults"
 import SearchUI from "./components/SearchUI";
+import Chart from "./components/Dashboard/AdminRoutes/Chart";
+import AllOrders from "./components/Dashboard/AdminRoutes/AllOrders";
+import AllExmans from "./components/Dashboard/AdminRoutes/AllExmans";
+import AllUsers from "./components/Dashboard/AdminRoutes/AllUsers";
+import AllAppointment from "./components/Dashboard/AdminRoutes/AllAppointment";
 
 
 export default function App() {
@@ -38,7 +43,6 @@ export default function App() {
 
   const token = useSelector((state) => state.sessionId?.token);
   const usuario = useSelector((state) => state.sessionId?.name)
-
 
   getTests((tests) => dispatch(loadTests(tests)));
   getCovidTests((tests) => dispatch(loadTests(tests)));
@@ -81,13 +85,24 @@ export default function App() {
           {/* <Route path="/user" element={<User />}  onEnter={requireAuth}  /> */}
           {/* pregunta si hay algo en el token al momento de buscar la url user si no tiene nada manda al componente de error */ }
           {/* modifica la url con el nombre del usuario (`/user/${usuario}`) */ }
-          <Route path={`/user`} element={!token ? <Navigate to="/*" /> : <User />}>
-            <Route path="profile" element={<Profile/>} />
-            <Route path="orders" element={<Orders/>} />
-            <Route path="result&payment" element={<UserResults/>} />
-            <Route path="appointment" element={<Appointment/>} />
-            <Route path="reviews" element={<Reviews/>} />
+
+          <Route path={`/dashboard`} element={!token ? <Navigate to="/*" /> : <Dashboard/>}>
+            <Route path="user"> 
+              <Route path="profile" element={<Profile/>} />
+              <Route path="orders" element={<Orders/>} />
+              <Route path="result&payment" element={<UserResults/>} />
+              <Route path="appointment" element={<Appointment/>} />
+              <Route path="reviews" element={<Reviews/>} />
+            </Route>
+            <Route path="admin">
+              <Route path="chart" element={<Chart/>} />
+              <Route path="allorders" element={<AllOrders/>} />
+              <Route path="allexams" element={<AllExmans/>} />
+              <Route path="allusers" element={<AllUsers/>} />
+              <Route path="allappointments" element={<AllAppointment/>} />
+            </Route>
           </Route>
+
         </Routes>
       </div>
       <Footer />
