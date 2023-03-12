@@ -12,17 +12,12 @@ import "./App.css";
 import TestList from "./containers/TestList";
 import Results from "./components/Results";
 import Payments from "./components/Payments";
-import User from "./components/User";
 import Footer from "./components/Footer";
 import CovidTests from "./containers/CovidTests";
-import Appointment from "./components/UserRoutes/Appointment"
-import Orders from "./components/UserRoutes/Orders"
-import Profile from "./components/UserRoutes/Profile"
-import Reviews from "./components/UserRoutes/Reviews"
-import UserResults from "./components/UserRoutes/UserResults"
 import SearchUI from "./components/SearchUI";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import NavUI from './components/NavUI';
+import DashboardUI from "./components/DashboardUI";
 
 const darkTheme = createTheme({
   palette: {
@@ -65,14 +60,8 @@ export default function App() {
             {/* <Route path="/user" element={<User />}  onEnter={requireAuth}  /> */}
             {/* pregunta si hay algo en el token al momento de buscar la url user si no tiene nada manda al componente de error */}
             {/* modifica la url con el nombre del usuario (`/user/${usuario}`) */}
-            <Route path={`/user`} element={<User />}>
-              <Route path="profile" element={<Profile />} />
-              <Route path="orders" element={<Orders />} />
-              <Route path="result&payment" element={<UserResults />} />
-              <Route path="appointment" element={<Appointment />} />
-              <Route path="reviews" element={<Reviews />} />
-            </Route>
-          </Routes>
+            <Route path={`/dashboardui`} element={<DashboardUI />}/>
+        </Routes>
         </div>
         <Footer />
       </ThemeProvider>
