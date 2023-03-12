@@ -98,12 +98,7 @@ export default function NavUI() {
                         </Tooltip>
                         <Menu sx={{ mt: '45px' }} id="menu-appbar" anchorEl={anchorElUser} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right' }} open={Boolean(anchorElUser)} onClose={handleCloseUserMenu}>
                             <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography component={Link} to="/user/profile" textAlign="center" sx={{ textDecoration: 'none', color: 'inherit' }}>
-                                    Profile
-                                </Typography>
-                            </MenuItem>
-                            <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography component={Link} to="/user/profile" textAlign="center" sx={{ textDecoration: 'none', color: 'inherit' }}>
+                                <Typography component={Link} to="/dashboardui" textAlign="center" sx={{ textDecoration: 'none', color: 'inherit' }}>
                                     Dashboard
                                 </Typography>
                             </MenuItem>

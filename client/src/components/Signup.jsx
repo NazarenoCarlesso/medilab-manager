@@ -139,10 +139,12 @@ export default function Signup(props) {
     } else {
       try {
         const response = await axios.post(`${BACK}/users/login`, user);
+        console.log(response.data)
         const userData = {
           name: response.data.name,
           token: response.headers.token,
-          avatar: response.data.avatar
+          avatar: response.data.avatar,
+          role: response.data.role
         };
         dispatch(setToken(userData.token));
         dispatch(setName(userData.name));
@@ -153,7 +155,7 @@ export default function Signup(props) {
           setShowAlertLogin(false);
           navigate("/cart");
         } else {
-          navigate("/user");
+          navigate("/dashboardui");
         }
       } catch (error) {
         const alertError = error.response.data?.msg;
