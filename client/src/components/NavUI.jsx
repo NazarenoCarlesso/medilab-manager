@@ -1,8 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setItem } from '../utils/localStorage';
-import { setState } from '../reducer';
+import { setAvatar, setName, setRole, setToken } from '../reducer';
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -25,29 +24,31 @@ export default function NavUI() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const onCart = useSelector((state) => state.cart.length);
-    const sessionId = useSelector((state) => state.sessionId);
+    const onCart = useSelector((state) => state.cart.length)
+    const name = useSelector((state) => state.name)
+    const avatar = useSelector((state) => state.avatar)
 
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [anchorElNav, setAnchorElNav] = React.useState(null)
+    const [anchorElUser, setAnchorElUser] = React.useState(null)
 
-    const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
+    const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget)
 
-    const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
+    const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget)
 
-    const handleCloseNavMenu = () => setAnchorElNav(null);
+    const handleCloseNavMenu = () => setAnchorElNav(null)
 
-    const handleCloseUserMenu = () => setAnchorElUser(null);
+    const handleCloseUserMenu = () => setAnchorElUser(null)
 
     const handleLogout = () => {
-        setItem("cart", []);
-        setItem("sessionId", undefined);
-        dispatch(setState());
-        navigate("/home");
+        dispatch(setToken(undefined))
+        dispatch(setName(undefined))
+        dispatch(setRole(undefined))
+        dispatch(setAvatar(undefined))
+        navigate('/home');
     }
 
     return (
-        <AppBar className="NavUI" position="fixed">
+        <AppBar position="fixed">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography variant="h6" noWrap component={Link} to="/" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontWeight: 600, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none' }}>
@@ -72,7 +73,10 @@ export default function NavUI() {
                         <Button component={Link} to="/home" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
                             Home
                         </Button>
-                        <IconButton component={Link} to="/quoter" size="large" color="inherit">
+                        <Button component={Link} to="/signup" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+                            Sign In
+                        </Button>
+                        <IconButton component={Link} to="/search" size="large" color="inherit">
                             <Badge color="error">
                                 <SearchIcon />
                             </Badge>
@@ -84,12 +88,12 @@ export default function NavUI() {
                         </IconButton>
                     </Box>
                     <Typography onClick={handleCloseNavMenu} sx={{ marginRight: 1 }}>
-                        {sessionId?.name}
+                        {name ? name : null}
                     </Typography>
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt={sessionId ? sessionId.name : null} src="/static/images/avatar/1.jpg" />
+                                <Avatar alt={name ? name : null} referrerPolicy="no-referrer" src={avatar} />
                             </IconButton>
                         </Tooltip>
                         <Menu sx={{ mt: '45px' }} id="menu-appbar" anchorEl={anchorElUser} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right' }} open={Boolean(anchorElUser)} onClose={handleCloseUserMenu}>

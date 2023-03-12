@@ -4,10 +4,11 @@ const { fromString } = require('uuidv4')
 
 // models
 const { models } = require('../db.js')
-const { User, test_category, Sample, Test } = models
+const { User, test_category, Sample, Test, Item, Order } = models
 
 // utils
 const { toFirstName, toLastName, toUnique, toPhoto, CapitalizeFirst } = require('../utils/index.js')
+const order = require('../models/order.js')
 
 const userGenerator = async () => {
     const users = await fetch(`${process.env.VITAL_API}/apirest/pacientes`)
@@ -57,6 +58,32 @@ const sampleGenerator = async () => {
     })))
 }
 
+
+const itemGenerator = async () => {
+    const items = await fetch(`${process.env.VITAL_API}/apirest/caracteristicas`)
+        .then(response => response.json())
+
+    await Promise.all(items.map(async item => {
+      const newItem = await Item.create({
+        id: fromString(item.id.toString()),
+        name: item.nombre ? CapitalizeFirst(item.nombre.slice(0,49)) : item.id+" > id antiguo sin nombre",
+      });
+      if (await Test.findByPk(fromString(item.id_examen))){
+        await newItem.addTest(fromString(item.id_examen.toString()));
+        }
+    }));
+    
+    
+    
+        // Promise.all(items.map(item => Item.create({
+    //     id: fromString(item.id.toString()),
+    //     name: item.nombre ? CapitalizeFirst(item.nombre.slice(0,49)) : item.id, // sdelp: por ahora lo dejo  ingresando id donde no tiene nombre 
+    // })))/*.then(results => console.log(results))
+    // .catch(err => console.error(err));*/
+    // //await Item.addTest(fromString(item.id_examen.toString()));
+
+}
+
 const testGenerator = async () => {
     let tests = await fetch(`${process.env.VITAL_API}/apirest/examenes`)
         .then(response => response.json())
@@ -74,9 +101,43 @@ const testGenerator = async () => {
     })))
 }
 
+const orderGenerator = async () => {
+    let orders = await fetch(`${process.env.VITAL_API}/apirest/ordenes`)
+        .then(response => response.json());
+
+        // tengo que desarmar el examen para crear distintas orders por cada examen con formato de id= idorderAPI+idTest
+        //console.log(orders); // orders es un array de objetos order
+        
+        orders.forEach(async order => {
+            if (await User.findByPk(fromString(order.id_paciente.toString())) ) { //&& order.id!=="5623" && order.id!=="5662" >>> esas tenian testy repetidos.
+                let testsids = order.examen.split(",");
+
+                const uniqueTestIds = [... new Set(testsids)]; // vienen test repetidos en la misma orden, con esto los saco.
+                await uniqueTestIds.forEach(async testid => {
+
+                    if (await Test.findByPk(fromString(testid))){
+
+                    const newOrder = {
+                        id: fromString(order.id+'-'+testid.toString()),
+                        createdAt: order.fec_crea,
+                        orden_id: order.id,
+                        TestId: fromString(testid.toString()),
+                        UserId: fromString(order.id_paciente.toString())
+                    }
+                    await Order.create(newOrder);
+                    }
+                })
+            }
+        });
+}
+
 module.exports = {
     userGenerator,
     sampleGenerator,
     categoryGenerator,
-    testGenerator
+    itemGenerator,
+    testGenerator,
+    orderGenerator
 }
+
+
