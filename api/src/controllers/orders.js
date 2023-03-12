@@ -3,7 +3,15 @@ const { models } = require('../db.js')
 const { Order, Test, Payment } = models
 
 const orderAll = async () => {
-    return await Order.findAll()
+    const orders = await Order.findAll({
+        include: { model: Test, required: true }
+    })
+    
+    return orders.map(order => ({
+        id: order.id,
+        test: order.Test.name,
+        payment: order.PaymentId
+    }))
 }
 
 const orderById = async (uid) => {

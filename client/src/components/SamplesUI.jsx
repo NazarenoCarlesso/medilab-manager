@@ -8,14 +8,15 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import CheckIcon from '@mui/icons-material/Check'
 import CloseIcon from '@mui/icons-material/Close'
+import AddIcon from '@mui/icons-material/Add'
 
 const BACK = process.env.REACT_APP_BACK
 
 function Sample({ id, name, handleEdit, handleDelete }) {
     return (
-        <Paper sx={{ width: 320, margin: '2px' }}>
+        <Paper sx={{ width: 320, margin: '2px', boxShadow: '0px 0px 10px 0px #00000047' }}>
             <Grid container direction="row" justifyContent="center" alignItems="center">
-                <Typography title={name} sx={{ width: 190, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <Typography title={name} sx={{ width: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {name}
                 </Typography>
                 <Button onClick={() => handleEdit({ id, name })}>
@@ -125,7 +126,17 @@ export default function SamplesUI() {
                     </Button>
                 </Paper>
             </Modal>
-            <Grid container direction="column" sx={{ height: 480 }}>
+            <Paper sx={{
+                width: 968, marginBottom: 0.25, marginTop: 0.1,
+                boxShadow: '0px 0px 10px 0px #00000047'
+            }}>
+                <Grid container direction="row" justifyContent="center" alignItems="center">
+                    <Button>
+                        <AddIcon />
+                    </Button>
+                </Grid>
+            </Paper>
+            <Grid container direction="column" alignItems="center" sx={{ height: 480 }}>
                 {samples.slice(0, 36).map(s => <Sample key={s.id} id={s.id} name={s.name} handleEdit={handleEdit} handleDelete={handleDelete} />)}
             </Grid>
         </Grid>

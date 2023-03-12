@@ -29,8 +29,8 @@ export default function TestsUI() {
             <Paper style={{ width: 360 }}>
                 <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
                     <FormControl sx={{ m: 1, width: 340 }}>
-                        <TextField value={search} onChange={e => setSearch(e.target.value)} id="outlined-search" label="Search field" type="search" />
-                        <FormHelperText>With label + helper text</FormHelperText>
+                        <TextField value={search} onChange={e => setSearch(e.target.value)} id="outlined-search" label="Busqueda" type="search" />
+                        <FormHelperText>Escribe tu exámen acá</FormHelperText>
                     </FormControl>
                     <Stack spacing={2}>
                         <Pagination

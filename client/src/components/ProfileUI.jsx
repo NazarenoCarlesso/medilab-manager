@@ -34,7 +34,7 @@ export default function ProfileUI() {
     }, [token])
 
     return (
-        <Paper sx={{ height: 340, padding: '10px' }}>
+        <Paper sx={{ height: 340, padding: '10px', margin: 0.5, boxShadow: '0px 0px 10px 0px #00000047' }}>
             <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
                 <Avatar alt={user.name} referrerPolicy="no-referrer" src={user.photo} sx={{ width: 100, height: 100 }} />
                 <Typography variant="h6" color="primary" fontWeight={700} fontStyle="italic" sx={{ fontFamily: 'unset' }}>

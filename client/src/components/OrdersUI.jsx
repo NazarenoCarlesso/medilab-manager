@@ -4,18 +4,23 @@ import {
     Button, Grid, Paper, Typography
 } from '@mui/material'
 import PaidIcon from '@mui/icons-material/Paid'
+import ReceiptIcon from '@mui/icons-material/Receipt'
+import AddIcon from '@mui/icons-material/Add'
 
 const BACK = process.env.REACT_APP_BACK
 
-function Order({ id, test, paymnet }) {
+function Order({ id, test, payment }) {
     return (
-        <Paper sx={{ width: 480, margin: '2px' }}>
+        <Paper sx={{ width: 320, margin: '2px', boxShadow: '0px 0px 10px 0px #00000047' }}>
             <Grid container direction="row" justifyContent="center" alignItems="center">
-                <Typography title={test} sx={{ width: 190, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <Typography title={test} sx={{ width: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {test}
                 </Typography>
                 <Button>
                     <PaidIcon />
+                </Button>
+                <Button>
+                    <ReceiptIcon />
                 </Button>
             </Grid>
         </Paper>
@@ -37,9 +42,19 @@ export default function OrdersUI() {
     // render component
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
-            <Grid container direction="column" sx={{ height: 480 }}>
+            <Paper sx={{
+                width: 968, marginBottom: 0.25, marginTop: 0.1,
+                boxShadow: '0px 0px 10px 0px #00000047'
+            }}>
+                <Grid container direction="row" justifyContent="center" alignItems="center">
+                    <Button>
+                        <AddIcon />
+                    </Button>
+                </Grid>
+            </Paper>
+            <Grid container direction="column" alignItems="center" sx={{ height: 480 }}>
                 {orders
-                    .slice(0, 24)
+                    .slice(0, 36)
                     .map(o => <Order key={o.id} id={o.id} test={o.test} payment={o.payment} />)}
             </Grid>
         </Grid>
