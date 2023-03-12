@@ -24,6 +24,7 @@ import SearchUI from "./components/SearchUI";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import NavUI from './components/NavUI';
 import SamplesUI from "./components/SamplesUI";
+import ProfileUI from "./components/ProfileUI";
 
 const darkTheme = createTheme({
   palette: {
@@ -57,6 +58,7 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/faq" element={<Faq />} />
+            <Route path="/profile" element={<ProfileUI />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/detail/:id" element={<Detail />} />
             <Route path="/*" element={<Ops />} />
