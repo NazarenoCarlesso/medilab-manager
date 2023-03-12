@@ -76,7 +76,7 @@ const userSignUp = async (username, password, email, firstName, lastName, dni, n
 
     return await User.create({
         username, email, password: hash, firstName,
-        lastName, dni, number, sex, height, civilState
+        lastName, dni, phone: number, sex, height, civil: civilState
     })
 }
 
