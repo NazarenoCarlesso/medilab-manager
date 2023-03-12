@@ -1,7 +1,12 @@
 import React from 'react'
-import { Button, Grid, styled } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '../reducer';
+import { useDispatch, useSelector } from 'react-redux'
+import { Button, Grid, styled } from '@mui/material'
+
+// reducer
+import { addToCart, removeFromCart } from '../reducer'
+
+// styles
+import './UIStyles.css'
 
 const ButtonUI = styled(Button)(({ theme }) => ({
     backgroundColor: '#9b0000',

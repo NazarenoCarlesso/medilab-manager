@@ -1,6 +1,9 @@
-import { Button, FormControl, Grid, MenuItem, Modal, Paper, Select, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import {
+    Button, FormControl, Grid, MenuItem, Modal,
+    Paper, Select, TextField, Typography
+} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import CheckIcon from '@mui/icons-material/Check'
@@ -10,9 +13,11 @@ const BACK = process.env.REACT_APP_BACK
 
 function Sample({ id, name, handleEdit, handleDelete }) {
     return (
-        <Paper sx={{ padding: '5px', width: 600 }}>
+        <Paper sx={{ width: 320, margin: '2px' }}>
             <Grid container direction="row" justifyContent="center" alignItems="center">
-                {name}
+                <Typography title={name} sx={{ width: 190, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {name}
+                </Typography>
                 <Button onClick={() => handleEdit({ id, name })}>
                     <EditIcon />
                 </Button>
@@ -25,38 +30,41 @@ function Sample({ id, name, handleEdit, handleDelete }) {
 }
 
 export default function SamplesUI() {
+    // get token from store
     const token = useSelector(state => state.token)
+    // array of samples
     const [samples, setSamples] = useState([])
-
+    // edit modal state and hooks
     const [openEdit, setOpenEdit] = useState(false)
     const handleOpenEdit = () => setOpenEdit(true)
     const handleCloseEdit = () => setOpenEdit(false)
+    // delete modal state and hooks
     const [openDelete, setOpenDelete] = useState(false)
     const handleOpenDelete = () => setOpenDelete(true)
     const handleCloseDelete = () => setOpenDelete(false)
-
+    // selected sample state
     const [sample, setSample] = useState('')
-
+    // merge state (sample fk in tests => merge sample)
+    const [merge, setMerge] = useState('')
+    // edit handler
     const handleEdit = (sample) => {
         handleOpenEdit()
         setSample(sample)
     }
-
+    // delete handler
     const handleDelete = (sample) => {
         handleOpenDelete()
         setSample(sample)
     }
-
+    // input handler
     const handleChange = (event) => {
         setSample({ ...sample, [event.target.name]: event.target.value })
     }
-
+    // select handler
     const handleSelect = (event) => {
         setMerge(event.target.value)
     }
-
-    const [merge, setMerge] = useState({ id: '' })
-
+    // edit request
     const sendEdit = () => {
         fetch(`${BACK}/samples/${sample.id}`, {
             method: 'put',
@@ -64,20 +72,20 @@ export default function SamplesUI() {
             body: JSON.stringify({ name: sample.name })
         }).then(() => handleCloseEdit())
     }
-
+    // delete request
     const sendDelete = () => {
         fetch(`${BACK}/samples/${sample.id}/${merge}`, {
             method: 'delete',
             headers: { 'token': token }
         }).then(() => handleCloseDelete())
     }
-
+    // reload list effect
     useEffect(() => {
         fetch(`${BACK}/samples/admin`, { headers: { 'token': token } })
             .then(response => response.json())
             .then(data => setSamples(data))
     }, [token, openEdit, openDelete])
-
+    // render component
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
             <Modal open={openEdit} onClose={handleCloseEdit}>
@@ -106,7 +114,7 @@ export default function SamplesUI() {
                     <FormControl>
                         <Select value={merge} label="Age" onChange={handleSelect}>
                             <MenuItem value={''}>Ninguna</MenuItem>
-                            {samples.filter(s => s.id !== sample.id).map(s => <MenuItem value={s.id}>{s.name}</MenuItem>)}
+                            {samples.filter(s => s.id !== sample.id).map(s => <MenuItem key={s.id} value={s.id}>{s.name}</MenuItem>)}
                         </Select>
                     </FormControl>
                     <Button>
@@ -117,7 +125,9 @@ export default function SamplesUI() {
                     </Button>
                 </Paper>
             </Modal>
-            {samples.map(s => <Sample key={s.id} id={s.id} name={s.name} handleEdit={handleEdit} handleDelete={handleDelete} />)}
+            <Grid container direction="column" sx={{ height: 480 }}>
+                {samples.slice(0, 36).map(s => <Sample key={s.id} id={s.id} name={s.name} handleEdit={handleEdit} handleDelete={handleDelete} />)}
+            </Grid>
         </Grid>
     )
 }
