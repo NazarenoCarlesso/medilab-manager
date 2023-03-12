@@ -8,7 +8,10 @@ module.exports = (sequelize) => {
             allowNull: false,
             primaryKey: true
         },
+        orden_id:{
+            type: DataTypes.INTEGER
+        }
     }, {
-        timestamps: false
+        timestamps: true
     })
 }
