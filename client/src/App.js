@@ -23,6 +23,7 @@ import UserResults from "./components/UserRoutes/UserResults"
 import SearchUI from "./components/SearchUI";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import NavUI from './components/NavUI';
+import SamplesUI from "./components/SamplesUI";
 
 const darkTheme = createTheme({
   palette: {
@@ -59,6 +60,7 @@ export default function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/detail/:id" element={<Detail />} />
             <Route path="/*" element={<Ops />} />
+            <Route path='/samples' element={<SamplesUI />} />
             <Route path="/results" element={<Results />} />
             <Route path="/payments" element={<Payments />} />
             <Route path="/search" element={<SearchUI />} />
