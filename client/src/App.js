@@ -1,5 +1,4 @@
-  import { Route, Routes, Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Route, Routes} from "react-router-dom";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import Signup from "./components/Signup";
@@ -10,16 +9,7 @@ import Cart from "./components/Cart";
 import Detail from "./components/Detail";
 import Ops from "./components/Ops";
 import "./App.css";
-import { loadCategories, loadSamples, loadTests, loadOrders } from "./reducer";
-import {
-  getCategories,
-  getOrders,
-  getSamples,
-  getTests,
-  getCovidTests
-} from "./utils/request";
 import TestList from "./containers/TestList";
-import Quoter from "./components/Quoter";
 import Results from "./components/Results";
 import Payments from "./components/Payments";
 import Dashboard from "./components/Dashboard/Dashboard";
@@ -31,27 +21,21 @@ import Profile from "./components/Dashboard/UserRoutes/Profile"
 import Reviews from "./components/Dashboard/UserRoutes/Reviews"
 import UserResults from "./components/Dashboard/UserRoutes/UserResults"
 import SearchUI from "./components/SearchUI";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import NavUI from './components/NavUI';
 import Chart from "./components/Dashboard/AdminRoutes/Chart";
 import AllOrders from "./components/Dashboard/AdminRoutes/AllOrders";
 import AllExmans from "./components/Dashboard/AdminRoutes/AllExmans";
 import AllUsers from "./components/Dashboard/AdminRoutes/AllUsers";
 import AllAppointment from "./components/Dashboard/AdminRoutes/AllAppointment";
 
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+})
 
 export default function App() {
-  const dispatch = useDispatch();
-
-  const token = useSelector((state) => state.sessionId?.token);
-  const usuario = useSelector((state) => state.sessionId?.name)
-
-  getTests((tests) => dispatch(loadTests(tests)));
-  getCovidTests((tests) => dispatch(loadTests(tests)));
-  getSamples((samples) => dispatch(loadSamples(samples)));
-  getCategories((categories) => dispatch(loadCategories(categories)));
-
-  if (token) {
-    getOrders((orders) => dispatch(loadOrders(orders)), token);
-  }
   // function requireAuth(nextState, replace) {
   //   if (token !== "undefined") {
   //     replace({
@@ -60,52 +44,56 @@ export default function App() {
   //     })
   //   }
   // }
-// console.log(usuario.toString())
+  // console.log(usuario.toString())
 
   return (
     <div className="App">
-      <NavBar />
-      <div className="route">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/tests" element={<TestList />} />
-          <Route path="/covid" element={<CovidTests />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/*" element={<Ops />} />
-          <Route path="/quoter" element={<Quoter />} />
-          <Route path="/results" element={<Results />} />
-          <Route path="/payments" element={<Payments />} />
-          <Route path="/mui" element={<SearchUI />} />
-          {/* <Route path="/user" element={<User />}  onEnter={requireAuth}  /> */}
-          {/* pregunta si hay algo en el token al momento de buscar la url user si no tiene nada manda al componente de error */ }
-          {/* modifica la url con el nombre del usuario (`/user/${usuario}`) */ }
+      <ThemeProvider theme={darkTheme}>
+        <NavUI />
+        <NavBar />
+        <div className="route">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/tests" element={<TestList />} />
+            <Route path="/covid" element={<CovidTests />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/faq" element={<Faq />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/detail/:id" element={<Detail />} />
+            <Route path="/*" element={<Ops />} />
+            <Route path="/results" element={<Results />} />
+            <Route path="/payments" element={<Payments />} />
+            <Route path="/search" element={<SearchUI />} />
+            {/* <Route path="/user" element={<User />}  onEnter={requireAuth}  /> */}
+            {/* pregunta si hay algo en el token al momento de buscar la url user si no tiene nada manda al componente de error */}
+            {/* modifica la url con el nombre del usuario (`/user/${usuario}`) */}
 
-          <Route path={`/dashboard`} element={!token ? <Navigate to="/*" /> : <Dashboard/>}>
-            <Route path="user"> 
-              <Route path="profile" element={<Profile/>} />
-              <Route path="orders" element={<Orders/>} />
-              <Route path="result&payment" element={<UserResults/>} />
-              <Route path="appointment" element={<Appointment/>} />
-              <Route path="reviews" element={<Reviews/>} />
-            </Route>
-            <Route path="admin">
-              <Route path="chart" element={<Chart/>} />
-              <Route path="allorders" element={<AllOrders/>} />
-              <Route path="allexams" element={<AllExmans/>} />
-              <Route path="allusers" element={<AllUsers/>} />
-              <Route path="allappointments" element={<AllAppointment/>} />
-            </Route>
-          </Route>
+            <Route path={`/dashboard`} element={<Dashboard />}>
 
+              <Route path="user"> 
+                <Route path="profile" element={<Profile/>} />
+                <Route path="orders" element={<Orders/>} />
+                <Route path="result&payment" element={<UserResults/>} />
+                <Route path="appointment" element={<Appointment/>} />
+                <Route path="reviews" element={<Reviews/>} />
+              </Route>
+
+              <Route path="admin">
+                <Route path="chart" element={<Chart/>} />
+                <Route path="allorders" element={<AllOrders/>} />
+                <Route path="allexams" element={<AllExmans/>} />
+                <Route path="allusers" element={<AllUsers/>} />
+                <Route path="allappointments" element={<AllAppointment/>} />
+              </Route>
+
+            </Route>
         </Routes>
-      </div>
-      <Footer />
+        </div>
+        <Footer />
+      </ThemeProvider>
     </div>
   );
 }

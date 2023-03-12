@@ -9,9 +9,7 @@ const {
 } = require('../controllers/test')
 
 const testAllHandler = async (req, res) => {
-    const tests = req.query.search
-        ? await testSearch(req.query.search, req.query.limit)
-        : await testAll(req.query.limit)
+    const tests = await testAll(req.query.limit)
     res.status(200).json(tests)
 }
 
@@ -22,6 +20,12 @@ const testDetailHandler = async (req, res) => {
 
 const testByOrdersHandler = async (req, res) => {
     const tests = await testByOrders(req.query.limit)
+    res.status(200).json(tests)
+}
+
+const testSearchHandler = async (req, res) => {
+    const {search, page, limit} = req.query
+    const tests = await testSearch(search, page, limit)
     res.status(200).json(tests)
 }
 
@@ -62,6 +66,7 @@ module.exports = {
     testDetailHandler,
     testByOrdersHandler,
     testCreateHandler,
+    testSearchHandler,
     testDeleteHandler,
     testUpdateHandler
 }

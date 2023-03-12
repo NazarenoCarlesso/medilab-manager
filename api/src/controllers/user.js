@@ -56,7 +56,9 @@ const userLogIn = async (username, password) => {
 
     return ({
         token: await generateJWT(user.id),
-        name: `${user.lastName.toUpperCase()}, ${user.firstName}`
+        name: `${user.lastName.toUpperCase()}, ${user.firstName}`,
+        avatar: user.photo,
+        role: user.role
     })
 }
 
@@ -94,7 +96,9 @@ const userGoogle = async (token) => {
 
     return ({
         token: await generateJWT(user.id),
-        name: `${user.lastName.toUpperCase()}, ${user.firstName}`
+        name: `${user.lastName.toUpperCase()}, ${user.firstName}`,
+        avatar: user.photo,
+        role: user.role
     })
 }
 

@@ -15,13 +15,16 @@ const {
     testEditHandler,
     testCreateHandler,
     testUpdateHandler,
-    testDeleteHandler
+    testDeleteHandler,
+    testSearchHandler
 } = require('../handlers/test')
 
 // routes
 const router = Router()
 
 router.get('/', testAllHandler)
+
+router.get('/search', testSearchHandler)
 
 router.get('/orders', testByOrdersHandler)
 
