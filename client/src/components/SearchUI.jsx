@@ -6,10 +6,7 @@ import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { Box, FormControl, FormHelperText, Paper, TextField } from '@mui/material';
-import ProfileUI from './ProfileUI';
-import CategoriesUI from './CategoriesUI';
-import SamplesUI from './SamplesUI';
+import { FormControl, FormHelperText, Paper, TextField } from '@mui/material';
 
 const BACK = process.env.REACT_APP_BACK
 
@@ -62,12 +59,6 @@ export default function TestsUI() {
                     price={test.price}
                 />)}
             </Grid>
-            <Grid container direction="row" justifyContent="center" alignItems="start">
-                <Box><ProfileUI /></Box>
-                <Box><CategoriesUI /></Box>
-                <Box><SamplesUI /></Box>
-            </Grid>
-            <div style={{ height: 200 }} />
         </Grid>
     )
 }
