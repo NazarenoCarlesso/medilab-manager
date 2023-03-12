@@ -3,8 +3,6 @@ import Row from "react-bootstrap/Row";
 import QuoterContainer from './QuoterContainer'
 import Slides from './Slides'
 import CarouselCards from './CarouselCards'
-import MercadoPago from './MercadoPago'
-
 
 export default function Home() {
     

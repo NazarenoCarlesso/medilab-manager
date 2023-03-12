@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Grid, styled } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, deleteOfCartId } from '../reducer';
+import { addToCart, removeFromCart } from '../reducer';
 
 const ButtonUI = styled(Button)(({ theme }) => ({
     backgroundColor: '#9b0000',
@@ -26,7 +26,7 @@ export default function TestUI({ id, name, description, price }) {
                 <Button>
                     Detalles
                 </Button>
-                {cart.includes(id) ? <ButtonUI color='secondary' onClick={() => dispatch(deleteOfCartId(id))}>
+                {cart.includes(id) ? <ButtonUI color='secondary' onClick={() => dispatch(removeFromCart(id))}>
                     Quitar
                 </ButtonUI> : <Button onClick={() => dispatch(addToCart(id))}>
                     Agregar

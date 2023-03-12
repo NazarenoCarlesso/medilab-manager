@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { setSessionId, setToken, setName, setAvatar } from '../reducer'
-import { setItem } from '../utils/localStorage'
+import { setToken, setName, setAvatar, setRole } from '../reducer'
 
 const BACK = process.env.REACT_APP_BACK
 
@@ -33,11 +32,10 @@ export default function GoogleSignIn() {
                 body: await response.json()
             }))
             .then(data => {
-                dispatch(setSessionId(data))
-                setItem('sessionId', data)
                 dispatch(setToken(data.token))
                 dispatch(setName(data.body.name))
                 dispatch(setAvatar(data.body.avatar))
+                dispatch(setRole(data.body.role))
             })
             .then(() => navigate('/home'))
     }
@@ -61,6 +59,7 @@ export default function GoogleSignIn() {
                 locale: 'es_ES'
             })
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
