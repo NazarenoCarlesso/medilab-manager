@@ -4,18 +4,19 @@ const { fromString } = require('uuidv4')
 
 // models
 const { models } = require('../db.js')
-const { User, test_category, Sample, Test, Item, Order } = models
+const { User, test_category, Sample, Test, Item, Order, Result } = models
 
 // utils
 const { toFirstName, toLastName, toUnique, toPhoto, CapitalizeFirst } = require('../utils/index.js')
 const order = require('../models/order.js')
 
 const userGenerator = async () => {
+
     const users = await fetch(`${process.env.VITAL_API}/apirest/pacientes`)
         .then(response => response.json())
 
     const password = await bcrypt.hash('password', 10)
-
+    
     await Promise.all(users.map(user => User.create({
         id: fromString(user.id.toString()),
         firstName: toFirstName(user.nombres),
@@ -72,16 +73,6 @@ const itemGenerator = async () => {
         await newItem.addTest(fromString(item.id_examen.toString()));
         }
     }));
-    
-    
-    
-        // Promise.all(items.map(item => Item.create({
-    //     id: fromString(item.id.toString()),
-    //     name: item.nombre ? CapitalizeFirst(item.nombre.slice(0,49)) : item.id, // sdelp: por ahora lo dejo  ingresando id donde no tiene nombre 
-    // })))/*.then(results => console.log(results))
-    // .catch(err => console.error(err));*/
-    // //await Item.addTest(fromString(item.id_examen.toString()));
-
 }
 
 const testGenerator = async () => {
@@ -131,13 +122,54 @@ const orderGenerator = async () => {
         });
 }
 
+const resultGenerator = async () => {
+    let results = await fetch(`${process.env.VITAL_API}/apirest/resultados`)
+        .then(response => response.json());
+        
+        Promise.all(results.map(async (result) => {
+            const order = await Order.findByPk(fromString(result.id_orden+'-'+result.id_examen.toString()));
+            const test = await Test.findByPk(fromString(result.id_examen.toString()));
+            const item = await Item.findByPk(fromString(result.id_caracteristica.toString()));
+            // console.log("item api (caracteristica)--->> ",result.id_caracteristica);
+            // console.log("item id--->> ",fromString(result.id_caracteristica.toString()));
+            // console.log("item --->> ",item);
+            
+            if (order && test && item) {
+                return Result.create({
+                id: fromString(result.id.toString()),
+                value: result.resultado !== '' && Number.isInteger(Number(result.resultado))
+                    ? parseInt(result.resultado)
+                    : 0,
+                // Asociaciones con objetos encontrados
+                //Order: order,
+                OrderId: order.id,
+                //Test: test,
+                //TestId: test.id,
+                //Item: item,
+                ItemId: item.id,
+                });
+            };
+          }));
+       
+        // Promise.all(results.map(result => Result.create({
+        //     id: fromString(result.id.toString()),
+        //     orderId: fromString(result.id_orden.toString()),
+        //     TestId: fromString(result.id_examen.toString()),
+        //     itemId: fromString(result.id_caracteristica.toString()),
+        //     value: result.resultado !== '' && Number.isInteger(Number(result.resultado))
+        //     ? parseInt(result.resultado) // si es number lo convertimos a integer
+        //     : 0
+        // })));
+}
+
 module.exports = {
     userGenerator,
     sampleGenerator,
     categoryGenerator,
     itemGenerator,
     testGenerator,
-    orderGenerator
+    orderGenerator,
+    resultGenerator
 }
 
 
