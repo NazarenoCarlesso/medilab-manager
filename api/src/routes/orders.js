@@ -4,10 +4,10 @@ const { Router } = require('express')
 const { header, body } = require('express-validator')
 const validateJWT = require('../middlewares/validateJWT')
 const validateReq = require('../middlewares/validateReq')
+const { validateAdmin } = require('../middlewares/validateDB')
 
 // handlers
 const { orderHandler, orderAllHandler, orderCreateHandler } = require('../handlers/orders')
-const { validateAdmin } = require('../middlewares/validateDB')
 
 // routes
 const router = Router()
