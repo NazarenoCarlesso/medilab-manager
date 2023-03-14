@@ -97,7 +97,7 @@ const userGoogle = async (token) => {
     return ({
         token: await generateJWT(user.id),
         name: `${user.lastName.toUpperCase()}, ${user.firstName}`,
-        avatar: user.photo,
+        avatar: user.photo ? user.photo : picture,
         role: user.role
     })
 }
