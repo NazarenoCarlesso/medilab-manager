@@ -43,7 +43,8 @@ export function DetailUI({ id, addToCart, removeFromCart }) {
 }
 
 const ButtonUI = styled(Button)(({ theme }) => ({
-    backgroundColor: '#9b0000',
+    color:"white",
+    background: 'linear-gradient(293deg, rgb(185, 185, 255) 0%, rgb(72, 225, 255) 100%);;',
     '&:hover': { backgroundColor: '#d70000' }
 }))
 
@@ -59,12 +60,12 @@ export default function TestUI({ id, name, description, price }) {
     return (
         <div className="TestUI">
             <div className="content">
-                <div className="title">{name}</div>
-                <div className="price">${price}.00</div>
-                <div className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at posuere eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</div>
+                <div className="name">{name}</div>
+                <div className="tag">${price}.00</div>
+                <div className="sample">rem ipsumLo dolor sit amet, consectetur adipiscing elit. Curabitur at posuere eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</div>
             </div>
             <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
-                <Button onClick={handleOpen}>
+                <Button  variant="outlined" onClick={handleOpen}>
                     Detalles
                 </Button>
                 <Modal open={open} onClose={handleClose}>
@@ -82,10 +83,10 @@ export default function TestUI({ id, name, description, price }) {
                     </Paper>
                 </Modal>
                 {cart.includes(id)
-                    ? <ButtonUI color='secondary' onClick={() => dispatch(removeFromCart(id))}>
+                    ? <ButtonUI onClick={() => dispatch(removeFromCart(id))}>
                         Quitar
                     </ButtonUI>
-                    : <Button onClick={() => dispatch(addToCart(id))}>
+                    : <Button variant="outlined" onClick={() => dispatch(addToCart(id))}>
                         Agregar
                     </Button>}
             </Grid>
