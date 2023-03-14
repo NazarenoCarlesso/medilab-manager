@@ -1,5 +1,5 @@
 const mercadopago = require("mercadopago");
-const { ACCESS_TOKEN } = process.env;
+const { ACCESS_TOKEN, FRONT } = process.env;
 
 mercadopago.configure({
   access_token: ACCESS_TOKEN,
@@ -15,7 +15,7 @@ const createPayment = (name, price, quantity) => {
       },
     ],
     back_urls: {
-      success: "http://localhost:3000",
+      success: FRONT,
       failure: "",
       pending: "",
     },
