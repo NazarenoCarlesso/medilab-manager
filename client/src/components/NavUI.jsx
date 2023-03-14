@@ -68,24 +68,24 @@ export default function NavUI() {
                         <Button component={Link} to="/home" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
                             Home
                         </Button>
-                        <IconButton component={Link} to="/search" size="large" color="inherit">
+                        <IconButton component={Link} to="/search" size="large" color="inherit" sx={{ width: '48px', margin: '10px 4px' }}>
                             <Badge color="error">
                                 <SearchIcon />
                             </Badge>
                         </IconButton>
-                        <IconButton component={Link} to="/cart" size="large" color="inherit">
+                        <IconButton component={Link} to="/cart" size="large" color="inherit" sx={{ width: '48px', margin: '10px 4px' }}>
                             <Badge badgeContent={onCart} color="error">
                                 <ShoppingCartIcon />
                             </Badge>
                         </IconButton>
                     </Box>
-                    <Typography color="primary" onClick={handleCloseNavMenu} sx={{ marginRight: 1 }}>
-                        {name ? name : null}
+                    <Typography color="primary" onClick={handleCloseNavMenu} sx={{ marginRight: 1, fontFamily: 'Raleway' }}>
+                        {name}
                     </Typography>
                     {name ? <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt={name ? name : null} referrerPolicy="no-referrer" src={avatar} />
+                                <Avatar alt={name} referrerPolicy="no-referrer" src={avatar} />
                             </IconButton>
                         </Tooltip>
                         <Menu sx={{ mt: '45px' }} id="menu-appbar" anchorEl={anchorElUser} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right' }} open={Boolean(anchorElUser)} onClose={handleCloseUserMenu}>

@@ -19,11 +19,11 @@ export default function PopularUI() {
     }, [])
 
     return (
-        <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
-            <Typography variant="h3" fontWeight={700} sx={{ fontFamily: 'unset', margin: 4 }}>
+        <Grid container direction="column" justifyContent="space-evenly" alignItems="center" sx={{ background: 'whitesmoke' }}>
+            <Typography variant="h3" fontWeight={700} sx={{ fontFamily: 'Raleway', margin: 4 }}>
                 Exámenes mas populares
             </Typography>
-            <Paper>
+            <Paper sx={{ padding: '6px 0px' }}>
                 <Stack spacing={2}>
                     <Pagination
                         count={2}
@@ -33,7 +33,7 @@ export default function PopularUI() {
                     />
                 </Stack>
             </Paper>
-            <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
+            <Grid container direction="row" justifyContent="space-evenly" alignItems="center" sx={{ marginBottom: '30px' }}>
                 {tests.slice((page - 1) * 5, 5 + (5 * (page - 1))).map(test => <TestUI
                     key={test.id}
                     id={test.id}
