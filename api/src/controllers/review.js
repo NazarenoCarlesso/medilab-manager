@@ -14,7 +14,8 @@ const reviewAll = async () => {
         content: review.content,
         createdAt: review.createdAt,
         updatedAt: review.updatedAt,
-        author: `${review.User.lastName.toUpperCase()}, ${review.User.firstName}`
+        author: `${review.User.lastName.toUpperCase()}, ${review.User.firstName}`,
+        avatar: review.User.photo
     }))
 }
 

@@ -1,14 +1,11 @@
-
-
-
 const BACK = process.env.REACT_APP_BACK
-
 
 const getTests = async (callback) => {
     fetch(`${BACK}/tests`)
         .then(response => response.json())
         .then(data => callback(data))
 }
+
 const getCovidTests = async (callback) => {
     fetch(`${BACK}/covid`)
         .then(response => response.json())
@@ -27,18 +24,12 @@ const getCategories = async (callback) => {
         .then(data => callback(data))
 }
 
-
 const getOrders = async (callback, token) => {
-
-    const options = {
-        headers: {
-          'token': ` ${token}`
-        }
-      }
+    const options = { headers: { 'token': ` ${token}` } }
     fetch(`${BACK}/orders`, options)
-     .then(response => response.json())
-    .then(data => callback(data)) 
-      
+        .then(response => response.json())
+        .then(data => callback(data))
+
 }
 
-module.exports = { getTests, getSamples, getCategories, getOrders, getCovidTests}
+module.exports = { getTests, getSamples, getCategories, getOrders, getCovidTests }

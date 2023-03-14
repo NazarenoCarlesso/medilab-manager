@@ -32,15 +32,15 @@ export default function Cart() {
   const handleShow = () => setShow(true);
 
   const cart = useSelector((state) => state.cart);
-  const sessionId = useSelector((state) => state.sessionId);
+  const token = useSelector((state) => state.token);
   const [products, setProducts] = useState([])
 
-  useEffect(() => {
-    setItem("cart", cart);
-  }, [cart]);
+  useEffect(() => setItem("cart", cart), [cart]);
 
   useEffect(() => {
-    Promise.all(cart.map(c => fetch(`${BACK}/tests/${c}`).then(res => res.json()))).then(products => setProducts(products))
+    Promise.all(cart.map(c => fetch(`${BACK}/tests/${c}`)
+      .then(res => res.json())))
+      .then(products => setProducts(products))
   }, [cart])
 
   function handleClickDelete(e) {
@@ -99,10 +99,7 @@ export default function Cart() {
                     <td>{test.name}</td>
                     <td>${test.price}.00</td>
                     <td>
-                      <Button
-                        variant="danger"
-                        id={test.id}
-                        onClick={(e) => handleClickDelete(e)}
+                      <Button variant="danger" id={test.id} onClick={(e) => handleClickDelete(e)}
                       >
                         X
                       </Button>
@@ -136,17 +133,17 @@ export default function Cart() {
               marginBottom: "2%",
             }}
           >
-            <Button variant="success" as={Link} to="/quoter">
+            <Button variant="success" as={Link} to="/search">
               SEGUIR COMPRANDO
             </Button>
-            {sessionId ? (
+            {token ? (
               <Button variant="primary" onClick={handleSubmit}>
                 CONTINUAR COMPRA
               </Button>
             ) : null}
           </div>
 
-          {sessionId ? null : (
+          {token ? null : (
             <div
               style={{
                 display: "flex",
@@ -210,22 +207,10 @@ export default function Cart() {
           <Modal.Body>
             <CloseButton
               onClick={() => setShowAlertLogin(false)}
-              style={{
-                position: "absolute",
-                top: "15px",
-                right: "15px",
-                zIndex: "1",
-              }}
+              style={{ position: "absolute", top: "15px", right: "15px", zIndex: "1" }}
             ></CloseButton>
-            <div
-              style={{
-                width: "100%",
-              }}
-            >
-              <Signup
-                setShowAlertLogin={setShowAlertLogin}
-                fromCart={fromCart}
-              />
+            <div style={{ width: "100%" }}>
+              <Signup setShowAlertLogin={setShowAlertLogin} fromCart={fromCart} />
             </div>
           </Modal.Body>
         </Modal>
