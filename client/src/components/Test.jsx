@@ -3,14 +3,14 @@ import { useDispatch } from "react-redux";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { addToCart } from "../reducer";
-import logo from "../images/logo5.png";
+
 import Hematologia from '../icons/hematologia'
 import styles from './Test.module.css';
 
 export default function Test({
   id,
   name,
-  category,
+  sample,
   price,
   setDetailId,
   setShowDetails,
@@ -22,24 +22,24 @@ export default function Test({
       style={{
         width: "250px",
         height: "340px",
-        marginTop: "3%",
-        marginBottom: "5%",
+        marginTop: "5%",
+        marginBottom: "8%",
       }}
     >
       <Card className={`p-2 ${styles.card} ${styles.container}`}>
-        <Card.Header variant="top" style={{ width: "80px", height: "80px" }}>
+        <div className="mb-4" style={{ width: "50px", height: "15px" }}>
           <Hematologia></Hematologia>
-        </Card.Header>
+        </div>
         <Card.Body>
-          <Card.Title className={`badge bg-secondary ${styles.card} ${styles.title}`}>
+          <Card.Title className={`bg-secondary ${styles.card} ${styles.title}`}>
             <strong>{name}</strong>
           </Card.Title>
           <Card.Title className={`text-primary ${styles.card} ${styles.category}`}>
-            {category}
+            Tipo de muestra: <strong>{sample}</strong>
           </Card.Title>
-          <hr className="text-primary" style={{ marginBottom: "4%" }} />
-          <Card.Title className="text-primary d-flex pb-4 flex-row-reverse">
-            ${price}.00
+          <hr className="text-info" style={{ marginBottom: "1%" }} />
+          <Card.Title className="text-success d-flex pb-3 flex-row-reverse">
+          <strong>${price}.00</strong>
           </Card.Title>
 
           <div
@@ -63,7 +63,7 @@ export default function Test({
             >
               Detalles
             </Button>
-            <Button variant="outline-success" className={`${styles.btn} ${styles.boton}`} onClick={() => dispatch(addToCart(id))}>
+            <Button variant="outline-info" className={`${styles.btn} ${styles.boton}`} onClick={() => dispatch(addToCart(id))}>
               Agregar
             </Button>
           </div>

@@ -37,7 +37,7 @@ export default function NavBar() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          <Nav className={`me-auto ${styles.links} ${styles.navBar}`}>
             {/* <Nav.Link as={Link} to="/home">Home</Nav.Link> */}
 
             {sessionId

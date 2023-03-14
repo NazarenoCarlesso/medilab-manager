@@ -34,7 +34,7 @@
   --bs-success: rgb(91, 192, 192);
   --bs-info: rgb(25, 138, 176);
   --bs-warning: #9ce9ec;
-  --bs-danger: rgb(246, 159, 144);
+  --bs-danger: rgb(255, 143, 124);
   --bs-light: rgb(255, 255, 255);
   --bs-dark: black;
   --bs-primary-rgb: 80, 128, 253;
@@ -42,7 +42,7 @@
   --bs-success-rgb: 91, 192, 192;
   --bs-info-rgb: 25, 138, 176;
   --bs-warning-rgb: 156, 233, 236;
-  --bs-danger-rgb: 246, 159, 144;
+  --bs-danger-rgb: 255, 143, 124;
   --bs-light-rgb: 255, 255, 255;
   --bs-dark-rgb: 0, 0, 0;
   --bs-white-rgb: 255, 255, 255;
@@ -1878,13 +1878,13 @@ progress {
 
 .table-danger {
   --bs-table-color: #000;
-  --bs-table-bg: #fdece9;
-  --bs-table-border-color: #e4d4d2;
-  --bs-table-striped-bg: #f0e0dd;
+  --bs-table-bg: #ffe9e5;
+  --bs-table-border-color: #e6d2ce;
+  --bs-table-striped-bg: #f2ddda;
   --bs-table-striped-color: #000;
-  --bs-table-active-bg: #e4d4d2;
+  --bs-table-active-bg: #e6d2ce;
   --bs-table-active-color: #000;
-  --bs-table-hover-bg: #eadad8;
+  --bs-table-hover-bg: #ecd8d4;
   --bs-table-hover-color: #000;
   color: var(--bs-table-color);
   border-color: var(--bs-table-border-color);
@@ -2640,7 +2640,7 @@ textarea.form-control-lg {
   width: 100%;
   margin-top: 0.25rem;
   font-size: 0.875em;
-  color: rgb(246, 159, 144);
+  color: rgb(255, 143, 124);
 }
 
 .invalid-tooltip {
@@ -2653,7 +2653,7 @@ textarea.form-control-lg {
   margin-top: 0.1rem;
   font-size: 0.875rem;
   color: #000;
-  background-color: rgba(246, 159, 144, 0.9);
+  background-color: rgba(255, 143, 124, 0.9);
   border-radius: 0.375rem;
 }
 
@@ -2665,16 +2665,16 @@ textarea.form-control-lg {
 }
 
 .was-validated .form-control:invalid, .form-control.is-invalid {
-  border-color: rgb(246, 159, 144);
+  border-color: rgb(255, 143, 124);
   padding-right: calc(1.5em + 0.75rem);
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='rgb%28246, 159, 144%29'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='rgb%28246, 159, 144%29' stroke='none'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='rgb%28255, 143, 124%29'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='rgb%28255, 143, 124%29' stroke='none'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right calc(0.375em + 0.1875rem) center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
 .was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
-  border-color: rgb(246, 159, 144);
-  box-shadow: 0 0 0 0.25rem rgba(246, 159, 144, 0.25);
+  border-color: rgb(255, 143, 124);
+  box-shadow: 0 0 0 0.25rem rgba(255, 143, 124, 0.25);
 }
 
 .was-validated textarea.form-control:invalid, textarea.form-control.is-invalid {
@@ -2683,17 +2683,17 @@ textarea.form-control-lg {
 }
 
 .was-validated .form-select:invalid, .form-select.is-invalid {
-  border-color: rgb(246, 159, 144);
+  border-color: rgb(255, 143, 124);
 }
 .was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"], .form-select.is-invalid:not([multiple]):not([size]), .form-select.is-invalid:not([multiple])[size="1"] {
   padding-right: 4.125rem;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='rgb%28246, 159, 144%29'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='rgb%28246, 159, 144%29' stroke='none'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='rgb%28255, 143, 124%29'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='rgb%28255, 143, 124%29' stroke='none'/%3e%3c/svg%3e");
   background-position: right 0.75rem center, center right 2.25rem;
   background-size: 16px 12px, calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
 .was-validated .form-select:invalid:focus, .form-select.is-invalid:focus {
-  border-color: rgb(246, 159, 144);
-  box-shadow: 0 0 0 0.25rem rgba(246, 159, 144, 0.25);
+  border-color: rgb(255, 143, 124);
+  box-shadow: 0 0 0 0.25rem rgba(255, 143, 124, 0.25);
 }
 
 .was-validated .form-control-color:invalid, .form-control-color.is-invalid {
@@ -2701,16 +2701,16 @@ textarea.form-control-lg {
 }
 
 .was-validated .form-check-input:invalid, .form-check-input.is-invalid {
-  border-color: rgb(246, 159, 144);
+  border-color: rgb(255, 143, 124);
 }
 .was-validated .form-check-input:invalid:checked, .form-check-input.is-invalid:checked {
-  background-color: rgb(246, 159, 144);
+  background-color: rgb(255, 143, 124);
 }
 .was-validated .form-check-input:invalid:focus, .form-check-input.is-invalid:focus {
-  box-shadow: 0 0 0 0.25rem rgba(246, 159, 144, 0.25);
+  box-shadow: 0 0 0 0.25rem rgba(255, 143, 124, 0.25);
 }
 .was-validated .form-check-input:invalid ~ .form-check-label, .form-check-input.is-invalid ~ .form-check-label {
-  color: rgb(246, 159, 144);
+  color: rgb(255, 143, 124);
 }
 
 .form-check-inline .form-check-input ~ .invalid-feedback {
@@ -2888,19 +2888,19 @@ textarea.form-control-lg {
 
 .btn-danger {
   --bs-btn-color: #000;
-  --bs-btn-bg: rgb(246, 159, 144);
-  --bs-btn-border-color: rgb(246, 159, 144);
+  --bs-btn-bg: rgb(255, 143, 124);
+  --bs-btn-border-color: rgb(255, 143, 124);
   --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: #f7ada1;
-  --bs-btn-hover-border-color: #f7a99b;
-  --bs-btn-focus-shadow-rgb: 209, 135, 122;
+  --bs-btn-hover-bg: #ffa090;
+  --bs-btn-hover-border-color: #ff9a89;
+  --bs-btn-focus-shadow-rgb: 217, 122, 105;
   --bs-btn-active-color: #000;
-  --bs-btn-active-bg: #f8b2a6;
-  --bs-btn-active-border-color: #f7a99b;
+  --bs-btn-active-bg: #ffa596;
+  --bs-btn-active-border-color: #ff9a89;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: #000;
-  --bs-btn-disabled-bg: rgb(246, 159, 144);
-  --bs-btn-disabled-border-color: rgb(246, 159, 144);
+  --bs-btn-disabled-bg: rgb(255, 143, 124);
+  --bs-btn-disabled-border-color: rgb(255, 143, 124);
 }
 
 .btn-light {
@@ -3023,19 +3023,19 @@ textarea.form-control-lg {
 }
 
 .btn-outline-danger {
-  --bs-btn-color: rgb(246, 159, 144);
-  --bs-btn-border-color: rgb(246, 159, 144);
+  --bs-btn-color: rgb(255, 143, 124);
+  --bs-btn-border-color: rgb(255, 143, 124);
   --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: rgb(246, 159, 144);
-  --bs-btn-hover-border-color: rgb(246, 159, 144);
-  --bs-btn-focus-shadow-rgb: 246, 159, 144;
+  --bs-btn-hover-bg: rgb(255, 143, 124);
+  --bs-btn-hover-border-color: rgb(255, 143, 124);
+  --bs-btn-focus-shadow-rgb: 255, 143, 124;
   --bs-btn-active-color: #000;
-  --bs-btn-active-bg: rgb(246, 159, 144);
-  --bs-btn-active-border-color: rgb(246, 159, 144);
+  --bs-btn-active-bg: rgb(255, 143, 124);
+  --bs-btn-active-border-color: rgb(255, 143, 124);
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: rgb(246, 159, 144);
+  --bs-btn-disabled-color: rgb(255, 143, 124);
   --bs-btn-disabled-bg: transparent;
-  --bs-btn-disabled-border-color: rgb(246, 159, 144);
+  --bs-btn-disabled-border-color: rgb(255, 143, 124);
   --bs-gradient: none;
 }
 
@@ -4659,12 +4659,12 @@ textarea.form-control-lg {
 }
 
 .alert-danger {
-  --bs-alert-color: #945f56;
-  --bs-alert-bg: #fdece9;
-  --bs-alert-border-color: #fce2de;
+  --bs-alert-color: #99564a;
+  --bs-alert-bg: #ffe9e5;
+  --bs-alert-border-color: #ffddd8;
 }
 .alert-danger .alert-link {
-  color: #764c45;
+  color: #7a453b;
 }
 
 .alert-light {
@@ -5048,17 +5048,17 @@ textarea.form-control-lg {
 }
 
 .list-group-item-danger {
-  color: #945f56;
-  background-color: #fdece9;
+  color: #99564a;
+  background-color: #ffe9e5;
 }
 .list-group-item-danger.list-group-item-action:hover, .list-group-item-danger.list-group-item-action:focus {
-  color: #945f56;
-  background-color: #e4d4d2;
+  color: #99564a;
+  background-color: #e6d2ce;
 }
 .list-group-item-danger.list-group-item-action.active {
   color: #fff;
-  background-color: #945f56;
-  border-color: #945f56;
+  background-color: #99564a;
+  border-color: #99564a;
 }
 
 .list-group-item-light {
@@ -6632,7 +6632,7 @@ textarea.form-control-lg {
 
 .text-bg-danger {
   color: #000 !important;
-  background-color: RGBA(246, 159, 144, var(--bs-bg-opacity, 1)) !important;
+  background-color: RGBA(255, 143, 124, var(--bs-bg-opacity, 1)) !important;
 }
 
 .text-bg-light {
@@ -6681,10 +6681,10 @@ textarea.form-control-lg {
 }
 
 .link-danger {
-  color: rgb(246, 159, 144) !important;
+  color: rgb(255, 143, 124) !important;
 }
 .link-danger:hover, .link-danger:focus {
-  color: #f8b2a6 !important;
+  color: #ffa596 !important;
 }
 
 .link-light {

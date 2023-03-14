@@ -43,7 +43,7 @@ export default function Quoter() {
                 key={test.id}
                 id={test.id}
                 name={test.name}
-                category={test.category}
+                sample={test.sample}
                 price={test.price}
                 setDetailId={setDetailId}
                 setShowDetails={setShowDetails}
