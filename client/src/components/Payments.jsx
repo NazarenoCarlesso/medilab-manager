@@ -47,7 +47,7 @@ export default function Payments() {
 
   function handleDetailData(e) {
     const { id } = e.target;
-    const dataPayments = payments.find((p) => p.id === parseInt(id));
+    const dataPayments = payments.find((p) => p.id === id);
     const dataTests = [];
     dataPayments?.Orders.forEach((e) => {
       const test = tests.find((test) => {
@@ -95,7 +95,7 @@ export default function Payments() {
               return (
                 <tr key={key}>
                   <td style={{ display: "flex", justifyContent: "center" }}>
-                    {e.id}
+                    {key + 1}
                   </td>
                   <td>{getTestNamesById(e.Orders).join(", ")}</td>
                   <td>{e.createdAt.slice(0, 10)}</td>

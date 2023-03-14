@@ -11,9 +11,11 @@ import { setItem } from "../utils/localStorage";
 import OffCanvasCart from "./OffCanvasCart";
 import BillCart from "./BillCart";
 import Signup from "./Signup";
+import SelectAppointment from "./SelectAppointment";
 import { emptyCart, removeFromCart } from "../reducer";
 
 const BACK = process.env.REACT_APP_BACK
+
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -23,6 +25,9 @@ export default function Cart() {
   const [showAlert, setShowAlert] = useState(false);
   const [showAlertLogin, setShowAlertLogin] = useState(false);
   const [fromCart, setFromCart] = useState(false);
+  const [openSA, setOpenSA] = useState(false);
+  const handleOpenSA = () => setOpenSA(true);
+  const handleCloseSA = () => setOpenSA(false);
 
   const handleShow = () => setShow(true);
 
@@ -45,7 +50,9 @@ export default function Cart() {
   function handleSubmit() {
     if (cart.length === 0) {
       alert("No tiene productos en el carrito de compras.");
-    } else { handleShow() }
+    } else {
+      handleOpenSA();
+    }
   }
 
   return (
@@ -131,7 +138,7 @@ export default function Cart() {
             </Button>
             {token ? (
               <Button variant="primary" onClick={handleSubmit}>
-                PROCESAR COMPRA
+                CONTINUAR COMPRA
               </Button>
             ) : null}
           </div>
@@ -208,6 +215,11 @@ export default function Cart() {
           </Modal.Body>
         </Modal>
       </div>
+      <SelectAppointment
+        openSA={openSA}
+        handleCloseSA={handleCloseSA}
+        handleShow={handleShow}
+      />
     </div>
   );
 }
