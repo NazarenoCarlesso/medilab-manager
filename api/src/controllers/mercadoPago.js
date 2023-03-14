@@ -1,19 +1,25 @@
 const mercadopago = require("mercadopago");
+const {models} = require('../db.js')
 const { ACCESS_TOKEN } = process.env;
+const {Test} = models
+
 
 mercadopago.configure({
   access_token: ACCESS_TOKEN,
-}); 
+});
 
-const createPayment = (name, price, quantity) => {
+const createPayment = async (items) => {
+  const tests = await Test.findAll({
+    where: {
+      id: items
+    }
+  })
+
   let preference = {
-    items: [
-      {
-        title: name,
-        unit_price: Number(price),
-        quantity: Number(quantity),
-      },
-    ],
+    items: tests.map((item) => {
+      return { title: item.name, unit_price: item.price, quantity: 1 };
+    }),
+
     back_urls: {
       success: "http://localhost:3000",
       failure: "",
