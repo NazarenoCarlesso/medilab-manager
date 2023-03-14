@@ -1,9 +1,8 @@
 const { createPayment } = require("../controllers/mercadoPago");
 
 const mercadoPagoHandler = async (req, res) => {
-  const { name, price, quantity } = req.body;
-  const newPayment = await createPayment(name, price, quantity);
-  console.log(newPayment.body);
+  const  items  = req.body;
+  const newPayment = await createPayment(items);
   try {
     res.status(200).json(newPayment);
   } catch (error) {
