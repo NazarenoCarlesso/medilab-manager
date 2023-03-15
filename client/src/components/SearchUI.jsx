@@ -26,7 +26,7 @@ export default function TestsUI() {
 
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
-            <Paper style={{ width: 360 }}>
+            <Paper sx={(theme)=>({background: theme.palette.secondary.main})} style={{ width: 360, margin: "3%"}}>
                 <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
                     <FormControl sx={{ m: 1, width: 340 }}>
                         <TextField value={search} onChange={e => setSearch(e.target.value)} id="outlined-search" label="Busqueda" type="search" />

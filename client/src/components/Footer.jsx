@@ -2,12 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Youtube, Twitter, Telephone, EnvelopeAt} from 'react-bootstrap-icons';
 import logo from "../images/logo3.png"
+import styles from './Footer.module.css';
 
 export default function Footer() {
     return (
         <div>
-      <div style={{background: "aliceblue"}}>
-        <footer className="text-primary py-4">
+      <div className={`mt-4 ${styles.div} ${styles.container}`}>
+        <footer className="text-light py-4">
             <div className="container">
                 <nav className="row">
                     <ul className="col-12 col-md-3 list-unstyled">
@@ -25,7 +26,7 @@ export default function Footer() {
                                medilab@gmail.com
                         </li>
                     </ul>
-                    <ul className="col-12 col-md-3 list-unstyled">
+                    <ul className=" text-light col-12 col-md-3 list-unstyled">
                         <li className="pb-2"> <strong>Nosotros</strong></li>
                         
                         <li>
@@ -38,7 +39,7 @@ export default function Footer() {
                             <Link to='/about' className="text-reset">Politica de privacidad</Link>
                         </li>     
                     </ul>
-                    <ul className="col-12 col-md-3 list-unstyled">
+                    <ul className="text-light col-12 col-md-3 list-unstyled">
                         <li className="pb-2"><strong>Nuestros Servicios</strong></li>
                         <li>
                             <Link to='/quoter' className="text-reset">Analisis Clinicos</Link>
@@ -50,7 +51,7 @@ export default function Footer() {
                             <Link to='/covid' className="text-reset">Pruebas Covid</Link>
                         </li>    
                     </ul>
-                    <ul className="col-12 col-md-3 list-unstyled">
+                    <ul className=" text-light col-12 col-md-3 list-unstyled">
                     <li className="pb-2"><strong>Siguenos</strong></li>
                         <li> 
                             <Facebook></Facebook>
