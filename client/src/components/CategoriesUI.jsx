@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import {
     Button, FormControl, Grid, MenuItem, Modal,
+    Pagination,
     Paper, Select, TextField, Typography
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -16,7 +17,7 @@ function Category({ id, name, handleEdit, handleDelete }) {
     return (
         <Paper sx={{ width: 320, margin: '2px', boxShadow: '0px 0px 10px 0px #00000047' }}>
             <Grid container direction="row" justifyContent="center" alignItems="center">
-                <Typography title={name} sx={{ width: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <Typography title={name} sx={{ width: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontFamily: 'Raleway' }}>
                     {name}
                 </Typography>
                 <Button onClick={() => handleEdit({ id, name })}>
@@ -133,6 +134,8 @@ export default function CategoriesUI() {
                 boxShadow: '0px 0px 10px 0px #00000047'
             }}>
                 <Grid container direction="row" justifyContent="center" alignItems="center">
+                    <TextField variant="standard" />
+                    <Pagination count={10} />
                     <Button>
                         <AddIcon />
                     </Button>

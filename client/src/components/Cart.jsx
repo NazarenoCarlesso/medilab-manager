@@ -229,7 +229,6 @@ export default function Cart() {
           <PopularUI />
         </div>
       </div>
-
       <div>
         <Modal open={showAlertLogin} aria-labelledby="keep-mounted-modal-title" aria-describedby="keep-mounted-modal-description">
           <Box sx={style}>

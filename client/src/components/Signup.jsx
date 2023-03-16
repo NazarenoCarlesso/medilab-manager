@@ -139,7 +139,6 @@ export default function Signup(props) {
     } else {
       try {
         const response = await axios.post(`${BACK}/users/login`, user);
-        console.log(response.data);
         const userData = {
           name: response.data.name,
           token: response.headers.token,
@@ -155,7 +154,7 @@ export default function Signup(props) {
           setShowAlertLogin(false);
           navigate("/cart");
         } else {
-          navigate("/dashboardui");
+          navigate("/dashboard");
         }
       } catch (error) {
         const alertError = error.response.data?.msg;
@@ -173,7 +172,7 @@ export default function Signup(props) {
     } else {
       try {
         await axios.post(`${BACK}/users/signup`, userSignUp);
-        window.alert("Registro exitoso. Verifique su mail");
+        window.alert("Registro exitoso. Verifique su email");
         setSelectedForm("login");
       } catch (error) {
         const alertError = error.response.data.errors[0]?.msg;
@@ -454,7 +453,6 @@ export default function Signup(props) {
                 <Col>
                   <Form.Group className="mb-3">
                     <Form.Label>Estado civil</Form.Label>
-
                     <DropdownButton
                       variant="outline-secondary"
                       title={userSignUp.civilState === "" ? "Seleccione su estado civil" : userSignUp.civilState.charAt(0).toUpperCase() + userSignUp.civilState.slice(1)}
