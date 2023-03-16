@@ -14,15 +14,10 @@ import Payments from "./components/Payments";
 import Footer from "./components/Footer";
 import CovidTests from "./containers/CovidTests";
 import SearchUI from "./components/SearchUI";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Experimental_CssVarsProvider as ThemeProvider } from '@mui/material/styles';
 import NavUI from './components/NavUI';
 import DashboardUI from "./components/DashboardUI";
-
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-})
+import theme from './theme';
 
 export default function App() {
   // function requireAuth(nextState, replace) {
@@ -37,7 +32,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={theme}>
         <NavUI />
         <div style={{ height: 69 }} />
         <div className="route">

@@ -10,6 +10,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import MenuIcon from '@mui/icons-material/Menu'
 
+
 // reducer
 import { setAvatar, setName, setRole, setToken } from '../reducer'
 
@@ -43,8 +44,8 @@ export default function NavUI() {
     }
 
     return (
-        <AppBar position="fixed">
-            <Container maxWidth="xl">
+        <AppBar color="secondary" position="fixed">
+            <Container   maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography variant="h6" noWrap component={Link} to="/" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontWeight: 600, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none' }}>
                         <img src="img/nav.png" alt="nav" style={{ height: 35 }} />
@@ -65,15 +66,15 @@ export default function NavUI() {
                         MEDILAB
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <Button component={Link} to="/home" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+                        <Button component={Link} to="/home" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'cyan', display: 'block' }}>
                             Home
                         </Button>
-                        <IconButton component={Link} to="/search" size="large" color="inherit" sx={{ width: '48px', margin: '10px 4px' }}>
+                        <IconButton component={Link} to="/search" size="large" color="secondary" sx={{ width: '48px', margin: '10px 4px' }}>
                             <Badge color="error">
                                 <SearchIcon />
                             </Badge>
                         </IconButton>
-                        <IconButton component={Link} to="/cart" size="large" color="inherit" sx={{ width: '48px', margin: '10px 4px' }}>
+                        <IconButton component={Link} to="/cart" size="large" color="secondary" sx={{ width: '48px', margin: '10px 4px' }}>
                             <Badge badgeContent={onCart} color="error">
                                 <ShoppingCartIcon />
                             </Badge>
