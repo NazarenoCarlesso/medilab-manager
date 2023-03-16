@@ -185,7 +185,6 @@ export default function Cart() {
                     width: "30%",
                   }}
                   onClick={() => {
-                    console.log(showAlertLogin);
                     setShowAlertLogin(true);
                     setFromCart(true);
                   }}
@@ -218,7 +217,6 @@ export default function Cart() {
           size="lg"
           show={showAlertLogin}
           onHide={() => {
-            console.log(showAlertLogin);
             setShowAlertLogin(false);
           }}
           backdrop="static"

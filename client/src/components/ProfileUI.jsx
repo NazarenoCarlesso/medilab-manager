@@ -41,37 +41,37 @@ export default function ProfileUI() {
                     {name}
                 </Typography>
                 <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
-                    <Typo variant="body2" color="primary">
+                    <Typo variant="body2" color="primary" sx={{ fontFamily: 'Raleway' }}>
                         <MedicalInformationIcon /> {user.id}
                     </Typo>
-                    <Typo variant="body2" color="primary">
+                    <Typo variant="body2" color="primary" sx={{ fontFamily: 'Raleway' }}>
                         <EmailIcon /> {user.email}
                     </Typo>
-                    <Typo variant="body2" color="primary">
+                    <Typo variant="body2" color="primary" sx={{ fontFamily: 'Raleway' }}>
                         <AccessTimeFilledIcon />{user.createdAt}
                     </Typo>
                     <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
-                        <Typo variant="body2" color="primary">
+                        <Typo variant="body2" color="primary" sx={{ fontFamily: 'Raleway' }}>
                             <LocalPhoneIcon />{user.phone}
                         </Typo>
-                        <Typo variant="body2" color="primary">
+                        <Typo variant="body2" color="primary" sx={{ fontFamily: 'Raleway' }}>
                             <FingerprintIcon />{user.dni}
                         </Typo>
                     </Grid>
                     <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
-                        <Typo variant="body2" color="primary">
+                        <Typo variant="body2" color="primary" sx={{ fontFamily: 'Raleway' }}>
                             <VerifiedUserIcon />{user.username}
                         </Typo>
-                        <Typo variant="body2" color="primary">
+                        <Typo variant="body2" color="primary" sx={{ fontFamily: 'Raleway' }}>
                             <PolicyIcon />{user.role ? user.role : 'Paciente'}
                         </Typo>
                     </Grid>
                     <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
-                        <Typo variant="body2" color="primary">
+                        <Typo variant="body2" color="primary" sx={{ fontFamily: 'Raleway' }}>
                             {user.sex === 'M' ? <><MaleIcon />Hombre</> : null}
                             {user.sex === 'F' ? <><FemaleIcon />Mujer</> : null}
                         </Typo>
-                        <Typo variant="body2" color="primary">
+                        <Typo variant="body2" color="primary" sx={{ fontFamily: 'Raleway' }}>
                             <ChurchIcon />{user.civil}
                         </Typo>
                     </Grid>
