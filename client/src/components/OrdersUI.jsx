@@ -33,12 +33,16 @@ export default function OrdersUI() {
     const role = useSelector(state => state.role)
     // array of orders
     const [orders, setOrders] = useState([])
-    // reload list effect
+    //  reload list effect
     useEffect(() => {
-        fetch(`${BACK}/orders/${role === 'ADMIN' ? 'admin' : ''}`, { headers: { 'token': token } })
+        //  http://localhost:3001/orders/admin/?page=3&limit=5
+        fetch(`${BACK}/orders/${role === 'ADMIN' ? 'admin' : ''}?page=1`, { headers: { 'token': token } })
             .then(response => response.json())
             .then(data => setOrders(data))
     }, [token, role])
+
+
+
     // render component
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
