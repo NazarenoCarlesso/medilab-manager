@@ -16,7 +16,7 @@ function Sample({ id, name, handleEdit, handleDelete }) {
     return (
         <Paper sx={{ width: 320, margin: '2px', boxShadow: '0px 0px 10px 0px #00000047' }}>
             <Grid container direction="row" justifyContent="center" alignItems="center">
-                <Typography title={name} sx={{ width: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <Typography title={name} sx={{ width: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontFamily: 'Raleway' }}>
                     {name}
                 </Typography>
                 <Button onClick={() => handleEdit({ id, name })}>

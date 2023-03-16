@@ -139,7 +139,6 @@ export default function Signup(props) {
     } else {
       try {
         const response = await axios.post(`${BACK}/users/login`, user);
-        console.log(response.data)
         const userData = {
           name: response.data.name,
           token: response.headers.token,
@@ -155,7 +154,7 @@ export default function Signup(props) {
           setShowAlertLogin(false);
           navigate("/cart");
         } else {
-          navigate("/dashboardui");
+          navigate("/dashboard");
         }
       } catch (error) {
         const alertError = error.response.data?.msg;
@@ -540,7 +539,6 @@ export default function Signup(props) {
                     }
                     name="civilState"
                     onClick={(e) => {
-                      //console.log("event", e.target.name);
                       if (e.target.name !== "") {
                         handleChangeSignUp(e);
                       }
