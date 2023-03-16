@@ -1,7 +1,6 @@
-import Modal from "react-bootstrap/Modal";
 import CloseButton from "react-bootstrap/CloseButton";
 import Button from "@mui/material/Button";
-import { Typography } from "@mui/material";
+import { Hidden, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Table from "@mui/material/Table";
@@ -11,6 +10,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,6 +26,22 @@ import { emptyCart, removeFromCart } from "../reducer";
 import PopularUI from "./PopularUI";
 
 const BACK = process.env.REACT_APP_BACK;
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  maxHeight: "500px",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+  display: "inline-block",
+  border: "1px solid black",
+  overflow: "hidden",
+  overflowY: "scroll",
+};
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -87,7 +104,7 @@ export default function Cart() {
           </Button>
         </div>
       ) : (
-        <div style={{ width: "90%", position: "relative" }}>
+        <div style={{ width: "1300px", position: "relative" }}>
           <Button variant="contained" color="error" onClick={() => dispatch(emptyCart())} style={{ position: "absolute", right: "0px" }}>
             Vaciar carrito
           </Button>
@@ -96,12 +113,11 @@ export default function Cart() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              width: "100%",
               paddingTop: "5%",
             }}
           >
             <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }}>
+              <Table sx={{ minWidth: 650 }} aria-label="a dense table" size="large">
                 <TableHead>
                   <TableRow>
                     <TableCell align="center">ID</TableCell>
@@ -128,9 +144,8 @@ export default function Cart() {
                     );
                   })}
                   <TableRow>
-                    <TableCell align="center" colSpan={2}>
-                      TOTAL
-                    </TableCell>
+                    <TableCell></TableCell>
+                    <TableCell align="left">TOTAL</TableCell>
                     <TableCell align="center">${products.map((e) => e.price || 0).reduce((a, b) => a + b, 0)}.00</TableCell>
                   </TableRow>
                 </TableBody>
@@ -176,16 +191,17 @@ export default function Cart() {
               >
                 <h5>Debe iniciar sesión antes de continuar con la compra</h5>
                 <Button
-                  variant="primary"
+                  variant="contained"
+                  color="success"
+                  size="large"
                   style={{
                     marginTop: "2%",
                     padding: "1%",
                     paddingRight: "3%",
                     paddingLeft: "3%",
-                    width: "30%",
+                    width: "40%",
                   }}
                   onClick={() => {
-                    console.log(showAlertLogin);
                     setShowAlertLogin(true);
                     setFromCart(true);
                   }}
@@ -197,6 +213,7 @@ export default function Cart() {
           </div>
         </div>
       )}
+
       <div>
         <OffCanvasCart show={show} setShow={setShow} setShowAlert={setShowAlert} cart={cart} />
       </div>
@@ -206,30 +223,27 @@ export default function Cart() {
       </div>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <Typography variant="h5" fontWeight={700} sx={{ fontFamily: "Raleway", margin: 4 }}>
-          Tests que te pueden interesar:
+          Exámenes que te pueden interesar:
         </Typography>
-        <div style={{ width: "1400px", marginBottom: "20px" }}>
+        <div style={{ width: "1300px", marginBottom: "20px" }}>
           <PopularUI />
         </div>
       </div>
 
-      <div style={{ position: "relative" }}>
-        <Modal
-          size="lg"
-          show={showAlertLogin}
-          onHide={() => {
-            console.log(showAlertLogin);
-            setShowAlertLogin(false);
-          }}
-          backdrop="static"
-          aria-labelledby="example-modal-sizes-title-lg"
-        >
-          <Modal.Body>
-            <CloseButton onClick={() => setShowAlertLogin(false)} style={{ position: "absolute", top: "15px", right: "15px", zIndex: "1" }}></CloseButton>
-            <div style={{ width: "100%" }}>
-              <Signup setShowAlertLogin={setShowAlertLogin} fromCart={fromCart} />
+      <div>
+        <Modal open={showAlertLogin} aria-labelledby="keep-mounted-modal-title" aria-describedby="keep-mounted-modal-description">
+          <Box sx={style}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingTop: "20px" }}>
+              <div>
+                <Signup setShowAlertLogin={setShowAlertLogin} fromCart={fromCart} />
+              </div>
+              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <Button variant="contained" color="error" onClick={() => setShowAlertLogin(false)} style={{ width: "80px", position: "absolute", top: "10px", right: "10px" }}>
+                  CERRAR
+                </Button>
+              </div>
             </div>
-          </Modal.Body>
+          </Box>
         </Modal>
       </div>
       <SelectAppointment openSA={openSA} handleCloseSA={handleCloseSA} handleShow={handleShow} />
