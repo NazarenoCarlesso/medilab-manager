@@ -18,9 +18,27 @@ const categoryCreate = async (name) => {
     return await test_category.create({ name })
 }
 
-const categoryAll = async () => {
-    return await test_category.findAll()
+
+//////////////////////////////////////////////////////////////
+
+//------------------>ANTES<------------------------
+
+// const categoryAll = async () => {
+//     return await test_category.findAll()
+// }
+
+
+//////////////////////////////////////////////////////////////
+
+
+const categoryAll = async ( page = 0, limit = 10) => {
+    return await test_category.findAll({ limit: limit,
+        offset: ((page - 1) * limit)})
+    
+
 }
+
+//////////////////////////////////////////////////////////////
 
 const categoryDelete = async (id, newId) => {
     const tests = await Test.findAll({ where: { testCategoryId: id } })

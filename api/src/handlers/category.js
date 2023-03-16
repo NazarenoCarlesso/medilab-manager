@@ -6,10 +6,28 @@ const {
     categoryUpdate
 } = require('../controllers/category')
 
+
+
+//////////////////////////////////////////////////////////////
+
+//------------------>ANTES<------------------------
+
+// const categoryAllHandler = async (req, res) => {
+//     const categories = await categoryAll()
+//     res.status(200).json(categories)
+// }
+
+//////////////////////////////////////////////////////////////
+
+
 const categoryAllHandler = async (req, res) => {
-    const categories = await categoryAll()
+    const { page, limit}= req.query
+    const categories = await categoryAll(page, limit)
     res.status(200).json(categories)
 }
+
+//////////////////////////////////////////////////////////////
+
 
 const categoryCreateHandler = async (req, res) => {
     const { name } = req.body

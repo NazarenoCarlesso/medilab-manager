@@ -18,9 +18,24 @@ const sampleCreate = async (name) => {
     return await Sample.create({ name })
 }
 
-const sampleAll = async () => {
-    return await Sample.findAll()
+//////////////////////////////////////////////////////////////
+
+//------------------>ANTES<------------------------
+
+// const sampleAll = async () => {
+//     return await Sample.findAll()
+// }
+//////////////////////////////////////////////////////////////
+
+
+const sampleAll = async ( page = 0, limit = 10) => {
+    return await Sample.findAll({ limit: limit,
+        offset: ((page - 1) * limit)})
 }
+
+//////////////////////////////////////////////////////////////
+
+
 
 const sampleDelete = async (id, newId) => {
     const tests = await Test.findAll({ where: { SampleId: id } })

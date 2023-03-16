@@ -1,10 +1,31 @@
 // models
 const { models } = require('../db.js')
 const { Order, Test, Payment } = models
+///////////////////////////////////////////////////
 
-const orderAll = async () => {
+//--------------------> ANTES <----------------------------
+
+// const orderAll = async () => {
+//     const orders = await Order.findAll({
+//         include: { model: Test, required: true }
+//     })
+    
+//     return orders.map(order => ({
+//         id: order.id,
+//         test: order.Test.name,
+//         payment: order.PaymentId
+//     }))
+// }
+
+
+/////////////////////////////////////////////
+
+
+const orderAll = async ( page = 0, limit = 10) => {
     const orders = await Order.findAll({
-        include: { model: Test, required: true }
+        include: { model: Test, required: true },
+        limit: limit,
+        offset: ((page - 1) * limit)
     })
     
     return orders.map(order => ({
@@ -13,6 +34,8 @@ const orderAll = async () => {
         payment: order.PaymentId
     }))
 }
+
+//////////////////////////////////////////////////////////////
 
 const orderById = async (uid) => {
     const orders = await Order.findAll({
