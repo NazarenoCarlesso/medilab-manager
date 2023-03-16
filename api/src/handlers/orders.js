@@ -9,10 +9,21 @@ const orderHandler = async (req, res) => {
     }
 }
 
+////////////////////////////////////////////////////////
+
+//------------------>ANTES<------------------------
+
+// const orderAllHandler = async (req, res) => {
+//     const orders = await orderAll()
+//     res.status(200).json(orders)
+// }
+////////////////////////////////////////
 const orderAllHandler = async (req, res) => {
-    const orders = await orderAll()
+    const { page, limit } = req.query
+    const orders = await orderAll(page, limit)
     res.status(200).json(orders)
 }
+/////////////////////////////////////
 
 const orderCreateHandler = async (req, res) => {
     const { tests } = req.body
