@@ -20,7 +20,7 @@ const {
 //////////////////////////////////////////////////////////////
 
 const sampleAllHandler = async (req, res) => {
-    const { page, limit}= req.query
+    const { page, limit } = req.query
     const samples = await sampleAll(page, limit)
     res.status(200).json(samples)
 }

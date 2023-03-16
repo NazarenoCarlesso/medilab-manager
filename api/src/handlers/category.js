@@ -21,7 +21,7 @@ const {
 
 
 const categoryAllHandler = async (req, res) => {
-    const { page, limit}= req.query
+    const { page, limit } = req.query
     const categories = await categoryAll(page, limit)
     res.status(200).json(categories)
 }

@@ -24,7 +24,7 @@ const orderHandler = async (req, res) => {
 
 
 const orderAllHandler = async (req, res) => {
-    const { page, limit}= req.query
+    const { page, limit } = req.query
     const orders = await orderAll(page, limit)
     res.status(200).json(orders)
 }
