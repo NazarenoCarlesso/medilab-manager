@@ -11,6 +11,7 @@ const reviewRouter = require('./review.js')
 const doctorRouter = require('./doctor.js')
 const generateRouter = require('./generate.js')
 const mercadoPagoRouter = require('./mercadoPago.js')
+const verifyRouter = require('./verify.js');
 
 const router = Router()
 // routers config
@@ -35,6 +36,8 @@ router.use('/doctors', doctorRouter)
 router.use('/generate', generateRouter)
 
 router.use('/mercadopago', mercadoPagoRouter)
+
+router.use('/verify', verifyRouter)
 
 // main router export
 module.exports = router

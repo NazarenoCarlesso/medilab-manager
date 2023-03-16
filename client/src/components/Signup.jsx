@@ -173,7 +173,7 @@ export default function Signup(props) {
     } else {
       try {
         await axios.post(`${BACK}/users/signup`, userSignUp);
-        window.alert("Registro exitoso.");
+        window.alert("Registro exitoso. Verifique su mail");
         setSelectedForm("login");
       } catch (error) {
         const alertError = error.response.data.errors[0]?.msg;
