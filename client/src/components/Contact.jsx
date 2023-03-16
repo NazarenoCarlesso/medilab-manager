@@ -1,7 +1,10 @@
+import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
+import * as Icon from "react-bootstrap-icons";
+import style from "./Contact.module.css";
 
 import React, { useState } from "react";
 import { validateContact } from "../utils/validate";
@@ -89,109 +92,161 @@ export default function Contact() {
   }
 
   return (
-    <div
-      style={{
-        width: "90%",
-        margin: "auto",
-        marginTop: "2%",
-        marginBottom: "2%",
-      }}
-    >
-      <h2>Contáctanos</h2>
-      <p>
-        ¿Tienes alguna duda o necesitas ayuda con nuestros productos y
-        servicios? Nos encantaría escuchar de ti. Puedes comunicarte con
-        nosotros por correo electrónico a{" "}
-        <a href="mailto:medilab@gmail.com">medilab@gmail.com</a> o por teléfono
-        al 123 456 789. Si prefieres que nos comuniquemos contigo, simplemente
-        completa el siguiente formulario y nos pondremos en contacto lo antes
-        posible.
-      </p>
-      <Form noValidate onSubmit={(e) => handleSubmit(e)}>
-        <Row className="mb-3">
-          <Form.Group as={Col} md="4">
-            <Form.Label>Nombre(s)</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="firstName"
-              placeholder="Ingrese su(s) nombre(s)"
-              onChange={(e) => handleChange(e)}
-            />
-            <p style={{ color: "red", fontSize: "12px" }}>
-              {contact.touched.firstName ? errorsContact.firstName : null}
+    
+    <Container>
+      <Row className={style.contactTitle}>
+        <p>Contáctanos</p>
+      </Row>
+      <Row>
+        <Col>
+          <div className={style.contactBox}>
+            <p>
+              ¿Tienes alguna duda o necesitas ayuda con nuestros productos y
+              servicios? Nos encantaría escuchar de ti. Puedes comunicarte con
+              nosotros por correo electrónico a{" "}
+              <a href="mailto:medilab@gmail.com">medilab@gmail.com</a> o por
+              teléfono al 123 456 789. Si prefieres que nos comuniquemos
+              contigo, simplemente completa el siguiente formulario y nos
+              pondremos en contacto lo antes posible.
             </p>
-          </Form.Group>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col md="6">
+          <Row>
+            <Col>
+              <div className={style.infoBox}>
+                <Icon.GeoAlt size={35} />
+                <h3>Dirección</h3>
+                <p>
+                  A108 Adam Street, <br />
+                  New York, NY 535022
+                </p>
+              </div>
+            </Col>
+            <Col>
+              <div className={style.infoBox}>
+                <Icon.Telephone size={35} />
+                <h3>Llámenos</h3>
+                <p>
+                  +1 5589 55488 55
+                  <br />
+                  +1 6678 254445 41
+                </p>
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <div className={style.infoBox}>
+                <Icon.GeoAlt size={35} />
+                <h3>Email</h3>
+                <p>
+                  <a href="mailto:medilab@gmail.com">medilab@gmail.com</a>
+                  <br /> contact@medilab.com
+                </p>
+              </div>
+            </Col>
+            <Col>
+              <div className={style.infoBox}>
+                <Icon.Telephone size={35} />
+                <h3>Horario</h3>
+                <p>
+                  Lunes - Sábado
+                  <br />
+                  9:00A.M - 5:00P.M
+                </p>
+              </div>
+            </Col>
+          </Row>
+        </Col>
+        <Col md="6">
+          <div className={style.contactBox}>
+            <Form noValidate onSubmit={(e) => handleSubmit(e)}>
+              <Row className="mb-3">
+                <Form.Group as={Col} md="6">
+                  <Form.Control
+                    required
+                    type="text"
+                    name="firstName"
+                    placeholder="Ingrese su(s) nombre(s)"
+                    onChange={(e) => handleChange(e)}
+                  />
+                  <p style={{ color: "red", fontSize: "12px" }}>
+                    {contact.touched.firstName ? errorsContact.firstName : null}
+                  </p>
+                </Form.Group>
 
-          <Form.Group as={Col} md="4">
-            <Form.Label>Apellido(s)</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="lastName"
-              placeholder="Ingrese su(s) apellido(s)"
-              onChange={(e) => handleChange(e)}
-            />
-            <p style={{ color: "red", fontSize: "12px" }}>
-              {contact.touched.lastName ? errorsContact.lastName : null}
-            </p>
-          </Form.Group>
-        </Row>
-        <Row className="mb-3">
-          <Form.Group as={Col} md="4">
-            <Form.Label>Nombre de usuario</Form.Label>
-            <Form.Group>
-              <Form.Control
-                type="text"
-                name="username"
-                placeholder="Ingrese su nombre de usuario"
-                onChange={(e) => handleChange(e)}
-              />
-              <p style={{ color: "red", fontSize: "12px" }}>
-                {contact.touched.username ? errorsContact.username : null}
-              </p>
-            </Form.Group>
-          </Form.Group>
-          <Form.Group as={Col} md="6">
-            <Form.Label>Correo Electrónico</Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              placeholder="Ingrese un correo electrónico"
-              onChange={(e) => handleChange(e)}
-            />
-            <p style={{ color: "red", fontSize: "12px" }}>
-              {contact.touched.email ? errorsContact.email : null}
-            </p>
-          </Form.Group>
-        </Row>
-        <Row>
-          <Form.Group as={Col} md="6">
-            <Form.Label>FAQ</Form.Label>
-            <Form.Control
-              as="textarea"
-              name="faq"
-              placeholder="Ingrese su FAQ"
-              onChange={(e) => handleChange(e)}
-            />
-            <p style={{ color: "red", fontSize: "12px" }}>
-              {contact.touched.faq ? errorsContact.faq : null}
-            </p>
-          </Form.Group>
-        </Row>
-        <Form.Group className="mb-3">
-          <Form.Check
-            name="term"
-            onChange={(e) => handleChange(e)}
-            label="Aceptar términos y condiciones"
-            onClick={() => setTerm(!term)}
-          />
-          <p style={{ color: "red", fontSize: "12px" }}>
-            {contact.touched.term ? errorsContact.term : null}
-          </p>
-        </Form.Group>
-        <Button type="submit">Enviar</Button>
-      </Form>
-    </div>
+                <Form.Group as={Col} md="6">
+                  <Form.Control
+                    required
+                    type="text"
+                    name="lastName"
+                    placeholder="Ingrese su(s) apellido(s)"
+                    onChange={(e) => handleChange(e)}
+                  />
+                  <p style={{ color: "red", fontSize: "12px" }}>
+                    {contact.touched.lastName ? errorsContact.lastName : null}
+                  </p>
+                </Form.Group>
+              </Row>
+              <Row className="mb-3">
+                <Form.Group as={Col} md="6">
+                  <Form.Group>
+                    <Form.Control
+                      type="text"
+                      name="username"
+                      placeholder="Ingrese su nombre de usuario"
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <p style={{ color: "red", fontSize: "12px" }}>
+                      {contact.touched.username ? errorsContact.username : null}
+                    </p>
+                  </Form.Group>
+                </Form.Group>
+                <Form.Group as={Col} md="6">
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    placeholder="Ingrese un correo electrónico"
+                    onChange={(e) => handleChange(e)}
+                  />
+                  <p style={{ color: "red", fontSize: "12px" }}>
+                    {contact.touched.email ? errorsContact.email : null}
+                  </p>
+                </Form.Group>
+              </Row>
+              <Row>
+                <Form.Group as={Col} md="12">
+                  <Form.Label>FAQ</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    name="faq"
+                    placeholder="Ingrese su FAQ"
+                    onChange={(e) => handleChange(e)}
+                  />
+                  <p style={{ color: "red", fontSize: "12px" }}>
+                    {contact.touched.faq ? errorsContact.faq : null}
+                  </p>
+                </Form.Group>
+              </Row>
+              <Form.Group className="mb-3">
+                <Form.Check
+                  name="term"
+                  onChange={(e) => handleChange(e)}
+                  label="Aceptar términos y condiciones"
+                  onClick={() => setTerm(!term)}
+                />
+                <p style={{ color: "red", fontSize: "12px" }}>
+                  {contact.touched.term ? errorsContact.term : null}
+                </p>
+              </Form.Group>
+              <Button type="submit">Enviar</Button>
+            </Form>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 }

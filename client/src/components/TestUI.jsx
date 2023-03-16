@@ -64,7 +64,7 @@ export default function TestUI({ id, name, description, price }) {
                 <div className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at posuere eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</div>
             </div>
             <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
-                <Button onClick={handleOpen}>
+                <Button onClick={handleOpen} color="secondary">
                     Detalles
                 </Button>
                 <Modal open={open} onClose={handleClose}>
@@ -85,7 +85,7 @@ export default function TestUI({ id, name, description, price }) {
                     ? <ButtonUI color='secondary' onClick={() => dispatch(removeFromCart(id))}>
                         Quitar
                     </ButtonUI>
-                    : <Button onClick={() => dispatch(addToCart(id))}>
+                    : <Button color='secondary' onClick={() => dispatch(addToCart(id))}>
                         Agregar
                     </Button>}
             </Grid>

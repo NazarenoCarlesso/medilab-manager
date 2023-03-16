@@ -46,43 +46,43 @@ export default function NavUI() {
         <AppBar position="fixed">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <Typography variant="h6" noWrap component={Link} to="/" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontWeight: 600, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none' }}>
+                    <Typography variant="h6" noWrap component={Link} to="/" sx={{ mr:2,ml:'100px', display: { xs: 'none', md: 'flex' }, fontWeight: 600, letterSpacing: '.3rem', color: '#012970', textDecoration: 'none' }}>
                         <img src="img/nav.png" alt="nav" style={{ height: 35 }} />
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
+                        <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="#012970">
                             <MenuIcon />
                         </IconButton>
                         <Menu id="menu-appbar" anchorEl={anchorElNav} anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'left' }} open={Boolean(anchorElNav)} onClose={handleCloseNavMenu} sx={{ display: { xs: 'block', md: 'none' } }}>
                             <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography component={Link} to="/home" textAlign="center">
+                                <Typography component={Link} to="/home" textAlign="center" sx={{color:'#012970', textDecoration:'none'}}>
                                     Home
                                 </Typography>
                             </MenuItem>
                         </Menu>
                     </Box>
-                    <Typography variant="h5" noWrap component="a" href="" sx={{ mr: 2, display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }}>
+                    <Typography variant="h5" noWrap component="a" href="" sx={{ mr: 2, display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: '#012970', textDecoration: 'none', }}>
                         MEDILAB
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <Button component={Link} to="/home" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+                        <Button component={Link} to="/home" onClick={handleCloseNavMenu} sx={{ my: 2, color: '#012970', display: 'block' }}>
                             Home
                         </Button>
-                        <IconButton component={Link} to="/search" size="large" color="inherit">
+                        <IconButton component={Link} to="/search" size="large" color="#012970">
                             <Badge color="error">
                                 <SearchIcon />
                             </Badge>
                         </IconButton>
-                        <IconButton component={Link} to="/cart" size="large" color="inherit">
+                        <IconButton component={Link} to="/cart" size="large" color="#012970">
                             <Badge badgeContent={onCart} color="error">
                                 <ShoppingCartIcon />
                             </Badge>
                         </IconButton>
                     </Box>
-                    <Typography color="primary" onClick={handleCloseNavMenu} sx={{ marginRight: 1 }}>
+                    <Typography onClick={handleCloseNavMenu} sx={{ marginRight: 1 }}>
                         {name ? name : null}
                     </Typography>
-                    {name ? <Box sx={{ flexGrow: 0 }}>
+                    {name ? <Box sx={{ mr:'100px'}}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 <Avatar alt={name ? name : null} referrerPolicy="no-referrer" src={avatar} />
@@ -90,7 +90,7 @@ export default function NavUI() {
                         </Tooltip>
                         <Menu sx={{ mt: '45px' }} id="menu-appbar" anchorEl={anchorElUser} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right' }} open={Boolean(anchorElUser)} onClose={handleCloseUserMenu}>
                             <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography component={Link} to="/dashboardui" textAlign="center" sx={{ textDecoration: 'none', color: 'inherit' }}>
+                                <Typography component={Link} to="/dashboardui" textAlign="center" sx={{ textDecoration: 'none', color: '#012970' }}>
                                     Dashboard
                                 </Typography>
                             </MenuItem>
@@ -100,7 +100,7 @@ export default function NavUI() {
                                 </Typography>
                             </MenuItem>
                         </Menu>
-                    </Box> : <Button component={Link} to="/signup" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+                    </Box> : <Button component={Link} to="/signup" onClick={handleCloseNavMenu} sx={{ my: 2, color: '#012970', display: 'block' }}>
                         Sign In
                     </Button>}
                 </Toolbar>

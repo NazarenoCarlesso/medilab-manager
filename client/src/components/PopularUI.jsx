@@ -20,7 +20,7 @@ export default function PopularUI() {
 
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
-            <Typography variant="h3" fontWeight={700} sx={{ fontFamily: 'unset', margin: 4 }}>
+            <Typography variant="h3" fontWeight={700} sx={{color:'#012970', fontFamily: 'unset', margin: 4 }}>
                 Exámenes mas populares
             </Typography>
             <Paper>
