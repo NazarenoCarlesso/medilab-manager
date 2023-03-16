@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { FormControl, FormHelperText, Grid, Pagination, PaginationItem, Paper, Stack, TextField } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+
 // components
 import TestUI from './TestUI'
 
@@ -47,15 +49,25 @@ export default function TestsUI() {
                     </Stack>
                 </Grid>
             </Paper>
-            <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
-                {tests.map(test => <TestUI
+            <DragDropContext> 
+        <Droppable droppableId="id">
+        {(provided)=>(
+            <Grid container direction="row" justifyContent="space-evenly" alignItems="center"
+            {...provided.droppableProps}
+            ref={provided.innerRef}>
+                {tests.map((test, index) => <TestUI
                     key={test.id}
                     id={test.id}
                     name={test.name}
                     description={test.description}
                     price={test.price}
+                    index={index}
                 />)}
             </Grid>
+            
+        )}
+        </Droppable>
+    </DragDropContext>
         </Grid>
     )
 }

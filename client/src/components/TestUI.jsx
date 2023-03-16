@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Grid, Modal, Paper, styled } from '@mui/material'
+import { Draggable } from 'react-beautiful-dnd'
 
 // reducer
 import { addToCart, removeFromCart } from '../reducer'
@@ -48,7 +49,7 @@ const ButtonUI = styled(Button)(({ theme }) => ({
     '&:hover': { backgroundColor: '#d70000' }
 }))
 
-export default function TestUI({ id, name, description, price }) {
+export default function TestUI({ id, name, description, price, index }) {
     // dispatch hook
     const dispatch = useDispatch()
     // get cart from store
@@ -58,7 +59,10 @@ export default function TestUI({ id, name, description, price }) {
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
     return (
-        <div className="TestUI">
+    
+        <Draggable key={id} draggableId={id.toString()} index={index}>
+        {(provided)=>(
+        <div className="TestUI" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
             <div className="content">
                 <div className="name">{name}</div>
                 <div className="tag">${price}.00</div>
@@ -90,6 +94,8 @@ export default function TestUI({ id, name, description, price }) {
                         Agregar
                     </Button>}
             </Grid>
-        </div>
+            </div>
+            )}
+            </Draggable>
     )
 }
