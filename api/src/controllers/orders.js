@@ -9,7 +9,7 @@ const { Order, Test, Payment } = models
 //     const orders = await Order.findAll({
 //         include: { model: Test, required: true }
 //     })
-    
+
 //     return orders.map(order => ({
 //         id: order.id,
 //         test: order.Test.name,
@@ -21,13 +21,13 @@ const { Order, Test, Payment } = models
 /////////////////////////////////////////////
 
 
-const orderAll = async ( page = 0, limit = 10) => {
+const orderAll = async (page = 1, limit = 10) => {
     const orders = await Order.findAll({
         include: { model: Test, required: true },
         limit: limit,
         offset: ((page - 1) * limit)
     })
-    
+
     return orders.map(order => ({
         id: order.id,
         test: order.Test.name,

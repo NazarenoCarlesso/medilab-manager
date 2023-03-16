@@ -27,12 +27,12 @@ const sampleCreate = async (name) => {
 // }
 //////////////////////////////////////////////////////////////
 
-
-const sampleAll = async ( page = 0, limit = 10) => {
-    return await Sample.findAll({ limit: limit,
-        offset: ((page - 1) * limit)})
+const sampleAll = async (page = 1, limit = 10) => {
+    return await Sample.findAll({
+        limit: limit,
+        offset: ((page - 1) * limit)
+    })
 }
-
 //////////////////////////////////////////////////////////////
 
 
