@@ -138,6 +138,7 @@ export default function OffCanvasCart(props) {
         placement={"end"}
         onHide={handleClose}
         backdrop="static"
+        style={{paddingTop:"7%"}}
       >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Método de pago</Offcanvas.Title>
