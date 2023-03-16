@@ -10,7 +10,7 @@ const colors = ['palevioletred', 'palegreen', 'palegoldenrod', 'paleturquoise']
 export default function EnterpriseUI() {
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center"
-            sx={{ minHeight: 280, background: 'linear-gradient(59deg, rgba(122,255,182,1) 0%, rgba(174,255,64,1) 52%, rgba(255,252,25,1) 100%)' }}>
+            sx={{ minHeight: 280, background: 'radial-gradient(circle, rgba(181,241,242,1) 46%, rgba(255,255,255,1) 100%)' }}>
             <Typography variant="h3" fontWeight={700} sx={{ fontFamily: 'Raleway', margin: 4 }}>
                 Medilab Manager es la mejor solución para tu laboratorio
             </Typography>

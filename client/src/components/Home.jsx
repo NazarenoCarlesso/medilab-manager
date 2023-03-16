@@ -4,6 +4,7 @@ import Slides from './Slides'
 import PopularUI from './PopularUI'
 import ReviewsUI from './ReviewsUI'
 import EnterpriseUI from './EnterpriseUI'
+import Contact from './Contact'
 
 export default function Home() {
     return (
@@ -13,6 +14,7 @@ export default function Home() {
             <PopularUI />
             <ReviewsUI />
             <EnterpriseUI />
+            <Contact />
             <div style={{ height: 40 }} />
         </div>
     )
