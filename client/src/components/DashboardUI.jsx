@@ -6,6 +6,7 @@ import ProfileUI from './ProfileUI'
 import CategoriesUI from './CategoriesUI'
 import OrdersUI from './OrdersUI'
 import PaymentsUI from './PaymentsUI'
+import Payments from './Payments'
 
 export default function DashboardUI() {
     // get role from store
@@ -57,7 +58,7 @@ export default function DashboardUI() {
             </Paper>
             <Paper sx={{ width: 980, height: 526, padding: 0.5 }}>
                 {option === 'orders' ? <OrdersUI /> : null}
-                {option === 'payments' ? <PaymentsUI /> : null}
+                {option === 'payments' ? <Payments /> : null}
                 {option === 'categories' ? <CategoriesUI /> : null}
                 {option === 'samples' ? <SamplesUI /> : null}
             </Paper>
