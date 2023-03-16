@@ -21,8 +21,8 @@ const createPayment = async (items) => {
     }),
 
     back_urls: {
-      success: "http://localhost:3000",
-      failure: "",
+      success: "http://localhost:3000/successful-payment",
+      failure: "http://localhost:3000/declined-payment",
       pending: "",
     },
     auto_return: "approved",
@@ -32,6 +32,7 @@ const createPayment = async (items) => {
   return mercadopago.preferences
     .create(preference)
     .then((response) => {
+      console.log(response)
       return response.body.init_point;
     })
     .catch((error) => {

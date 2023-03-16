@@ -105,7 +105,7 @@ export default function OffCanvasCart(props) {
         const config = { headers: { token: `${token}` } }
         const data = { tests: cart }
         await axios.post(`${BACK}/orders`, data, config)
-      } catch (error) { console.log(error.response.data) }
+      } catch (error) { console.log(error.response.data)}
     }
 
     handleClose();
@@ -351,7 +351,7 @@ export default function OffCanvasCart(props) {
                 </Form>
               </Accordion.Body>
             </Accordion.Item>
-              <MercadoPago/>
+              <MercadoPago setShowAlert={setShowAlert}/>
             <Accordion.Item eventKey="2">
               <Accordion.Header>CryptoPago</Accordion.Header>
               <Accordion.Body>

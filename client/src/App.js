@@ -17,6 +17,8 @@ import SearchUI from "./components/SearchUI";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import NavUI from './components/NavUI';
 import DashboardUI from "./components/DashboardUI";
+import SuccessfulPayment from "./components/SuccessfulPayment";
+import DeclinedPayment from "./components/DeclinedPayment"
 
 const darkTheme = createTheme({
   palette: {
@@ -56,6 +58,8 @@ export default function App() {
             <Route path="/results" element={<Results />} />
             <Route path="/payments" element={<Payments />} />
             <Route path="/search" element={<SearchUI />} />
+            <Route path="/successful-payment" element={<SuccessfulPayment/>} />
+            <Route path="/declined-payment" element={<DeclinedPayment/>} />
             {/* <Route path="/user" element={<User />}  onEnter={requireAuth}  /> */}
             {/* pregunta si hay algo en el token al momento de buscar la url user si no tiene nada manda al componente de error */}
             {/* modifica la url con el nombre del usuario (`/user/${usuario}`) */}

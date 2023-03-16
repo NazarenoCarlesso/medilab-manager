@@ -5,7 +5,7 @@ import CloseButton from "react-bootstrap/CloseButton";
 
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { setItem } from "../utils/localStorage";
 
 import OffCanvasCart from "./OffCanvasCart";
@@ -17,12 +17,14 @@ const BACK = process.env.REACT_APP_BACK
 
 export default function Cart() {
   const dispatch = useDispatch();
+  const location = useLocation()
 
   // Panel de pagos (agregar)
   const [show, setShow] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
+  const [showAlert, setShowAlert] = useState(location.state?.showAlert || false);
   const [showAlertLogin, setShowAlertLogin] = useState(false);
   const [fromCart, setFromCart] = useState(false);
+  console.log(showAlert)
 
   const handleShow = () => setShow(true);
 

@@ -6,19 +6,16 @@ import axios from "axios";
 
 const { REACT_APP_BACK } = process.env;
 
-export default function MercadoPagoPayment() {
-
+export default function MercadoPagoPayment(props) {
   const [preferenceId, setPreferenceId] = useState(null);
-  const cart = useSelector((state) => state.cart)
+  const cart = useSelector((state) => state.cart);
+  const { setShowAlert } = props;
 
   useEffect(() => {
     axios
       .post(`${REACT_APP_BACK}/mercadopago/preference`, cart)
-      .then((order) => {
-        setPreferenceId(order.data);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+      .then((order) => setPreferenceId(order.data))
+  },[]);
 
   return (
     <>
@@ -26,7 +23,6 @@ export default function MercadoPagoPayment() {
         <Accordion.Header>MercadoPago</Accordion.Header>
         <Accordion.Body>
           <Button href={preferenceId}>CONTINUAR COMPRA MERCADOPAGO</Button>
-
         </Accordion.Body>
       </Accordion.Item>
     </>
