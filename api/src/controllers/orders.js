@@ -1,49 +1,47 @@
+const { Op } = require('sequelize')
 // models
 const { models } = require('../db.js')
 const { Order, Test, Payment } = models
 
-//////////////////////////////////////////////////
-
-//--------------------> ANTES <----------------------------
-
-// const orderAll = async () => {
-//     const orders = await Order.findAll({
-//         include: { model: Test, required: true }
-//     })
-
-//     return orders.map(order => ({
-//         id: order.id,
-//         test: order.Test.name,
-//         payment: order.PaymentId
-//     }))
-// }
-/////////////////////////////////////////////
-const orderAll = async (page = 1, limit = 10) => {
-    const orders = await Order.findAll({
-        include: { model: Test, required: true },
+const orderAll = async (page = 1, limit = 10, search = '') => {
+    const orders = await Order.findAndCountAll({
+        include: {
+            model: Test,
+            where: { name: { [Op.iLike]: `%${search}%` } },
+            required: true
+        },
         limit: limit,
         offset: ((page - 1) * limit)
     })
 
-    return orders.map(order => ({
+    orders.rows = orders.rows.map(order => ({
         id: order.id,
         test: order.Test.name,
         payment: order.PaymentId
     }))
-}
-//////////////////////////////////////////////////////////////
 
-const orderById = async (uid) => {
-    const orders = await Order.findAll({
-        include: { model: Test, required: true },
-        where: { UserId: uid }
+    return orders
+}
+
+const orderById = async (uid, page = 1, limit = 10, search = '') => {
+    const orders = await Order.findAndCountAll({
+        include: {
+            model: Test,
+            where: { name: { [Op.iLike]: `%${search}%` } },
+            required: true
+        },
+        where: { UserId: uid },
+        limit: limit,
+        offset: ((page - 1) * limit)
     })
 
-    return orders.map(order => ({
+    orders.rows = orders.rows.map(order => ({
         id: order.id,
         test: order.Test.name,
         payment: order.PaymentId
     }))
+
+    return orders
 }
 
 const createOrder = async (uid, tests) => {

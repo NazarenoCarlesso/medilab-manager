@@ -1,4 +1,4 @@
-const { QueryTypes } = require('sequelize')
+const { QueryTypes, Op } = require('sequelize')
 // conexion con Sequelize
 const sequelize = require('../db.js')
 // models
@@ -18,22 +18,13 @@ const categoryCreate = async (name) => {
     return await test_category.create({ name })
 }
 
-//////////////////////////////////////////////////////////////
-
-//------------------>ANTES<------------------------
-
-// const categoryAll = async () => {
-//     return await test_category.findAll()
-// }
-//////////////////////////////////////////////////////////////
-const categoryAll = async (page = 1, limit = 10) => {
-    return await test_category.findAll({
+const categoryAll = async (page = 1, limit = 10, search = '') => {
+    return await test_category.findAndCountAll({
+        where: { name: { [Op.iLike]: `%${search}%` } },
         limit: limit,
         offset: ((page - 1) * limit)
     })
 }
-//////////////////////////////////////////////////////////////
-
 
 const categoryDelete = async (id, newId) => {
     const tests = await Test.findAll({ where: { testCategoryId: id } })

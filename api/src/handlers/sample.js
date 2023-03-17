@@ -6,21 +6,11 @@ const {
     sampleUpdate
 } = require('../controllers/sample')
 
-////////////////////////////////////////////////////////
-
-//------------------>ANTES<------------------------
-
-// const sampleAllHandler = async (req, res) => {
-//     const samples = await sampleAll()
-//     res.status(200).json(samples)
-// }
-//////////////////////////////////////////////////////////////
 const sampleAllHandler = async (req, res) => {
-    const { page, limit } = req.query
-    const samples = await sampleAll(page, limit)
+    const { page, limit, search } = req.query
+    const samples = await sampleAll(page, limit, search)
     res.status(200).json(samples)
 }
-//////////////////////////////////////////////////////////////
 
 const sampleCreateHandler = async (req, res) => {
     const { name } = req.body

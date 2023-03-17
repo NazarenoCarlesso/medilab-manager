@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import {
-    Button, Grid, Paper, Typography
+    Button, Grid, Pagination, Paper, TextField, Typography
 } from '@mui/material'
 import PaidIcon from '@mui/icons-material/Paid'
 import ReceiptIcon from '@mui/icons-material/Receipt'
@@ -33,12 +33,23 @@ export default function OrdersUI() {
     const role = useSelector(state => state.role)
     // array of orders
     const [orders, setOrders] = useState([])
+    // page state
+    const [page, setPage] = useState(1)
+    const [count, setCount] = useState(1)
+    const [search, setSearch] = useState('')
+    // page change handler
+    const handleChangePage = (e, value) => setPage(value)
+    // search effect
+    useEffect(() => setPage(1), [search])
     // reload list effect
     useEffect(() => {
-        fetch(`${BACK}/orders/${role === 'ADMIN' ? 'admin' : ''}`, { headers: { 'token': token } })
+        fetch(`${BACK}/orders/${role === 'ADMIN' ? 'admin' : ''}/?page=${page}&limit=36&search=${search}`, { headers: { 'token': token } })
             .then(response => response.json())
-            .then(data => setOrders(data))
-    }, [token, role])
+            .then(data => {
+                setOrders(data.rows)
+                setCount(data.count)
+            })
+    }, [token, role, search, page])
     // render component
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
@@ -47,15 +58,15 @@ export default function OrdersUI() {
                 boxShadow: '0px 0px 10px 0px #00000047'
             }}>
                 <Grid container direction="row" justifyContent="center" alignItems="center">
+                    <TextField variant="standard" value={search} onChange={e => setSearch(e.target.value)} />
+                    <Pagination page={page} count={Math.ceil(count / 36)} onChange={handleChangePage} />
                     <Button>
                         <AddIcon />
                     </Button>
                 </Grid>
             </Paper>
             <Grid container direction="column" alignItems="center" sx={{ height: 480 }}>
-                {orders
-                    .slice(0, 36)
-                    .map(o => <Order key={o.id} id={o.id} test={o.test} payment={o.payment} />)}
+                {orders.map(o => <Order key={o.id} id={o.id} test={o.test} payment={o.payment} />)}
             </Grid>
         </Grid>
     )
