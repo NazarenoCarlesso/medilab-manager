@@ -34,14 +34,13 @@ export default function Payments() {
           `${BACK}/payments/${role === "ADMIN" ? "admin" : ""}`,
           config
         )
-        console.log(response.data)
         setPayments(response.data);
       } catch (error) {
         console.log(error);
       }
     }
     fetchPayments();
-  }, [token]);
+  }, [token, role]);
 
   useEffect(() => {
     const fetchData = async () => {
