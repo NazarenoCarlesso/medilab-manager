@@ -7,7 +7,8 @@ const {
 } = require('../controllers/sample')
 
 const sampleAllHandler = async (req, res) => {
-    const samples = await sampleAll()
+    const { page, limit, search } = req.query
+    const samples = await sampleAll(page, limit, search)
     res.status(200).json(samples)
 }
 

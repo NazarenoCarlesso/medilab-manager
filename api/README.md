@@ -63,3 +63,5 @@ Desactualizada
 ``` GET /results/:id ``` devuelve los resultados de la orden
 
 ``` GET /doctors ``` devuelve todos los doctores
+
+``` POST /verify/:id ``` valida usuario x mail

@@ -65,6 +65,12 @@ const validateReview = async (id) => {
     if (!review) throw new Error('Reseña no es válida')
 }
 
+const validateUserId = async (id) => {
+    const user = await User.findByPk(id);
+
+    if (!user) throw new Error('Token de id no es válido')
+}
+
 module.exports = {
     validateOrder,
     validateTest,
@@ -75,5 +81,6 @@ module.exports = {
     validateFreeUsername,
     validateFreeEmail,
     validateUsernameStatus,
-    validateAdmin
+    validateAdmin,
+    validateUserId
 }

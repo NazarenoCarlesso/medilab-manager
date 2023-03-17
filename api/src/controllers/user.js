@@ -8,6 +8,7 @@ const { User } = models
 // helpers
 const generateJWT = require('../helpers/generateJWT.js')
 const { googleVerify } = require('../helpers/verifyGoogle.js')
+const { sendVerificationEmail } = require('../helpers/sendVerificationEmail.js');
 
 // utils
 const { uploadPhotoCloudinary } = require('./upload.js')
@@ -72,12 +73,16 @@ const userChangePassword = async (uid, password) => {
 
 const userSignUp = async (username, password, email, firstName, lastName, dni, number, sex, height, civilState) => {
     // Generar una contraseña encriptada con bcrypt
-    const hash = await bcrypt.hash(password, 10)
+    const hash = await bcrypt.hash(password, 10);
 
-    return await User.create({
+    const user = await User.create({
         username, email, password: hash, firstName,
-        lastName, dni, phone: number, sex, height, civil: civilState
-    })
+        lastName, dni, phone: number, sex, height, civil: civilState, deleted: true
+    });
+    
+    await sendVerificationEmail(user.email, user.id); // pide verificaccion del email para pasar deleted a true...
+
+    return user;
 }
 
 const userGoogle = async (token) => {
@@ -97,7 +102,7 @@ const userGoogle = async (token) => {
     return ({
         token: await generateJWT(user.id),
         name: `${user.lastName.toUpperCase()}, ${user.firstName}`,
-        avatar: user.photo,
+        avatar: user.photo ? user.photo : picture,
         role: user.role
     })
 }
