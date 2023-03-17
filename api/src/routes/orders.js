@@ -28,7 +28,7 @@ router.get('/admin', [
 router.post('/', [
     body('tests', 'Tests son obligatorios').not().isEmpty(),
     validateReq,
-    // validateJWT
+    validateJWT
 ], orderCreateHandler)
 
 module.exports = router

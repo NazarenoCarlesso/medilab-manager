@@ -14,7 +14,7 @@ export default function SuccessfulPayment() {
     const config = { headers: { token: `${token}` } };
     const data = { tests: cart };
     try {
-      await axios.post(`${BACK}/orders`, data);
+      await axios.post(`${BACK}/orders`, data, config);
       navigate("/cart", { state: { showAlert: true } });
     } catch (error) {console.log(error.response.data);}
   };

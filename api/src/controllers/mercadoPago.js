@@ -31,13 +31,8 @@ const createPayment = async (items) => {
 
   return mercadopago.preferences
     .create(preference)
-    .then((response) => {
-      console.log(response)
-      return response.body.init_point;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    .then((response) => response.body.init_point)
+    .catch((error) => console.log(error));
 };
 
 module.exports = { createPayment };
