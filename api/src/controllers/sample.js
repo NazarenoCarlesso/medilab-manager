@@ -1,4 +1,4 @@
-const { QueryTypes } = require('sequelize')
+const { QueryTypes, Op } = require('sequelize')
 // conexion con Sequelize
 const sequelize = require('../db.js')
 // models
@@ -18,8 +18,12 @@ const sampleCreate = async (name) => {
     return await Sample.create({ name })
 }
 
-const sampleAll = async () => {
-    return await Sample.findAll()
+const sampleAll = async (page = 1, limit = 10, search = '') => {
+    return await Sample.findAndCountAll({
+        where: { name: { [Op.iLike]: `%${search}%` } },
+        limit: limit,
+        offset: ((page - 1) * limit)
+    })
 }
 
 const sampleDelete = async (id, newId) => {

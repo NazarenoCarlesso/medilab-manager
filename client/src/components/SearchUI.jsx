@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { FormControl, FormHelperText, Grid, Pagination, PaginationItem, Paper, Stack, TextField } from '@mui/material'
+import { FormControl, FormHelperText, Grid, Pagination, PaginationItem, Paper, Stack, TextField, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
 // components
 import TestUI from './TestUI'
+//
+import './UIStyles.css'
 
 const BACK = process.env.REACT_APP_BACK
 
@@ -38,13 +40,24 @@ export default function TestsUI() {
 
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
-            <Paper sx={(theme)=>({background: theme.palette.secondary.main})} style={{ width: 360, margin: "3%"}}>
-                <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
-                    <FormControl sx={{ m: 1, width: 340 }}>
-                        <TextField value={search} onChange={e => setSearch(e.target.value)} id="outlined-search" label="Busqueda" type="search" />
-                        <FormHelperText>Escribe tu exámen acá</FormHelperText>
+            <Typography variant="h3" fontWeight={750} style={{margin: "1%"}} sx={{ fontFamily: 'Raleway', width: 600, whiteSpace:'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}}>
+                Todos nuestros Exámenes</Typography>
+            <Paper className='PaperContainer' sx={(theme)=>({background: theme.palette.secondary.main})} style={{margin: "1%"}}>
+                    <FormControl sx={{padding: 1, width: 400}}>
+                        <TextField value={search} onChange={e => setSearch(e.target.value)} id="outlined-search" label="Buscar" type="search"/>
+                        <FormHelperText>Ingrese el nombre del exámen</FormHelperText>
                     </FormControl>
-                    <Stack spacing={2}>
+            </Paper>
+            <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
+                {tests.map(test => <TestUI
+                    key={test.id}
+                    id={test.id}
+                    name={test.name}
+                    description={test.description}
+                    price={test.price}
+                />)}
+            </Grid>
+            <Stack spacing={2} sx={{marginTop:6}}>
                         <Pagination
                             count={Math.round(count / 5)}
                             page={page}
@@ -77,7 +90,6 @@ export default function TestsUI() {
                 {provided.placeholder}
             </Grid> 
         )}
-        
         </Droppable>
     </DragDropContext>
         </Grid>

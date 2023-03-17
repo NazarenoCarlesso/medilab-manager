@@ -12,7 +12,8 @@ import MenuIcon from '@mui/icons-material/Menu'
 
 
 // reducer
-import { setAvatar, setName, setRole, setToken } from '../reducer'
+import { emptyCart, setAvatar, setName, setRole, setToken } from '../reducer'
+import { setItem } from '../utils/localStorage'
 
 export default function NavUI() {
     // dispatch hook
@@ -40,6 +41,7 @@ export default function NavUI() {
         dispatch(setName(undefined))
         dispatch(setRole(undefined))
         dispatch(setAvatar(undefined))
+        dispatch(emptyCart())
         navigate('/home')
     }
 
@@ -66,7 +68,7 @@ export default function NavUI() {
                         MEDILAB
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <Button component={Link} to="/home" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'cyan', display: 'block' }}>
+                        <Button component={Link} to="/home" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'cyan', display: 'block', fontFamily: 'Raleway' }}>
                             Home
                         </Button>
                         <IconButton component={Link} to="/search" size="large" color="secondary" sx={{ width: '48px', margin: '10px 4px' }}>
@@ -80,7 +82,7 @@ export default function NavUI() {
                             </Badge>
                         </IconButton>
                     </Box>
-                    <Typography color="primary" onClick={handleCloseNavMenu} sx={{ marginRight: 1, fontFamily: 'Raleway' }}>
+                    <Typography onClick={handleCloseNavMenu} sx={{ marginRight: 1, fontFamily: 'Raleway' }}>
                         {name}
                     </Typography>
                     {name ? <Box sx={{ flexGrow: 0 }}>
@@ -91,7 +93,7 @@ export default function NavUI() {
                         </Tooltip>
                         <Menu sx={{ mt: '45px' }} id="menu-appbar" anchorEl={anchorElUser} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right' }} open={Boolean(anchorElUser)} onClose={handleCloseUserMenu}>
                             <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography component={Link} to="/dashboardui" textAlign="center" sx={{ textDecoration: 'none', color: 'inherit' }}>
+                                <Typography component={Link} to="/dashboard" textAlign="center" sx={{ textDecoration: 'none', color: 'inherit' }}>
                                     Dashboard
                                 </Typography>
                             </MenuItem>

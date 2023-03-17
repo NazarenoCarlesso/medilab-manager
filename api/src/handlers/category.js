@@ -7,7 +7,8 @@ const {
 } = require('../controllers/category')
 
 const categoryAllHandler = async (req, res) => {
-    const categories = await categoryAll()
+    const { page, limit, search } = req.query
+    const categories = await categoryAll(page, limit, search)
     res.status(200).json(categories)
 }
 
