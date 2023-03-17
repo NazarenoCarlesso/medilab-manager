@@ -15,7 +15,7 @@ import Box from "@mui/material/Box";
 
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { setItem } from "../utils/localStorage";
 
 import OffCanvasCart from "./OffCanvasCart";
@@ -45,15 +45,17 @@ const style = {
 
 export default function Cart() {
   const dispatch = useDispatch();
+  const location = useLocation()
 
   // Panel de pagos (agregar)
   const [show, setShow] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
+  const [showAlert, setShowAlert] = useState(location.state?.showAlert || false);
   const [showAlertLogin, setShowAlertLogin] = useState(false);
   const [fromCart, setFromCart] = useState(false);
   const [openSA, setOpenSA] = useState(false);
   const handleOpenSA = () => setOpenSA(true);
   const handleCloseSA = () => setOpenSA(false);
+
 
   const handleShow = () => setShow(true);
 

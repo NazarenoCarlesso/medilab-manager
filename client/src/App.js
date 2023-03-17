@@ -12,6 +12,8 @@ import Footer from './components/Footer'
 import SearchUI from './components/SearchUI'
 import NavUI from './components/NavUI'
 import DashboardUI from "./components/DashboardUI"
+import SuccessfulPayment from "./components/SuccessfulPayment";
+import DeclinedPayment from "./components/DeclinedPayment"
 // styles
 import { Experimental_CssVarsProvider as ThemeProvider } from '@mui/material/styles'
 import theme from './theme'
@@ -35,6 +37,8 @@ export default function App() {
                     <Route path="/payments" element={<Payments />} />
                     <Route path="/search" element={<SearchUI />} />
                     <Route path="/dashboard" element={<DashboardUI />} />
+                    <Route path="/successful-payment" element={<SuccessfulPayment/>} />
+                    <Route path="/declined-payment" element={<DeclinedPayment/>} />
                     <Route path="/*" element={<Ops />} />
                 </Routes>
                 <Footer />
