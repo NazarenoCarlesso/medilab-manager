@@ -35,6 +35,7 @@ const slice = createSlice({
         },
         emptyCart(state) {
             state.cart = []
+            setItem('cart', [])
         }
     },
 })
