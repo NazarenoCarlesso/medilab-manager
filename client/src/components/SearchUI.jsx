@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FormControl, FormHelperText, Grid, Pagination, PaginationItem, Paper, Stack, TextField } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
 // components
 import TestUI from './TestUI'
@@ -14,6 +14,7 @@ export default function TestsUI() {
     const [search, setSearch] = useState('')
     const [page, setPage] = useState(1)
     const [count, setCount] = useState(1)
+   
 
     useEffect(() => {
         fetch(`${BACK}/tests/search/?search=${search}&page=${page}&limit=5`)
@@ -25,6 +26,15 @@ export default function TestsUI() {
     }, [search, page])
 
     useEffect(() => setPage(1), [search])
+
+    function handleOnDragEnd(result){
+        if (!result.destination) return;
+        const items = Array.from(tests);
+        const [reorderedItem] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, reorderedItem);
+
+        setTests(items);
+    }
 
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
@@ -49,8 +59,8 @@ export default function TestsUI() {
                     </Stack>
                 </Grid>
             </Paper>
-            <DragDropContext> 
-        <Droppable droppableId="id">
+            <DragDropContext onDragEnd={handleOnDragEnd}> 
+        <Droppable droppableId="id" direction='horizontal'>
         {(provided)=>(
             <Grid container direction="row" justifyContent="space-evenly" alignItems="center"
             {...provided.droppableProps}
@@ -62,10 +72,12 @@ export default function TestsUI() {
                     description={test.description}
                     price={test.price}
                     index={index}
-                />)}
-            </Grid>
-            
+                />
+                )}
+                {provided.placeholder}
+            </Grid> 
         )}
+        
         </Droppable>
     </DragDropContext>
         </Grid>
