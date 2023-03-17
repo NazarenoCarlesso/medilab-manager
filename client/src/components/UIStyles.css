@@ -108,4 +108,11 @@
     font-size: 12px;
 }
 
+.PaperContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
 
