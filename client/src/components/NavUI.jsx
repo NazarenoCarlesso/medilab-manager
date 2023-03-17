@@ -12,7 +12,8 @@ import MenuIcon from '@mui/icons-material/Menu'
 
 
 // reducer
-import { setAvatar, setName, setRole, setToken } from '../reducer'
+import { emptyCart, setAvatar, setName, setRole, setToken } from '../reducer'
+import { setItem } from '../utils/localStorage'
 
 export default function NavUI() {
     // dispatch hook
@@ -40,6 +41,7 @@ export default function NavUI() {
         dispatch(setName(undefined))
         dispatch(setRole(undefined))
         dispatch(setAvatar(undefined))
+        dispatch(emptyCart())
         navigate('/home')
     }
 

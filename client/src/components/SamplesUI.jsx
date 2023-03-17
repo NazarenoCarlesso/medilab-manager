@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import {
     Button, FormControl, Grid, MenuItem, Modal,
+    Pagination,
     Paper, Select, TextField, Typography
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -65,6 +66,14 @@ export default function SamplesUI() {
     const handleSelect = (event) => {
         setMerge(event.target.value)
     }
+    // page state
+    const [page, setPage] = useState(1)
+    const [count, setCount] = useState(1)
+    const [search, setSearch] = useState('')
+    // page change handler
+    const handleChangePage = (e, value) => setPage(value)
+    // search effect
+    useEffect(() => setPage(1), [search])
     // edit request
     const sendEdit = () => {
         fetch(`${BACK}/samples/${sample.id}`, {
@@ -82,10 +91,13 @@ export default function SamplesUI() {
     }
     // reload list effect
     useEffect(() => {
-        fetch(`${BACK}/samples/admin`, { headers: { 'token': token } })
+        fetch(`${BACK}/samples/admin/?page=${page}&limit=36&search=${search}`, { headers: { 'token': token } })
             .then(response => response.json())
-            .then(data => setSamples(data))
-    }, [token, openEdit, openDelete])
+            .then(data => {
+                setSamples(data.rows)
+                setCount(data.count)
+            })
+    }, [token, openEdit, openDelete, search, page])
     // render component
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
@@ -131,13 +143,15 @@ export default function SamplesUI() {
                 boxShadow: '0px 0px 10px 0px #00000047'
             }}>
                 <Grid container direction="row" justifyContent="center" alignItems="center">
+                    <TextField variant="standard" value={search} onChange={e => setSearch(e.target.value)} />
+                    <Pagination page={page} count={Math.ceil(count / 36)} onChange={handleChangePage} />
                     <Button>
                         <AddIcon />
                     </Button>
                 </Grid>
             </Paper>
             <Grid container direction="column" alignItems="center" sx={{ height: 480 }}>
-                {samples.slice(0, 36).map(s => <Sample key={s.id} id={s.id} name={s.name} handleEdit={handleEdit} handleDelete={handleDelete} />)}
+                {samples.map(s => <Sample key={s.id} id={s.id} name={s.name} handleEdit={handleEdit} handleDelete={handleDelete} />)}
             </Grid>
         </Grid>
     )

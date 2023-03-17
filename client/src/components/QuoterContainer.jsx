@@ -4,9 +4,21 @@ import test from "../images/test.png"
 import result from "../images/results.png"
 import Button from "react-bootstrap/esm/Button";
 import styles from './QuoterContainer.module.css';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
+
 
 export default function QuoterContainer() {
+    const navigate = useNavigate();
+    const token = useSelector((state) => state.token);
 
+    function handleClick() {
+      if (token) {
+        navigate("/dashboard");
+      } else {
+        navigate("/signup");
+      }
+    }
 
   return (
     <div className="container pt-4 mb-4" style={{ width: '100vw', maxWidth: '100%', textAlign: 'center' }}>
@@ -34,8 +46,7 @@ export default function QuoterContainer() {
                             style={{ height: '160px'}}
                             className="p-4 fs-4"
                             variant="outline-success" 
-                            as={Link} 
-                            to={`/results`}>
+                            onClick={handleClick}>
                         <img src={result} className="mx-2 p-2" style={{ height: '90px'}} alt=""/>
                             Ver resultados
                     </Button>

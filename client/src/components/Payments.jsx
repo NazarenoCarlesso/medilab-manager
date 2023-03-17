@@ -6,6 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import ReceiptIcon from "@mui/icons-material/Receipt";
 
 import axios from "axios";
 import React, { useState, useEffect } from "react";
@@ -18,6 +19,7 @@ export default function Payments() {
   const [payments, setPayments] = useState([]);
   const [detailData, setDetailData] = useState([]);
   const [dateToDetail, setDateToDetail] = useState("");
+  const [idToDetail, setIdToDetail] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const token = useSelector((state) => state.token);
   const role = useSelector((state) => state.role);
@@ -30,10 +32,7 @@ export default function Payments() {
         const config = {
           headers: { token: `${token}` }, // se envía el token por header
         };
-        const response = await axios.get(
-          `${BACK}/payments/${role === "ADMIN" ? "admin" : ""}`,
-          config
-        )
+        const response = await axios.get(`${BACK}/payments/${role === "ADMIN" ? "admin" : ""}`, config);
         setPayments(response.data);
       } catch (error) {
         console.log(error);
@@ -70,7 +69,7 @@ export default function Payments() {
   }
 
   function handleDetailData(e) {
-    const { id } = e.target;
+    const { id } = e.currentTarget;
     const dataPayments = payments.find((p) => p.id === id);
     const dataTests = [];
     dataPayments?.Orders.forEach((e) => {
@@ -81,9 +80,9 @@ export default function Payments() {
         dataTests.push(test);
       }
     });
-
     setDetailData(dataTests);
     setDateToDetail(dataPayments.createdAt);
+    setIdToDetail(e.currentTarget.dataset.key);
     setShowAlert(true);
   }
 
@@ -101,36 +100,45 @@ export default function Payments() {
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead>
             <TableRow>
-              <TableCell align="center">Id de Pago</TableCell>
-              <TableCell align="center">Contenido</TableCell>
-              <TableCell align="center">Fecha de Pago</TableCell>
-              <TableCell align="center">Detalles</TableCell>
+              <TableCell align="center" sx={{ width: "15%" }}>
+                Id de Pago
+              </TableCell>
+              <TableCell align="center" sx={{ width: "60%" }}>
+                Contenido
+              </TableCell>
+              <TableCell align="center" sx={{ width: "15%" }}>
+                Fecha de Pago
+              </TableCell>
+              <TableCell align="center" sx={{ width: "10%" }}>
+                Detalles
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {isLoading ? (
-              <TableRow >
-              <TableCell align="center" colSpan={4}>Cargando pagos...</TableCell>
-            </TableRow>
+              <TableRow>
+                <TableCell align="center" colSpan={4}>
+                  Cargando pagos...
+                </TableCell>
+              </TableRow>
             ) : payments.length === 0 ? (
-              <TableRow >
-                <TableCell align="center" colSpan={4}>No ha realizado ningún pago.</TableCell>
+              <TableRow>
+                <TableCell align="center" colSpan={4}>
+                  No ha realizado ningún pago.
+                </TableCell>
               </TableRow>
             ) : (
               payments.map((e, key) => {
                 return (
-                  <TableRow
-                    key={key}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
+                  <TableRow key={key} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                     <TableCell component="th" scope="row" align="center">
                       {key + 1}
                     </TableCell>
                     <TableCell align="left">{getTestNamesById(e.Orders).join(", ")}</TableCell>
                     <TableCell align="center">{e.createdAt.slice(0, 10)}</TableCell>
                     <TableCell align="center">
-                      <Button id={e.id} size="small" onClick={(e) => handleDetailData(e)}>
-                        Detalles
+                      <Button id={e.id} data-key={key + 1} onClick={handleDetailData}>
+                        <ReceiptIcon />
                       </Button>
                     </TableCell>
                   </TableRow>
@@ -141,12 +149,7 @@ export default function Payments() {
         </Table>
       </TableContainer>
 
-      <PaymentDetail
-        showAlert={showAlert}
-        setShowAlert={setShowAlert}
-        detailData={detailData}
-        dateToDetail={dateToDetail}
-      />
+      <PaymentDetail showAlert={showAlert} setShowAlert={setShowAlert} detailData={detailData} dateToDetail={dateToDetail} idToDetail={idToDetail} />
     </div>
   );
 }

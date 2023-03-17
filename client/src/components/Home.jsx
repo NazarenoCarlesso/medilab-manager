@@ -3,6 +3,7 @@ import QuoterContainer from './QuoterContainer'
 import PopularUI from './PopularUI'
 import ReviewsUI from './ReviewsUI'
 import EnterpriseUI from './EnterpriseUI'
+import Contact from './Contact'
 
 export default function Home() {
     return (
@@ -11,6 +12,7 @@ export default function Home() {
             <EnterpriseUI />
             <PopularUI />
             <ReviewsUI />
+            <Contact />
             <div style={{ height: 40 }} />
         </div>
     )
