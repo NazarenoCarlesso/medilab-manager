@@ -6,7 +6,8 @@
   height: 350px;
   width: 800px;
   cursor: pointer;
-  border: 2px dashed #2c3442;
+  color: #071b4b;
+  border: 2px dashed #071b4b;
   border-radius: 10px;
 }
 
@@ -17,7 +18,8 @@
   align-items: center;
   padding: 15px 20px;
   border-radius: 5px;
-  background-color: #2c3442;
+  background-color: #071b4b;
+  color: white;
 }
 .IconsContainer{
   display: flex;
@@ -35,9 +37,10 @@
   width: 35px;
   border-radius: 50%;
   transition: all 0.2s;
+  color: white;
 }
 .TrashIcon:hover {
-  background-color: #aa0000;
+  background-color: #d30000;
 }
 .TrashIcon:active {
   background-color: #700000;
@@ -97,4 +100,9 @@
   opacity: 0;
   transition: all 0.8s;
   box-shadow: 0 0 5px 20px #046900;
+}
+
+.image{
+  max-height: 330px;
+  max-width: 750px;
 }
