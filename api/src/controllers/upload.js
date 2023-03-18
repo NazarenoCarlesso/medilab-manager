@@ -10,4 +10,12 @@ const uploadPhotoCloudinary = async (file) => {
     return response.secure_url
 }
 
-module.exports = { uploadPhotoCloudinary }
+const destroyPhotoCloudinary = async (id) => {
+    try {
+        await cloudinary.uploader.destroy(id)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports = { uploadPhotoCloudinary, destroyPhotoCloudinary }

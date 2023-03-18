@@ -43,7 +43,7 @@ export default function ProfileUI() {
             <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
                 <Avatar alt={user.name} referrerPolicy="no-referrer" src={user.photo} sx={{ width: 100, height: 100 }} onClick={handleOpen} />
                 <Modal className="ModalAvatar" open={open} onClose={handleClose}>
-                    <Paper className="AvatarUI">
+                    <Paper className="AvatarUI" sx={{background:"#4EC4CE"}}>
                             <Grid container justifyContent="space-evenly" alignItems="center" >
                                 <AvatarUpload></AvatarUpload>
                             </Grid>
