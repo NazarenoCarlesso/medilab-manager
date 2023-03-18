@@ -1,6 +1,5 @@
-import CloseButton from "react-bootstrap/CloseButton";
 import Button from "@mui/material/Button";
-import { Hidden, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Table from "@mui/material/Table";
@@ -32,13 +31,12 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  maxHeight: "500px",
+  maxHeight: "600px",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
   display: "inline-block",
-  border: "1px solid black",
   overflow: "hidden",
   overflowY: "scroll",
 };

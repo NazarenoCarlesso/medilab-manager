@@ -1,17 +1,13 @@
 import Button from "@mui/material/Button";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import ReceiptIcon from "@mui/icons-material/Receipt";
-
+import { Grid, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import PaymentDetail from "./PaymentDetail";
+import PaidIcon from "@mui/icons-material/Paid";
+import AddIcon from "@mui/icons-material/Add";
 
 const BACK = process.env.REACT_APP_BACK;
 
@@ -24,7 +20,6 @@ export default function Payments() {
   const token = useSelector((state) => state.token);
   const role = useSelector((state) => state.role);
   const [tests, setTests] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchPayments() {
@@ -48,8 +43,6 @@ export default function Payments() {
         setTests(response.data);
       } catch (error) {
         console.log(error);
-      } finally {
-        setIsLoading(false);
       }
     };
     fetchData();
@@ -82,73 +75,60 @@ export default function Payments() {
     });
     setDetailData(dataTests);
     setDateToDetail(dataPayments.createdAt);
-    setIdToDetail(e.currentTarget.dataset.key);
+    // setIdToDetail(e.currentTarget.dataset.key);
+    setIdToDetail(id);
     setShowAlert(true);
   }
 
   return (
     <div
       style={{
-        margin: "auto",
         display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        width: "90%",
+        width: "100%",
+        overflow: "hidden",
+        overflowY: "scroll",
       }}
     >
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center" sx={{ width: "15%" }}>
-                Id de Pago
-              </TableCell>
-              <TableCell align="center" sx={{ width: "60%" }}>
-                Contenido
-              </TableCell>
-              <TableCell align="center" sx={{ width: "15%" }}>
-                Fecha de Pago
-              </TableCell>
-              <TableCell align="center" sx={{ width: "10%" }}>
-                Detalles
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {isLoading ? (
-              <TableRow>
-                <TableCell align="center" colSpan={4}>
-                  Cargando pagos...
-                </TableCell>
-              </TableRow>
-            ) : payments.length === 0 ? (
-              <TableRow>
-                <TableCell align="center" colSpan={4}>
-                  No ha realizado ningún pago.
-                </TableCell>
-              </TableRow>
-            ) : (
-              payments.map((e, key) => {
-                return (
-                  <TableRow key={key} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                    <TableCell component="th" scope="row" align="center">
-                      {key + 1}
-                    </TableCell>
-                    <TableCell align="left">{getTestNamesById(e.Orders).join(", ")}</TableCell>
-                    <TableCell align="center">{e.createdAt.slice(0, 10)}</TableCell>
-                    <TableCell align="center">
-                      <Button id={e.id} data-key={key + 1} onClick={handleDetailData}>
-                        <ReceiptIcon />
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                );
-              })
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Grid container direction="column">
+        {/* Botón (+) para admin */}
+        <Paper
+          sx={{
+            width: "100%",
+            marginBottom: 0.25,
+            marginTop: 0.1,
+            boxShadow: "0px 0px 10px 0px #00000047",
+          }}
+        >
+          <Grid container direction="row" justifyContent="center" alignItems="center">
+            {role === "ADMIN" ? (
+              <Button>
+                <AddIcon />
+              </Button>
+            ) : null}
+          </Grid>
+        </Paper>
+        {/* Pagos */}
+        <Grid container direction="column" alignItems="center" sx={{ height: 480 }}>
+          {payments.slice(0, 36).map((e, key) => (
+            <Paper key={key} sx={{ width: 320, margin: "2px", paddingLeft: "10px", boxShadow: "0px 0px 10px 0px #00000047" }}>
+              <Grid container direction="row" justifyContent="center" alignItems="center">
+                <Typography title={e.id} sx={{ width: "80px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontFamily: "Raleway", fontWeight: "500" }}>
+                  {e.id}
+                </Typography>
+                <Typography title={e.id} sx={{ width: "140px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontFamily: "Raleway", fontWeight: "500" }}>
+                  {getTestNamesById(e.Orders).join(", ")}
+                </Typography>
 
+                <PaidIcon color="success"></PaidIcon>
+
+                <Button id={e.id} data-key={key + 1} onClick={handleDetailData}>
+                  <ReceiptIcon />
+                </Button>
+              </Grid>
+            </Paper>
+          ))}
+        </Grid>
+      </Grid>
       <PaymentDetail showAlert={showAlert} setShowAlert={setShowAlert} detailData={detailData} dateToDetail={dateToDetail} idToDetail={idToDetail} />
     </div>
   );
