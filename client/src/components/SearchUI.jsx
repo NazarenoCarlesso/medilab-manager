@@ -41,57 +41,47 @@ export default function TestsUI() {
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
             <Typography variant="h3" fontWeight={750} style={{margin: "1%"}} sx={{ fontFamily: 'Raleway', width: 600, whiteSpace:'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}}>
-                Todos nuestros Exámenes</Typography>
+                Todos nuestros Exámenes
+            </Typography>
             <Paper className='PaperContainer' sx={(theme)=>({background: theme.palette.secondary.main})} style={{margin: "1%"}}>
                     <FormControl sx={{padding: 1, width: 400}}>
                         <TextField value={search} onChange={e => setSearch(e.target.value)} id="outlined-search" label="Buscar" type="search"/>
                         <FormHelperText>Ingrese el nombre del exámen</FormHelperText>
                     </FormControl>
             </Paper>
-            <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
-                {tests.map(test => <TestUI
-                    key={test.id}
-                    id={test.id}
-                    name={test.name}
-                    description={test.description}
-                    price={test.price}
-                />)}
-            </Grid>
-            <Stack spacing={2} sx={{marginTop:6}}>
-                        <Pagination
-                            count={Math.round(count / 5)}
-                            page={page}
-                            onChange={(e, v) => setPage(v)}
-                            renderItem={(item) => <PaginationItem
-                                slots={{
-                                    previous: ArrowBackIcon,
-                                    next: ArrowForwardIcon
-                                }}
-                                {...item} />}
-                        />
-                    </Stack>
-                </Grid>
-            </Paper>
             <DragDropContext onDragEnd={handleOnDragEnd}> 
-        <Droppable droppableId="id" direction='horizontal'>
-        {(provided)=>(
-            <Grid container direction="row" justifyContent="space-evenly" alignItems="center"
-            {...provided.droppableProps}
-            ref={provided.innerRef}>
-                {tests.map((test, index) => <TestUI
-                    key={test.id}
-                    id={test.id}
-                    name={test.name}
-                    description={test.description}
-                    price={test.price}
-                    index={index}
-                />
+                <Droppable droppableId="id" direction='horizontal'>
+                {(provided)=>(
+                    <Grid container direction="row" justifyContent="space-evenly" alignItems="center"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}>
+                        {tests.map((test, index) => <TestUI
+                            key={test.id}
+                            id={test.id}
+                            name={test.name}
+                            description={test.description}
+                            price={test.price}
+                            index={index}
+                        />
+                        )}
+                        {provided.placeholder}
+                    </Grid> 
                 )}
-                {provided.placeholder}
-            </Grid> 
-        )}
-        </Droppable>
-    </DragDropContext>
+                </Droppable>
+            </DragDropContext>
+            <Stack spacing={2} sx={{marginTop:6}}>
+                <Pagination
+                    count={Math.round(count / 5)}
+                    page={page}
+                    onChange={(e, v) => setPage(v)}
+                    renderItem={(item) => <PaginationItem
+                    slots={{
+                        previous: ArrowBackIcon,
+                        next: ArrowForwardIcon
+                    }}
+                    {...item} />}
+                />
+            </Stack>
         </Grid>
     )
 }
