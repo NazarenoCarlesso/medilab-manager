@@ -11,7 +11,7 @@ const { googleVerify } = require('../helpers/verifyGoogle.js')
 const { sendVerificationEmail } = require('../helpers/sendVerificationEmail.js');
 
 // utils
-const { uploadPhotoCloudinary } = require('./upload.js')
+const { uploadPhotoCloudinary, destroyPhotoCloudinary } = require('./upload.js')
 
 const userAll = async () => {
     let users = await User.findAll({ where: { deleted: false } })
@@ -79,7 +79,7 @@ const userSignUp = async (username, password, email, firstName, lastName, dni, n
         username, email, password: hash, firstName,
         lastName, dni, phone: number, sex, height, civil: civilState, deleted: true
     });
-    
+
     await sendVerificationEmail(user.email, user.id); // pide verificaccion del email para pasar deleted a true...
 
     return user;
@@ -115,6 +115,13 @@ const userDelete = async (uid) => {
 
 const userPhotoUpload = async (uid, file) => {
     const user = await User.findByPk(uid)
+
+    if (user.photo && user.photo.includes('cloudinary')) {
+        const array = user.photo.split('/')
+        const nombre = array[array.length - 1]
+        const [public_id] = nombre.split('.')
+        destroyPhotoCloudinary(public_id)
+    }
 
     user.photo = await uploadPhotoCloudinary(file)
 
