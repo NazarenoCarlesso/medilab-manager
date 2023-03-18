@@ -149,7 +149,7 @@ export default function Contact() {
             </Col>
             <Col>
               <div className={style.infoBox}>
-                <Icon.Telephone size={35} />
+                <Icon.Clock size={35} />
                 <h3>Horario</h3>
                 <p>
                   Lunes - Sábado
