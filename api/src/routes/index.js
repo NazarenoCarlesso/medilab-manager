@@ -12,6 +12,7 @@ const doctorRouter = require('./doctor.js')
 const generateRouter = require('./generate.js')
 const mercadoPagoRouter = require('./mercadoPago.js')
 const verifyRouter = require('./verify.js');
+const openaiRouter = require('./openai.js');
 
 const router = Router()
 // routers config
@@ -38,6 +39,8 @@ router.use('/generate', generateRouter)
 router.use('/mercadopago', mercadoPagoRouter)
 
 router.use('/verify', verifyRouter)
+
+router.use('/openai', openaiRouter)
 
 // main router export
 module.exports = router
