@@ -1,0 +1,17 @@
+.privacyTitle {
+    text-align: center;
+    padding: 20px;
+    margin: 10px 0 0 0;
+    font-size: 38px;
+    line-height: 42px;
+    font-weight: 700;
+    color: #012970;
+    transition: all 300ms;
+}
+
+.privacyTitle:hover {
+    transform: scale(1.15);
+}
+p{
+    text-align: justify;
+}
