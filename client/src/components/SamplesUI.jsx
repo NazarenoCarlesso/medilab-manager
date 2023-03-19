@@ -74,6 +74,12 @@ export default function SamplesUI() {
     const handleChangePage = (e, value) => setPage(value)
     // search effect
     useEffect(() => setPage(1), [search])
+    // create state
+    const [create, setCreate] = useState('')
+    // create modal state and hooks
+    const [openCreate, setOpenCreate] = useState(false)
+    const handleOpenCreate = () => setOpenCreate(true)
+    const handleCloseCreate = () => setOpenCreate(false)
     // edit request
     const sendEdit = () => {
         fetch(`${BACK}/samples/${sample.id}`, {
@@ -89,6 +95,14 @@ export default function SamplesUI() {
             headers: { 'token': token }
         }).then(() => handleCloseDelete())
     }
+    // create request
+    const sendCreate = () => {
+        fetch(`${BACK}/samples`, {
+            method: 'post',
+            headers: { 'token': token, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: create })
+        }).then(() => handleCloseCreate())
+    }
     // reload list effect
     useEffect(() => {
         fetch(`${BACK}/samples/admin/?page=${page}&limit=36&search=${search}`, { headers: { 'token': token } })
@@ -97,10 +111,10 @@ export default function SamplesUI() {
                 setSamples(data.rows)
                 setCount(data.count)
             })
-    }, [token, openEdit, openDelete, search, page])
+    }, [token, openEdit, openDelete, openCreate, search, page])
     // render component
     return (
-        <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
+        <Grid container direction="column" justifyContent="center" alignItems="flex-start">
             <Modal open={openEdit} onClose={handleCloseEdit}>
                 <Paper sx={{
                     position: 'absolute', top: '50%', left: '50%',
@@ -138,6 +152,22 @@ export default function SamplesUI() {
                     </Button>
                 </Paper>
             </Modal>
+            <Modal open={openCreate} onClose={handleCloseCreate}>
+                <Paper sx={{
+                    position: 'absolute', top: '50%', left: '50%',
+                    transform: 'translate(-50%, -50%)', width: 400,
+                    bgcolor: 'background.paper', border: '2px solid #000',
+                    boxShadow: 24, p: 4
+                }}>
+                    <TextField name="name" value={create} onChange={e => setCreate(e.target.value)} variant="standard" />
+                    <Button>
+                        <CheckIcon onClick={sendCreate} />
+                    </Button>
+                    <Button>
+                        <CloseIcon onClick={handleCloseCreate} />
+                    </Button>
+                </Paper>
+            </Modal>
             <Paper sx={{
                 width: 968, marginBottom: 0.25, marginTop: 0.1,
                 boxShadow: '0px 0px 10px 0px #00000047'
@@ -145,12 +175,12 @@ export default function SamplesUI() {
                 <Grid container direction="row" justifyContent="center" alignItems="center">
                     <TextField variant="standard" value={search} onChange={e => setSearch(e.target.value)} />
                     <Pagination page={page} count={Math.ceil(count / 36)} onChange={handleChangePage} />
-                    <Button>
+                    <Button onClick={handleOpenCreate}>
                         <AddIcon />
                     </Button>
                 </Grid>
             </Paper>
-            <Grid container direction="column" alignItems="center" sx={{ height: 480 }}>
+            <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start" sx={{ height: 480, width: 'fit-content' }}>
                 {samples.map(s => <Sample key={s.id} id={s.id} name={s.name} handleEdit={handleEdit} handleDelete={handleDelete} />)}
             </Grid>
         </Grid>

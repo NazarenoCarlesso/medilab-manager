@@ -37,7 +37,7 @@ export default function PaymentsUI() {
     }, [token, role])
     // render component
     return (
-        <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
+        <Grid container direction="column" justifyContent="center" alignItems="flex-start">
             <Paper sx={{
                 width: 968, marginBottom: 0.25, marginTop: 0.1,
                 boxShadow: '0px 0px 10px 0px #00000047'
@@ -48,10 +48,8 @@ export default function PaymentsUI() {
                     </Button>
                 </Grid>
             </Paper>
-            <Grid container direction="column" alignItems="center" sx={{ height: 480 }}>
-                {payments
-                    .slice(0, 36)
-                    .map(o => <Payment key={o.id} id={o.id} />)}
+            <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start" sx={{ height: 480, width: 'fit-content' }}>
+                {payments.map(o => <Payment key={o.id} id={o.id} />)}
             </Grid>
         </Grid>
     )
