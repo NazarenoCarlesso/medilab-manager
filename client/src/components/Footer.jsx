@@ -36,7 +36,7 @@ export default function Footer() {
                             <Link to='/faq' className="text-reset">Preguntas Frecuentes</Link>
                         </li>
                         <li>
-                            <Link to='/about' className="text-reset">Politica de privacidad</Link>
+                            <Link to='/privacy-policies' className="text-reset">Política de privacidad</Link>
                         </li>     
                     </ul>
                     <ul className="text-light col-12 col-md-3 list-unstyled">
