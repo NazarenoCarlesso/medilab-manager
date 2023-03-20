@@ -24,7 +24,7 @@ export default function App() {
         <div className="App">
             <ThemeProvider theme={theme}>
                 <NavUI />
-                <div style={{ height: 69 }} />
+                <div className="route">
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/home" element={<Home />} />
@@ -41,6 +41,7 @@ export default function App() {
                     <Route path="/declined-payment" element={<DeclinedPayment/>} />
                     <Route path="/*" element={<Ops />} />
                 </Routes>
+                </div>
                 <Footer />
             </ThemeProvider>
         </div>
