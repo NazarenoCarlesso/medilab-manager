@@ -53,10 +53,10 @@ export default function PaymentDetail(props) {
       <Modal keepMounted open={showAlert} aria-labelledby="keep-mounted-modal-title" aria-describedby="keep-mounted-modal-description">
         <Box sx={style}>
           <div>
-            <Typography id="keep-mounted-modal-title" variant="h4" component="h2">
+            <Typography id="keep-mounted-modal-title" variant="h4" component="h2" style={{ fontFamily: "Raleway", fontWeight: "700" }}>
               Recibo de Pago
             </Typography>
-            <Typography id="keep-mounted-modal-description" variant="h5" sx={{ mt: 2 }}>
+            <Typography id="keep-mounted-modal-description" variant="h5" style={{ fontFamily: "Raleway", fontWeight: "500" }}>
               Puede consultar su validez al teléfono 123 456 789
             </Typography>
             <TableContainer component={Paper} sx={{ maxHeight: "300px" }}>
@@ -64,38 +64,78 @@ export default function PaymentDetail(props) {
                 <TableHead>
                   <TableRow>
                     <TableCell align="center" colSpan={2}>
-                      Id de Pago
+                      <Typography id="keep-mounted-modal-description" variant="h6" style={{ fontFamily: "Raleway", fontWeight: "700" }}>
+                        Id de Pago
+                      </Typography>
                     </TableCell>
-                    <TableCell align="center">{idToDetail}</TableCell>
+                    <TableCell align="center">
+                      <Typography id="keep-mounted-modal-description" variant="h6" style={{ fontFamily: "Raleway", fontWeight: "500" }}>
+                        {idToDetail}
+                      </Typography>
+                    </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell align="center" colSpan={2}>
-                      Fecha de Pago
+                      <Typography id="keep-mounted-modal-description" variant="h6" style={{ fontFamily: "Raleway", fontWeight: "700" }}>
+                        Fecha de Pago
+                      </Typography>
                     </TableCell>
                     <TableCell align="center">
-                      {date} {time}
+                      <Typography id="keep-mounted-modal-description" variant="h6" style={{ fontFamily: "Raleway", fontWeight: "500" }}>
+                        {date} {time}
+                      </Typography>
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align="center">Id</TableCell>
-                    <TableCell align="center">Producto</TableCell>
-                    <TableCell align="center">Precio</TableCell>
+                    <TableCell align="center">
+                      <Typography id="keep-mounted-modal-description" variant="h6" style={{ fontFamily: "Raleway", fontWeight: "700" }}>
+                        Id
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="center">
+                      <Typography id="keep-mounted-modal-description" variant="h6" style={{ fontFamily: "Raleway", fontWeight: "700" }}>
+                        Producto
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="center">
+                      <Typography id="keep-mounted-modal-description" variant="h6" style={{ fontFamily: "Raleway", fontWeight: "700" }}>
+                        Precio
+                      </Typography>
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {detailData.map((e, key) => (
                     <TableRow key={key} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                       <TableCell component="th" scope="row" align="center">
-                        {key + 1}
+                        <Typography id="keep-mounted-modal-description" variant="h6" style={{ fontFamily: "Raleway", fontWeight: "700" }}>
+                          {key + 1}
+                        </Typography>
                       </TableCell>
-                      <TableCell align="left">{e.name}</TableCell>
-                      <TableCell align="center">${e.price}.00</TableCell>
+                      <TableCell align="left">
+                        <Typography id="keep-mounted-modal-description" variant="h6" style={{ fontFamily: "Raleway", fontWeight: "500" }}>
+                          {e.name}
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="center">
+                        <Typography id="keep-mounted-modal-description" variant="h6" style={{ fontFamily: "Raleway", fontWeight: "500" }}>
+                          ${e.price}.00
+                        </Typography>
+                      </TableCell>
                     </TableRow>
                   ))}
                   <TableRow>
                     <TableCell align="left"></TableCell>
-                    <TableCell align="left">TOTAL</TableCell>
-                    <TableCell align="center">${detailData?.map((e) => e.price || 0).reduce((a, b) => a + b, 0)}.00</TableCell>
+                    <TableCell align="left">
+                      <Typography id="keep-mounted-modal-description" variant="h6" style={{ fontFamily: "Raleway", fontWeight: "700" }}>
+                        TOTAL
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="center">
+                      <Typography id="keep-mounted-modal-description" variant="h6" style={{ fontFamily: "Raleway", fontWeight: "700" }}>
+                        ${detailData?.map((e) => e.price || 0).reduce((a, b) => a + b, 0)}.00
+                      </Typography>
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>

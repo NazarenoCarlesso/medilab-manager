@@ -8,12 +8,16 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import ToggleButton from "react-bootstrap/ToggleButton";
-import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import { setAvatar, setName, setRole, setToken } from "../reducer";
 import { validateLogin, validateSignUp } from "../utils/validate";
 import GoogleSignIn from "./GoogleSignIn";
-
+import { Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import IconButton from "@mui/material/IconButton";
+import logo from "../images/logo3.png";
 const BACK = process.env.REACT_APP_BACK;
 
 export default function Signup(props) {
@@ -157,7 +161,12 @@ export default function Signup(props) {
           navigate("/dashboard");
         }
       } catch (error) {
-        const alertError = error.response.data?.msg;
+        let alertError = "";
+        if (error.response.data?.errors) {
+          alertError = "El Username no ha válidado su correo o no existe.";
+        } else {
+          alertError = error.response.data?.msg;
+        }
         alert(alertError);
       }
     }
@@ -221,395 +230,484 @@ export default function Signup(props) {
     }
   };
 
-  function handleSelect(e) {
-    const { innerText } = e.target;
-    if (innerText === "Registrarse") {
-      setSelectedForm("signup");
-    } else {
-      setSelectedForm("login");
-    }
-  }
-
   return (
-    <div style={{ textAlign: "center", margin: "auto", padding: "10px" }}>
-      {location.pathname === "/signup" ? (
-        <div style={{ margin: "2%" }}>
-          <ToggleButtonGroup type="radio" name="options" defaultValue={1} value={selectedForm === "login" ? 1 : 2}>
-            <ToggleButton value={1} id="tbg-radio-2" name="login" onClick={(e) => handleSelect(e)} variant="outline-primary">
-              Iniciar Sesión
-            </ToggleButton>
-            <ToggleButton value={2} id="tbg-radio-1" name="signup" onClick={(e) => handleSelect(e)} variant="outline-primary">
-              Registrarse
-            </ToggleButton>
-          </ToggleButtonGroup>
-        </div>
-      ) : null}
-
-      <div
-        style={
-          location.pathname === "/signup"
-            ? {
-                display: "inline-block",
-                padding: "2%",
-                backgroundColor: "white",
-                boxShadow: "0px 0px 10px gray",
-                margin: "auto",
-                padding: "10px",
-              }
-            : {
-                display: "inline-block",
-                padding: "2%",
-                backgroundColor: "white",
-                margin: "auto",
-                padding: "10px",
-              }
-        }
-      >
-        {/* Botón volver a login en "/cart" */}
-        {location.pathname === "/cart" ? (
-          selectedForm === "signup" ? (
-            <div style={{ position: "absolute", top: "10px", left: "10px" }}>
-              <Button variant="contained" onClick={() => setSelectedForm("login")}>
-                {"< Iniciar Sesión"}
-              </Button>
-            </div>
-          ) : null
+    <div style={{ display: "inline-block", marginTop: "10px" }}>
+      <div style={location.pathname === "/signup" ? { display: "flex", justifyContent: "center", width: "1200px", margin: "auto", marginTop: "0px" } : { display: "inline-block" }}>
+        {/* Imagen */}
+        {location.pathname === "/signup" ? (
+          <div style={{ width: "600px" }}>
+            <img src={logo} alt={logo} style={{ width: "600px", position: "fixed", top: "200px" }} />
+          </div>
         ) : null}
-        {/* Iniciar Sesión o registrarse con Google */}
-        <Row style={{ width: "300px", margin: "auto" }}>
-          {selectedForm === "signup" ? <p>Regístrese con Google</p> : <p>Inicie Sesión con Google</p>}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <GoogleSignIn />
-          </div>
-        </Row>
-        {/* Línea */}
-        <Row style={selectedForm === "login" ? { width: "300px", margin: "auto" } : { width: "650px", margin: "auto" }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-evenly",
-              marginTop: "2%",
-              marginBottom: "2%",
-            }}
-          >
-            <div style={{ borderBottom: "1px solid grey", width: "40%" }}></div>
-            <p style={{ textAlign: "center", margin: "0 10px" }}>O</p>
-            <div style={{ borderBottom: "1px solid grey", width: "40%" }}></div>
-          </div>
-        </Row>
+        {/* Formulario */}
+        <div style={location.pathname === "/signup" ? { textAlign: "center", margin: "auto", display: "flex", flexDirection: "column", alignItems: "center", width: "600px" } : { textAlign: "center", margin: "auto", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          {/* h2 iniciar sesion o registrarse */}
+          {location.pathname === "/signup" ? (
+            <div style={{ display: "flex", alignItems: "center" }}>
+              {selectedForm === "signup" ? (
+                <IconButton style={{ borderRadius: "50%", width: "60px", height: "60px" }}>
+                  <ArrowLeftIcon onClick={() => setSelectedForm("login")} style={{ width: "60px", height: "60px" }}></ArrowLeftIcon>
+                </IconButton>
+              ) : null}
 
-        {selectedForm === "signup" ? (
-          // Form register
-          <div style={{ width: "650px", margin: "auto" }}>
-            <Form
-              onSubmit={(e) => {
-                handleSubmitSignUp(e);
-              }}
-              style={{ width: "95%", margin: "auto" }}
-            >
-              <Row>
-                <Col>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Nombre(s)</Form.Label>
-                    <Form.Control
-                      name="firstName"
-                      onChange={(e) => {
-                        handleChangeSignUp(e);
-                      }}
-                      type="text"
-                      placeholder="Ingrese su(s) nombre(s)"
-                    />
-                    <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.firstName ? errorsUserSignUp.firstName : null}</p>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Apellido(s)</Form.Label>
-                    <Form.Control
-                      name="lastName"
-                      onChange={(e) => {
-                        handleChangeSignUp(e);
-                      }}
-                      type="text"
-                      placeholder="Ingrese su(s) apellido(s)"
-                    />
-                    <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.lastName ? errorsUserSignUp.lastName : null}</p>
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Nombre de usuario</Form.Label>
-                    <Form.Control
-                      name="username"
-                      onChange={(e) => {
-                        handleChangeSignUp(e);
-                      }}
-                      type="text"
-                      placeholder="Ingrese un nombre de usuario"
-                    />
-                    <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.username ? errorsUserSignUp.username : null}</p>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group className="mb-3">
-                    <Form.Label>DNI</Form.Label>
-                    <Form.Control
-                      name="dni"
-                      onChange={(e) => {
-                        handleChangeSignUp(e);
-                      }}
-                      type="text"
-                      placeholder="Ingrese su DNI"
-                    />
-                    <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.dni ? errorsUserSignUp.dni : null}</p>
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Número de teléfono</Form.Label>
-                    <Form.Control
-                      name="number"
-                      onChange={(e) => {
-                        handleChangeSignUp(e);
-                      }}
-                      type="text"
-                      placeholder="Ingrese su número de teléfono"
-                    />
-                    <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.number ? errorsUserSignUp.number : null}</p>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Correo Electrónico</Form.Label>
-                    <Form.Control
-                      name="email"
-                      onChange={(e) => {
-                        handleChangeSignUp(e);
-                      }}
-                      type="text"
-                      placeholder="Ingrese su correo electrónico"
-                    />
-                    <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.email ? errorsUserSignUp.email : null}</p>
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Género</Form.Label>
-                    <Row style={{ width: "90%", margin: "auto" }}>
-                      <Col>
-                        <Form.Check
-                          name="sex"
-                          value={"M"}
-                          checked={selectedSex === "M"}
-                          onChange={(e) => {
-                            handleChangeSignUp(e);
-                          }}
-                          type="checkbox"
-                          label="Hombre"
-                        />
-                      </Col>
-                      <Col>
-                        <Form.Check
-                          name="sex"
-                          value={"F"}
-                          checked={selectedSex === "F"}
-                          onChange={(e) => {
-                            handleChangeSignUp(e);
-                          }}
-                          type="checkbox"
-                          label="Mujer"
-                        />
-                      </Col>
-                    </Row>
-                    <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.sex ? errorsUserSignUp.sex : null}</p>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Altura (cm)</Form.Label>
-                    <Form.Control
-                      name="height"
-                      onChange={(e) => {
-                        handleChangeSignUp(e);
-                      }}
-                      type="text"
-                      placeholder="Ingrese su altura en cm"
-                    />
-                    <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.height ? errorsUserSignUp.height : null}</p>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Estado civil</Form.Label>
-                    <DropdownButton
-                      variant="outline-secondary"
-                      title={userSignUp.civilState === "" ? "Seleccione su estado civil" : userSignUp.civilState.charAt(0).toUpperCase() + userSignUp.civilState.slice(1)}
-                      name="civilState"
-                      onClick={(e) => {
-                        //console.log("event", e.target.name);
-                        if (e.target.name !== "") {
-                          handleChangeSignUp(e);
+              <Typography variant="h2" fontWeight={700} sx={{ fontFamily: "Raleway", margin: 4 }}>
+                {selectedForm === "login" ? `Iniciar Sesión` : `Registrarse`}
+              </Typography>
+              {selectedForm === "login" ? (
+                <IconButton style={{ borderRadius: "50%", width: "60px", height: "60px" }}>
+                  <ArrowRightIcon onClick={() => setSelectedForm("signup")} style={{ width: "60px", height: "60px" }}></ArrowRightIcon>
+                </IconButton>
+              ) : null}
+            </div>
+          ) : null}
+
+          <Box sx={{ display: "flex" }}>
+            <div>
+              {/* Iniciar Sesión */}
+              <Collapse orientation="horizontal" in={selectedForm === "login"}>
+                <div
+                  style={
+                    location.pathname === "/signup"
+                      ? {
+                          display: "inline-block",
+                          backgroundColor: "white",
+                          boxShadow: "0px 0px 10px gray",
+                          marginTop: "0px",
+                          padding: "10px",
                         }
+                      : {
+                          display: "inline-block",
+                          backgroundColor: "white",
+                          marginTop: "0px",
+                          padding: "10px",
+                        }
+                  }
+                >
+                  {/* Iniciar Sesión con Google */}
+                  {selectedForm === "login" ? (
+                    <Row style={{ width: "300px", margin: "auto" }}>
+                      <p>Inicie Sesión con Google</p>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <GoogleSignIn />
+                      </div>
+                    </Row>
+                  ) : null}
+                  {/* Línea */}
+                  <Row style={{ width: "300px", margin: "auto" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-evenly",
+                        marginTop: "2%",
+                        marginBottom: "2%",
                       }}
                     >
-                      <Dropdown.Item name="civilState" value="soltero">
-                        Soltero
-                      </Dropdown.Item>
-                      <Dropdown.Item name="civilState" value="casado">
-                        Casado
-                      </Dropdown.Item>
-                      <Dropdown.Item name="civilState" value="divorciado">
-                        Divorciado
-                      </Dropdown.Item>
-                      <Dropdown.Item name="civilState" value="viudo">
-                        Viudo
-                      </Dropdown.Item>
-                    </DropdownButton>
-                    <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.civilState ? errorsUserSignUp.civilState : null}</p>
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Contraseña</Form.Label>
-                    <Form.Control
-                      name="password"
-                      onChange={(e) => {
-                        handleChangeSignUp(e);
-                      }}
-                      type="password"
-                      placeholder="Ingrese una contraseña"
-                    />
-                    <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.password ? errorsUserSignUp.password : null}</p>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Confirme su contraseña</Form.Label>
-                    <Form.Control
-                      name="confirmPassword"
-                      onChange={(e) => {
-                        handleChangeSignUp(e);
-                      }}
-                      type="password"
-                      placeholder="Confirme su contraseña"
-                    />
-                    <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.confirmPassword ? errorsUserSignUp.confirmPassword : null}</p>
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Button
-                variant="contained"
-                color="success"
-                type="submit"
-                onClick={(e) => {
-                  showErrors(e);
-                }}
-                style={{ width: "30%" }}
-              >
-                Registrarse
-              </Button>
-            </Form>
-          </div>
-        ) : null}
+                      <div style={{ borderBottom: "1px solid grey", width: "40%" }}></div>
+                      <p style={{ textAlign: "center", margin: "0 10px" }}>O</p>
+                      <div style={{ borderBottom: "1px solid grey", width: "40%" }}></div>
+                    </div>
+                  </Row>
 
-        {selectedForm === "login" ? (
-          // Form Login
-          <div style={{ width: "300px", margin: "auto" }}>
-            <Form
-              onSubmit={(e) => {
-                handleSubmit(e);
-              }}
-              style={{
-                width: "90%",
-                margin: "auto",
-              }}
-            >
-              <Form.Group className="mb-3">
-                <Form.Label>Nombre de usuario</Form.Label>
-                <Form.Control
-                  name="username"
-                  onChange={(e) => {
-                    handleChange(e);
-                  }}
-                  type="text"
-                  placeholder="Ingrese su nombre de usuario"
-                />
-                <p style={{ color: "red", fontSize: "12px" }}>{user.touched.username ? errorsUser.username : null}</p>
-              </Form.Group>
-              <Form.Group className="mb-3" style={{ position: "relative" }}>
-                <Form.Label>Contraseña</Form.Label>
-                <Form.Control
-                  name="password"
-                  onChange={(e) => {
-                    handleChange(e);
-                  }}
-                  type="password"
-                  placeholder="Ingrese su contraseña"
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    fontSize: "12px",
-                    bottom: "-20px",
-                    right: "0px",
-                  }}
-                >
-                  <a href={"signup"}>¿Olvidaste tu contraseña?</a>
+                  {/* Formulario Iniciar sesión */}
+                  <div style={{ width: "300px", margin: "auto" }}>
+                    <Form
+                      onSubmit={(e) => {
+                        handleSubmit(e);
+                      }}
+                      style={{
+                        width: "90%",
+                        margin: "auto",
+                      }}
+                    >
+                      <Form.Group className="mb-3">
+                        <Form.Label>Nombre de usuario</Form.Label>
+                        <Form.Control
+                          name="username"
+                          onChange={(e) => {
+                            handleChange(e);
+                          }}
+                          type="text"
+                          placeholder="Ingrese su nombre de usuario"
+                        />
+                        <p style={{ color: "red", fontSize: "12px" }}>{user.touched.username ? errorsUser.username : null}</p>
+                      </Form.Group>
+                      <Form.Group className="mb-3" style={{ position: "relative" }}>
+                        <Form.Label>Contraseña</Form.Label>
+                        <Form.Control
+                          name="password"
+                          onChange={(e) => {
+                            handleChange(e);
+                          }}
+                          type="password"
+                          placeholder="Ingrese su contraseña"
+                        />
+                        <div
+                          style={{
+                            position: "absolute",
+                            fontSize: "12px",
+                            bottom: "-20px",
+                            right: "0px",
+                          }}
+                        >
+                          <a href={"signup"}>¿Olvidaste tu contraseña?</a>
+                        </div>
+                        <p style={{ color: "red", fontSize: "12px" }}>{user.touched.password ? errorsUser.password : null}</p>
+                      </Form.Group>
+
+                      <Button
+                        variant="contained"
+                        color="info"
+                        type="submit"
+                        onClick={(e) => {
+                          showErrors(e);
+                        }}
+                        style={{ marginTop: "5%", width: "150px" }}
+                      >
+                        Iniciar Sesión
+                      </Button>
+                      {/* Aún no tienes cuenta? */}
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          marginTop: "3%",
+                          alignItems: "center",
+                        }}
+                      >
+                        <div style={{ borderBottom: "1px solid grey", width: "90%", marginBottom: "2%" }}></div>
+
+                        <p>¿Aún no tienes cuenta?</p>
+                        <Button
+                          variant="contained"
+                          color="success"
+                          onClick={(e) => {
+                            setSelectedForm("signup");
+                          }}
+                          style={{ width: "150px" }}
+                        >
+                          Registrarse
+                        </Button>
+                      </div>
+                    </Form>
+                  </div>
                 </div>
-                <p style={{ color: "red", fontSize: "12px" }}>{user.touched.password ? errorsUser.password : null}</p>
-              </Form.Group>
-
-              <Button
-                variant="contained"
-                color="secondary"
-                type="submit"
-                onClick={(e) => {
-                  showErrors(e);
-                }}
-                style={{ marginTop: "5%", width: "150px" }}
-              >
-                Iniciar Sesión
-              </Button>
-              {/* Aún no tienes cuenta? */}
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  marginTop: "3%",
-                  alignItems: "center",
-                }}
-              >
-                <div style={{ borderBottom: "1px solid grey", width: "90%", marginBottom: "2%" }}></div>
-
-                <p>¿Aún no tienes cuenta?</p>
-                <Button
-                  variant="contained"
-                  color="success"
-                  onClick={(e) => {
-                    setSelectedForm("signup");
-                  }}
-                  style={{ width: "150px" }}
+              </Collapse>
+            </div>
+            <div style={selectedForm === "signup" ? null : { height: "0px" }}>
+              {/* Registrarse */}
+              <Collapse orientation="horizontal" in={selectedForm === "signup"}>
+                <div
+                  style={
+                    location.pathname === "/signup"
+                      ? {
+                          display: "inline-block",
+                          backgroundColor: "white",
+                          boxShadow: "0px 0px 10px gray",
+                          marginTop: "0px",
+                          padding: "10px",
+                        }
+                      : {
+                          display: "inline-block",
+                          backgroundColor: "white",
+                          marginTop: "0px",
+                          padding: "10px",
+                        }
+                  }
                 >
-                  Registrarse
-                </Button>
-              </div>
-            </Form>
-          </div>
-        ) : null}
+                  {/* Registrarse con Google */}
+                  {selectedForm === "signup" ? (
+                    <Row style={{ width: "300px", margin: "auto" }}>
+                      <p>Regístrese con Google</p>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <GoogleSignIn />
+                      </div>
+                    </Row>
+                  ) : null}
+                  {/* Botón volver a login en "/cart" */}
+                  {location.pathname === "/cart" ? (
+                    selectedForm === "signup" ? (
+                      <div style={{ position: "absolute", top: "10px", left: "10px" }}>
+                        <Button variant="contained" color="info" onClick={() => setSelectedForm("login")}>
+                          <ArrowLeftIcon /> Iniciar Sesión
+                        </Button>
+                      </div>
+                    ) : null
+                  ) : null}
+
+                  {/* Línea */}
+                  <Row style={{ width: "300px", margin: "auto" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-evenly",
+                        marginTop: "2%",
+                        marginBottom: "2%",
+                      }}
+                    >
+                      <div style={{ borderBottom: "1px solid grey", width: "40%" }}></div>
+                      <p style={{ textAlign: "center", margin: "0 10px" }}>O</p>
+                      <div style={{ borderBottom: "1px solid grey", width: "40%" }}></div>
+                    </div>
+                  </Row>
+                  {/* Formulario SignUp */}
+                  <div style={{ width: "300px", margin: "auto" }}>
+                    <Form
+                      onSubmit={(e) => {
+                        handleSubmitSignUp(e);
+                      }}
+                      style={{ width: "90%", margin: "auto" }}
+                    >
+                      {/* Nombre */}
+                      <Row>
+                        <Col>
+                          <Form.Group className="mb-3">
+                            <Form.Label>Nombre(s)</Form.Label>
+                            <Form.Control
+                              name="firstName"
+                              onChange={(e) => {
+                                handleChangeSignUp(e);
+                              }}
+                              type="text"
+                              placeholder="Ingrese su(s) nombre(s)"
+                            />
+                            <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.firstName ? errorsUserSignUp.firstName : null}</p>
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      {/* Apellido */}
+                      <Row>
+                        <Col>
+                          <Form.Group className="mb-3">
+                            <Form.Label>Apellido(s)</Form.Label>
+                            <Form.Control
+                              name="lastName"
+                              onChange={(e) => {
+                                handleChangeSignUp(e);
+                              }}
+                              type="text"
+                              placeholder="Ingrese su(s) apellido(s)"
+                            />
+                            <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.lastName ? errorsUserSignUp.lastName : null}</p>
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      {/* Nombre de Usuario */}
+                      <Row>
+                        <Col>
+                          <Form.Group className="mb-3">
+                            <Form.Label>Nombre de usuario</Form.Label>
+                            <Form.Control
+                              name="username"
+                              onChange={(e) => {
+                                handleChangeSignUp(e);
+                              }}
+                              type="text"
+                              placeholder="Ingrese un nombre de usuario"
+                            />
+                            <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.username ? errorsUserSignUp.username : null}</p>
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      {/* DNI */}
+                      <Row>
+                        <Col>
+                          <Form.Group className="mb-3">
+                            <Form.Label>DNI</Form.Label>
+                            <Form.Control
+                              name="dni"
+                              onChange={(e) => {
+                                handleChangeSignUp(e);
+                              }}
+                              type="text"
+                              placeholder="Ingrese su DNI"
+                            />
+                            <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.dni ? errorsUserSignUp.dni : null}</p>
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      {/* Número de teléfono */}
+                      <Row>
+                        <Col>
+                          <Form.Group className="mb-3">
+                            <Form.Label>Número de teléfono</Form.Label>
+                            <Form.Control
+                              name="number"
+                              onChange={(e) => {
+                                handleChangeSignUp(e);
+                              }}
+                              type="text"
+                              placeholder="Ingrese su número de teléfono"
+                            />
+                            <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.number ? errorsUserSignUp.number : null}</p>
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      {/* Correo electrónico */}
+                      <Row>
+                        <Col>
+                          <Form.Group className="mb-3">
+                            <Form.Label>Correo Electrónico</Form.Label>
+                            <Form.Control
+                              name="email"
+                              onChange={(e) => {
+                                handleChangeSignUp(e);
+                              }}
+                              type="text"
+                              placeholder="Ingrese su correo electrónico"
+                            />
+                            <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.email ? errorsUserSignUp.email : null}</p>
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      {/* Género */}
+                      <Row>
+                        <Col>
+                          <Form.Group className="mb-3">
+                            <Form.Label>Género</Form.Label>
+                            <Row style={{ width: "90%", margin: "auto" }}>
+                              <Col>
+                                <Form.Check
+                                  name="sex"
+                                  value={"M"}
+                                  checked={selectedSex === "M"}
+                                  onChange={(e) => {
+                                    handleChangeSignUp(e);
+                                  }}
+                                  type="checkbox"
+                                  label="Hombre"
+                                />
+                              </Col>
+                              <Col>
+                                <Form.Check
+                                  name="sex"
+                                  value={"F"}
+                                  checked={selectedSex === "F"}
+                                  onChange={(e) => {
+                                    handleChangeSignUp(e);
+                                  }}
+                                  type="checkbox"
+                                  label="Mujer"
+                                />
+                              </Col>
+                            </Row>
+                            <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.sex ? errorsUserSignUp.sex : null}</p>
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      {/* Altura */}
+                      <Row>
+                        <Col>
+                          <Form.Group className="mb-3">
+                            <Form.Label>Altura (cm)</Form.Label>
+                            <Form.Control
+                              name="height"
+                              onChange={(e) => {
+                                handleChangeSignUp(e);
+                              }}
+                              type="text"
+                              placeholder="Ingrese su altura en cm"
+                            />
+                            <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.height ? errorsUserSignUp.height : null}</p>
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      {/* Estado civil */}
+                      <Row>
+                        <Col>
+                          <Form.Group className="mb-3">
+                            <Form.Label>Estado civil</Form.Label>
+                            <DropdownButton
+                              variant="outline-secondary"
+                              title={userSignUp.civilState === "" ? "Seleccione su estado civil" : userSignUp.civilState.charAt(0).toUpperCase() + userSignUp.civilState.slice(1)}
+                              name="civilState"
+                              onClick={(e) => {
+                                //console.log("event", e.target.name);
+                                if (e.target.name !== "") {
+                                  handleChangeSignUp(e);
+                                }
+                              }}
+                            >
+                              <Dropdown.Item name="civilState" value="soltero">
+                                Soltero
+                              </Dropdown.Item>
+                              <Dropdown.Item name="civilState" value="casado">
+                                Casado
+                              </Dropdown.Item>
+                              <Dropdown.Item name="civilState" value="divorciado">
+                                Divorciado
+                              </Dropdown.Item>
+                              <Dropdown.Item name="civilState" value="viudo">
+                                Viudo
+                              </Dropdown.Item>
+                            </DropdownButton>
+                            <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.civilState ? errorsUserSignUp.civilState : null}</p>
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      {/* Contraseña */}
+                      <Row>
+                        <Col>
+                          <Form.Group className="mb-3">
+                            <Form.Label>Contraseña</Form.Label>
+                            <Form.Control
+                              name="password"
+                              onChange={(e) => {
+                                handleChangeSignUp(e);
+                              }}
+                              type="password"
+                              placeholder="Ingrese una contraseña"
+                            />
+                            <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.password ? errorsUserSignUp.password : null}</p>
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      {/* Confirmar contraseña */}
+                      <Row>
+                        <Col>
+                          <Form.Group className="mb-3">
+                            <Form.Label>Confirme su contraseña</Form.Label>
+                            <Form.Control
+                              name="confirmPassword"
+                              onChange={(e) => {
+                                handleChangeSignUp(e);
+                              }}
+                              type="password"
+                              placeholder="Confirme su contraseña"
+                            />
+                            <p style={{ color: "red", fontSize: "12px" }}>{userSignUp.touched.confirmPassword ? errorsUserSignUp.confirmPassword : null}</p>
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      <Button
+                        variant="contained"
+                        color="success"
+                        type="submit"
+                        onClick={(e) => {
+                          showErrors(e);
+                        }}
+                        style={{ width: "150px" }}
+                      >
+                        Registrarse
+                      </Button>
+                    </Form>
+                  </div>
+                </div>
+              </Collapse>
+            </div>
+          </Box>
+        </div>
       </div>
     </div>
   );
