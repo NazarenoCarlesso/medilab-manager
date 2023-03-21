@@ -65,3 +65,5 @@ Desactualizada
 ``` GET /doctors ``` devuelve todos los doctores
 
 ``` POST /verify/:id ``` valida usuario x mail
+
+``` POST /openai/ ``` Carga detalle del test

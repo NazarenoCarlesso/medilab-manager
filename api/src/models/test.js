@@ -12,8 +12,10 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING(100),
             allowNull: false
         },
+        ///////////////////////////////////
         description: {
-            type: DataTypes.TEXT,
+            type: DataTypes.TEXT('long'),
+            defaultValue: '',
             allowNull: true
         },
         price: {

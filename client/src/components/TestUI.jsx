@@ -24,13 +24,14 @@ export function DetailUI({ id, addToCart, removeFromCart }) {
     }, [id])
     // render component
     return (
-        <div className="TestUI" style={{ width: 900 }}>
+        <div className="TestUI" style={{ width: 900, color:'black', backgroundColor:'black' }}>
             <div className="content">
                 <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
-                    <div className="title" style={{ fontSize: '3rem', width: 600, height: 200 }}>{test.name}</div>
+                    <div className="title" style={{ fontSize: '3rem', backgroundColor:"black", width: 600, height: 200 }}>{test.name}</div>
                     <div className="price" style={{ fontSize: '4rem' }}>${test.price}.00</div>
                 </Grid>
-                <div className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at posuere eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</div>
+                <div className="description" style={{ fontSize: '16px', backgroundColor:"black", width: 600, height: 200 }}>
+                    <p>{test.description}</p></div>
             </div>
             {cart.includes(id)
                 ? <ButtonUI color='secondary' onClick={() => removeFromCart(id)} sx={{ minWidth: 200 }}>
