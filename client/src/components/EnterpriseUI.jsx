@@ -8,7 +8,7 @@ import EngineeringIcon from '@mui/icons-material/Engineering'
 export default function EnterpriseUI() {
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center"
-            sx={{ minHeight: 280, background: 'linear-gradient(59deg, rgb(122 138 255) 0%, rgb(64 123 255) 52%, rgb(25 234 255) 100%)' }}>
+            sx={{ minHeight: 280, background: 'linear-gradient(59deg, rgb(122 138 255) 0%, rgb(64 123 255) 52%, rgb(25 234 255) 100%)', maxWidth: "1500px", margin: "auto" }}>
             <Typography variant="h3" fontWeight={700} sx={{ fontFamily: 'Raleway', margin: 4 }}>
                 Medilab Manager es la mejor solución para tu laboratorio
             </Typography>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Button, Grid, Paper } from '@mui/material'
+import { Button, Grid, Paper} from '@mui/material'
 import SamplesUI from './SamplesUI'
 import ProfileUI from './ProfileUI'
 import CategoriesUI from './CategoriesUI'
@@ -18,8 +18,8 @@ export default function DashboardUI() {
     if (role === 'ADMIN') options = [...options, 'categories', 'samples']
     // render component
     return (
-        <Grid container direction="row" justifyContent="space-evenly" alignItems="center" sx={{ height: 540, width: '100%', backgroundColor: '#eaeaea' }}>
-            <Paper sx={{ width: 320 }}>
+        <Grid container direction="row" justifyContent="space-evenly" alignItems="center" sx={{ minHeight: "540px", maxWidth: '1500px', margin:"auto", backgroundColor: '#eaeaea'}}>
+            <Paper sx={{ width: "20%" }}>
                 <Grid container direction="column">
                     <ProfileUI />
                     {options.includes('orders')
@@ -56,7 +56,7 @@ export default function DashboardUI() {
                         : null}
                 </Grid>
             </Paper>
-            <Paper sx={{ width: 980, height: 526, padding: 0.5 }}>
+            <Paper sx={{ width: "75%", height: 526, padding: 0.5 }}>
                 {option === 'orders' ? <OrdersUI /> : null}
                 {option === 'payments' ? <Payments /> : null}
                 {option === 'categories' ? <CategoriesUI /> : null}

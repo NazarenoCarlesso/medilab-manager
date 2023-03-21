@@ -29,7 +29,7 @@ export default function PopularUI() {
     }
 
     return (
-        <Grid container direction="column" justifyContent="space-evenly" alignItems="center" >
+        <Grid container direction="column" justifyContent="space-evenly" alignItems="center" style={{maxWidth: "1500px", margin: "auto"}}>
             <Typography variant="h3" fontWeight={700} sx={{ fontFamily: 'Raleway', margin: 4 }}>
                 Exámenes mas populares
             </Typography>
