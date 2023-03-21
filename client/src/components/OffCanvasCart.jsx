@@ -352,7 +352,7 @@ export default function OffCanvasCart(props) {
                 </Form>
               </Accordion.Body>
             </Accordion.Item>
-              <MercadoPago setShowAlert={setShowAlert}/>
+              <MercadoPago/>
             <Accordion.Item eventKey="2">
               <Accordion.Header>CryptoPago</Accordion.Header>
               <Accordion.Body>
