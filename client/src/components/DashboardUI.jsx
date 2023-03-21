@@ -5,7 +5,8 @@ import SamplesUI from './SamplesUI'
 import ProfileUI from './ProfileUI'
 import CategoriesUI from './CategoriesUI'
 import OrdersUI from './OrdersUI'
-import PaymentsUI from './PaymentsUI'
+// import PaymentsUI from './PaymentsUI'
+import Payments from './Payments'
 
 export default function DashboardUI() {
     // get role from store
@@ -23,7 +24,7 @@ export default function DashboardUI() {
                     <ProfileUI />
                     {options.includes('orders')
                         ? <Button
-                            sx={{ margin: 0.5, boxShadow: '0px 0px 10px 0px #00000047' }}
+                            sx={{ margin: 0.5, boxShadow: '0px 0px 10px 0px #00000047', fontFamily: 'Raleway' }}
                             variant={option === 'orders' ? 'contained' : 'outlined'}
                             onClick={() => { setOption('orders') }}>
                             Ordenes
@@ -31,7 +32,7 @@ export default function DashboardUI() {
                         : null}
                     {options.includes('payments')
                         ? <Button
-                            sx={{ margin: 0.5, boxShadow: '0px 0px 10px 0px #00000047' }}
+                            sx={{ margin: 0.5, boxShadow: '0px 0px 10px 0px #00000047', fontFamily: 'Raleway' }}
                             variant={option === 'payments' ? 'contained' : 'outlined'}
                             onClick={() => { setOption('payments') }}>
                             Pagos
@@ -39,7 +40,7 @@ export default function DashboardUI() {
                         : null}
                     {options.includes('categories')
                         ? <Button
-                            sx={{ margin: 0.5, boxShadow: '0px 0px 10px 0px #00000047' }}
+                            sx={{ margin: 0.5, boxShadow: '0px 0px 10px 0px #00000047', fontFamily: 'Raleway' }}
                             variant={option === 'categories' ? 'contained' : 'outlined'}
                             onClick={() => { setOption('categories') }}>
                             Categorias
@@ -47,7 +48,7 @@ export default function DashboardUI() {
                         : null}
                     {options.includes('samples')
                         ? <Button
-                            sx={{ margin: 0.5, boxShadow: '0px 0px 10px 0px #00000047' }}
+                            sx={{ margin: 0.5, boxShadow: '0px 0px 10px 0px #00000047', fontFamily: 'Raleway' }}
                             variant={option === 'samples' ? 'contained' : 'outlined'}
                             onClick={() => { setOption('samples') }}>
                             Muestras
@@ -57,7 +58,7 @@ export default function DashboardUI() {
             </Paper>
             <Paper sx={{ width: 980, height: 526, padding: 0.5 }}>
                 {option === 'orders' ? <OrdersUI /> : null}
-                {option === 'payments' ? <PaymentsUI /> : null}
+                {option === 'payments' ? <Payments /> : null}
                 {option === 'categories' ? <CategoriesUI /> : null}
                 {option === 'samples' ? <SamplesUI /> : null}
             </Paper>
