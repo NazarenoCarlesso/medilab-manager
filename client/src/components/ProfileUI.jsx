@@ -47,8 +47,8 @@ export default function ProfileUI() {
                     <Avatar alt={user.name} referrerPolicy="no-referrer" src={user.photo} sx={{ width: 100, height: 100 }}/>
                     <div className="SelectAvatar"
                         onClick={handleOpen} 
-                        onMouseOver={()=> document.getElementById("selectedAvatar").hidden = false}
-                        onMouseOut={()=> document.getElementById("selectedAvatar").hidden = true}><EditIcon id="selectedAvatar" hidden={true} sx={{fontSize:50, color: "#5080FD"}}/></div>
+                        onMouseOver={()=> document.getElementById("selectedAvatar").style.visibility = "visible"}
+                        onMouseOut={()=> document.getElementById("selectedAvatar").style.visibility = "hidden"}><EditIcon visibility="hidden" id="selectedAvatar" sx={{fontSize:50, color: "#5080FD"}}/></div>
                 </div>
                 <Modal className="ModalAvatar" open={open} onClose={handleClose}>
                     <Paper className="AvatarUI" sx={{background:"#FFFFFF"}}>
