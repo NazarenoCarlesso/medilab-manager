@@ -1,4 +1,4 @@
-import  {React, useState, useEffect   } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import QuoterContainer from './QuoterContainer'
 import PopularUI from './PopularUI'
@@ -12,12 +12,10 @@ import Comment from './Comment'
 
 
 export default function Home() {
-
     const toke = useSelector((state) => state.token);
-
     const [mostrarBoton, setMostrarBoton] = useState(false);
 
- 
+
     useEffect(() => {
         if (toke) {
             setMostrarBoton(true);
@@ -33,12 +31,13 @@ export default function Home() {
             <PopularUI />
             <ReviewsUI />
             <Contact />
-         
-            {mostrarBoton && ( <button type="button" class="btn btn-primary" 
-            style={{position: "fixed",transform: "rotate(270deg)", bottom: "70%", right: "-10px",alignContent: "center",
-            }} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+
+            {mostrarBoton && (<button type="button" class="btn btn-primary"
+                style={{fontFamily:"Lato, Arial, sans-serif",borderRadius:"0px 10px 15px 10px",
+                    position: "fixed", transform: "rotate(270deg)", bottom: "70%", width:"100px", height:"40px", right: "-10px", alignContent: "center",
+                }} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Comentar</button>)}
-        
+
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
