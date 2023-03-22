@@ -21,6 +21,7 @@ export default function Comment() {
     const toke = useSelector((state) => state.token);
     const [errors, setErrors] = useState({ comment: "" });
     const [input, setInput] = useState({ comment: "" })
+  
 
     function handleInputChange(e) {
         setInput({
@@ -31,20 +32,35 @@ export default function Comment() {
         }))
     }
 
-    const handleComment = (token) => {
-        var mHeaders = new Headers({ 'token': token, 'Content-Type': 'application/json', });
-        fetch(`${BACK}/reviews`, {
-            method: 'POST',
-            headers: mHeaders,
-            body: JSON.stringify({ "content": input.comment })
-        })
-            .then(response => {
-                return response.json()
+    const handleComment = async (token) => {
+        try {
+            var mHeaders = new Headers({ 'token': token, 'Content-Type': 'application/json', });
+            await fetch(`${BACK}/reviews`, {
+                method: 'POST',
+                headers: mHeaders,
+                body: JSON.stringify({ "content": input.comment })
             })
-            .catch(error => {
-                console.log('Error fetching comment:-------------------->', error);
-            });
+                .then(response => {
+                    //return response.json()
+                    if (response.status === 400) {
+                        alert("comentario no publicado")
+                    } else if(response.status === 401) {
+                        alert("Token necesario")
+                    }else{alert("Comentario cargado con éxito")}
+                })
+                // .then(data => {
+                //     //     alert(JSON.stringify(data.errors))
+                //     // }
+                //     if(data){alert("comentario no publicado") }
+                // })
+                .catch(error => {
+                    console.error('Error fetching comment:', error);
+                });
+        } catch (error) {
+            console.error('Error inesperado:', error.data);
+        }
     }
+
 
     const handleSubmit = (e) => {
         e.preventDefault("");
