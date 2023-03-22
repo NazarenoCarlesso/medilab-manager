@@ -60,7 +60,7 @@ const handleSubmit = async (e)=>{
     } catch (error) {
       setLoading(false)
       setImage("Error")
-      setFileName("Se produjo un error en la carga")
+      setFileName(`Se produjo un error en la carga:  ${error.response.data.msg} `)
     }
 }
 
@@ -70,12 +70,12 @@ const handleSubmit = async (e)=>{
             <input type="file" accept=".jpg, .png" className='inputfield' hidden
             onChange={(e)=>{uploadHandler(e)}}></input>
             {loading ? 
-            <div class="loader3">
-              <div class="circle1"></div>
-              <div class="circle1"></div>
-              <div class="circle1"></div>
-              <div class="circle1"></div>
-              <div class="circle1"></div>
+            <div className="loader3">
+              <div className="circle1"></div>
+              <div className="circle1"></div>
+              <div className="circle1"></div>
+              <div className="circle1"></div>
+              <div className="circle1"></div>
             </div>
             :   image === "Check" ?
                   <> <TaskAltIcon sx={{fontSize: 100, color: "#00aa0e"}}/></> : null ||
