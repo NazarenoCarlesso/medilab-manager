@@ -33,32 +33,18 @@ export default function Comment() {
     }
 
     const handleComment = async (token) => {
-        try {
             var mHeaders = new Headers({ 'token': token, 'Content-Type': 'application/json', });
             await fetch(`${BACK}/reviews`, {
                 method: 'POST',
                 headers: mHeaders,
                 body: JSON.stringify({ "content": input.comment })
             })
-                .then(response => {
-                    //return response.json()
-                    if (response.status === 400) {
-                        alert("comentario no publicado")
-                    } else if(response.status === 401) {
-                        alert("Token necesario")
-                    }else{alert("Comentario cargado con éxito")}
+                .then((res)=> {
+                    if(res.status === 400) return res.json()    //Si falló algo en el back, te devuelve un array con los errores
+                    if(res.status === 401) return "Fallo en el servidor" //Fallo el token pero el cliente no sabe qué es eso
                 })
-                // .then(data => {
-                //     //     alert(JSON.stringify(data.errors))
-                //     // }
-                //     if(data){alert("comentario no publicado") }
-                // })
-                .catch(error => {
-                    console.error('Error fetching comment:', error);
-                });
-        } catch (error) {
-            console.error('Error inesperado:', error.data);
-        }
+                .then((res)=>(res.errors.map((error)=> {return error.msg}))) //Te da el array con los errores, el mayor numero es 2 (esta vacio y es menor a 16)
+                //El formulario controlado debería evitar que el servidor responda con los mismos errores, se resuelve evitando el post del formulario si hay errores
     }
 
 
