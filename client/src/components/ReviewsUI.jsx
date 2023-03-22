@@ -39,8 +39,8 @@ export default function ReviewsUI() {
     }, [])
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center"
-            sx={{ background: 'radial-gradient(26.76% 85.52% at 86.73% -12.86%,#41f6ff 6.65%,#5783ff 100%)', minHeight: 400 }}>
-            <Typography variant="h3" fontWeight={700} sx={{ fontFamily: 'Raleway', margin: 4 }}>
+            sx={{ background: 'linear-gradient(293deg,#5CE1E6  0%, #071b4b 100%)', minHeight: 400 }}>
+            <Typography variant="h4" fontWeight={700} sx={{ fontFamily: 'Raleway', margin: 4, color:'white' }}>
                 Mirá lo que opinan los pacientes de nosotros
             </Typography>
             <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
