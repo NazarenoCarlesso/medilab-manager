@@ -15,7 +15,6 @@ import DashboardUI from "./components/DashboardUI"
 import SuccessfulPayment from "./components/SuccessfulPayment";
 import DeclinedPayment from "./components/DeclinedPayment";
 import PrivacyPolicies from './components/PrivacyPolicies';
-import Comment from "./components/Comment"
 // styles
 import { Experimental_CssVarsProvider as ThemeProvider } from '@mui/material/styles'
 import theme from './theme'
@@ -42,7 +41,6 @@ export default function App() {
                     <Route path="/successful-payment" element={<SuccessfulPayment />} />
                     <Route path="/declined-payment" element={<DeclinedPayment />} />
                     <Route path="/privacy-policies" element={<PrivacyPolicies />} />
-                    <Route path="/comment" element={<Comment />} />
                     <Route path="/*" element={<Ops />} />
                 </Routes>
                 </div>
