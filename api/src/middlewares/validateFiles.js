@@ -10,7 +10,7 @@ const validateImg = (req, res, next) => {
     const { archivo } = req.files
     const [, extension] = archivo.name.split('.')
 
-    if (!['png', 'jpg'].includes(extension)) res.status(400).json({ msg: 'Extension no es válida' })
+    if (!['png', 'jpg', 'PNG', 'JPG'].includes(extension)) return res.status(400).json({ msg: 'Extension no es válida' })
 
     req.ext = extension
     next()
