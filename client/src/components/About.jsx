@@ -49,9 +49,9 @@ export default function About() {
   ];
 
   return (
-    <div className="container">
+    <div className="container" style={{marginTop:80}}>
       <div className={styles.aboutTitle}>
-        <p>Nuestro Equipo:</p>
+        Nuestro Equipo:
         <hr />
       </div>
 

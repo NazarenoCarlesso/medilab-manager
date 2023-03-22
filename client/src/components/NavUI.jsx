@@ -50,9 +50,9 @@ export default function NavUI() {
             <Container   maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography variant="h6" noWrap component={Link} to="/" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontWeight: 600, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none' }}>
-                        <img src="img/nav.png" alt="nav" style={{ height: 35 }} />
+                        <img src="img/nav.png" alt="nav" style={{ height: 35}} />
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }}}>
                         <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
                             <MenuIcon />
                         </IconButton>

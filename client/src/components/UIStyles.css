@@ -11,49 +11,54 @@
     position: relative;
     cursor: pointer;
     border-radius: 15px;
-    background: linear-gradient(293deg,white 0%, #d9f7f8 100%);
+    /* background: linear-gradient(293deg,white 0%, #d9f7f8 100%); */
     box-shadow: rgba(20, 20, 52, 0.599) 0px 50px 100px -20px, rgba(0, 0, 0, 0.632) 0px 30px 60px -30px;
     overflow: hidden;
 }
 
+.TestUI .content {
+    width: 100%;
+    margin: 0;
+}
 
-.TestUI .content :hover{
+/* .TestUI .content:hover{
     transform: scale(1.03);
     box-shadow: 0px 0px 30px 1px rgba(109, 237, 239, 0.3);
-}
+} */
 
-.TestUI .content {
-    padding: 0px 6px;
-}
+
 
 .TestUI .content .price {
-    color: white;
-    font-weight: 800;
-    font-size: 50px;
-    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.42);
+    color: #000;
+    font-size: 4rem;
+    font-weight: 800;    
+    width: 100%;
 }
 
 .TestUI .content .description {
-    color: rgba(255, 255, 255, 0.6);
-    margin-top: 10px;
-    font-size: 14px;
-    height: 120px;
-    margin-bottom: 10px;
+    color: #000;
+    font-size: 1.2rem;
+    width: 100%;
+    padding-left: 20px;
+    display: flex; 
+    text-align: center;   
+    justify-content: center;
+    align-items: center; 
 }
 
 .TestUI .content .title {
+    display: flex; 
+    text-align: center;   
+    justify-content: center;
+    align-items: center; 
+    font-size: 2rem;   
     font-weight: 800;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.64);
-    margin-top: 0px;
-    font-size: 25px;
+    color: #000;    
     letter-spacing: 1px;
-    height: 110px;
-    width: 220px;
+    width: 100%;
+    height: auto;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .TestUI button {
@@ -68,13 +73,13 @@
 }
 
 .TestUI button:hover{
-    background: linear-gradient(293deg, rgb(185, 185, 255) 0%, rgb(72, 225, 255) 100%);;
+    background: linear-gradient(293deg, rgb(185, 185, 255) 0%, rgb(72, 225, 255) 100%);
     color: white;
     -webkit-text-fill-color: white;
     -webkit-text-stroke: .5px;
 }
 
-.TestUI  .name {
+.TestUI .name {
     font-weight: 800;
     text-transform: uppercase;
     background: #5CE1E6;
@@ -101,7 +106,7 @@
     text-shadow: 0px 0px 10px rgba(5, 157, 168, 0.42);
 }
 
-.TestUI  .sample {
+.TestUI .sample {
     color: rgb(25, 138, 176) ;
     width: 95%;
     height: 25%;
@@ -134,4 +139,3 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
-

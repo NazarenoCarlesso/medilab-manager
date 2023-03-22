@@ -7,7 +7,7 @@ import Contact from './Contact'
 
 export default function Home() {
     return (
-        <div>
+        <div style={{marginTop: 100}}>
             <QuoterContainer />
             <EnterpriseUI />
             <PopularUI />

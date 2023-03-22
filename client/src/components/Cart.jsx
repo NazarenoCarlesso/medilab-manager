@@ -83,7 +83,7 @@ export default function Cart() {
     <div
       style={{
         margin: "auto",
-        paddingTop: "2%",
+        paddingTop: "6%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -99,7 +99,7 @@ export default function Cart() {
           <Typography variant="h5" fontWeight={700} sx={{ fontFamily: "Raleway", margin: 4 }}>
             Busca entre todos nuestros test el que necesites
           </Typography>
-          <Button variant="contained" color="success" size="large" as={Link} to="/search" style={{ textDecoration: "none", color: "black" }}>
+          <Button variant="contained" color="success" size="large" as={Link} to="/search" style={{ textDecoration: "none", color: "white" }}>
             BUSCA TU TEST
           </Button>
         </div>
