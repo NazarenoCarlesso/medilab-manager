@@ -88,7 +88,7 @@ const testGenerator = async () => {
         price: test.precio && test.precio !== '-' ? Number(test.precio) : null,
         time: test.tiempo_resultado ? test.tiempo_resultado : '5 horas',
         testCategoryId: test.categoria !== '-' ? fromString(test.categoria.toString()) : null,
-        SampleId: test.muestra !== '-' ? fromString(test.muestra.toString()) : null
+        SampleId: (test.muestra !== '-'&& test.muestra !=='') ? fromString(test.muestra.toString()) : null
     })))
 }
 
