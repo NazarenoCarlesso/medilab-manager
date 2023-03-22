@@ -1,6 +1,6 @@
 const mercadopago = require("mercadopago");
 const {models} = require('../db.js')
-const { ACCESS_TOKEN, REACT_APP_FRONT } = process.env;
+const { ACCESS_TOKEN, FRONT } = process.env;
 const {Test} = models
 
 
@@ -21,8 +21,8 @@ const createPayment = async (items) => {
     }),
 
     back_urls: {
-      success: `${REACT_APP_FRONT}/successful-payment`,
-      failure: `${REACT_APP_FRONT}/declined-payment`,
+      success: `${FRONT}/successful-payment`,
+      failure: `${FRONT}/declined-payment`,
       pending: "",
     },
     auto_return: "approved",
