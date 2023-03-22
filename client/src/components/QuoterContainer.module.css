@@ -1,8 +1,29 @@
 .quoter.container{
-    background: linear-gradient(293deg, rgba(240, 248, 255, 0.8) 0%,rgba(83, 214, 232, 0.8) 100%);
+    /*background: linear-gradient(293deg, rgba(240, 248, 255, 0.8) 0%,rgba(83, 214, 232, 0.8) 100%);*/
+    background: #fff;
     box-shadow:0 2px 20px grey;
     border-radius: 20px;
     padding: 10px;
     margin-left: 10%;
     margin-right: 10%;
+    margin-bottom: 5%;
+}
+.quoterButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 24px;
+    border: 1px solid #5BC0C0;
+    border-radius: 10px;
+    color: #2a8888;
+    background-color: #fff;    
+    height: 160px;
+    transition: all 300ms;
+}
+.quoterButton:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    background: linear-gradient(293deg,#5CE1E6  0%, #071b4b 100%);
+    color: #ffffff;
 }

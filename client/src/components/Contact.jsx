@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import * as Icon from "react-bootstrap-icons";
-import style from "./Contact.module.css";
+import cstyles from "./Contact.module.css";
 
 import React, { useState } from "react";
 import { validateContact } from "../utils/validate";
@@ -93,12 +93,10 @@ export default function Contact() {
 
   return (
     <Container>
-      <Row className={style.contactTitle}>
-        <p>Contáctanos</p>
-      </Row>
+      <div className={cstyles.contactTitle}>Contáctanos</div>
       <Row>
         <Col>
-          <div className={style.contactBox}>
+          <div className={cstyles.contactBox}>
             <p>
               ¿Tienes alguna duda o necesitas ayuda con nuestros productos y
               servicios? Nos encantaría escuchar de ti. Puedes comunicarte con
@@ -115,7 +113,7 @@ export default function Contact() {
         <Col md="6">
           <Row>
             <Col>
-              <div className={style.infoBox}>
+              <div className={cstyles.infoBox}>
                 <Icon.GeoAlt size={35} />
                 <h3>Dirección</h3>
                 <p>
@@ -125,7 +123,7 @@ export default function Contact() {
               </div>
             </Col>
             <Col>
-              <div className={style.infoBox}>
+              <div className={cstyles.infoBox}>
                 <Icon.Telephone size={35} />
                 <h3>Llámenos</h3>
                 <p>
@@ -138,7 +136,7 @@ export default function Contact() {
           </Row>
           <Row>
             <Col>
-              <div className={style.infoBox}>
+              <div className={cstyles.infoBox}>
                 <Icon.GeoAlt size={35} />
                 <h3>Email</h3>
                 <p>
@@ -148,7 +146,7 @@ export default function Contact() {
               </div>
             </Col>
             <Col>
-              <div className={style.infoBox}>
+              <div className={cstyles.infoBox}>
                 <Icon.Clock size={35} />
                 <h3>Horario</h3>
                 <p>
@@ -161,7 +159,7 @@ export default function Contact() {
           </Row>
         </Col>
         <Col md="6">
-          <div className={style.contactBox}>
+          <div className={cstyles.contactBox}>
             <Form noValidate onSubmit={(e) => handleSubmit(e)}>
               <Row className="mb-3">
                 <Form.Group as={Col} md="6">

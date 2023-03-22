@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 
 export default function Faq() {
   return (
-    <div className="container">
+    <div className="container" style={{marginTop: 80}}>
       <div className={styles.faqTitle}>
-        <p>Preguntas Frecuentes:</p>
+        Preguntas Frecuentes:
       </div>
       <div className={styles.faqFondo}>
         <h4>

@@ -24,20 +24,20 @@ export function DetailUI({ id, addToCart, removeFromCart }) {
     }, [id])
     // render component
     return (
-        <div className="TestUI" style={{ width: 900, color:'black', backgroundColor:'black' }}>
+        <div className='TestUI' style={{ width: '100%', color:'black', backgroundColor:'white', borderRadius:"10px" }}>
             <div className="content">
                 <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
-                    <div className="title" style={{ fontSize: '3rem', backgroundColor:"black", width: 600, height: 200 }}>{test.name}</div>
-                    <div className="price" style={{ fontSize: '4rem' }}>${test.price}.00</div>
+                    <div className="title">{test.name}</div>
+                    <div className="price">${test.price}.00</div>
                 </Grid>
-                <div className="description" style={{ fontSize: '16px', backgroundColor:"black", width: 600, height: 200 }}>
+                <div className="description">
                     <p>{test.description}</p></div>
             </div>
             {cart.includes(id)
-                ? <ButtonUI color='secondary' onClick={() => removeFromCart(id)} sx={{ minWidth: 200 }}>
+                ? <ButtonUI color='secondary' onClick={() => removeFromCart(id)} sx={{ minWidth: 200}}>
                     Quitar del carrito
                 </ButtonUI>
-                : <Button onClick={() => addToCart(id)} sx={{ minWidth: 200 }}>
+                : <Button onClick={() => addToCart(id)} sx={{ minWidth: 200, border:'1px solid #5080FD'  }}>
                     Agregar al carrito
                 </Button>}
         </div>
@@ -46,7 +46,7 @@ export function DetailUI({ id, addToCart, removeFromCart }) {
 
 const ButtonUI = styled(Button)(({ theme }) => ({
     color:"white",
-    background: 'linear-gradient(293deg, rgb(185, 185, 255) 0%, rgb(72, 225, 255) 100%);;',
+    background: 'linear-gradient(293deg, rgb(185, 185, 255) 0%, rgb(72, 225, 255) 100%);',
     '&:hover': { backgroundColor: '#d70000' }
 }))
 
@@ -76,9 +76,8 @@ export default function TestUI({ id, name, description, price, index }) {
                 <Modal open={open} onClose={handleClose}>
                     <Paper sx={{
                         position: 'absolute', top: '50%', left: '50%',
-                        transform: 'translate(-50%, -50%)', width: 900,
-                        bgcolor: 'transparent', backgroundImage: 'none',
-                        boxShadow: 'none'
+                        transform: 'translate(-50%, -50%)', width: '60%',
+                        bgcolor: 'transparent'
                     }}>
                         {open
                             ? <DetailUI id={id}

@@ -1,58 +1,41 @@
 import { Link } from "react-router-dom";
-import Badge from 'react-bootstrap/esm/Badge'
-import test from "../images/test.png"
-import result from "../images/results.png"
-import Button from "react-bootstrap/esm/Button";
-import styles from './QuoterContainer.module.css';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom'
+import test from "../images/test.png";
+import result from "../images/results.png";
+import qstyles from "./QuoterContainer.module.css";
 
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function QuoterContainer() {
-    const navigate = useNavigate();
-    const token = useSelector((state) => state.token);
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.token);
 
-    function handleClick() {
-      if (token) {
-        navigate("/dashboard");
-      } else {
-        navigate("/signup");
-      }
+  function handleClick() {
+    if (token) {
+      navigate("/dashboard");
+    } else {
+      navigate("/signup");
     }
+  }
 
   return (
-    <div className="container pt-4 mb-4" style={{ width: '100vw', maxWidth: '100%', textAlign: 'center' }}>
-        <Badge bg='white' className={`row ${styles.quoter} ${styles.container}`} style={{width: "1100px", height: "250px"}}>
-            <div className=" text-info row justify-content-center">
-                <div className="col-4 p-4">
-                    <h3 className="pt-4">Bienvenido</h3>
-                    <h5>¿Qué te gustaría hacer hoy?</h5>    
-                </div>
-                <div className="col-4 pt-4">
-                    
-                    <Button 
-                            style={{ height: '160px'}}
-                            className="p-4 fs-4"
-                            variant="outline-info" 
-                            as={Link} 
-                            to={`/search`}>
-                        <img src={test} className="mx-2 p-2" style={{ height: '90px'}} alt=""/>Cotizar analisis
-                           
-                    </Button>
-                  
-                </div>
-                <div className="col-4 pt-4">
-                    <Button 
-                            style={{ height: '160px'}}
-                            className="p-4 fs-4"
-                            variant="outline-success" 
-                            onClick={handleClick}>
-                        <img src={result} className="mx-2 p-2" style={{ height: '90px'}} alt=""/>
-                            Ver resultados
-                    </Button>
-                </div>
-            </div>     
-        </Badge>
+    <div className={`${qstyles.quoter} ${qstyles.container}`}>
+      <div className="row p-5">
+        <div className="col-sm-12 col-md-12 col-lg-4 text-center p-4">
+          <h2 className="p-4">Bienvenido</h2>
+          <h5>¿Qué te gustaría hacer hoy?</h5>
+        </div>
+        <div className="col-sm-12 col-md-6 col-lg-4 p-4">
+          <Link variant={Link} to={`/search`} className={qstyles.quoterButton}>
+            <img src={test} className="mx-2 p-2" style={{ height: "90px" }}alt="Cotizar Análisis" /> Cotizar análisis
+          </Link>
+        </div>
+        <div className="col-sm-12 col-md-6 col-lg-4 p-4">
+          <div className={qstyles.quoterButton} as="Link" style={{ height: "160px" }} onClick={handleClick}>
+            <img src={result}className="mx-2 p-2" style={{ height: "90px" }} alt="Ver Resultados" /> Ver resultados
+          </div>
+        </div>
+      </div>
     </div>
-)
+  );
 }

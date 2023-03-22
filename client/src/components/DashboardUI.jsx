@@ -18,7 +18,7 @@ export default function DashboardUI() {
     if (role === 'ADMIN') options = [...options, 'categories', 'samples']
     // render component
     return (
-        <Grid container direction="row" justifyContent="space-evenly" alignItems="center" sx={{ height: 540, width: '100%', backgroundColor: '#eaeaea' }}>
+        <Grid container direction="row" justifyContent="space-evenly" alignItems="center" sx={{ height: 540, width: '100%', backgroundColor: '#eaeaea', marginTop:9 }}>
             <Paper sx={{ width: 320 }}>
                 <Grid container direction="column">
                     <ProfileUI />
