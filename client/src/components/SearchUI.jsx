@@ -43,7 +43,7 @@ export default function TestsUI() {
             <Typography variant="h3" fontWeight={750} style={{margin: "1%"}} sx={{ fontFamily: 'Raleway', width: 600, whiteSpace:'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}}>
                 Todos nuestros Exámenes
             </Typography>
-            <Paper className='PaperContainer' sx={(theme)=>({background: theme.palette.secondary.main})} style={{margin: "1%"}}>
+            <Paper className='PaperContainer' sx={(theme)=>({background: theme.palette.search.main})} style={{margin: "1%"}}>
                     <FormControl sx={{padding: 1, width: 400}}>
                         <TextField value={search} onChange={e => setSearch(e.target.value)} id="outlined-search" label="Buscar" type="search"/>
                         <FormHelperText>Ingrese el nombre del exámen</FormHelperText>
