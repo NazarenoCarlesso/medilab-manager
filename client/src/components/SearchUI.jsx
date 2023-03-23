@@ -16,7 +16,7 @@ export default function TestsUI() {
     const [search, setSearch] = useState('')
     const [page, setPage] = useState(1)
     const [count, setCount] = useState(1)
-    console.log(tests);
+
 
     useEffect(() => {
         fetch(`${BACK}/tests/search/?search=${search}&page=${page}&limit=5`)
