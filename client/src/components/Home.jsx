@@ -33,8 +33,9 @@ export default function Home() {
             <Contact />
 
             {mostrarBoton && (<button type="button" class="btn btn-primary"
-                style={{fontFamily:"Lato, Arial, sans-serif",borderRadius:"0px 10px 15px 10px",
-                    position: "fixed", transform: "rotate(270deg)", bottom: "70%", width:"100px", height:"40px", right: "-10px", alignContent: "center",
+                style={{
+                    boxShadow: "2px 1px 80px 1px", fontFamily: "Lato, Arial, sans-serif", borderRadius: "0px 20px 20px 20px",
+                    position: "fixed", transform: "rotate(270deg)", bottom: "50%", width: "100px", height: "40px", right: "-10px", alignContent: "center",
                 }} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Comentar</button>)}
 
@@ -54,7 +55,3 @@ export default function Home() {
         </div>
     )
 }
-
-
-
-
