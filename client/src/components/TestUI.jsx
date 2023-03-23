@@ -22,6 +22,7 @@ export function DetailUI({ id, addToCart, removeFromCart }) {
             .then(response => response.json())
             .then(data => setTest(data))
     }, [id])
+    
     // render component
     return (
         <div className='TestUI' style={{ width: '100%', color:'black', backgroundColor:'white', borderRadius:"10px" }}>
@@ -50,7 +51,7 @@ const ButtonUI = styled(Button)(({ theme }) => ({
     '&:hover': { backgroundColor: '#d70000' }
 }))
 
-export default function TestUI({ id, name, description, price, index }) {
+export default function TestUI({ id, name, sample, category, price, index }) {
     // dispatch hook
     const dispatch = useDispatch()
     // get cart from store
@@ -67,7 +68,8 @@ export default function TestUI({ id, name, description, price, index }) {
             <div className="content">
                 <div className="name">{name}</div>
                 <div className="tag">${price}.00</div>
-                <div className="sample">rem ipsumLo dolor sit amet, consectetur adipiscing elit. Curabitur at posuere eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</div>
+                <div className="sample"><strong>Categoria:  </strong> {category}</div>
+                <div className="sample"><strong>Tipo de muestra:  </strong> {sample}</div>
             </div>
             <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
                 <Button  variant="outlined" onClick={handleOpen}>

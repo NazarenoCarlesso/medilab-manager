@@ -16,7 +16,7 @@ export default function TestsUI() {
     const [search, setSearch] = useState('')
     const [page, setPage] = useState(1)
     const [count, setCount] = useState(1)
-   
+    console.log(tests);
 
     useEffect(() => {
         fetch(`${BACK}/tests/search/?search=${search}&page=${page}&limit=5`)
@@ -36,6 +36,7 @@ export default function TestsUI() {
         items.splice(result.destination.index, 0, reorderedItem);
 
         setTests(items);
+        
     }
 
     return (
@@ -61,6 +62,8 @@ export default function TestsUI() {
                             name={test.name}
                             description={test.description}
                             price={test.price}
+                            category={test.category}
+                            sample={test.sample}
                             index={index}
                         />
                         )}
