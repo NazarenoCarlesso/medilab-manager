@@ -13,7 +13,6 @@ import MenuIcon from '@mui/icons-material/Menu'
 
 // reducer
 import { emptyCart, setAvatar, setName, setRole, setToken } from '../reducer'
-import { setItem } from '../utils/localStorage'
 
 export default function NavUI() {
     // dispatch hook

@@ -7,13 +7,12 @@ import Contact from './Contact'
 
 export default function Home() {
     return (
-        <div style={{marginTop: 100}}>
+        <div>
             <QuoterContainer />
             <EnterpriseUI />
             <PopularUI />
             <ReviewsUI />
             <Contact />
-            <div style={{ height: 40 }} />
         </div>
     )
 }

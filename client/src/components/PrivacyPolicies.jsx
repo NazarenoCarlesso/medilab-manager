@@ -4,7 +4,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 export default function PrivacyPolicies() {
   return (
-    <div className="container" style={{marginTop:80}}>
+    <div className="container">
       <div className={styles.privacyTitle}>Políticas de Privacidad</div>
       <div>
         <h4>

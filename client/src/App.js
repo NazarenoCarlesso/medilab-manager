@@ -6,7 +6,6 @@ import Contact from './components/Contact'
 import Faq from './components/Faq'
 import Cart from './components/Cart'
 import Ops from './components/Ops'
-import Results from './components/Results'
 import Payments from './components/Payments'
 import Footer from './components/Footer'
 import SearchUI from './components/SearchUI'
@@ -34,7 +33,6 @@ export default function App() {
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/faq" element={<Faq />} />
                     <Route path="/cart" element={<Cart />} />
-                    <Route path="/results" element={<Results />} />
                     <Route path="/payments" element={<Payments />} />
                     <Route path="/search" element={<SearchUI />} />
                     <Route path="/dashboard" element={<DashboardUI />} />

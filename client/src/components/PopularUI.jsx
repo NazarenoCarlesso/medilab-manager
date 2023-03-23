@@ -30,7 +30,7 @@ export default function PopularUI() {
 
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center" >
-            <Typography variant="h3" fontWeight={700} sx={{ fontFamily: 'Raleway', margin: 4 }}>
+            <Typography variant="h3" fontWeight={700} sx={{ fontFamily: 'Raleway', margin: 3 }}>
                 Exámenes mas populares
             </Typography>
             <Paper sx={{ padding: '6px 0px' }}>
