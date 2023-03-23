@@ -24,13 +24,13 @@ export function DetailUI({ id, addToCart, removeFromCart }) {
     }, [id])
     // render component
     return (
-        <div className='TestUI' style={{ width: '100%', color:'black', backgroundColor:'white', borderRadius:"10px" }}>
+        <div className='TestUI' style={{ padding: '0px 20px 20px 0px', height: "inherit", width: '100%', color:'black', backgroundColor:'white', borderRadius:"10px" }}>
             <div className="content">
-                <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
+                <Grid container direction="row" justifyContent="space-evenly" alignItems="center" >
                     <div className="title">{test.name}</div>
                     <div className="price">${test.price}.00</div>
                 </Grid>
-                <div className="description">
+                <div className="description" style={{fontFamily: 'Raleway'}}>
                     <p>{test.description}</p></div>
             </div>
             {cart.includes(id)
@@ -64,10 +64,10 @@ export default function TestUI({ id, name, description, price, index }) {
         <Draggable key={id} draggableId={id.toString()} index={index}>
         {(provided)=>(
         <div className="TestUI" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-            <div className="content">
-                <div className="name">{name}</div>
+            <div  className="content">
+                <div className="name" style={{fontFamily: 'Raleway', overflowWrap:"anywhere", padding: "0px 4px" }}>{name}</div>
                 <div className="tag">${price}.00</div>
-                <div className="sample">rem ipsumLo dolor sit amet, consectetur adipiscing elit. Curabitur at posuere eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</div>
+                <div title={description} className="sample">{description.slice(0,145)}...</div>
             </div>
             <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
                 <Button  variant="outlined" onClick={handleOpen}>
