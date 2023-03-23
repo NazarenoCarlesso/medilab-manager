@@ -49,7 +49,7 @@ export default function About() {
   ];
 
   return (
-    <div className="container" style={{marginTop:80}}>
+    <div className="container">
       <div className={styles.aboutTitle}>
         Nuestro Equipo:
         <hr />
