@@ -25,13 +25,12 @@ export default function Home() {
     }, [toke]);
 
     return (
-        <div style={{marginTop: 100}}>
+        <div>
             <QuoterContainer />
             <EnterpriseUI />
             <PopularUI />
             <ReviewsUI />
             <Contact />
-
             {mostrarBoton && (<button type="button" class="btn btn-primary"
                 style={{
                     boxShadow: "2px 1px 80px 1px", fontFamily: "Lato, Arial, sans-serif", borderRadius: "0px 20px 20px 20px",

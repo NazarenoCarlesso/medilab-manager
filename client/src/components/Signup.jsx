@@ -231,7 +231,7 @@ export default function Signup(props) {
   };
 
   return (
-    <div style={{ display: "inline-block", marginTop: "10px" }}>
+    <div style={{ display: "inline-block"}}>
       <div style={location.pathname === "/signup" ? { display: "flex", justifyContent: "center", width: "1200px", margin: "auto", marginTop: "0px" } : { display: "inline-block" }}>
         {/* Imagen */}
         {location.pathname === "/signup" ? (

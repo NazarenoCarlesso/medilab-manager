@@ -83,7 +83,6 @@ export default function Cart() {
     <div
       style={{
         margin: "auto",
-        paddingTop: "6%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
