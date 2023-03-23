@@ -19,7 +19,7 @@ export default function QuoterContainer() {
   }
 
   return (
-    <div className={`${qstyles.quoter} ${qstyles.container}`}>
+    <div className={`${qstyles.quoter} ${qstyles.container}`} style={{fontFamily: 'Raleway'}}>
       <div className="row p-5">
         <div className="col-sm-12 col-md-12 col-lg-4 text-center p-4">
           <h2 className="p-4">Bienvenido</h2>
