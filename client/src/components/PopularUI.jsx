@@ -27,7 +27,7 @@ export default function PopularUI() {
 
         setTests(items);
     }
-
+    console.log(tests)
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center" >
             <Typography variant="h3" fontWeight={700} sx={{ fontFamily: 'Raleway', margin: 3 }}>
@@ -53,8 +53,9 @@ export default function PopularUI() {
                             key={test.id}
                             id={test.id}
                             name={test.name}
-                            description={test.description}
                             price={test.price}
+                            category={test.category}
+                            sample={test.sample}
                             index={index}
                         />)}
                         {provided.placeholder}

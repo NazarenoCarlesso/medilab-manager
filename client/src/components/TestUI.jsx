@@ -69,7 +69,7 @@ export default function TestUI({ id, name, sample, category, price, index }) {
                 <div className="name" style={{fontFamily: 'Raleway', overflowWrap:"anywhere", padding: "0px 4px" }}>{name}</div>
                 <div className="tag">${price}.00</div>
                 <div className="sample"><strong>Categoria:  </strong> {category}</div>
-                <div className="sample"><strong>Tipo de muestra:  </strong> {sample}</div>
+                <div className="sample"><strong>Tipo de muestra:</strong> {sample}</div>
             </div>
             <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
                 <Button  variant="outlined" onClick={handleOpen}>
