@@ -11,7 +11,6 @@
     position: relative;
     cursor: pointer;
     border-radius: 15px;
-    /* background: linear-gradient(293deg,white 0%, #d9f7f8 100%); */
     box-shadow: rgba(20, 20, 52, 0.599) 0px 50px 100px -20px, rgba(0, 0, 0, 0.632) 0px 30px 60px -30px;
     overflow: hidden;
 }
@@ -20,11 +19,6 @@
     width: 100%;
     margin: 0;
 }
-
-/* .TestUI .content:hover{
-    transform: scale(1.03);
-    box-shadow: 0px 0px 30px 1px rgba(109, 237, 239, 0.3);
-} */
 
 
 
@@ -62,14 +56,13 @@
 }
 
 .TestUI button {
-    color:#5080FD;
+    color: #193b8b ;
     text-transform: uppercase;
     font-weight: 700;
     font-size: .75rem;
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
     width: 100px;
-    text-shadow: 0px 4px 18px #2c3442;
 }
 
 .TestUI button:hover{
@@ -82,7 +75,7 @@
 .TestUI .name {
     font-weight: 800;
     text-transform: uppercase;
-    background: #5CE1E6;
+    background: linear-gradient(293deg,#07c0c6  0%, #071b4b 100%);
     position: absolute;
     left: -9px;
     width: 101%;
@@ -99,11 +92,10 @@
 }
 
 .TestUI .tag {
-    color: #5080FD;
+    color:  #133482 ;
     margin-top: 110px;
     font-weight: 800;
     font-size: 50px;
-    text-shadow: 0px 0px 10px rgba(5, 157, 168, 0.42);
 }
 
 .TestUI .sample {

@@ -16,8 +16,8 @@ export default extendTheme({
           dark: '#16a8ad',
           contrastText: '#000',
         },
-        shit: {
-          main: '#002277'
+        search: {
+          main: 'linear-gradient(to left, var(--mui-palette-secondary-dark), var(--mui-palette-primary-light))'
         },
         gradient: 'linear-gradient(to left, var(--mui-palette-secondary-main), var(--mui-palette-primary-dark))'
       },
@@ -28,6 +28,13 @@ export default extendTheme({
       styleOverrides: {
         root: ({ theme: {palette} }) => ({
           background: palette.gradient
+        })
+      }
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: ({ theme: {palette} }) => ({
+          background: palette.search
         })
       }
     }

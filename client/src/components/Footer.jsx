@@ -29,8 +29,8 @@ export default function Footer() {
                 <li><Link to="/search" className="text-reset"> Analisis Clinicos </Link>
                 </li>
                 <li>
-                  <Link to="/covid" className="text-reset">
-                    Pruebas Covid
+                  <Link to="/dashboard" className="text-reset">
+                    Resultados
                   </Link>
                 </li>
               </ul>
