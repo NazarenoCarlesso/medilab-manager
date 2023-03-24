@@ -6,6 +6,8 @@ import {
 } from '@mui/material'
 // components
 import TestUI from './TestUI'
+//styles
+import cstyles from "./Contact.module.css";
 
 const BACK = process.env.REACT_APP_BACK
 
@@ -30,7 +32,7 @@ export default function PopularUI() {
 
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center" >
-            <Typography variant="h3" fontWeight={700} sx={{ fontFamily: 'Raleway', margin: 3 }}>
+            <Typography className={cstyles.contactTitle} variant="h3" fontWeight={700} sx={{ fontFamily: 'Raleway', margin: 3 }}>
                 Exámenes mas populares
             </Typography>
             <Paper sx={{ padding: '6px 0px' }}>
