@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
+
 
 const BACK = process.env.REACT_APP_BACK;
 
@@ -25,28 +25,38 @@ export default function SuccessfulPayment() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        fontFamily: "raleway",
       }}
-    >
+      >
       <div
         style={{
-          background: "#002d0085",
-          height: "250px",
+          background: "rgb(61 195 61 / 45%)",
+          height: "300px",
           width: "350px",
           margin: "40px",
           textAlign: "center",
           borderRadius: "10px",
-        }}
+          color: "#223",
+          boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
+        }}  
       >
+        <img alt="check" src="check.png"
+          style={{
+            height: "55px",
+            width: "auto",
+            marginTop: "10px",
+          }}
+        />
         <h1
           style={{
-            margin: "20px",
+            margin: "10px",
           }}
         >
           su pago ha finalizado de manera exitosa
         </h1>
-        <Button variant="outline-success" onClick={onClickHandler}>
+        <button className="payment-button" onClick={onClickHandler}>
           CONTINUAR
-        </Button>{" "}
+        </button>
       </div>
     </div>
   );
