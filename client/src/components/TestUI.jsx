@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Grid, Modal, Paper, styled } from '@mui/material'
 import { Draggable } from 'react-beautiful-dnd'
-import OpenAiSvg from '../images/OpenAILogo'
 // reducer
 import { addToCart, removeFromCart } from '../reducer'
 
@@ -39,7 +38,7 @@ export function DetailUI({ id, addToCart, removeFromCart }) {
                 </Button>}
                 <div className='OpenAiWatermark' >
                         <label className="PoweredBy" style={{fontFamily: 'Raleway'}}>Descripción generada con</label>
-                        <OpenAiSvg/>
+                        <img src='img/OpenAI_Logo.svg' alt="OPEN AI ICON" style={{ width:120 }} ></img>
                     </div>
         </div>
     )
