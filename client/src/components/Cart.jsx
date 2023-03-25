@@ -26,7 +26,7 @@ import SelectAppointment from "./SelectAppointment";
 import { emptyCart, removeFromCart, addToCart } from "../reducer";
 import PopularUI from "./PopularUI";
 import { Container } from "@mui/system";
-import { Grid } from "@mui/material";
+import { DetailUI } from "./TestUI";
 
 const style = {
    position: "absolute",
@@ -43,45 +43,6 @@ const style = {
    overflow: "hidden",
    overflowY: "scroll",
 };
-
-export function DetailUI({ id, addToCart, removeFromCart }) {
-   // get cart from store
-   const cart = useSelector((state) => state.cart);
-   // test state
-   const [test, setTest] = useState({});
-   // get test detail
-   useEffect(() => {
-      fetch(`${BACK}/tests/${id}`)
-         .then((response) => response.json())
-         .then((data) => setTest(data));
-   }, [id]);
-   // render component
-   return (
-      <div
-         className="TestUI"
-         style={{ padding: "0px 20px 20px 0px", height: "inherit", width: "100%", color: "black", backgroundColor: "white", borderRadius: "10px" }}
-      >
-         <div className="content">
-            <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
-               <div className="title">{test.name}</div>
-               <div className="price">${test.price}.00</div>
-            </Grid>
-            <div className="description" style={{ fontFamily: "Raleway" }}>
-               <p>{test.description}</p>
-            </div>
-         </div>
-         {cart.includes(id) ? (
-            <Button color="secondary" onClick={() => removeFromCart(id)} sx={{ minWidth: 200 }}>
-               Quitar del carrito
-            </Button>
-         ) : (
-            <Button onClick={() => addToCart(id)} sx={{ minWidth: 200, border: "1px solid #5080FD" }}>
-               Agregar al carrito
-            </Button>
-         )}
-      </div>
-   );
-}
 
 const BACK = process.env.REACT_APP_BACK;
 
@@ -104,7 +65,6 @@ export default function Cart() {
    const token = useSelector((state) => state.token);
    const [products, setProducts] = useState([]);
 
-
    const [open, setOpen] = useState(false);
    const handleOpen = (e) => {
       setIdDetails(e.target.id);
@@ -112,7 +72,6 @@ export default function Cart() {
    };
    const handleClose = () => setOpen(false);
    const [idDetails, setIdDetails] = useState("");
-
 
    useEffect(() => setItem("cart", cart), [cart]);
 
@@ -379,7 +338,6 @@ export default function Cart() {
             </Modal>
          </div>
          <SelectAppointment openSA={openSA} handleCloseSA={handleCloseSA} handleShow={handleShow} />
-
 
          {/* Modal detalles */}
          <Modal open={open} onClose={handleClose}>
