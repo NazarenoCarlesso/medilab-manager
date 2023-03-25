@@ -3,6 +3,7 @@ import { FormControl, FormHelperText, Grid, Pagination, PaginationItem, Paper, S
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import cstyles from "./Contact.module.css";
 
 // components
 import TestUI from './TestUI'
@@ -40,7 +41,7 @@ export default function TestsUI() {
 
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center">
-            <Typography variant="h3" fontWeight={750} sx={{ fontFamily: 'Raleway', width: 600, whiteSpace:'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}}>
+            <Typography className={cstyles.contactTitle} variant="h3" fontWeight={700} sx={{ fontFamily: 'Raleway', whiteSpace:'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}}>
                 Todos nuestros Exámenes
             </Typography>
             <Paper className='PaperContainer' sx={(theme)=>({background: theme.palette.search.main})} style={{margin: "1%"}}>

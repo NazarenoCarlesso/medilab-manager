@@ -1,13 +1,15 @@
+import { useRef } from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import { useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { TextareaAutosize } from '@mui/material';
+
+
 
 
 
 
 function valida(input) {
-
-
     let errors = {}
     if (!input.comment) {
         errors.comment = "El comentario no puede estar vacío";
@@ -19,22 +21,12 @@ function valida(input) {
 
 
 export default function Comment() {
-    const [mostrarBoton, setMostrarBoton] = useState(false);
+    const textareaRef = useRef(null);
     const BACK = process.env.REACT_APP_BACK
     const toke = useSelector((state) => state.token);
     const [errors, setErrors] = useState({ comment: "" });
     const [input, setInput] = useState({ comment: "" })
 
-    useEffect(() => {
-        if (!errors.comment) {
-            setMostrarBoton(true);
-        } else if (errors) {
-            setMostrarBoton(false);
-        }
-        if (!input.comment) {
-            setMostrarBoton(false)
-        }
-    }, [errors, input]);
 
     function handleInputChange(e) {
         setInput({
@@ -42,6 +34,7 @@ export default function Comment() {
         })
         setErrors(valida({
             ...input, [e.target.name]: e.target.value
+
         }))
     }
 
@@ -70,21 +63,17 @@ export default function Comment() {
         e.preventDefault("");
         handleComment(toke, input);
         setInput({ comment: "" });
-        setMostrarBoton(false);
+        textareaRef.current.value = "";
 
     }
-    const gradientStyle = {
-        backgroundImage: "linear-gradient(to bottom, #F5F5F5, rgb(78 78 78))"
-    };
 
     return (
         <form onSubmit={handleSubmit}
-            style={{ isplay: "flex", flexDirection: "column", alignItems: "flex-end", alignContent: "center", flexWrap: "wrap", }}>
-            <textarea
-                style={{ fontFamily: "Lucida Sans Unicode", fontSize: '16px', backgroundColor: "white", width: 450, height: 250, top: "300px", left: "300px", }}
-                type="text" value={input.comment} name="comment" onChange={(e) => handleInputChange(e)} placeholder="Escribe tu comentario..."></textarea>
-            {errors.comment && (<p style={{ fontSize: "16px", color: "red" }}>{errors.comment}</p>)}
-            {mostrarBoton && (<Button style={{ ...gradientStyle, margin: "10px", width: "100px", }} type='submit' class="btn btn-outline-success">  Publicar  </Button>)}
+            style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", alignContent: "center", flexWrap: "wrap", }} >
+            <TextareaAutosize ref={textareaRef} style={{ fontFamily: "raleway", fontSize: '16px', backgroundColor: "white", width: 350, height: 200, }}
+                placeholder="Escribe tu comentario..." name="comment" type="text" onChange={(e) => { handleInputChange(e) }} />
+            {errors.comment && (<p style={{ fontFamily: "raleway", fontSize: "15px", position: 'absolute', top: "320px", color: "red" }}>{errors.comment}</p>)}
+            {errors.comment || input.comment.length < 16 ? (<Button type="submit" variant="contained" style={{ position: 'absolute', top: "350px", }} disabled>Publicar</Button>) : (<Button style={{ fontFamily: "raleway", position: 'absolute', top: "350px", backgroundColor: "rgb(37 91 99)", color: "white", }} type='submit'>Publicar</Button>)}
         </form>
     );
 }

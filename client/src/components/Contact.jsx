@@ -5,7 +5,6 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import * as Icon from "react-bootstrap-icons";
 import cstyles from "./Contact.module.css";
-
 import React, { useState } from "react";
 import { validateContact } from "../utils/validate";
 
@@ -93,7 +92,7 @@ export default function Contact() {
 
   return (
     <Container>
-      <div className={cstyles.contactTitle}>Contáctanos</div>
+      <h3 className={cstyles.contactTitle} style={{fontFamily: 'Raleway'}}>Contáctanos</h3>
       <Row>
         <Col>
           <div className={cstyles.contactBox}>
