@@ -1,0 +1,9 @@
+.cardImage:hover {
+   transform: scale(1.2);
+   transition: all 0.2s ease-in-out;
+}
+
+.compraProtegida:hover {
+   transform: scale(1.2);
+   transition: all 0.2s ease-in-out;
+}

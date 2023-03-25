@@ -231,7 +231,6 @@ export default function Signup(props) {
          );
       }
    };
-
    return (
       <Container maxWidth="lg" style={{ fontFamily: "Raleway", fontWeight: "700" }}>
          <Box style={location.pathname === "/signup" ? { display: "flex", justifyContent: "center", width: "100%" } : { display: "inline-block" }}>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Avatar, Divider, Grid, Paper, Typography } from '@mui/material'
+import cstyles from "./Contact.module.css";
 
 const BACK = process.env.REACT_APP_BACK
 
@@ -39,11 +40,11 @@ export default function ReviewsUI() {
     }, [])
     return (
         <Grid container direction="column" justifyContent="space-evenly" alignItems="center"
-            sx={{ background: 'linear-gradient(293deg,#5CE1E6  0%, #071b4b 100%)', minHeight: 400 }}>
-            <Typography variant="h4" fontWeight={700} sx={{ fontFamily: 'Raleway', margin: 4, color:'white' }}>
+            sx={{ background: 'linear-gradient(293deg,#5CE1E6  0%, #071b4b 100%)'}}>
+            <Typography className={cstyles.contactTitle} variant="h4" fontWeight={700} sx={{ fontFamily: 'Raleway', margin: 2, color:'white' }}>
                 Mirá lo que opinan los pacientes de nosotros
             </Typography>
-            <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
+            <Grid container direction="row" justifyContent="space-evenly" alignItems="center" sx={{padding:2}}>
                 {reviews
                     .slice(0, 3)
                     .map(r => <Review key={r.id} id={r.id} author={r.author}
