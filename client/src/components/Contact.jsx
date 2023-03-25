@@ -100,8 +100,8 @@ export default function Contact() {
               ¿Tienes alguna duda o necesitas ayuda con nuestros productos y
               servicios? Nos encantaría escuchar de ti. Puedes comunicarte con
               nosotros por correo electrónico a{" "}
-              <a href="mailto:medilab@gmail.com">medilab@gmail.com</a> o por
-              teléfono al 123 456 789. Si prefieres que nos comuniquemos
+              <a className={cstyles.a} href="mailto:contact@medilab.com">contact@medilab.com</a> o por
+              teléfono al +12 345-6789. Si prefieres que nos comuniquemos
               contigo, simplemente completa el siguiente formulario y nos
               pondremos en contacto lo antes posible.
             </p>
@@ -115,21 +115,16 @@ export default function Contact() {
               <div className={cstyles.infoBox}>
                 <Icon.GeoAlt size={35} />
                 <h3>Dirección</h3>
-                <p>
-                  A108 Adam Street, <br />
-                  New York, NY 535022
-                </p>
+                <p> <img src="/img/Flag_of_Argentina.svg" alt="ARflag" style={{ width:30, marginRight:"10px", marginBottom:"5px" }}/>Buenos Aires</p>
+                <p> <img src="/img/Flag_of_Peru.svg" alt="ARflag" style={{ width:30, marginRight:"10px" }}/>Lima</p>
               </div>
             </Col>
             <Col>
               <div className={cstyles.infoBox}>
                 <Icon.Telephone size={35} />
                 <h3>Llámenos</h3>
-                <p>
-                  +1 5589 55488 55
-                  <br />
-                  +1 6678 254445 41
-                </p>
+                <p> <img src="/img/Flag_of_Argentina.svg" alt="ARflag" style={{ width:30, marginRight:"10px", marginBottom:"5px" }}/>+54 0800-444-xxxx </p>
+                <p> <img src="/img/Flag_of_Peru.svg" alt="ARflag" style={{ width:30, marginRight:"10px" }}/>+51 0800-444-xxxx </p>
               </div>
             </Col>
           </Row>
@@ -138,10 +133,8 @@ export default function Contact() {
               <div className={cstyles.infoBox}>
                 <Icon.GeoAlt size={35} />
                 <h3>Email</h3>
-                <p>
-                  <a href="mailto:medilab@gmail.com">medilab@gmail.com</a>
-                  <br /> contact@medilab.com
-                </p>
+                  <p><a className={cstyles.a} href="mailto:medilab@gmail.com">contact@medilab.com</a></p>
+                  <p><a className={cstyles.a} href="mailto:medilab@gmail.com">support@medilab.com</a></p>
               </div>
             </Col>
             <Col>
@@ -214,11 +207,11 @@ export default function Contact() {
               </Row>
               <Row>
                 <Form.Group as={Col} md="12">
-                  <Form.Label>FAQ</Form.Label>
+                  <Form.Label>¿Tiene alguna duda puntual / sugerencia?</Form.Label>
                   <Form.Control
                     as="textarea"
                     name="faq"
-                    placeholder="Ingrese su FAQ"
+                    placeholder="Ingrese su consulta"
                     onChange={(e) => handleChange(e)}
                   />
                   <p style={{ color: "red", fontSize: "12px" }}>

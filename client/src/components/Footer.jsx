@@ -1,38 +1,31 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Facebook, Instagram, Youtube, Twitter, Telephone, EnvelopeAt } from "react-bootstrap-icons";
 import logo from "../images/logo3.png";
 import styles from "./Footer.module.css";
 
+
 export default function Footer() {
+  const location = useLocation().pathname
+  console.log(location)
+
   return (
-    <div>
+    <div className={styles.Footer} >
       <div className={`mt-4 ${styles.div} ${styles.container}`}>
-        <footer className="text-light py-4">
+        <footer className="text-light py-3">
           <div className="container">
             <nav className="row">
-              <ul className="col-12 col-md-3 list-unstyled">
-                <Link to="/" className="col-12 col-md-3 d-flex aling-items-center justyfy-content-center">
-                  <img src={logo} className="mx-2 pb-4" style={{ height: "70px" }}alt="" />
-                </Link>
-                <li><Telephone /> 123 456 789 </li>
-                <li> <EnvelopeAt />medilab@gmail.com</li>
-              </ul>
+              <div className="col-12 col-md-3 d-flex justify-content-start align-items-center">
+                <Link className={styles.FooterLogo} to="/"><img src={logo} className="" style={{ width: "150px" }}alt="MediLabLogo" /></Link>
+              </div>
               <ul className=" text-light col-12 col-md-3 list-unstyled">
-                <li className="pb-2"> <strong>Nosotros</strong></li>
-                <li><Link to="/about" className="text-reset"> Sobre Medilab </Link></li>
-                <li><Link to="/faq" className="text-reset"> Preguntas Frecuentes</Link></li>
-                <li><Link to="/privacy-policies" className="text-reset"> Política de privacidad </Link></li>
+                <li className="pb-2"> <strong>Más información</strong></li>
+                <li style={{left:-10}}><Telephone style={{marginRight: "5px"}}/> <EnvelopeAt style={{marginRight: "5px"}}/><Link to={location === "/" ? "#Contacto" : "/Contact"} className={styles.linkto}>Medios de contacto</Link></li>
               </ul>
               <ul className="text-light col-12 col-md-3 list-unstyled">
                 <li className="pb-2"><strong>Nuestros Servicios</strong></li>
-                <li><Link to="/search" className="text-reset"> Analisis Clinicos </Link>
-                </li>
-                <li>
-                  <Link to="/dashboard" className="text-reset">
-                    Resultados
-                  </Link>
-                </li>
+                <li><Link to="/search" className={styles.linkto}> Analisis Clinicos </Link></li>
+                <li><Link to="/privacy-policies" className={styles.linkto}> Política de privacidad </Link></li>
               </ul>
               <ul className=" text-light col-12 col-md-3 list-unstyled">
                 <li className="pb-2">

@@ -14,10 +14,6 @@ import Modal from '@mui/material/Modal';
 
 
 
-
-
-
-
 export default function Home() {
     const toke = useSelector((state) => state.token);
     const [mostrarBoton, setMostrarBoton] = useState(false);
@@ -37,7 +33,6 @@ export default function Home() {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
     useEffect(() => {
         if (toke) {
             setMostrarBoton(true);
@@ -74,7 +69,6 @@ export default function Home() {
                     </Typography>
                 </Box>
             </Modal>
-
         </div>
     )
 }

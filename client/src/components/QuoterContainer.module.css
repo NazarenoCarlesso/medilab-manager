@@ -9,21 +9,21 @@
     margin-bottom: 5%;
 }
 .quoterButton{
+    margin-top: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
     font-size: 24px;
-    border: 1px solid #5BC0C0;
     border-radius: 10px;
-    color: #2a8888;
-    background-color: #fff;    
-    height: 160px;
+    color: white;   
+    height: 80px;
+    width: 50%;
     transition: all 300ms;
+    background: linear-gradient(293deg,#5CE1E6  0%, #071b4b 100%);
 }
 .quoterButton:hover{
     cursor: pointer;
+    color: white;
     transform: scale(1.05);
-    background: linear-gradient(293deg,#5CE1E6  0%, #071b4b 100%);
-    color: #ffffff;
 }
