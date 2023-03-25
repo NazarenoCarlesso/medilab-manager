@@ -7,14 +7,9 @@ import EnterpriseUI from './EnterpriseUI'
 import Contact from './Contact'
 import Comment from './Comment'
 
-
-
-
-
 export default function Home() {
     const toke = useSelector((state) => state.token);
     const [mostrarBoton, setMostrarBoton] = useState(false);
-
 
     useEffect(() => {
         if (toke) {
@@ -30,7 +25,7 @@ export default function Home() {
             <EnterpriseUI />
             <PopularUI />
             <ReviewsUI />
-            <Contact />
+            <Contact/>
             {mostrarBoton && (<button type="button" class="btn btn-primary"
                 style={{
                     boxShadow: "2px 1px 80px 1px", fontFamily: "Lato, Arial, sans-serif", borderRadius: "0px 20px 20px 20px",

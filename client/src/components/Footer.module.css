@@ -1,5 +1,24 @@
+.Footer{
+    width: 100%;
+}
+.FooterLogo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .div.container{
     background: linear-gradient(293deg,#5CE1E6  0%, #071b4b 100%);
     box-shadow:0 2px 20px grey;
     box-shadow:0 2px 20px grey;
+}
+
+.linkto{
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s;
+}
+
+.linkto:hover{
+    color: white;
+    border-bottom: none;       
 }

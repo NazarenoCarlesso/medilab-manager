@@ -14,7 +14,7 @@ export default function NavBar() {
   const cartLength = useSelector((state) => state.cart.length);
   const sessionId = useSelector((state) => state.sessionId?.name);
   function handleLogout() {
-    navigate("/home");
+    navigate("/");
   }
 
   return (
@@ -31,8 +31,6 @@ export default function NavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            {/* <Nav.Link as={Link} to="/home">Home</Nav.Link> */}
-
             {sessionId
               ? null
               : !(

@@ -37,7 +37,7 @@ export default function GoogleSignIn() {
                 dispatch(setAvatar(data.body.avatar))
                 dispatch(setRole(data.body.role))
             })
-            .then(() => navigate('/home'))
+            .then(() => navigate('/'))
     }
 
     useEffect(() => {
