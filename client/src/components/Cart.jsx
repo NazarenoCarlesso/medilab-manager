@@ -34,6 +34,7 @@ const style = {
    left: "50%",
    transform: "translate(-50%, -50%)",
    maxHeight: "600px",
+   maxWidth: "350px",
    bgcolor: "background.paper",
    border: "2px solid #000",
    boxShadow: 24,
@@ -103,6 +104,7 @@ export default function Cart() {
    const token = useSelector((state) => state.token);
    const [products, setProducts] = useState([]);
 
+
    const [open, setOpen] = useState(false);
    const handleOpen = (e) => {
       setIdDetails(e.target.id);
@@ -110,6 +112,7 @@ export default function Cart() {
    };
    const handleClose = () => setOpen(false);
    const [idDetails, setIdDetails] = useState("");
+
 
    useEffect(() => setItem("cart", cart), [cart]);
 
@@ -128,6 +131,7 @@ export default function Cart() {
          handleOpenSA();
       }
    }
+
    return (
       <Container maxWidth={"xl"}>
          <div
@@ -375,6 +379,7 @@ export default function Cart() {
             </Modal>
          </div>
          <SelectAppointment openSA={openSA} handleCloseSA={handleCloseSA} handleShow={handleShow} />
+
 
          {/* Modal detalles */}
          <Modal open={open} onClose={handleClose}>

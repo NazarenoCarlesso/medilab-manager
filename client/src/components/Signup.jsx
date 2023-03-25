@@ -17,7 +17,9 @@ import Collapse from "@mui/material/Collapse";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import IconButton from "@mui/material/IconButton";
+import { Container } from "@mui/material";
 import logo from "../images/logo3.png";
+import styles from "./Signup.module.css";
 const BACK = process.env.REACT_APP_BACK;
 
 export default function Signup(props) {
@@ -229,30 +231,17 @@ export default function Signup(props) {
          );
       }
    };
-
    return (
-      <div style={{ display: "inline-block" }}>
-         <div
-            style={
-               location.pathname === "/signup"
-                  ? { display: "flex", justifyContent: "center", width: "1200px", margin: "auto", marginTop: "0px" }
-                  : { display: "inline-block" }
-            }
-         >
+      <Container maxWidth="lg" style={{ fontFamily: "Raleway", fontWeight: "700" }}>
+         <Box style={location.pathname === "/signup" ? { display: "flex", justifyContent: "center", width: "100%" } : { display: "inline-block" }}>
             {/* Imagen */}
             {location.pathname === "/signup" ? (
-               <div style={{ width: "600px" }}>
-                  <img src={logo} alt={logo} style={{ width: "600px", position: "fixed", top: "200px" }} />
-               </div>
+               <Box className={styles.boxImage}>
+                  <img src={logo} alt={logo} />
+               </Box>
             ) : null}
             {/* Formulario */}
-            <div
-               style={
-                  location.pathname === "/signup"
-                     ? { textAlign: "center", margin: "auto", display: "flex", flexDirection: "column", alignItems: "center", width: "600px" }
-                     : { textAlign: "center", margin: "auto", display: "flex", flexDirection: "column", alignItems: "center" }
-               }
-            >
+            <Box className={location.pathname === "/signup" ? styles.boxFormSignUp : styles.boxForm}>
                {/* h2 iniciar sesion o registrarse */}
                {location.pathname === "/signup" ? (
                   <div style={{ display: "flex", alignItems: "center" }}>
@@ -262,7 +251,7 @@ export default function Signup(props) {
                         </IconButton>
                      ) : null}
 
-                     <Typography variant="h2" fontWeight={700} sx={{ fontFamily: "Raleway", margin: 4 }}>
+                     <Typography className={styles.typoH2Title} variant="h2" fontWeight={700} fontFamily={"Raleway"}>
                         {selectedForm === "login" ? `Iniciar Sesión` : `Registrarse`}
                      </Typography>
                      {selectedForm === "login" ? (
@@ -274,145 +263,144 @@ export default function Signup(props) {
                ) : null}
 
                <Box sx={{ display: "flex" }}>
-                  <div>
-                     {/* Iniciar Sesión */}
-                     <Collapse orientation="horizontal" in={selectedForm === "login"}>
-                        <div
-                           style={
-                              location.pathname === "/signup"
-                                 ? {
-                                      display: "inline-block",
-                                      backgroundColor: "white",
-                                      boxShadow: "0px 0px 10px gray",
-                                      marginTop: "0px",
-                                      padding: "10px",
-                                   }
-                                 : {
-                                      display: "inline-block",
-                                      backgroundColor: "white",
-                                      marginTop: "0px",
-                                      padding: "10px",
-                                   }
-                           }
-                        >
-                           {/* Iniciar Sesión con Google */}
-                           {selectedForm === "login" ? (
-                              <Row style={{ width: "300px", margin: "auto" }}>
-                                 <p>Inicie Sesión con Google</p>
-                                 <div
-                                    style={{
-                                       display: "flex",
-                                       justifyContent: "center",
-                                    }}
-                                 >
-                                    <GoogleSignIn setShowAlertLogin={setShowAlertLogin} fromCart={fromCart} />
-                                 </div>
-                              </Row>
-                           ) : null}
-                           {/* Línea */}
-                           <Row style={{ width: "300px", margin: "auto" }}>
+                  {/* Iniciar Sesión */}
+                  <Collapse orientation="horizontal" in={selectedForm === "login"}>
+                     <div
+                        style={
+                           location.pathname === "/signup"
+                              ? {
+                                   display: "inline-block",
+                                   backgroundColor: "white",
+                                   boxShadow: "0px 0px 10px gray",
+                                   marginTop: "20px",
+                                   width: "65%",
+                                   paddingTop: "20px",
+                                   paddingBottom: "20px",
+                                }
+                              : {
+                                   display: "inline-block",
+                                   backgroundColor: "white",
+                                   marginTop: "10px",
+                                }
+                        }
+                     >
+                        {/* Iniciar Sesión con Google */}
+                        {selectedForm === "login" ? (
+                           <Row style={{ width: "100%", margin: "auto" }}>
+                              <p style={{ textAlign: "center" }}>Inicie Sesión con Google</p>
                               <div
                                  style={{
                                     display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "space-evenly",
-                                    marginTop: "2%",
-                                    marginBottom: "2%",
+                                    justifyContent: "center",
+                                    maxWidth: "100%",
                                  }}
                               >
-                                 <div style={{ borderBottom: "1px solid grey", width: "40%" }}></div>
-                                 <p style={{ textAlign: "center", margin: "0 10px" }}>O</p>
-                                 <div style={{ borderBottom: "1px solid grey", width: "40%" }}></div>
+                                 <GoogleSignIn />
                               </div>
                            </Row>
+                        ) : null}
+                        {/* Línea */}
+                        <Row style={{ width: "100%", margin: "auto" }}>
+                           <div
+                              style={{
+                                 display: "flex",
+                                 alignItems: "center",
+                                 justifyContent: "space-evenly",
+                              }}
+                           >
+                              <div style={{ borderBottom: "1px solid grey", width: "40%" }}></div>
+                              <p style={{ textAlign: "center", margin: "0 10px" }}>O</p>
+                              <div style={{ borderBottom: "1px solid grey", width: "40%" }}></div>
+                           </div>
+                        </Row>
 
-                           {/* Formulario Iniciar sesión */}
-                           <div style={{ width: "300px", margin: "auto" }}>
-                              <Form
-                                 onSubmit={(e) => {
-                                    handleSubmit(e);
-                                 }}
-                                 style={{
-                                    width: "90%",
-                                    margin: "auto",
-                                 }}
-                              >
-                                 <Form.Group className="mb-3">
-                                    <Form.Label>Nombre de usuario</Form.Label>
-                                    <Form.Control
-                                       name="username"
-                                       onChange={(e) => {
-                                          handleChange(e);
-                                       }}
-                                       type="text"
-                                       placeholder="Ingrese su nombre de usuario"
-                                    />
-                                    <p style={{ color: "red", fontSize: "12px" }}>{user.touched.username ? errorsUser.username : null}</p>
-                                 </Form.Group>
-                                 <Form.Group className="mb-3" style={{ position: "relative" }}>
-                                    <Form.Label>Contraseña</Form.Label>
-                                    <Form.Control
-                                       name="password"
-                                       onChange={(e) => {
-                                          handleChange(e);
-                                       }}
-                                       type="password"
-                                       placeholder="Ingrese su contraseña"
-                                    />
-                                    <div
-                                       style={{
-                                          position: "absolute",
-                                          fontSize: "12px",
-                                          bottom: "-20px",
-                                          right: "0px",
-                                       }}
-                                    >
-                                       <a href={"signup"}>¿Olvidaste tu contraseña?</a>
-                                    </div>
-                                    <p style={{ color: "red", fontSize: "12px" }}>{user.touched.password ? errorsUser.password : null}</p>
-                                 </Form.Group>
-
-                                 <Button
-                                    variant="contained"
-                                    color="info"
-                                    type="submit"
-                                    onClick={(e) => {
-                                       showErrors(e);
+                        {/* Formulario Iniciar sesión */}
+                        <div style={{ width: "100%", margin: "auto" }}>
+                           <Form
+                              onSubmit={(e) => {
+                                 handleSubmit(e);
+                              }}
+                              style={{
+                                 width: "90%",
+                                 margin: "auto",
+                              }}
+                           >
+                              <Form.Group className="mb-3">
+                                 <Form.Label>Nombre de usuario</Form.Label>
+                                 <Form.Control
+                                    name="username"
+                                    onChange={(e) => {
+                                       handleChange(e);
                                     }}
-                                    style={{ marginTop: "5%", width: "150px" }}
-                                 >
-                                    Iniciar Sesión
-                                 </Button>
-                                 {/* Aún no tienes cuenta? */}
+                                    type="text"
+                                    placeholder="Ingrese su nombre de usuario"
+                                    style={{ fontFamily: "Raleway" }}
+                                 />
+                                 <p style={{ color: "red", fontSize: "12px" }}>{user.touched.username ? errorsUser.username : null}</p>
+                              </Form.Group>
+                              <Form.Group className="mb-3" style={{ position: "relative" }}>
+                                 <Form.Label>Contraseña</Form.Label>
+                                 <Form.Control
+                                    name="password"
+                                    onChange={(e) => {
+                                       handleChange(e);
+                                    }}
+                                    type="password"
+                                    placeholder="Ingrese su contraseña"
+                                 />
                                  <div
                                     style={{
-                                       display: "flex",
-                                       flexDirection: "column",
-                                       marginTop: "3%",
-                                       alignItems: "center",
+                                       position: "absolute",
+                                       fontSize: "12px",
+                                       bottom: "-20px",
+                                       right: "0px",
                                     }}
                                  >
-                                    <div style={{ borderBottom: "1px solid grey", width: "90%", marginBottom: "2%" }}></div>
-
-                                    <p>¿Aún no tienes cuenta?</p>
-                                    <Button
-                                       variant="contained"
-                                       color="success"
-                                       onClick={(e) => {
-                                          setSelectedForm("signup");
-                                       }}
-                                       style={{ width: "150px" }}
-                                    >
-                                       Registrarse
-                                    </Button>
+                                    <a href={"signup"}>¿Olvidaste tu contraseña?</a>
                                  </div>
-                              </Form>
-                           </div>
+                                 <p style={{ color: "red", fontSize: "12px" }}>{user.touched.password ? errorsUser.password : null}</p>
+                              </Form.Group>
+
+                              <Button
+                                 variant="contained"
+                                 color="info"
+                                 type="submit"
+                                 onClick={(e) => {
+                                    showErrors(e);
+                                 }}
+                                 style={{ marginTop: "10px", width: "150px", fontFamily: "Raleway" }}
+                              >
+                                 Iniciar Sesión
+                              </Button>
+                              {/* Aún no tienes cuenta? */}
+                              <div
+                                 style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    marginTop: "10px",
+                                    alignItems: "center",
+                                 }}
+                              >
+                                 <div style={{ borderBottom: "1px solid grey", width: "90%", marginBottom: "10px" }}></div>
+
+                                 <p>¿Aún no tienes cuenta?</p>
+                                 <Button
+                                    variant="contained"
+                                    color="success"
+                                    onClick={(e) => {
+                                       setSelectedForm("signup");
+                                    }}
+                                    style={{ width: "150px", fontFamily: "Raleway" }}
+                                 >
+                                    Registrarse
+                                 </Button>
+                              </div>
+                           </Form>
                         </div>
-                     </Collapse>
-                  </div>
-                  <div style={selectedForm === "signup" ? null : { height: "0px" }}>
-                     {/* Registrarse */}
+                     </div>
+                  </Collapse>
+                  {/* Registrarse */}
+                  <Box style={selectedForm === "signup" ? null : { height: "0px" }}>
                      <Collapse orientation="horizontal" in={selectedForm === "signup"}>
                         <div
                            style={
@@ -421,21 +409,22 @@ export default function Signup(props) {
                                       display: "inline-block",
                                       backgroundColor: "white",
                                       boxShadow: "0px 0px 10px gray",
-                                      marginTop: "0px",
-                                      padding: "10px",
+                                      marginTop: "20px",
+                                      width: "65%",
+                                      paddingTop: "20px",
+                                      paddingBottom: "20px",
                                    }
                                  : {
                                       display: "inline-block",
                                       backgroundColor: "white",
-                                      marginTop: "0px",
-                                      padding: "10px",
+                                      marginTop: "10px",
                                    }
                            }
                         >
                            {/* Registrarse con Google */}
                            {selectedForm === "signup" ? (
-                              <Row style={{ width: "300px", margin: "auto" }}>
-                                 <p>Regístrese con Google</p>
+                              <Row style={{ width: "100%", margin: "auto" }}>
+                                 <p style={{ textAlign: "center" }}>Regístrese con Google</p>
                                  <div
                                     style={{
                                        display: "flex",
@@ -458,14 +447,12 @@ export default function Signup(props) {
                            ) : null}
 
                            {/* Línea */}
-                           <Row style={{ width: "300px", margin: "auto" }}>
+                           <Row style={{ width: "100%", margin: "auto" }}>
                               <div
                                  style={{
                                     display: "flex",
                                     alignItems: "center",
                                     justifyContent: "space-evenly",
-                                    marginTop: "2%",
-                                    marginBottom: "2%",
                                  }}
                               >
                                  <div style={{ borderBottom: "1px solid grey", width: "40%" }}></div>
@@ -474,7 +461,7 @@ export default function Signup(props) {
                               </div>
                            </Row>
                            {/* Formulario SignUp */}
-                           <div style={{ width: "300px", margin: "auto" }}>
+                           <div style={{ width: "100%", margin: "auto" }}>
                               <Form
                                  onSubmit={(e) => {
                                     handleSubmitSignUp(e);
@@ -651,7 +638,7 @@ export default function Signup(props) {
                                        <Form.Group className="mb-3">
                                           <Form.Label>Estado civil</Form.Label>
                                           <DropdownButton
-                                             variant="outline-secondary"
+                                             variant="outline-dark"
                                              title={
                                                 userSignUp.civilState === ""
                                                    ? "Seleccione su estado civil"
@@ -737,10 +724,10 @@ export default function Signup(props) {
                            </div>
                         </div>
                      </Collapse>
-                  </div>
+                  </Box>
                </Box>
-            </div>
-         </div>
-      </div>
+            </Box>
+         </Box>
+      </Container>
    );
 }
