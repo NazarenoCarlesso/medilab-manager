@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function Faq() {
   return (
-    <div className="container">
+    <div className="container" style={{fontFamily: 'Raleway'}}>
       <div className={styles.faqTitle}>
         Preguntas Frecuentes:
       </div>
