@@ -295,7 +295,7 @@ export default function Signup(props) {
                                     maxWidth: "100%",
                                  }}
                               >
-                                 <GoogleSignIn />
+                                 <GoogleSignIn setShowAlertLogin={setShowAlertLogin} fromCart={fromCart} />
                               </div>
                            </Row>
                         ) : null}
@@ -431,7 +431,7 @@ export default function Signup(props) {
                                        justifyContent: "center",
                                     }}
                                  >
-                                    <GoogleSignIn />
+                                    <GoogleSignIn setShowAlertLogin={setShowAlertLogin} fromCart={fromCart} />
                                  </div>
                               </Row>
                            ) : null}
