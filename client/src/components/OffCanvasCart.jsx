@@ -5,7 +5,9 @@ import Accordion from "react-bootstrap/Accordion";
 import Form from "react-bootstrap/Form";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/esm/DropdownButton";
+
 import MercadoPago from "./MercadoPago";
+import PagoCrypto from "./PagoCrypto";
 import creditCardImage from "../images/creditcard.webp";
 import { Box } from "@mui/material";
 import React, { useState } from "react";
@@ -323,14 +325,7 @@ export default function OffCanvasCart(props) {
                      </Accordion.Body>
                   </Accordion.Item>
                   <MercadoPago />
-                  <Accordion.Item eventKey="2">
-                     <Accordion.Header>CryptoPago</Accordion.Header>
-                     <Accordion.Body>
-                        <Button variant="contained" color="success">
-                           CONTINUAR COMPRA CRYPTOPAGO
-                        </Button>
-                     </Accordion.Body>
-                  </Accordion.Item>
+                  <PagoCrypto/>
                </Accordion>
             </Offcanvas.Body>
          </Offcanvas>

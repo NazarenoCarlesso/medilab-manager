@@ -67,3 +67,16 @@ Desactualizada
 ``` POST /verify/:id ``` valida usuario x mail
 
 ``` POST /openai/ ``` Carga detalle del test
+
+``` POST /generate/1 ``` Carga users
+
+``` POST /generate/2 ``` Carga Categorias, muestras y test
+
+``` POST /generate/3 ``` Carga Items y ordenes
+
+``` POST /generate/4 ``` Carga resultados
+
+
+
+
+
