@@ -1,0 +1,50 @@
+.boxImage {
+   width: 60%;
+   padding-top: 100px;
+}
+
+.boxImage img {
+   position: fixed;
+   width: 650px;
+}
+
+@media screen and (max-width: 1020px) {
+   .boxFormSignUp {
+      width: 100%;
+   }
+   .boxImage {
+      display: none;
+   }
+   .typoH2Title {
+      font-family: "Raleway";
+      font-size: 40px;
+   }
+}
+
+@media screen and (max-width: 1170px) {
+   .boxImage img {
+      width: 580px;
+   }
+}
+
+@media screen and (max-width: 1060px) {
+   .boxImage img {
+      width: 500px;
+   }
+}
+
+.boxFormSignUp {
+   text-align: center;
+   margin: auto;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.boxForm {
+   text-align: center;
+   margin: auto;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
