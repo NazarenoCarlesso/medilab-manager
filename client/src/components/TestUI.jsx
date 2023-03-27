@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Grid, Modal, Paper, styled } from '@mui/material'
 import { Draggable } from 'react-beautiful-dnd'
-
 // reducer
 import { addToCart, removeFromCart } from '../reducer'
 
@@ -24,22 +23,23 @@ export function DetailUI({ id, addToCart, removeFromCart }) {
     }, [id])
     // render component
     return (
-        <div className='TestUI' style={{ width: '100%', color:'black', backgroundColor:'white', borderRadius:"10px" }}>
-            <div className="content">
-                <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
-                    <div className="title">{test.name}</div>
-                    <div className="price">${test.price}.00</div>
+        <div className='TestDetails' style={{ padding: '0px 0px 20px 0px', height: "inherit", width: '100%', borderRadius:"10px" }}>
+                <Grid container direction="column" justifyContent="space-evenly" alignItems="center" >
+                <div className="TestDetailHeader" style={{fontFamily: 'Raleway'}}>{test.name}</div>
+                    <div className="TestDetailPrice">${test.price}.00</div>
                 </Grid>
-                <div className="description">
-                    <p>{test.description}</p></div>
-            </div>
+                    <p className='TestDetailDescription'>{test.description}</p>                    
             {cart.includes(id)
-                ? <ButtonUI color='secondary' onClick={() => removeFromCart(id)} sx={{ minWidth: 200}}>
+                ? <ButtonUI onClick={() => removeFromCart(id)} sx={{ minWidth: 200}}>
                     Quitar del carrito
                 </ButtonUI>
-                : <Button onClick={() => addToCart(id)} sx={{ minWidth: 200, border:'1px solid #5080FD'  }}>
+                : <Button variant="outlined" onClick={() => addToCart(id)} >
                     Agregar al carrito
                 </Button>}
+                <div className='OpenAiWatermark' >
+                        <label className="PoweredBy" style={{fontFamily: 'Raleway'}}>Descripción generada con</label>
+                        <img src='img/OpenAI_Logo.svg' alt="OPEN AI ICON" style={{ width:120 }} ></img>
+                    </div>
         </div>
     )
 }
@@ -64,10 +64,10 @@ export default function TestUI({ id, name, description, price, index }) {
         <Draggable key={id} draggableId={id.toString()} index={index}>
         {(provided)=>(
         <div className="TestUI" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-            <div className="content">
-                <div className="name">{name}</div>
+            <div  className="content">
+                <div className="name" style={{fontFamily: 'Raleway', overflowWrap:"anywhere", padding: "0px 4px" }}>{name}</div>
                 <div className="tag">${price}.00</div>
-                <div className="sample">rem ipsumLo dolor sit amet, consectetur adipiscing elit. Curabitur at posuere eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</div>
+                <div title={description} className="sample">{description.slice(0,145)}...</div>
             </div>
             <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
                 <Button  variant="outlined" onClick={handleOpen}>

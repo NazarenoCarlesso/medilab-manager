@@ -41,7 +41,7 @@ export default function NavUI() {
         dispatch(setRole(undefined))
         dispatch(setAvatar(undefined))
         dispatch(emptyCart())
-        navigate('/home')
+        navigate('/')
     }
 
     return (
@@ -56,32 +56,32 @@ export default function NavUI() {
                             <MenuIcon />
                         </IconButton>
                         <Menu id="menu-appbar" anchorEl={anchorElNav} anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'left' }} open={Boolean(anchorElNav)} onClose={handleCloseNavMenu} sx={{ display: { xs: 'block', md: 'none' } }}>
-                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography component={Link} to="/home" textAlign="center">
-                                    Home
-                                </Typography>
-                            </MenuItem>
                         </Menu>
                     </Box>
-                    <Typography variant="h5" noWrap component="a" href="" sx={{ mr: 2, display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }}>
+                    <Typography component={Link} to="/" variant="h5" noWrap sx={{ mr: 2, display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }}>
                         MEDILAB
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <Button component={Link} to="/home" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'cyan', display: 'block', fontFamily: 'Raleway' }}>
-                            Home
+                        <Button component={Link} to="/about" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'cyan', display: 'block', fontFamily: 'Raleway' }}>
+                            Nosotros
                         </Button>
-                        <IconButton component={Link} to="/search" size="large" color="secondary" sx={{ width: '48px', margin: '10px 4px' }}>
+                        <Button component={Link} to="/faq" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'cyan', display: 'block', fontFamily: 'Raleway' }}>
+                            FAQ
+                        </Button>
+                    </Box>
+                    <Box>
+                        <IconButton component={Link} to="/search" size="large" color="secondary" sx={{ width: '48px', margin: '10px 4px', color: 'white'}}>
                             <Badge color="error">
                                 <SearchIcon />
                             </Badge>
                         </IconButton>
-                        <IconButton component={Link} to="/cart" size="large" color="secondary" sx={{ width: '48px', margin: '10px 4px' }}>
+                        <IconButton component={Link} to="/cart" size="large" color="secondary" sx={{ width: '48px', margin: '10px 4px', color: 'white'}}>
                             <Badge badgeContent={onCart} color="error">
                                 <ShoppingCartIcon />
                             </Badge>
                         </IconButton>
                     </Box>
-                    <Typography onClick={handleCloseNavMenu} sx={{ marginRight: 1, fontFamily: 'Raleway' }}>
+                    <Typography onClick={handleCloseNavMenu} sx={{ marginRight: 1, fontFamily: 'Raleway', color:"white"}}>
                         {name}
                     </Typography>
                     {name ? <Box sx={{ flexGrow: 0 }}>
