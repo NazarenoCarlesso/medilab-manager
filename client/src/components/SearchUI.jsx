@@ -47,7 +47,7 @@ export default function TestsUI() {
             <Paper className='PaperContainer' sx={{background: "linear-gradient(180deg,#F0F8FF 0%, #9fffff 100%)"}} style={{margin: "1%"}}>
                     <FormControl sx={{padding: 1, width: 400}}>
                         <TextField value={search} onChange={e => setSearch(e.target.value)} id="outlined-search" label="Buscar" type="search"/>
-                        <FormHelperText>Ingrese el nombre del exámen</FormHelperText>
+                        <FormHelperText>Ingrese el nombre del exámen (o una breve descripción)</FormHelperText>
                     </FormControl>
             </Paper>
             <DragDropContext onDragEnd={handleOnDragEnd}> 

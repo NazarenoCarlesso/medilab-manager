@@ -17,14 +17,14 @@ const style = {
    top: "50%",
    left: "50%",
    transform: "translate(-50%, -50%)",
-   maxHeight: "600px",
-   width: "400px",
+   maxHeight: "800px",
+   width: "600px",
    bgcolor: "background.paper",
    border: "2px solid #000",
    boxShadow: 24,
    p: 4,
    overflow: "hidden",
-   overflowY: "scroll",
+   //overflowY: "scroll",
 };
 
 export default function SelectAppointment(props) {
